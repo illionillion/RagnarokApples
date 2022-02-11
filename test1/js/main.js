@@ -2,9 +2,6 @@
 import TextAnimation  from './lib/TextAnimation.js';
 
 (function(){
-    // console.log('hello');
-
-
 
     window.addEventListener('load',(e)=>{
 
@@ -50,26 +47,16 @@ import TextAnimation  from './lib/TextAnimation.js';
                 TextLoading();
 
             }else{
-                // if (!gameState.textloading) {
-                //     gameState.textloading=true;
 
-                //     // console.log(msgs[gameState.msgindex]);
-
-                //     TextLoading();
-
-                // }else{
-
-
-                    let text = document.querySelectorAll('#dialogue .op0');
-                    if (text.length==0) {
-                        TextLoading();
-                        // console.log(text);
-                        text = document.querySelectorAll('#dialogue .op0');
-                    }
-                    const AnimeC = new TextAnimation(text)
+                let text = document.querySelectorAll('#dialogue .op0');
+                if (text.length==0) {
+                    TextLoading();
                     // console.log(text);
-                    AnimeC.AnimationStart(text);
-                // }
+                    text = document.querySelectorAll('#dialogue .op0');
+                }
+                const AnimeC = new TextAnimation(text)
+                // console.log(text);
+                AnimeC.AnimationStart(text);
             }
         
         })
