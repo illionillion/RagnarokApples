@@ -9,6 +9,7 @@ export default class Text {
         this.TextList=TextList
         this.state=state
         this.movingFlag=false;
+        this.colorFlag=false;
     }
 
     /**
@@ -37,11 +38,24 @@ export default class Text {
         const msgfragment = document.createDocumentFragment();
         for (let i = 0; i < this.TextList[this.state.msgindex].length; i++) {
             const element = this.TextList[this.state.msgindex][i];
+            if (element==='/') {
+                // console.log(element);
+                if (this.colorFlag) {
+                    this.colorFlag=false;
+                    continue;
+                }
+                this.colorFlag=true;
+                continue;
+            }
             const span = document.createElement('span');
             span.innerText=element;
             span.className='op0';
+            if (this.colorFlag) {
+                span.className='op0 red';
+            }
             msgfragment.appendChild(span);
         }
+        this.colorFlag=false;
         document.getElementById('dialogue').innerHTML='';
         document.getElementById('dialogue').appendChild(msgfragment);
         this.state.msgindex++;
