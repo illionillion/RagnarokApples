@@ -37,7 +37,7 @@ import Text from './lib/Text.js';
                 // console.log(text);
                 text = document.querySelectorAll('#dialogue .op0');
             }
-            if (!TextData.moving) {
+            if (!TextData.movingFlag) {
                 TextData.AnimationStart(text);
             }else{
                 TextData.AnimationForcedEnd(text);

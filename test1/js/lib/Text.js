@@ -2,13 +2,13 @@ export default class Text {
 
     /**
      * 1パートのテキストのデータを格納する
-     * @param {*} text テキストのオブジェクト
+     * @param {*} TextList テキストのオブジェクト
      * @param {*} state ゲームのステータスのオブジェクト
      */
-    constructor(text,state){
-        this.text=text
+    constructor(TextList,state){
+        this.TextList=TextList
         this.state=state
-        this.moving=false;
+        this.movingFlag=false;
     }
 
     /**
@@ -29,14 +29,14 @@ export default class Text {
      */
     Loading(){
 
-        if (this.state.msgindex>=this.text.length) {
+        if (this.state.msgindex>=this.TextList.length) {
             // alert('終了');
             // return;
             this.state.msgindex=0;
         }
         const msgfragment = document.createDocumentFragment();
-        for (let i = 0; i < this.text[this.state.msgindex].length; i++) {
-            const element = this.text[this.state.msgindex][i];
+        for (let i = 0; i < this.TextList[this.state.msgindex].length; i++) {
+            const element = this.TextList[this.state.msgindex][i];
             const span = document.createElement('span');
             span.innerText=element;
             span.className='op0';
@@ -56,9 +56,9 @@ export default class Text {
         const screen = document.getElementById('screen');
 
         (async()=>{
-            this.moving=true;
+            this.movingFlag=true;
             for (const ele of text) {
-                if (!this.moving) {
+                if (!this.movingFlag) {
                     // console.log("stop");
                     break;
                 }
@@ -68,7 +68,7 @@ export default class Text {
                 ele.classList.remove('op0');
 
             }
-            this.moving=false;
+            this.movingFlag=false;
             
         })();
     }
@@ -80,7 +80,7 @@ export default class Text {
     AnimationForcedEnd(text){
         text.forEach(element => {
             element.classList.remove('op0');
-            this.moving=false;
+            this.movingFlag=false;
 
         });
     }
