@@ -1,6 +1,5 @@
 "use strict";
-import TextAnimation  from './lib/TextAnimation.js';
-import TextLoading from './lib/TextLoading.js';
+import Text from './lib/Text.js';
 
 (function(){
 
@@ -20,7 +19,7 @@ import TextLoading from './lib/TextLoading.js';
         "顔を洗い、髭を剃り、歯を磨いて、…。それから着替え、身支度を済ませてドアを開けた。"
     ]
 
-    let TextData = new TextLoading(msgs,gameState)
+    let TextData = new Text(msgs,gameState)
 
     const screen = document.getElementById('screen');
     screen.addEventListener('click',(e)=>{
@@ -38,9 +37,11 @@ import TextLoading from './lib/TextLoading.js';
                 // console.log(text);
                 text = document.querySelectorAll('#dialogue .op0');
             }
-            const AnimeC = new TextAnimation(text)
-            // console.log(text);
-            AnimeC.AnimationStart(text);
+            if (!TextData.moving) {
+                TextData.AnimationStart(text);
+            }else{
+                TextData.AnimationForcedEnd(text);
+            }
         }
     
     })
