@@ -71,7 +71,6 @@ export default class Text {
             this.moving=false;
             
         })();
-        // this.Loading();
     }
 
     /**

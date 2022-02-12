@@ -32,7 +32,7 @@ import Text from './lib/Text.js';
         }else{
 
             let text = document.querySelectorAll('#dialogue .op0');
-            if (text.length==0) {
+            if (text.length===0) {
                 TextData.Loading();
                 // console.log(text);
                 text = document.querySelectorAll('#dialogue .op0');
