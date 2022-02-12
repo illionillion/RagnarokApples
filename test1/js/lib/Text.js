@@ -1,5 +1,10 @@
 export default class Text {
 
+    /**
+     * 1パートのテキストのデータを格納する
+     * @param {*} text テキストのオブジェクト
+     * @param {*} state ゲームのステータスのオブジェクト
+     */
     constructor(text,state){
         this.text=text
         this.state=state
