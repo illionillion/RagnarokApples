@@ -10,6 +10,7 @@ export default class Text {
         this.state=state
         this.movingFlag=false;
         this.colorFlag=false;
+        this.sizeFlag=false;
     }
 
     /**
@@ -47,11 +48,23 @@ export default class Text {
                 this.colorFlag=true;
                 continue;
             }
+            if (element==='*') {
+                // console.log(element);
+                if (this.sizeFlag) {
+                    this.sizeFlag=false;
+                    continue;
+                }
+                this.sizeFlag=true;
+                continue;
+            }
             const span = document.createElement('span');
             span.innerText=element;
             span.className='op0';
             if (this.colorFlag) {
-                span.className='op0 red';
+                span.classList.add('red');
+            }
+            if (this.sizeFlag) {
+                span.classList.add('large');
             }
             msgfragment.appendChild(span);
         }
