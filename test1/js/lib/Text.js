@@ -36,6 +36,7 @@ export default class Text {
             // return;
             this.state.msgindex=0;
         }
+        console.log(`${this.state.msgindex}=>${this.TextList[this.state.msgindex]}`);
         const msgfragment = document.createDocumentFragment();
         for (let i = 0; i < this.TextList[this.state.msgindex].length; i++) {
             const element = this.TextList[this.state.msgindex][i];
@@ -58,7 +59,7 @@ export default class Text {
                 continue;
             }
             const span = document.createElement('span');
-            span.innerText=element;
+            span.textContent=element;
             span.className='op0';
             if (this.colorFlag) {
                 span.classList.add('red');
@@ -99,8 +100,11 @@ export default class Text {
             //オート機能を作りたいが難しい
             if (this.state.autoPlaying) {
                 // (async ()=>{
-                    await this.timer(1000);
+
+                    await this.timer(1000);//この待機中にAnimationStartが走るとおかしくなる
                     // })()
+                    // console.log('auto');
+                    // console.log(text);
                     this.Loading();
                     const nexttext = document.querySelectorAll('#dialogue .op0');
                     this.AnimationStart(nexttext);

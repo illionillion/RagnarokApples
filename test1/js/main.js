@@ -10,7 +10,8 @@ import Text from './lib/Text.js';
             "msgindex":0,
             "dialogue":true,
             // "autoPlaying":true
-            "autoPlaying":false
+            "autoPlaying":false,
+            "autoPlayingCheck":false
         }
     
         let msgs = [ //コンストラクタに入れる
@@ -53,24 +54,40 @@ import Text from './lib/Text.js';
             }else{
     
                 let text = document.querySelectorAll('#dialogue .op0');
-                if (text.length===0) {
+
+                if (text.length===0 && !gameState.autoPlaying) {
                     TextData.Loading();
                     // console.log(text);
                     text = document.querySelectorAll('#dialogue .op0');
                 }
                 if (!TextData.movingFlag) {
+                    if (gameState.autoPlaying&&gameState.autoPlayingCheck) {
+                        return;
+                    }else if(gameState.autoPlaying){
+                        gameState.autoPlayingCheck=true;
+                    }
                     TextData.AnimationStart(text);
                 }else{
                     // if (!gameState.autoPlaying) {
                         
                         TextData.AnimationForcedEnd(text);
+
                     // }
                 }
             }
         
         })
 
+        // AutoのON/OFF
         autocheck.textContent = gameState.autoPlaying ? 'Auto ON' :'Auto OFF';
-        autocheck.addEventListener('click',(e)=>{e.stopPropagation();});
+        autocheck.addEventListener('click',(e)=>{
+            e.stopPropagation();
+            gameState.autoPlaying=gameState.autoPlaying ? false : true
+            e.target.textContent = gameState.autoPlaying ? 'Auto ON' :'Auto OFF';
+            if (!gameState.autoPlaying) {
+                gameState.autoPlayingCheck=false;
+            }
+            // console.log(gameState.autoPlaying);
+        });
     })
 })();
