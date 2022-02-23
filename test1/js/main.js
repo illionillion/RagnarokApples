@@ -61,7 +61,8 @@ import Text from './lib/Text.js';
                     text = document.querySelectorAll('#dialogue .op0');
                 }
                 if (!TextData.movingFlag) {
-                    if (gameState.autoPlaying&&gameState.autoPlayingCheck) {
+                    // gameState.autoPlayingCheckでautoの待機中にイベントが発生するのを防ぐ
+                    if (gameState.autoPlaying && gameState.autoPlayingCheck) {
                         return;
                     }else if(gameState.autoPlaying){
                         gameState.autoPlayingCheck=true;
@@ -84,6 +85,7 @@ import Text from './lib/Text.js';
             e.stopPropagation();
             gameState.autoPlaying=gameState.autoPlaying ? false : true
             e.target.textContent = gameState.autoPlaying ? 'Auto ON' :'Auto OFF';
+            // auto機能をONからOFFに変更したときautoPlayingCheckを初期化
             if (!gameState.autoPlaying) {
                 gameState.autoPlayingCheck=false;
             }
