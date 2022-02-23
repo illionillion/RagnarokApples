@@ -3,14 +3,13 @@
 body{
     margin: 0;
 }
-
+/* 画面全般 */
 #frame{
     /* width: 80%; */
     width: 600px;
     height: 450px;
     margin: auto;
 }
-
 #screen{
     width: 90%;
     height: 90%;
@@ -19,7 +18,12 @@ body{
     color: #fff;
     position: relative;
 }
+#background{
+    width: 100%;
+    height: 100%;
+}
 
+/* タイトル表示(仮) */
 .msg-txt{
     width:40%;
     height:20%;
@@ -35,10 +39,7 @@ body{
     z-index: 2;
 }
 
-.none{
-    display: none;
-}
-
+/* オート・非オート表示 */
 #autocheck{
     position: absolute;
     bottom: 10%;
@@ -46,36 +47,58 @@ body{
     z-index: 3;
 }
 
-#background{
-    width: 100%;
-    height: 100%;
-}
-
+/* テキスト表示画面 */
 #dialogue{
     position: absolute;
     bottom: 10%;
     left: 50%;
     transform: translate(-50%, 10%);
     z-index: 1;
-    /* opacity: 0.8; */
     background-color: rgba(0, 0, 0, 0.582);
     width: 90%;
     height: 30%;
+    padding: 5px;
+}
+#dialogue-name-area{
+    height: 20%;
+    font-size: 1em;
+}
+#dialogue-text-area{
     line-height: 2em;
     text-align: justify;
     margin: auto;
     font-size: 1.2em;
-    padding: 5px;
 }
 
+/* キャラクター */
+#character-area{
+    position: absolute;
+    top: 7%;
+    display: flex;
+    width: 100%;
+}
+#character-area div{
+    margin: 0 auto;
+    width: 30%;
+}
+#character-area div img{
+    width: 100%;
+    object-fit: fill;
+}
+
+/* 非表示(完全に) */
+.none{
+    display: none;
+}
+/* 非表示(透明) */
 .op0{
     opacity: 0;
 }
-
+/* 赤文字 */
 .red{
     color: #f00;
 }
-
+/* 大文字 */
 .large{
     font-size: 1.5em;
 }

@@ -1,19 +1,22 @@
 "use strict";
 import Text from './lib/Text.js';
+import TextDataA from './lib/TextDataA.json.js';
 
 (function(){
     window.addEventListener('load',(e)=>{
-
+        console.log(TextDataA);
+        console.log(TextDataA.A1);
+        console.log(Object.keys(TextDataA.A1));
+        console.log(Object.keys(TextDataA.A1).length);
         let gameState = {
             "title":true,
             "textloading":false,
-            "msgindex":0,
+            // "msgindex":0,
             "dialogue":true,
             // "autoPlaying":true
             "autoPlaying":false,
             "autoPlayingCheck":false
         }
-    
         let msgs = [ //コンストラクタに入れる
             "今日の*/ご飯/*は",
             "焼肉に行こうと思ったが/お金/がなかったので、*自炊*することにした。",
@@ -24,10 +27,13 @@ import Text from './lib/Text.js';
             "顔を洗い、髭を剃り、歯を磨いて、…。それから着替え、身支度を済ませてドアを開けた。"
         ]
     
-        let TextData = new Text(msgs,gameState)
+        // TextDataA.A1これで投げ込む
+        // let TextData = new Text(msgs,gameState)
+        let TextData = new Text(TextDataA.A1,gameState)
     
         const screen = document.getElementById('screen');
         const dialogue = document.getElementById('dialogue');
+        const dialogueText = document.getElementById('dialogue-text-area');
         const autocheck = document.getElementById('autocheck');
     
         // テキストボックス以外をクリックすると、テキストボックスが消えたり現れたりする
@@ -53,22 +59,22 @@ import Text from './lib/Text.js';
     
             }else{
     
-                let text = document.querySelectorAll('#dialogue .op0');
+                let text = document.querySelectorAll('#dialogue-text-area .op0');
 
                 if (text.length===0 && !gameState.autoPlaying) {
                     TextData.Loading();
                     // console.log(text);
-                    text = document.querySelectorAll('#dialogue .op0');
+                    text = document.querySelectorAll('#dialogue-text-area .op0');
                 }
                 if (!TextData.movingFlag) {
                     // gameState.autoPlayingCheckでautoの待機中にイベントが発生するのを防ぐ
                     console.log(gameState.autoPlaying);
                     console.log(gameState.autoPlayingCheck);
                     if (gameState.autoPlaying && gameState.autoPlayingCheck) {
-                        console.log('cancel');
+                        console.log('cancel');//autoの待機中にイベントが発生するのを防ぐ
                         return;
                     }else if(gameState.autoPlaying && !gameState.autoPlayingCheck){
-                        gameState.autoPlayingCheck=true;
+                        gameState.autoPlayingCheck=true;//auto初回のみ通る
                     }
                     TextData.AnimationStart(text);
                 }else{

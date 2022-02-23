@@ -8,6 +8,7 @@ export default class Text {
     constructor(TextList,state){
         this.TextList=TextList
         this.state=state
+        this.msgindex=0;
         this.movingFlag=false;
         this.colorFlag=false;
         this.sizeFlag=false;
@@ -27,19 +28,37 @@ export default class Text {
     }
 
     /**
+     * キャラを設定する
+     * @param {*} props 
+     */
+    characterSetting (props){
+        // console.log(props);
+        for (const positon in props) {
+            if (Object.hasOwnProperty.call(props, positon)) {
+                const element = props[positon];
+                document.querySelector(`#character-area [data-position=${positon}] img`).src=element.src;
+                document.querySelector(`#character-area [data-position=${positon}] img`).alt=element.name;
+            }
+        }
+    }
+
+    /**
      * テキストを透明にして配置する
      */
     Loading(){
 
-        if (this.state.msgindex>=this.TextList.length) {
+        if (this.msgindex>=Object.keys(this.TextList).length) {
             // alert('終了');
             // return;
-            this.state.msgindex=0;
+            this.msgindex=0;
         }
-        console.log(`${this.state.msgindex}=>${this.TextList[this.state.msgindex]}`);
+        console.log(this.TextList[this.msgindex]);
+        this.characterSetting(this.TextList[this.msgindex]['characterList'])
         const msgfragment = document.createDocumentFragment();
-        for (let i = 0; i < this.TextList[this.state.msgindex].length; i++) {
-            const element = this.TextList[this.state.msgindex][i];
+
+        let speakerName = this.TextList[this.msgindex]['characterText']['name'];//名前
+        for (let i = 0; i < this.TextList[this.msgindex]['characterText']['text'].length; i++) {
+            const element = this.TextList[this.msgindex]['characterText']['text'][i];
             if (element==='/') {
                 // console.log(element);
                 if (this.colorFlag) {
@@ -70,9 +89,10 @@ export default class Text {
             msgfragment.appendChild(span);
         }
         this.colorFlag=false;
-        document.getElementById('dialogue').innerHTML='';
-        document.getElementById('dialogue').appendChild(msgfragment);
-        this.state.msgindex++;
+        document.getElementById('dialogue-name-area').innerHTML=speakerName;
+        document.getElementById('dialogue-text-area').innerHTML='';
+        document.getElementById('dialogue-text-area').appendChild(msgfragment);
+        this.msgindex++;
     
     }
 
@@ -104,7 +124,7 @@ export default class Text {
                 // console.log('auto');
                 // console.log(text);
                 this.Loading();
-                const nexttext = document.querySelectorAll('#dialogue .op0');
+                const nexttext = document.querySelectorAll('#dialogue-text-area .op0');
                 this.AnimationStart(nexttext);
             }
                 
