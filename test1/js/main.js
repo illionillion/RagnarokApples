@@ -62,9 +62,12 @@ import Text from './lib/Text.js';
                 }
                 if (!TextData.movingFlag) {
                     // gameState.autoPlayingCheckでautoの待機中にイベントが発生するのを防ぐ
+                    console.log(gameState.autoPlaying);
+                    console.log(gameState.autoPlayingCheck);
                     if (gameState.autoPlaying && gameState.autoPlayingCheck) {
+                        console.log('cancel');
                         return;
-                    }else if(gameState.autoPlaying){
+                    }else if(gameState.autoPlaying && !gameState.autoPlayingCheck){
                         gameState.autoPlayingCheck=true;
                     }
                     TextData.AnimationStart(text);
@@ -88,6 +91,10 @@ import Text from './lib/Text.js';
             // auto機能をONからOFFに変更したときautoPlayingCheckを初期化
             if (!gameState.autoPlaying) {
                 gameState.autoPlayingCheck=false;
+            }
+            //autoで再生中にautoをoffにする時だけ
+            if (gameState.autoPlaying && TextData.movingFlag) {
+                gameState.autoPlayingCheck=true;
             }
             // console.log(gameState.autoPlaying);
         });
