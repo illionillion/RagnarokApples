@@ -6,7 +6,8 @@ import Text from './lib/Text.js';
     let gameState = {
         "title":true,
         "textloading":false,
-        "msgindex":0
+        "msgindex":0,
+        "dialogue":true
     }
 
     let msgs = [ //コンストラクタに入れる
@@ -22,8 +23,22 @@ import Text from './lib/Text.js';
     let TextData = new Text(msgs,gameState)
 
     const screen = document.getElementById('screen');
-    screen.addEventListener('click',(e)=>{
+    const dialogue = document.getElementById('dialogue');
 
+    // テキストボックス以外をクリックすると、テキストボックスが消えたり現れたりする
+    screen.addEventListener('click',(e)=>{
+        if (gameState.dialogue) {
+            dialogue.classList.add('none');
+            gameState.dialogue=false;
+        }else{
+            dialogue.classList.remove('none');
+            gameState.dialogue=true;
+        }
+    })
+
+    // テキストボックスクリックでアニメーション再生
+    dialogue.addEventListener('click',(e)=>{
+        e.stopPropagation();//イベントの伝搬を防止
         if (gameState.title) {
             gameState.title=false;
             document.querySelector('#screen .msg-txt').classList.add('none');
