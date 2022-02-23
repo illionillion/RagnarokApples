@@ -80,7 +80,6 @@ export default class Text {
      * @param {*} text cp0クラスがついているspanタグ
      */
     AnimationStart(text){
-        const screen = document.getElementById('screen');
 
         (async()=>{
             this.movingFlag=true;
@@ -97,6 +96,16 @@ export default class Text {
             }
             this.movingFlag=false;
             
+            //オート機能を作りたいが難しい
+            if (this.state.autoPlaying) {
+                // (async ()=>{
+                    await this.timer(1000);
+                    // })()
+                    this.Loading();
+                    const nexttext = document.querySelectorAll('#dialogue .op0');
+                    this.AnimationStart(nexttext);
+            }
+                
         })();
     }
 
