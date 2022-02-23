@@ -27,14 +27,17 @@ import Text from './lib/Text.js';
     
         const screen = document.getElementById('screen');
         const dialogue = document.getElementById('dialogue');
+        const autocheck = document.getElementById('autocheck');
     
         // テキストボックス以外をクリックすると、テキストボックスが消えたり現れたりする
         screen.addEventListener('click',(e)=>{
             if (gameState.dialogue) {
                 dialogue.classList.add('none');
+                autocheck.classList.add('none');
                 gameState.dialogue=false;
             }else{
                 dialogue.classList.remove('none');
+                autocheck.classList.remove('none');
                 gameState.dialogue=true;
             }
         })
@@ -67,7 +70,7 @@ import Text from './lib/Text.js';
         
         })
 
-        document.getElementById('autocheck').textContent = gameState.autoPlaying ? 'Auto ON' :'Auto OFF';
-        document.getElementById('autocheck').addEventListener('click',(e)=>{e.stopPropagation();});
+        autocheck.textContent = gameState.autoPlaying ? 'Auto ON' :'Auto OFF';
+        autocheck.addEventListener('click',(e)=>{e.stopPropagation();});
     })
 })();
