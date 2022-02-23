@@ -68,5 +68,6 @@ import Text from './lib/Text.js';
         })
 
         document.getElementById('autocheck').textContent = gameState.autoPlaying ? 'Auto ON' :'Auto OFF';
+        document.getElementById('autocheck').addEventListener('click',(e)=>{e.stopPropagation();});
     })
 })();
