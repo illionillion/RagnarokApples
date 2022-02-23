@@ -72,11 +72,9 @@ import Text from './lib/Text.js';
                     }
                     TextData.AnimationStart(text);
                 }else{
-                    // if (!gameState.autoPlaying) {
                         
-                        TextData.AnimationForcedEnd(text);
+                    TextData.AnimationForcedEnd(text);
 
-                    // }
                 }
             }
         

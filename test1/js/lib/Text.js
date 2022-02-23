@@ -99,15 +99,13 @@ export default class Text {
             
             //オート機能を作りたいが難しい
             if (this.state.autoPlaying) {
-                // (async ()=>{
 
-                    await this.timer(1000);//この待機中にAnimationStartが走るとおかしくなる
-                    // })()
-                    // console.log('auto');
-                    // console.log(text);
-                    this.Loading();
-                    const nexttext = document.querySelectorAll('#dialogue .op0');
-                    this.AnimationStart(nexttext);
+                await this.timer(1000);//この待機中にAnimationStartが走るとおかしくなる
+                // console.log('auto');
+                // console.log(text);
+                this.Loading();
+                const nexttext = document.querySelectorAll('#dialogue .op0');
+                this.AnimationStart(nexttext);
             }
                 
         })();
