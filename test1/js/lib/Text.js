@@ -43,6 +43,14 @@ export default class Text {
     }
 
     /**
+     * 背景画像設定
+     * @param {*} url 
+     */
+    backgroundSetting (url) {
+        document.getElementById('background').src=url;
+    }
+
+    /**
      * テキストを透明にして配置する
      */
     Loading(){
@@ -53,7 +61,10 @@ export default class Text {
             this.msgindex=0;
         }
         console.log(this.TextList[this.msgindex]);
+
         this.characterSetting(this.TextList[this.msgindex]['characterList'])
+        this.backgroundSetting(this.TextList[this.msgindex]['backgroundImage'])
+        
         const msgfragment = document.createDocumentFragment();
 
         let speakerName = this.TextList[this.msgindex]['characterText']['name'];//名前
@@ -89,6 +100,7 @@ export default class Text {
             msgfragment.appendChild(span);
         }
         this.colorFlag=false;
+        document.getElementById('dialogue-name-area').classList.add('op0');
         document.getElementById('dialogue-name-area').innerHTML=speakerName;
         document.getElementById('dialogue-text-area').innerHTML='';
         document.getElementById('dialogue-text-area').appendChild(msgfragment);
@@ -101,6 +113,7 @@ export default class Text {
      * @param {*} text cp0クラスがついているspanタグ
      */
     AnimationStart(text){
+        document.getElementById('dialogue-name-area').classList.remove('op0');
 
         (async()=>{
             this.movingFlag=true;

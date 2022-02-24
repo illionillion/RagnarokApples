@@ -32,7 +32,8 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
                 "effect":{
 
                 }
-            }
+            },
+            "backgroundImage":"images/background/city01.jpeg"
         },
         {
             "textId":1,
@@ -65,7 +66,8 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
                 "effect":{
                     
                 }
-            }
+            },
+            "backgroundImage":"images/background/city01.jpeg"
         },
         {
             "textId":2,
@@ -98,7 +100,8 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
                 "effect":{
                     
                 }
-            }
+            },
+            "backgroundImage":"images/background/city01.jpeg"
         },
         {
             "textId":3,
@@ -131,7 +134,8 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
                 "effect":{
                     
                 }
-            }
+            },
+            "backgroundImage":"images/background/city01.jpeg"
         },
         {
             "textId":4,
@@ -164,7 +168,8 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
                 "effect":{
                     
                 }
-            }
+            },
+            "backgroundImage":"images/background/city02.jpeg"
         },
         {
             "textId":5,
@@ -197,7 +202,8 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
                 "effect":{
                     
                 }
-            }
+            },
+            "backgroundImage":"images/background/city02.jpeg"
         },
         {
             "textId":6,
@@ -230,7 +236,8 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
                 "effect":{
                     
                 }
-            }
+            },
+            "backgroundImage":"images/background/city02.jpeg"
         }
     ]
 }
