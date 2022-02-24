@@ -6,21 +6,21 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
             "characterList":{//各キャラの設定
                 "left":{//左
                     "name":"キャラ(左)",
-                    "src":"images/bengal.png",
+                    "src":"images/character/bengal.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
                 },
                 "center":{//中央
                     "name":"キャラ(中)",
-                    "src":"images/transparent_background.png",
+                    "src":"images/character/transparent_background.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
                 },
                 "right":{//右
                     "name":"キャラ(右)",
-                    "src":"images/transparent_background.png",
+                    "src":"images/character/transparent_background.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
@@ -39,21 +39,21 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
             "characterList":{//各キャラの設定
                 "left":{//左
                     "name":"キャラ(左)",
-                    "src":"images/bengal.png",
+                    "src":"images/character/bengal.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
                 },
                 "center":{//中央
                     "name":"キャラ(中)",
-                    "src":"images/transparent_background.png",
+                    "src":"images/character/transparent_background.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
                 },
                 "right":{//右
                     "name":"キャラ(右)",
-                    "src":"images/bibian.png",
+                    "src":"images/character/bibian.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
@@ -72,21 +72,21 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
             "characterList":{//各キャラの設定
                 "left":{//左
                     "name":"キャラ(左)",
-                    "src":"images/bibian.png",
+                    "src":"images/character/bibian.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
                 },
                 "center":{//中央
                     "name":"キャラ(中)",
-                    "src":"images/bengal.png",
+                    "src":"images/character/bengal.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
                 },
                 "right":{//右
                     "name":"キャラ(右)",
-                    "src":"images/transparent_background.png",
+                    "src":"images/character/transparent_background.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
@@ -105,21 +105,21 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
             "characterList":{//各キャラの設定
                 "left":{//左
                     "name":"キャラ(左)",
-                    "src":"images/bibian.png",
+                    "src":"images/character/bibian.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
                 },
                 "center":{//中央
                     "name":"キャラ(中)",
-                    "src":"images/bengal.png",
+                    "src":"images/character/bengal.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
                 },
                 "right":{//右
                     "name":"キャラ(右)",
-                    "src":"images/transparent_background.png",
+                    "src":"images/character/transparent_background.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
@@ -138,21 +138,21 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
             "characterList":{//各キャラの設定
                 "left":{//左
                     "name":"キャラ(左)",
-                    "src":"images/bibian.png",
+                    "src":"images/character/bibian.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
                 },
                 "center":{//中央
                     "name":"キャラ(中)",
-                    "src":"images/bengal.png",
+                    "src":"images/character/bengal.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
                 },
                 "right":{//右
                     "name":"キャラ(右)",
-                    "src":"images/transparent_background.png",
+                    "src":"images/character/transparent_background.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
@@ -171,21 +171,21 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
             "characterList":{//各キャラの設定
                 "left":{//左
                     "name":"キャラ(左)",
-                    "src":"images/bibian.png",
+                    "src":"images/character/bibian.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
                 },
                 "center":{//中央
                     "name":"キャラ(中)",
-                    "src":"images/bengal.png",
+                    "src":"images/character/bengal.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
                 },
                 "right":{//右
                     "name":"キャラ(右)",
-                    "src":"images/transparent_background.png",
+                    "src":"images/character/transparent_background.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
@@ -204,21 +204,21 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
             "characterList":{//各キャラの設定
                 "left":{//左
                     "name":"キャラ(左)",
-                    "src":"images/bibian.png",
+                    "src":"images/character/bibian.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
                 },
                 "center":{//中央
                     "name":"キャラ(中)",
-                    "src":"images/bengal.png",
+                    "src":"images/character/bengal.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
                 },
                 "right":{//右
                     "name":"キャラ(右)",
-                    "src":"images/transparent_background.png",
+                    "src":"images/character/transparent_background.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
