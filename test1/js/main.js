@@ -35,6 +35,7 @@ import TextDataA from './lib/TextDataA.json.js';
         const dialogue = document.getElementById('dialogue');
         const dialogueText = document.getElementById('dialogue-text-area');
         const autocheck = document.getElementById('autocheck');
+        const darkeningFloor = document.getElementById('darkening-floor');
     
         // テキストボックス以外をクリックすると、テキストボックスが消えたり現れたりする
         screen.addEventListener('click',(e)=>{
@@ -102,5 +103,9 @@ import TextDataA from './lib/TextDataA.json.js';
             }
             // console.log(gameState.autoPlaying);
         });
+
+        darkeningFloor.addEventListener('click',(e)=>{
+            e.stopPropagation();
+        })
     })
 })();

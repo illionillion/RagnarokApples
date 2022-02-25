@@ -182,7 +182,7 @@ export default class Text {
                 await this.timer(2000);
                 document.getElementById('darkening-floor').classList.add('op0');//暗転解除
             }
-
+            await this.timer(500);
             this.movingFlag=true;
             for (const ele of text) {
                 if (!this.movingFlag) {
