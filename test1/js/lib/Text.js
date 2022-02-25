@@ -12,6 +12,8 @@ export default class Text {
         this.movingFlag=false;
         this.colorFlag=false;
         this.sizeFlag=false;
+
+        this.imagePreload();
     }
 
     /**
@@ -43,11 +45,63 @@ export default class Text {
     }
 
     /**
+     * 画像のプリロード
+     */
+    imagePreload () {
+        // const imgFragment = document.createDocumentFragment();
+        for (const textEle of this.TextList) {
+            // console.log(textEle['backgroundImage']);
+            const imgele = document.createElement('img');
+            imgele.src = textEle['backgroundImage'];
+
+            for (const key in textEle['characterList']) {
+                if (Object.hasOwnProperty.call(textEle['characterList'], key)) {
+                    // console.log(textEle['characterList'][key]['src']);
+                    const charimgele = document.createElement('img');
+                    charimgele.src =  textEle['characterList'][key]['src'];
+                    
+                }
+            }
+            // console.log(textEle['characterList']['left']['src']);
+            // const charimgele = document.createElement('img');
+            // charimgele.src = textEle['characterList']['left']['src'];
+            // imgele.addEventListener('load',(e)=>{
+            //     imgFragment.appendChild(e.target);
+            // })
+            // imgFragment.appendChild(imgele);
+        }
+        // document.getElementById('imageholder').appendChild(imgFragment);
+    }
+
+    /**
      * 背景画像設定
      * @param {*} url 
      */
     backgroundSetting (url) {
+
+        // srcを変えるだけだが、切り替えに時間がかかってしまう
         document.getElementById('background').src=url;
+
+
+        // document.getElementById('background').remove();
+        // console.log(document.querySelector(`#imageholder > img:nth-child(${this.msgindex+1})`));
+        // // 複製するHTML要素を取得
+        // var content_area = document.querySelector(`#imageholder > img:nth-child(${this.msgindex+1})`);
+
+        // // 複製
+        // const clone_element = content_area.cloneNode(true);
+
+        // // 複製した要素の属性を編集
+        // clone_element.id = "background";
+
+        // // 複製したHTML要素をページに挿入
+        // document.getElementById('screen').appendChild(clone_element);
+
+        // const image = document.createElement('img');
+        // image.id='background';
+        // image.src=document.querySelector(`#imageholder > img:nth-child(${this.msgindex+1})`).src;
+        // document.getElementById('screen').appendChild(image);
+        // document.getElementById('screen').appendChild(document.querySelector(`#imageholder > img:nth-child(${this.msgindex+1})`));
     }
 
     /**
