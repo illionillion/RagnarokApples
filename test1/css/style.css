@@ -44,7 +44,7 @@ body{
     position: absolute;
     bottom: 10%;
     right: 10%;
-    z-index: 3;
+    z-index: 2;
 }
 
 /* テキスト表示画面 */
@@ -86,6 +86,17 @@ body{
     object-fit: fill;
 }
 
+#darkening-floor{
+    position: absolute;
+    top: 0%;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    z-index: 3;
+}
+#darkening-floor.op0{
+    z-index: -1;
+}
 /* 非表示(完全に) */
 .none{
     display: none;
@@ -94,6 +105,11 @@ body{
 .op0{
     opacity: 0;
 }
+/* #dialogue-text-area .op0:first-child::after{
+    width: 20px;
+    height: 10px;
+    background-color: #ffffff;
+} */
 /* 赤文字 */
 .red{
     color: #f00;

@@ -116,8 +116,8 @@ export default class Text {
         }
         console.log(this.TextList[this.msgindex]);
 
-        this.characterSetting(this.TextList[this.msgindex]['characterList'])
-        this.backgroundSetting(this.TextList[this.msgindex]['backgroundImage'])
+        // this.characterSetting(this.TextList[this.msgindex]['characterList'])
+        // this.backgroundSetting(this.TextList[this.msgindex]['backgroundImage'])
         
         const msgfragment = document.createDocumentFragment();
 
@@ -168,8 +168,21 @@ export default class Text {
      */
     AnimationStart(text){
         document.getElementById('dialogue-name-area').classList.remove('op0');
-
+        
         (async()=>{
+            
+            this.characterSetting(this.TextList[this.msgindex - 1]['characterList'])
+            // console.log(this.TextList[this.msgindex - 1]['backgroundImage']);
+            // console.log(document.getElementById('background').src);
+            if (document.getElementById('background').src.indexOf(this.TextList[this.msgindex - 1]['backgroundImage'])===-1) { //画像の変更がある時のみ暗転
+                
+                this.backgroundSetting(this.TextList[this.msgindex - 1]['backgroundImage'])//読み込み終了=>画面反映まで暗転させたい
+                // 2秒間暗転させる処理書きたい
+                document.getElementById('darkening-floor').classList.remove('op0');//暗転
+                await this.timer(2000);
+                document.getElementById('darkening-floor').classList.add('op0');//暗転解除
+            }
+
             this.movingFlag=true;
             for (const ele of text) {
                 if (!this.movingFlag) {
