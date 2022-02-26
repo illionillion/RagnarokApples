@@ -173,6 +173,7 @@ export default class ScenarioPlayer {
             // console.log(document.getElementById('background').src);
             if (document.getElementById('background').src.indexOf(this.TextList[this.msgindex - 1]['backgroundImage'])===-1) { //画像の変更がある時のみ暗転
                 
+                document.getElementById('autocheck').classList.add('op0');
                 document.getElementById('darkening-floor').classList.remove('op0');//暗転
                 await this.timer(500);
                 document.getElementById('dialogue-name-area').classList.remove('op0');//名前表示
@@ -181,13 +182,15 @@ export default class ScenarioPlayer {
                 // 2秒間暗転させる処理書きたい
                 await this.timer(1000);
                 document.getElementById('darkening-floor').classList.add('op0');//暗転解除
+                document.getElementById('autocheck').classList.remove('op0');
+                await this.timer(1000);
             }else{
                 //画像が同じ=>暗転しない場合
                 document.getElementById('dialogue-name-area').classList.remove('op0');//名前表示
                 this.characterSetting(this.TextList[this.msgindex - 1]['characterList']);//キャラ画像反映
             }
-            await this.timer(500);
 
+            // テキスト1文字ずつ描画
             this.movingFlag=true;
             for (const ele of text) {
                 if (!this.movingFlag) {
