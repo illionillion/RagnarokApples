@@ -43,11 +43,15 @@ import TextDataA from './lib/TextDataA.json.js';
                 dialogue.classList.add('none');
                 autocheck.classList.add('none');
                 gameState.dialogue=false;
+                // TextData.movingFlag = false;//アニメーション停止
+                TextData.AnimationPause();
             }else{
                 dialogue.classList.remove('none');
                 autocheck.classList.remove('none');
                 gameState.dialogue=true;
+                // TextData.AnimationRestart();
             }
+            // console.log(gameState.dialogue);
         })
     
         // テキストボックスクリックでアニメーション再生
@@ -57,7 +61,6 @@ import TextDataA from './lib/TextDataA.json.js';
                 gameState.title=false;
                 document.querySelector('#screen .msg-txt').classList.add('none');
                 TextData.Loading();
-    
             }else{
     
                 let text = document.querySelectorAll('#dialogue-text-area .op0');

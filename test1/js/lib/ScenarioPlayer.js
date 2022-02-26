@@ -43,7 +43,16 @@ export default class ScenarioPlayer {
             }
         }
     }
+    /**
+     * 背景画像設定
+     * @param {*} url 
+     */
+     backgroundSetting (url) {
 
+        // srcを変えるだけだが、切り替えに時間がかかってしまう
+        document.getElementById('background').src=url;
+
+    }
     /**
      * 画像のプリロード
      */
@@ -62,46 +71,8 @@ export default class ScenarioPlayer {
                     
                 }
             }
-            // console.log(textEle['characterList']['left']['src']);
-            // const charimgele = document.createElement('img');
-            // charimgele.src = textEle['characterList']['left']['src'];
-            // imgele.addEventListener('load',(e)=>{
-            //     imgFragment.appendChild(e.target);
-            // })
-            // imgFragment.appendChild(imgele);
         }
         // document.getElementById('imageholder').appendChild(imgFragment);
-    }
-
-    /**
-     * 背景画像設定
-     * @param {*} url 
-     */
-    backgroundSetting (url) {
-
-        // srcを変えるだけだが、切り替えに時間がかかってしまう
-        document.getElementById('background').src=url;
-
-
-        // document.getElementById('background').remove();
-        // console.log(document.querySelector(`#imageholder > img:nth-child(${this.msgindex+1})`));
-        // // 複製するHTML要素を取得
-        // var content_area = document.querySelector(`#imageholder > img:nth-child(${this.msgindex+1})`);
-
-        // // 複製
-        // const clone_element = content_area.cloneNode(true);
-
-        // // 複製した要素の属性を編集
-        // clone_element.id = "background";
-
-        // // 複製したHTML要素をページに挿入
-        // document.getElementById('screen').appendChild(clone_element);
-
-        // const image = document.createElement('img');
-        // image.id='background';
-        // image.src=document.querySelector(`#imageholder > img:nth-child(${this.msgindex+1})`).src;
-        // document.getElementById('screen').appendChild(image);
-        // document.getElementById('screen').appendChild(document.querySelector(`#imageholder > img:nth-child(${this.msgindex+1})`));
     }
 
     /**
@@ -115,9 +86,6 @@ export default class ScenarioPlayer {
             this.msgindex=0;
         }
         console.log(this.TextList[this.msgindex]);
-
-        // this.characterSetting(this.TextList[this.msgindex]['characterList'])
-        // this.backgroundSetting(this.TextList[this.msgindex]['backgroundImage'])
         
         const msgfragment = document.createDocumentFragment();
 
@@ -167,7 +135,7 @@ export default class ScenarioPlayer {
      * @param {*} text cp0クラスがついているspanタグ
      */
     AnimationStart(text){
-        
+        this.nowEle = text;
         (async()=>{
             
             // console.log(document.getElementById('background').src);
@@ -195,9 +163,16 @@ export default class ScenarioPlayer {
             for (const ele of text) {
                 if (!this.movingFlag) {
                     // console.log("stop");
-                    break;
+                    if (!this.state.dialogue) {
+                        this.state.autoPlayingCheck=false;
+                        return;//オートで再生中にダイアログ非表示で停止させた場合
+                    }else{
+                        break;
+                    }
                 }
-
+                if( !ele.classList.contains('op0')){//アニメーション再スタート時op0持ってない場合は飛ばす
+                    continue;
+                }
                 await this.timer(100);
                 // console.log(ele);
                 ele.classList.remove('op0');
@@ -217,6 +192,18 @@ export default class ScenarioPlayer {
             }
                 
         })();
+    }
+
+    AnimationPause () {
+        this.movingFlag=false;
+    }
+
+    AnimationRestart () {
+        // console.log(this.nowEle);
+        if (this.movingFlag) {
+            return;
+        }
+        this.AnimationStart(this.nowEle);
     }
 
     /**
