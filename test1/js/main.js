@@ -1,5 +1,5 @@
 "use strict";
-import Text from './lib/Text.js';
+import ScenarioPlayer from './lib/ScenarioPlayer.js';
 import TextDataA from './lib/TextDataA.json.js';
 
 (function(){
@@ -29,7 +29,7 @@ import TextDataA from './lib/TextDataA.json.js';
     
         // TextDataA.A1これで投げ込む
         // let TextData = new Text(msgs,gameState)
-        let TextData = new Text(TextDataA.A1,gameState)
+        let TextData = new ScenarioPlayer(TextDataA.A1,gameState)
     
         const screen = document.getElementById('screen');
         const dialogue = document.getElementById('dialogue');
