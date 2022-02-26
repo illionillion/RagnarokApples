@@ -165,12 +165,19 @@ export default class ScenarioPlayer {
                     // console.log("stop");
                     if (!this.state.dialogue) {
                         this.state.autoPlayingCheck=false;
+                        // console.log('');
                         return;//オートで再生中にダイアログ非表示で停止させた場合
                     }else{
                         break;
                     }
                 }
-                if( !ele.classList.contains('op0')){//アニメーション再スタート時op0持ってない場合は飛ばす
+                if (!this.state.dialogue) {
+                    this.state.autoPlayingCheck=false;
+                    this.movingFlag=false;
+                    // console.log('');
+                    return;//オートで再生中にダイアログ非表示で停止させた場合
+                }
+                if(!ele.classList.contains('op0')){//アニメーション再スタート時op0持ってない場合は飛ばす
                     continue;
                 }
                 await this.timer(100);
@@ -186,6 +193,10 @@ export default class ScenarioPlayer {
                 await this.timer(1000);//この待機中にAnimationStartが走るとおかしくなる
                 // console.log('auto');
                 // console.log(text);
+                if (!this.state.dialogue) {
+                    this.state.autoPlayingCheck=false;
+                    return;
+                }
                 this.Loading();
                 const nexttext = document.querySelectorAll('#dialogue-text-area .op0');
                 this.AnimationStart(nexttext);
