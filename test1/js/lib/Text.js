@@ -167,22 +167,27 @@ export default class Text {
      * @param {*} text cp0クラスがついているspanタグ
      */
     AnimationStart(text){
-        document.getElementById('dialogue-name-area').classList.remove('op0');
         
         (async()=>{
             
-            this.characterSetting(this.TextList[this.msgindex - 1]['characterList'])
-            // console.log(this.TextList[this.msgindex - 1]['backgroundImage']);
             // console.log(document.getElementById('background').src);
             if (document.getElementById('background').src.indexOf(this.TextList[this.msgindex - 1]['backgroundImage'])===-1) { //画像の変更がある時のみ暗転
                 
+                document.getElementById('darkening-floor').classList.remove('op0');//暗転
+                await this.timer(500);
+                document.getElementById('dialogue-name-area').classList.remove('op0');//名前表示
+                this.characterSetting(this.TextList[this.msgindex - 1]['characterList']);//キャラ画像反映
                 this.backgroundSetting(this.TextList[this.msgindex - 1]['backgroundImage'])//読み込み終了=>画面反映まで暗転させたい
                 // 2秒間暗転させる処理書きたい
-                document.getElementById('darkening-floor').classList.remove('op0');//暗転
-                await this.timer(2000);
+                await this.timer(1000);
                 document.getElementById('darkening-floor').classList.add('op0');//暗転解除
+            }else{
+                //画像が同じ=>暗転しない場合
+                document.getElementById('dialogue-name-area').classList.remove('op0');//名前表示
+                this.characterSetting(this.TextList[this.msgindex - 1]['characterList']);//キャラ画像反映
             }
             await this.timer(500);
+
             this.movingFlag=true;
             for (const ele of text) {
                 if (!this.movingFlag) {
