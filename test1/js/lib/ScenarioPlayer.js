@@ -122,10 +122,20 @@ export default class ScenarioPlayer {
             msgfragment.appendChild(span);
         }
         this.colorFlag=false;
+
+        //一枚絵の時
+        if (this.TextList[this.msgindex]['onePicture']) {
+            // #onePictureに操作
+            console.log(this.TextList[this.msgindex]);
+        }else{
+
+        }
+
         document.getElementById('dialogue-name-area').classList.add('op0');
         document.getElementById('dialogue-name-area').innerHTML=speakerName;
         document.getElementById('dialogue-text-area').innerHTML='';
         document.getElementById('dialogue-text-area').appendChild(msgfragment);
+        
         this.msgindex++;
     
     }

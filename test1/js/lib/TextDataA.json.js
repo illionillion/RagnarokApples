@@ -2,7 +2,7 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
     "A1":[//パート
         {
             "textId":0,
-            // "type":"normal",
+            "onePicture":true,
             "characterList":{//各キャラの設定
                 "left":{//左
                     "name":"キャラ(左)",
@@ -37,6 +37,7 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
         },
         {
             "textId":1,
+            "onePicture":true,
             "characterList":{//各キャラの設定
                 "left":{//左
                     "name":"キャラ(左)",
@@ -71,6 +72,7 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
         },
         {
             "textId":2,
+            "onePicture":false,
             "characterList":{//各キャラの設定
                 "left":{//左
                     "name":"キャラ(左)",
@@ -105,6 +107,7 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
         },
         {
             "textId":3,
+            "onePicture":false,
             "characterList":{//各キャラの設定
                 "left":{//左
                     "name":"キャラ(左)",
@@ -139,6 +142,7 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
         },
         {
             "textId":4,
+            "onePicture":false,
             "characterList":{//各キャラの設定
                 "left":{//左
                     "name":"キャラ(左)",
@@ -173,6 +177,7 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
         },
         {
             "textId":5,
+            "onePicture":false,
             "characterList":{//各キャラの設定
                 "left":{//左
                     "name":"キャラ(左)",
@@ -207,6 +212,7 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
         },
         {
             "textId":6,
+            "onePicture":false,
             "characterList":{//各キャラの設定
                 "left":{//左
                     "name":"キャラ(左)",

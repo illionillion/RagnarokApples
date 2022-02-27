@@ -15,7 +15,8 @@ import TextDataA from './lib/TextDataA.json.js';
             "dialogue":true,
             // "autoPlaying":true
             "autoPlaying":false,
-            "autoPlayingCheck":false
+            "autoPlayingCheck":false,
+            "onePictureSwitch":false
         }
         let msgs = [ //コンストラクタに入れる
             "今日の*/ご飯/*は",
