@@ -54,6 +54,17 @@ body{
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     transition: 500ms;
+    z-index: 2;
+}
+#one-picture.op0{
+    z-index: 0;
+}
+#one-picture-text{
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    top: 10%;
+    left: 10%;
 }
 /* テキスト表示画面 */
 #dialogue{

@@ -37,6 +37,33 @@ import TextDataA from './lib/TextDataA.json.js';
         const dialogueText = document.getElementById('dialogue-text-area');
         const autocheck = document.getElementById('autocheck');
         const darkeningFloor = document.getElementById('darkening-floor');
+        const onePicture = document.getElementById('one-picture');
+
+        const ScenarioClick = () => {
+            let text = gameState.onePictureSwitch ? document.querySelectorAll('#one-picture-text .op0') : document.querySelectorAll('#dialogue-text-area .op0');
+
+            if (text.length===0 && !gameState.autoPlaying) {
+                TextData.Loading();
+                // console.log(text);
+                text = gameState.onePictureSwitch ? document.querySelectorAll('#one-picture-text .op0') : document.querySelectorAll('#dialogue-text-area .op0');
+            }
+            if (!TextData.movingFlag) {
+                // gameState.autoPlayingCheckでautoの待機中にイベントが発生するのを防ぐ
+                console.log(gameState.autoPlaying);
+                console.log(gameState.autoPlayingCheck);
+                if (gameState.autoPlaying && gameState.autoPlayingCheck) {
+                    console.log('cancel');//autoの待機中にイベントが発生するのを防ぐ
+                    return;
+                }else if(gameState.autoPlaying && !gameState.autoPlayingCheck){
+                    gameState.autoPlayingCheck=true;//auto初回のみ通る
+                }
+                TextData.AnimationStart(text);
+            }else{
+                    
+                TextData.AnimationForcedEnd(text);
+
+            }
+        }
     
         // テキストボックス以外をクリックすると、テキストボックスが消えたり現れたりする
         screen.addEventListener('click',(e)=>{
@@ -63,30 +90,7 @@ import TextDataA from './lib/TextDataA.json.js';
                 document.querySelector('#screen .msg-txt').classList.add('none');
                 TextData.Loading();
             }else{
-    
-                let text = document.querySelectorAll('#dialogue-text-area .op0');
-
-                if (text.length===0 && !gameState.autoPlaying) {
-                    TextData.Loading();
-                    // console.log(text);
-                    text = document.querySelectorAll('#dialogue-text-area .op0');
-                }
-                if (!TextData.movingFlag) {
-                    // gameState.autoPlayingCheckでautoの待機中にイベントが発生するのを防ぐ
-                    console.log(gameState.autoPlaying);
-                    console.log(gameState.autoPlayingCheck);
-                    if (gameState.autoPlaying && gameState.autoPlayingCheck) {
-                        console.log('cancel');//autoの待機中にイベントが発生するのを防ぐ
-                        return;
-                    }else if(gameState.autoPlaying && !gameState.autoPlayingCheck){
-                        gameState.autoPlayingCheck=true;//auto初回のみ通る
-                    }
-                    TextData.AnimationStart(text);
-                }else{
-                        
-                    TextData.AnimationForcedEnd(text);
-
-                }
+                ScenarioClick();
             }
         
         })
@@ -107,9 +111,15 @@ import TextDataA from './lib/TextDataA.json.js';
             }
             // console.log(gameState.autoPlaying);
         });
-
+        // 暗転要素の伝搬禁止
         darkeningFloor.addEventListener('click',(e)=>{
             e.stopPropagation();
+        })
+        // 一枚絵の時のイベント発火
+        onePicture.addEventListener('click',(e)=>{
+            e.stopPropagation();
+            ScenarioClick();
+
         })
     })
 })();

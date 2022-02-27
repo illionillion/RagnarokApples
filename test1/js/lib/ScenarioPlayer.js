@@ -125,16 +125,22 @@ export default class ScenarioPlayer {
 
         //一枚絵の時
         if (this.TextList[this.msgindex]['onePicture']) {
+            this.state.onePictureSwitch=true;
             // #onePictureに操作
+            document.getElementById('one-picture').classList.remove('op0');
+            document.getElementById('dialogue').classList.add('op0');
+            document.getElementById('one-picture-text').innerHTML='';
+            document.getElementById('one-picture-text').appendChild(msgfragment);
             console.log(this.TextList[this.msgindex]);
         }else{
-
+            this.state.onePictureSwitch=false;
+            document.getElementById('one-picture').classList.add('op0');
+            document.getElementById('dialogue').classList.remove('op0');
+            document.getElementById('dialogue-name-area').classList.add('op0');
+            document.getElementById('dialogue-name-area').innerHTML=speakerName;
+            document.getElementById('dialogue-text-area').innerHTML='';
+            document.getElementById('dialogue-text-area').appendChild(msgfragment);
         }
-
-        document.getElementById('dialogue-name-area').classList.add('op0');
-        document.getElementById('dialogue-name-area').innerHTML=speakerName;
-        document.getElementById('dialogue-text-area').innerHTML='';
-        document.getElementById('dialogue-text-area').appendChild(msgfragment);
         
         this.msgindex++;
     
@@ -178,10 +184,10 @@ export default class ScenarioPlayer {
                         // console.log('');
                         return;//オートで再生中にダイアログ非表示で停止させた場合
                     }else{
-                        break;
+                        break;//テキスト強制終了でautoで次へい行かせる
                     }
                 }
-                if (!this.state.dialogue) {
+                if (!this.state.dialogue && !this.state.onePictureSwitch) {
                     this.state.autoPlayingCheck=false;
                     this.movingFlag=false;
                     // console.log('');
@@ -208,7 +214,7 @@ export default class ScenarioPlayer {
                     return;
                 }
                 this.Loading();
-                const nexttext = document.querySelectorAll('#dialogue-text-area .op0');
+                const nexttext = this.state.onePictureSwitch ? document.querySelectorAll('#one-picture-text .op0') : document.querySelectorAll('#dialogue-text-area .op0');
                 this.AnimationStart(nexttext);
             }
                 
