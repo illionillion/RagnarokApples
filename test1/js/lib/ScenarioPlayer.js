@@ -155,6 +155,11 @@ export default class ScenarioPlayer {
         (async()=>{
             
             // console.log(document.getElementById('background').src);
+            // if (this.state.onePictureSwitch) {
+            //     document.getElementById('one-picture').classList.remove('op0');
+            // }else{
+            //     document.getElementById('one-picture').classList.add('op0');
+            // }
             if (document.getElementById('background').src.indexOf(this.TextList[this.msgindex - 1]['backgroundImage'])===-1) { //画像の変更がある時のみ暗転
                 
                 document.getElementById('autocheck').classList.add('op0');
@@ -209,7 +214,7 @@ export default class ScenarioPlayer {
                 await this.timer(1000);//この待機中にAnimationStartが走るとおかしくなる
                 // console.log('auto');
                 // console.log(text);
-                if (!this.state.dialogue) {
+                if (!this.state.dialogue && !this.state.onePictureSwitch) {
                     this.state.autoPlayingCheck=false;
                     return;
                 }
