@@ -66,6 +66,9 @@ body{
     top: 10%;
     left: 10%;
 }
+#one-picture-text span{
+    transition: 250ms;
+}
 /* テキスト表示画面 */
 #dialogue{
     position: absolute;
@@ -88,7 +91,9 @@ body{
     margin: auto;
     font-size: 1.2em;
 }
-
+#dialogue-text-area span{
+    transition: 250ms;
+}
 /* キャラクター */
 #character-area{
     position: absolute;
