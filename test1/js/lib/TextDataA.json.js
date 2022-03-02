@@ -2,7 +2,7 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
     "A1":[//パート
         {
             "textId":0,
-            "onePicture":true,
+            "onePicture":false,
             "characterList":{//各キャラの設定
                 "left":{//左
                     "name":"キャラ(左)",
@@ -63,7 +63,7 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
             },
             "characterText":{
                 "name":"キャラ１",
-                "text":"焼肉に行こうと思ったが/お金/がなかったので、*自炊*することにした。",
+                "text":"焼肉に行こうと思ったが*/お金/*がなかったので、*自炊*することにした。",
                 "effect":{
                     
                 }
@@ -107,7 +107,7 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
         },
         {
             "textId":3,
-            "onePicture":false,
+            "onePicture":true,
             "characterList":{//各キャラの設定
                 "left":{//左
                     "name":"キャラ(左)",
@@ -133,7 +133,7 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
             },
             "characterText":{
                 "name":"キャラ２",
-                "text":"何も食べれそうなものがなかった。あったのは調味料とビールだけ…。",
+                "text":"何も/食べれそうなもの/がなかった。あったのは/*調味料*/と/*ビール*/だけ…。",
                 "effect":{
                     
                 }

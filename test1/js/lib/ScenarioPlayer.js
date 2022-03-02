@@ -88,11 +88,12 @@ export default class ScenarioPlayer {
         console.log(this.TextList[this.msgindex]);
         
         const msgfragment = document.createDocumentFragment();
+        let largeHolder;
 
         let speakerName = this.TextList[this.msgindex]['characterText']['name'];//名前
         for (let i = 0; i < this.TextList[this.msgindex]['characterText']['text'].length; i++) {
             const element = this.TextList[this.msgindex]['characterText']['text'][i];
-            if (element==='/') {
+            if (element==='/') {//赤文字
                 // console.log(element);
                 if (this.colorFlag) {
                     this.colorFlag=false;
@@ -101,7 +102,7 @@ export default class ScenarioPlayer {
                 this.colorFlag=true;
                 continue;
             }
-            if (element==='*') {
+            if (element==='*') {//大文字
                 // console.log(element);
                 if (this.sizeFlag) {
                     this.sizeFlag=false;
@@ -118,7 +119,21 @@ export default class ScenarioPlayer {
             }
             if (this.sizeFlag) {
                 span.classList.add('large');
+                if (!largeHolder) {
+                    largeHolder=document.createElement('span');
+                    largeHolder.className='fast-show';
+                }
+                // 一枚絵且つ、大文字の時は速めに表示させるので別にする
+                if (this.TextList[this.msgindex]['onePicture']) {
+                    largeHolder.appendChild(span);
+                    console.log(largeHolder);
+                    continue;
+                }
             }
+            if (largeHolder) {
+                msgfragment.appendChild(largeHolder);
+            }
+            largeHolder=null;
             msgfragment.appendChild(span);
         }
         this.colorFlag=false;
@@ -181,6 +196,25 @@ export default class ScenarioPlayer {
 
             // テキスト1文字ずつ描画
             this.movingFlag=true;
+            const p = new Promise((resolve,reject)=>{
+                (async ()=>{
+                    let fastFlag = false;
+                    for (const ele of text) {
+                        await this.timer(10)
+                        if (ele.parentNode.classList.contains('fast-show')) {
+                            fastFlag=true;
+                            ele.classList.remove('op0');
+                            await this.timer(100)
+                        }else{
+                            if (fastFlag) {
+                                await this.timer(500)
+                                fastFlag=false;
+                            }
+                        }
+                    }
+                })()
+                resolve();
+            })
             for (const ele of text) {
                 if (!this.movingFlag) {
                     // console.log("stop");
