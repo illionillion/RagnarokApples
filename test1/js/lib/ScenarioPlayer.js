@@ -169,12 +169,6 @@ export default class ScenarioPlayer {
         this.nowEle = text;
         (async()=>{
             
-            // console.log(document.getElementById('background').src);
-            // if (this.state.onePictureSwitch) {
-            //     document.getElementById('one-picture').classList.remove('op0');
-            // }else{
-            //     document.getElementById('one-picture').classList.add('op0');
-            // }
             if (document.getElementById('background').src.indexOf(this.TextList[this.msgindex - 1]['backgroundImage'])===-1) { //画像の変更がある時のみ暗転
                 
                 document.getElementById('autocheck').classList.add('op0');
