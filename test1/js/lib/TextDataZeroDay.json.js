@@ -1,0 +1,39 @@
+export default { //JSONファイルとしてでなくJSのオブジェクトとしてエクスポートする
+    "A1":[//パート
+        {
+            "textId":0,
+            "onePicture":false,
+            "characterList":{//各キャラの設定
+                "left":{//左
+                    "name":"キャラ(左)",
+                    "src":"images/character/bengal.png",
+                    "status":{
+                        "brightnessDown":false//明度(true)の時は落とす
+                    }
+                },
+                "center":{//中央
+                    "name":"キャラ(中)",
+                    "src":"images/character/transparent_background.png",
+                    "status":{
+                        "brightnessDown":false//明度(true)の時は落とす
+                    }
+                },
+                "right":{//右
+                    "name":"キャラ(右)",
+                    "src":"images/character/transparent_background.png",
+                    "status":{
+                        "brightnessDown":false//明度(true)の時は落とす
+                    }
+                }
+            },
+            "characterText":{
+                "name":"キャラ１",
+                "text":"相変わらず目覚めは最悪で、今ここで微睡んでいる事すら後悔してしまうほどだった。もう一度眠りにつこう。そう思ってベッドに潜ってみたものの、あれだけ寝ていたのだ。当然、眠れる訳がなかった。",
+                "effect":{
+
+                }
+            },
+            "backgroundImage":"images/background/city01.jpeg"
+        },
+    ]
+}
