@@ -1,9 +1,16 @@
 "use strict";
 import ScenarioPlayer from './lib/ScenarioPlayer.js';
 import TextDataA from './lib/TextDataA.json.js';
+import FrameSizing from './lib/FrameSizing.js';
 
 (function(){
+    window.addEventListener('resize',(e)=>{
+        FrameSizing()
+    })
     window.addEventListener('load',(e)=>{
+        
+        FrameSizing()
+
         console.log(TextDataA);
         console.log(TextDataA.A1);
         console.log(Object.keys(TextDataA.A1));

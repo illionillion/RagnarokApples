@@ -7,18 +7,25 @@
  }
 body{
     margin: 0;
+    /* overflow: hidden; */
 }
 /* 画面全般 */
 #frame{
     /* width: 80%; */
-    width: 600px;
-    height: 450px;
+    /* width: 600px;
+    height: 450px; */
+    min-width: 1024px;
+    min-height: 768px;
+    width: 100%;
+    height: 100%;
     margin: auto;
 }
 #screen{
-    width: 90%;
-    height: 90%;
-    margin: 10px auto;
+    /* width: 90%;
+    height: 90%; */
+    width: 100%;
+    height: 100%;
+    /* margin: 10px auto; */
     background-color: #000;
     color: #fff;
     position: relative;
@@ -107,13 +114,14 @@ body{
 /* キャラクター */
 #character-area{
     position: absolute;
-    top: 7%;
+    /* top: 7%; */
+    bottom: 0%;
     display: flex;
     width: 100%;
 }
 #character-area div{
     margin: 0 auto;
-    width: 30%;
+    width: 25%;
 }
 #character-area div img{
     width: 100%;
