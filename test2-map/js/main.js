@@ -14,7 +14,16 @@ import FrameSizing from "./lib/FrameSizing.js";
             // console.log(point);
             point.addEventListener('click',(e)=>{
                 // console.log(e.target);
-                alert(e.target.dataset.place);
+                // alert(e.target.dataset.place);
+                const float=document.getElementById('mapSelectFloat')
+                float.classList.remove('none')
+                const pname = document.getElementById('placeName')
+                pname.innerHTML=e.target.dataset.place
+
+                const noBtn = document.getElementById('mapSelectNo')
+                noBtn.addEventListener('click',(e)=>{
+                    float.classList.add('none')
+                })
             })
 
         }

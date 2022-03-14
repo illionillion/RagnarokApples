@@ -105,8 +105,8 @@ body{
 #mapSelectButton {
     position: absolute;
     left: 50%;
-    top: 35%;
-    transform: translate(-50%,-35%);
+    top: 50%;
+    transform: translate(-50%,-50%);
     width: 100%;
     height: 35%;
     display: flex;
@@ -120,6 +120,36 @@ body{
     border-radius: 25px;
     text-align: center;
     margin: 10px auto;
+}
+
+#mapCharacterList{
+    position: absolute;
+    left: 50%;
+    bottom: 5%;
+    transform: translate(-50%,5%);
+    border: 1px solid #000;
+    width: 90%;
+    height: 40%;
+}
+
+#mapCharacterList ul{
+    margin: 0;
+    padding-left: 0;
+    list-style-type: none;
+    display: flex;
+}
+
+#mapCharacterList ul li{
+    background-color: #000;
+    width: 20%;
+    height: 20%;
+    margin: 0px auto;
+    border-radius: 50%;
+    overflow: hidden;
+}
+#mapCharacterList ul li img{
+    width: 100%;
+    object-fit: cover;
 }
 
 .op0{
