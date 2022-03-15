@@ -195,7 +195,7 @@ export default class ScenarioPlayer {
                     let fastFlag = false;
                     for (const ele of text) {
                         await this.timer(10)
-                        if (ele.parentNode.classList.contains('fast-show')) {
+                        if (ele.parentNode.classList.contains('fast-show')) {//1枚絵の時だけ先行して別速度で表示させる
                             fastFlag=true;
                             ele.classList.remove('op0');
                             await this.timer(100)
