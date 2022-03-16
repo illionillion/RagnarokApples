@@ -13,23 +13,25 @@ import FrameSizing from "./lib/FrameSizing.js";
         for (const point of point_eles) { //各場所のタッチ時の処理
             // console.log(point);
             point.addEventListener('click',(e)=>{
-                // console.log(e.target);
-                // alert(e.target.dataset.place);
-                const float=document.getElementById('mapSelectFloat')
+                
+                const float=document.getElementById('mapWrapper')
                 float.classList.remove('none')
                 const pname = document.getElementById('placeName')
-                pname.innerHTML=e.target.dataset.place
+                const placeName=e.target.dataset.place
+                pname.innerHTML=placeName
 
+                const yesBtn = document.getElementById('mapSelectYes')
                 const noBtn = document.getElementById('mapSelectNo')
-                noBtn.addEventListener('click',((e)=>{
-                    const f = (e) => {
-                        // console.log('a');//イベントが消えないので繰り返すごとにたくさん走る
-                        float.classList.add('none')
-                        // noBtn.removeEventListener('click',f,false)
-                        e.target.removeEventListener('click',f,false)//イベントの削除
-                    }
-                    return f
-                })(),false)
+
+                const selectEve = (e) => {
+                    if( e.target === yesBtn ) alert(`${placeName}が選択されました`)
+                    float.classList.add('none')
+                    e.target.removeEventListener('click',selectEve,false)//クリックされたボタンのイベントを削除
+                    e.target === yesBtn ? noBtn : yesBtn .removeEventListener('click',selectEve,false)//クリックされなかったボタンのイベントを削除
+                }
+
+                yesBtn.addEventListener('click',selectEve,false)
+                noBtn.addEventListener('click',selectEve,false)
             })
 
         }
