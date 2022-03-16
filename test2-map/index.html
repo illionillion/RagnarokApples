@@ -14,30 +14,42 @@
     <main>
         <div id="frame">
             <div id="screen">
-                <div id="mapWrapper" class="none">
-                    <div id="mapSelectFloat">
-                        <p id="placeName">場所の名前</p>
-                        <div id="mapSelectButton">
-                            <div id="mapSelectYes">ここにする</div>
-                            <div id="mapSelectNo">やめておく</div>
+                <div id="mapScreen">
+                    <div id="mapWrapper" class="none">
+                        <div id="mapSelectFloat">
+                            <p id="placeName">場所の名前</p>
+                            <div id="mapSelectButton">
+                                <div id="mapSelectYes">ここにする</div>
+                                <div id="mapSelectNo">やめておく</div>
+                            </div>
+                            <div id="mapCharacterList">
+                                <ul>
+                                    <!-- キャラ一覧 -->
+                                    <li><img src="app.png" alt="" srcset=""></li>
+                                    <li><img src="app.png" alt="" srcset=""></li>
+                                    <li><img src="app.png" alt="" srcset=""></li>
+                                </ul>
+                            </div>
                         </div>
-                        <div id="mapCharacterList">
-                            <ul>
-                                <!-- キャラ一覧 -->
-                                <li><img src="app.png" alt="" srcset=""></li>
-                                <li><img src="app.png" alt="" srcset=""></li>
-                                <li><img src="app.png" alt="" srcset=""></li>
-                            </ul>
+                    </div>
+                    <div id="date">ｎ日目</div>
+                    <img id="background" src="map.png" alt="" srcset=""/>
+                    <div id="mapItems">
+                        <div id="point1" data-place="場所1" class="map-touch"></div>
+                        <div id="point2" data-place="場所2" class="map-touch"></div>
+                        <div id="point3" data-place="場所3(ドーム)" class="map-touch"></div>
+                        <div id="point4" data-place="場所4" class="map-touch"></div>
+                        <div id="point5" data-place="場所5" class="map-touch"></div>
+                    </div>
+                    <div id="mapTextCover">
+                        <div id="mapTextCharacter">
+                            <img src="images/character/bengal.png" alt="" srcset="">
+                        </div>
+                        <div id="speechBubble">
+
                         </div>
                     </div>
                 </div>
-                <div id="date">ｎ日目</div>
-                <img id="background" src="map.png" alt="" srcset=""/>
-                <div id="point1" data-place="場所1" class="map-touch"></div>
-                <div id="point2" data-place="場所2" class="map-touch"></div>
-                <div id="point3" data-place="場所3(ドーム)" class="map-touch"></div>
-                <div id="point4" data-place="場所4" class="map-touch"></div>
-                <div id="point5" data-place="場所5" class="map-touch"></div>
             </div>
         </div>
     </main>
