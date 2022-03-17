@@ -78,6 +78,14 @@ body{
     z-index: 2;
 }
 
+#mapScreen {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+}
+
 #mapWrapper{
     position: absolute;
     top: 0%;
@@ -86,6 +94,14 @@ body{
     height: 100%;
     background-color: rgba(0, 0, 0, 0.582);
     z-index: 2;
+}
+
+#mapItems{
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
 }
 
 #mapSelectFloat{
@@ -160,6 +176,51 @@ body{
 #mapCharacterList ul li img{
     width: 100%;
     object-fit: cover;
+}
+
+
+#mapTextCover {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    /* display: flex; */
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+#mapTextCharacter img{
+    width: 100%;
+    object-fit: cover;
+}
+#mapTextCharacter{
+    /* flex: 1; */
+    position: absolute;
+    bottom: 0%;
+    left: 5%;
+    width: 25%;
+}
+
+#speechBubble p.textarea{
+    /* margin: 10px auto; */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 90%;
+    height: 75%;
+    transform: translate(-50%,-50%);
+    color: #000;
+    text-align: center;
+}
+#speechBubble{
+    position: relative;
+    width: 38%;
+    height: 18%;
+    top: 25%;
+    left: 30%;
+    text-align: left;
+    background-size: cover;
+    background-image: url(../images/e0186_1.png);
 }
 
 .op0{

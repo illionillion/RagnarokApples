@@ -35,5 +35,10 @@ import FrameSizing from "./lib/FrameSizing.js";
             })
 
         }
+
+        const spb = document.getElementById('speechBubble')
+        spb.addEventListener('click', (e) => {
+            document.getElementById('mapTextCover').classList.add('none')
+        })
     })
 })();
