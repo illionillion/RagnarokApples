@@ -223,6 +223,31 @@ body{
     background-image: url(../images/e0186_1.png);
 }
 
+#mapTextFloat{
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translate(-50%,0%);
+    display: flex;
+    width: 80%;
+}
+
+#mapTextIcon{
+    width: 15%;
+    background-color: #000;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+#mapTextIcon img{
+    width: 100%;
+}
+
+#FloatSpeechBubble{
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
 .op0{
     opacity: 0;
 }
