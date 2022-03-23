@@ -1,7 +1,12 @@
 "use strict";
 import FrameSizing from "./lib/FrameSizing.js";
 
+
 (function(){
+    const state={
+        now:1,
+        FloatCheck:true
+    }
     // console.log(document.getElementById('screen'));
     window.addEventListener('resize',(e)=>{
         FrameSizing()
@@ -37,9 +42,26 @@ import FrameSizing from "./lib/FrameSizing.js";
         }
 
         const spb = document.getElementById('speechBubble')
+        const FloatCheck = document.getElementById('FloatCheck')
+        const TextFloat = document.getElementById('mapTextFloat')
+        const TextCover = document.getElementById('mapTextCover')
         spb.addEventListener('click', (e) => {
-            document.getElementById('mapTextCover').classList.add('none')
-            document.getElementById('mapTextFloat').classList.remove('op0');
+            TextCover.classList.add('none')
+            FloatCheck.classList.remove('op0');
+            TextFloat.classList.remove('op0');
+        })
+
+        FloatCheck.addEventListener('click',(e)=>{
+            if (state.FloatCheck) {
+                state.FloatCheck=false
+                FloatCheck.innerHTML='OFF'
+                TextFloat.classList.add('op0');
+            }else{
+                state.FloatCheck=true
+                FloatCheck.innerHTML='ON'
+                TextFloat.classList.remove('op0');
+            }
+            console.log(state.FloatCheck);
         })
     })
 })();
