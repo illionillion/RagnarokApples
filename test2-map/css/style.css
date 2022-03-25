@@ -104,6 +104,10 @@ body{
     height: 100%;
 }
 
+.map-touch {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.699);}
+
 #mapSelectFloat{
     position: absolute;
     /* position: relative; */
