@@ -1,6 +1,7 @@
 "use strict";
 import ScenarioPlayer from './lib/ScenarioPlayer.js';
-import TextDataA from './lib/TextDataA.json.js';
+// import TextDataA from './lib/TextDataA.json.js';
+import TextDataA from './lib/TextDataZeroDay.json.js';
 import FrameSizing from './lib/FrameSizing.js';
 
 (function(){
@@ -25,15 +26,6 @@ import FrameSizing from './lib/FrameSizing.js';
             "autoPlayingCheck":false,
             "onePictureSwitch":false
         }
-        let msgs = [ //コンストラクタに入れる
-            "今日の*/ご飯/*は",
-            "焼肉に行こうと思ったが/お金/がなかったので、*自炊*することにした。",
-            "冷蔵庫を見た。",
-            "何も食べれそうなものがなかった。あったのは調味料とビールだけ…。",
-            "「こりゃ、ダメだな...笑」",
-            "俺はそうつぶやいて、近所のスーパーへ出かけること決意した。",
-            "顔を洗い、髭を剃り、歯を磨いて、…。それから着替え、身支度を済ませてドアを開けた。"
-        ]
     
         // TextDataA.A1これで投げ込む
         // let TextData = new Text(msgs,gameState)
