@@ -10,6 +10,8 @@
     text-align: center;
     font-size: 2em;
     z-index: 2;
+    font-family: 'Noto Serif JP', serif;
+
 }
 
 #mapBackground{
@@ -56,6 +58,8 @@
     width: 60%;
     height: 50%;
     background-color: rgba(255, 255, 255, 1);
+    font-family: 'Noto Serif JP', serif;
+
 }
 
 #placeName{
@@ -129,6 +133,8 @@
     height: 100%;
     /* display: flex; */
     background-color: rgba(0, 0, 0, 0.4);
+    font-family: 'Noto Serif JP', serif;
+
 }
 
 #mapTextCharacter img{
@@ -163,6 +169,8 @@
     text-align: left;
     background-size: cover;
     background-image: url(../images/e0186_1.png);
+    font-family: 'Noto Serif JP', serif;
+
 }
 
 #mapTextFloat{
