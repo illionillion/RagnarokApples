@@ -1,4 +1,7 @@
 "use strict"
+import ScenarioPlayer from './lib/ScenarioPlayer.js';
+// import TextDataA from './lib/TextDataA.json.js';
+import TextDataA from './lib/TextDataZeroDay.json.js';
 import FrameSizing from "./lib/FrameSizing.js"
 import mapItems from "./lib/mapItems.json.js"
 
@@ -42,11 +45,31 @@ import mapItems from "./lib/mapItems.json.js"
                         e.target.removeEventListener('click',selectEve,false)//クリックされたボタンのイベントを削除
                         e.target === yesBtn ? noBtn : yesBtn .removeEventListener('click',selectEve,false)//クリックされなかったボタンのイベントを削除
                         
+                        const timer = (s) => {
+                            return new Promise((res,rej)=>{
+                                setTimeout(() => {
+                                    res()
+                                }, s);
+                            })
+                        }
                         if( e.target === yesBtn ) {
                             //alert(`${placeName}が選択されました`)
-                            // シナリオ画面へ遷移
-                            document.getElementById('textScreen').classList.remove('none')
-                            document.getElementById('mapScreen').classList.add('none')
+                            (async ()=>{
+
+                                // 暗転
+                                document.getElementById('darkening-floor').classList.remove('op0')
+                                // タイマー
+                                await timer(1000);
+                                // シナリオ画面へ遷移
+                                document.getElementById('textScreen').classList.remove('none')
+                                document.getElementById('mapScreen').classList.add('none')
+                                // タイマー
+                                await timer(1000);
+                                // 暗転解除
+                                document.getElementById('darkening-floor').classList.add('op0')
+                                
+                            })()
+                            
                         }
                     
 
@@ -72,7 +95,7 @@ import mapItems from "./lib/mapItems.json.js"
         // DOMにappend
         document.getElementById('mapItems').appendChild(eleFragment)
 
-        // 画面遷移系
+        // マップ画面遷移系
         const spb = document.getElementById('speechBubble')
         const FloatCheck = document.getElementById('FloatCheck')
         const TextFloat = document.getElementById('mapTextFloat')
