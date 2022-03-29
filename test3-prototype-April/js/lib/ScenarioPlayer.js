@@ -82,8 +82,13 @@ export default class ScenarioPlayer {
 
         if (this.msgindex>=Object.keys(this.TextList).length) {
             // alert('終了');
-            // return;
-            this.msgindex=0;
+            // (async ()=>{
+
+            //     console.log("end");
+    
+            // })
+            return;
+            // this.msgindex=0;
         }
         console.log(this.TextList[this.msgindex]);
         
@@ -240,15 +245,33 @@ export default class ScenarioPlayer {
             if (this.state.autoPlaying) {
 
                 await this.timer(1000);//この待機中にAnimationStartが走るとおかしくなる
-                // console.log('auto');
+                console.log('auto');
                 // console.log(text);
+                const nextFlag = this.msgindex >= Object.keys(this.TextList).length
                 if (!this.state.dialogue && !this.state.onePictureSwitch) {
                     this.state.autoPlayingCheck=false;
                     return;
                 }
                 this.Loading();
                 const nexttext = this.state.onePictureSwitch ? document.querySelectorAll('#one-picture-text .op0') : document.querySelectorAll('#dialogue-text-area .op0');
-                this.AnimationStart(nexttext);
+                if(!nextFlag) {
+                    this.AnimationStart(nexttext);
+                }else{
+                    console.log("end");
+                    
+                    // 暗転
+                    document.getElementById('darkening-floor').classList.remove('op0')
+                    // タイマー
+                    await this.timer(1000);
+                    // シナリオ画面へ遷移
+                    document.getElementById('textScreen').classList.add('none')
+                    document.getElementById('mapScreen').classList.remove('none')
+                    // タイマー
+                    await this.timer(1000);
+                    // 暗転解除
+                    document.getElementById('darkening-floor').classList.add('op0')
+
+                }
             }
                 
         })();
