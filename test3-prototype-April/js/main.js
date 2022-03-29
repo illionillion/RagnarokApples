@@ -1,7 +1,7 @@
 "use strict"
 import ScenarioPlayer from './lib/ScenarioPlayer.js';
 // import TextDataA from './lib/TextDataA.json.js';
-import TextDataA from './lib/TextDataZeroDay.json.js';
+import TextData from './lib/TextDataZeroDay.json.js';
 import FrameSizing from "./lib/FrameSizing.js"
 import mapItems from "./lib/mapItems.json.js"
 
@@ -10,12 +10,31 @@ import mapItems from "./lib/mapItems.json.js"
         now:1,
         FloatCheck:true
     }
+    let gameState = {
+        "title":true,
+        "textloading":false,
+        // "msgindex":0,
+        "dialogue":true,
+        // "autoPlaying":true
+        "autoPlaying":false,
+        "autoPlayingCheck":false,
+        "onePictureSwitch":false
+    }
 
+    
     // console.log(document.getElementById('screen'))
     window.addEventListener('resize',(e)=>{
         FrameSizing()
     })
     window.addEventListener('load',(e)=>{
+        // テキストのパーツ
+        const screen = document.getElementById('screen');
+        const dialogue = document.getElementById('dialogue');
+        const dialogueText = document.getElementById('dialogue-text-area');
+        const autocheck = document.getElementById('autocheck');
+        const darkeningFloor = document.getElementById('darkening-floor');
+        const onePicture = document.getElementById('one-picture');
+        
         FrameSizing()
 
         // マップアイテムの生成
@@ -36,6 +55,8 @@ import mapItems from "./lib/mapItems.json.js"
                     const pname = document.getElementById('placeName')
                     const placeName=e.target.dataset.place
                     pname.innerHTML=placeName
+
+                    const partKey = item.partKey
     
                     const yesBtn = document.getElementById('mapSelectYes')
                     const noBtn = document.getElementById('mapSelectNo')
@@ -67,6 +88,8 @@ import mapItems from "./lib/mapItems.json.js"
                                 await timer(1000);
                                 // 暗転解除
                                 document.getElementById('darkening-floor').classList.add('op0')
+
+                                console.log(TextData[partKey]);//選択されたシナリオ
                                 
                             })()
                             
@@ -117,6 +140,33 @@ import mapItems from "./lib/mapItems.json.js"
                 TextFloat.classList.remove('op0')
             }
             // console.log(state.FloatCheck)
+        })
+
+        // AutoのON/OFF
+        autocheck.textContent = gameState.autoPlaying ? 'Auto ON' :'Auto OFF';
+        autocheck.addEventListener('click',(e)=>{
+            e.stopPropagation();
+            gameState.autoPlaying=gameState.autoPlaying ? false : true
+            e.target.textContent = gameState.autoPlaying ? 'Auto ON' :'Auto OFF';
+            // auto機能をONからOFFに変更したときautoPlayingCheckを初期化
+            if (!gameState.autoPlaying) {
+                gameState.autoPlayingCheck=false;
+            }
+            //autoで再生中にautoをoffにする時だけ
+            if (gameState.autoPlaying && TextData.movingFlag) {
+                gameState.autoPlayingCheck=true;
+            }
+            // console.log(gameState.autoPlaying);
+        });
+        // 暗転要素の伝搬禁止
+        darkeningFloor.addEventListener('click',(e)=>{
+            e.stopPropagation();
+        })
+        // 一枚絵の時のイベント発火
+        onePicture.addEventListener('click',(e)=>{
+            e.stopPropagation();
+            ScenarioClick();
+
         })
     })
 })()
