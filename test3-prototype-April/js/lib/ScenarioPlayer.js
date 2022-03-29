@@ -50,7 +50,7 @@ export default class ScenarioPlayer {
      backgroundSetting (url) {
 
         // srcを変えるだけだが、切り替えに時間がかかってしまう
-        document.getElementById('background').src=url;
+        document.getElementById('textBackground').src=url;
 
     }
     /**
@@ -169,7 +169,7 @@ export default class ScenarioPlayer {
         this.nowEle = text;
         (async()=>{
             
-            if (document.getElementById('background').src.indexOf(this.TextList[this.msgindex - 1]['backgroundImage'])===-1) { //画像の変更がある時のみ暗転
+            if (document.getElementById('textBackground').src.indexOf(this.TextList[this.msgindex - 1]['backgroundImage'])===-1) { //画像の変更がある時のみ暗転
                 
                 document.getElementById('autocheck').classList.add('op0');
                 document.getElementById('darkening-floor').classList.remove('op0');//暗転
