@@ -18,9 +18,11 @@ import mapItems from "./lib/mapItems.json.js"
         // autoPlaying:true
         autoPlaying:false,
         autoPlayingCheck:false,
-        onePictureSwitch:false
+        onePictureSwitch:false,
+        textEventId:0
     }
     let TextPlayer
+    // let textEventId = 0
     
     // console.log(document.getElementById('screen'))
     window.addEventListener('resize',(e)=>{
@@ -73,7 +75,7 @@ import mapItems from "./lib/mapItems.json.js"
                                 }, s);
                             })
                         }
-                        if( e.target === yesBtn ) {
+                        if( e.target === yesBtn ) { // yesが押された
                             //alert(`${placeName}が選択されました`)
                             (async ()=>{
 
@@ -91,95 +93,13 @@ import mapItems from "./lib/mapItems.json.js"
                                 
                                 console.log(TextData[partKey]);//選択されたシナリオ
 
+                                gameState.textEventId++;
                                 TextPlayer=new ScenarioPlayer(TextData[partKey],gameState)//プレイヤー生成
                                 
                                 /*------------------
                                     テキストの処理 
                                 ------------------*/
 
-                                const ScenarioClick = () => {
-                                    let text = gameState.onePictureSwitch ? document.querySelectorAll('#one-picture-text .op0') : document.querySelectorAll('#dialogue-text-area .op0');
-                        
-                                    if (text.length===0 && !gameState.autoPlaying) {
-                                        TextPlayer.Loading();
-                                        // console.log(text);
-                                        text = gameState.onePictureSwitch ? document.querySelectorAll('#one-picture-text .op0') : document.querySelectorAll('#dialogue-text-area .op0');
-                                    }
-                                    if (!TextPlayer.movingFlag) {
-                                        // gameState.autoPlayingCheckでautoの待機中にイベントが発生するのを防ぐ
-                                        console.log(gameState.autoPlaying);
-                                        console.log(gameState.autoPlayingCheck);
-                                        if (gameState.autoPlaying && gameState.autoPlayingCheck) {
-                                            console.log('cancel');//autoの待機中にイベントが発生するのを防ぐ
-                                            return;
-                                        }else if(gameState.autoPlaying && !gameState.autoPlayingCheck){
-                                            gameState.autoPlayingCheck=true;//auto初回のみ通る
-                                        }
-                                        TextPlayer.AnimationStart(text);
-                                    }else{
-                                            
-                                        TextPlayer.AnimationForcedEnd(text);
-                        
-                                    }
-                                }
-                            
-                                // テキストボックス以外をクリックすると、テキストボックスが消えたり現れたりする
-                                screen.addEventListener('click',(e)=>{
-                                    if (gameState.dialogue) {
-                                        dialogue.classList.add('none');
-                                        autocheck.classList.add('none');
-                                        gameState.dialogue=false;
-                                        // TextPlayer.movingFlag = false;//アニメーション停止
-                                        TextPlayer.AnimationPause();
-                                    }else{
-                                        dialogue.classList.remove('none');
-                                        autocheck.classList.remove('none');
-                                        gameState.dialogue=true;
-                                        // TextPlayer.AnimationRestart();
-                                    }
-                                    // console.log(gameState.dialogue);
-                                })
-                            
-                                // テキストボックスクリックでアニメーション再生
-                                dialogue.addEventListener('click',(e)=>{
-                                    e.stopPropagation();//イベントの伝搬を防止
-                                    if (gameState.title) {
-                                        gameState.title=false;
-                                        document.querySelector('#screen .msg-txt').classList.add('none');
-                                        TextPlayer.Loading();
-                                    }else{
-                                        ScenarioClick();
-                                    }
-                                
-                                })
-                        
-                                // AutoのON/OFF
-                                autocheck.textContent = gameState.autoPlaying ? 'Auto ON' :'Auto OFF';
-                                autocheck.addEventListener('click',(e)=>{
-                                    e.stopPropagation();
-                                    gameState.autoPlaying=gameState.autoPlaying ? false : true
-                                    e.target.textContent = gameState.autoPlaying ? 'Auto ON' :'Auto OFF';
-                                    // auto機能をONからOFFに変更したときautoPlayingCheckを初期化
-                                    if (!gameState.autoPlaying) {
-                                        gameState.autoPlayingCheck=false;
-                                    }
-                                    //autoで再生中にautoをoffにする時だけ
-                                    if (gameState.autoPlaying && TextPlayer.movingFlag) {
-                                        gameState.autoPlayingCheck=true;
-                                    }
-                                    // console.log(gameState.autoPlaying);
-                                });
-
-                                // 暗転要素の伝搬禁止
-                                darkeningFloor.addEventListener('click',(e)=>{
-                                    e.stopPropagation();
-                                })
-                                // 一枚絵の時のイベント発火
-                                onePicture.addEventListener('click',(e)=>{
-                                    e.stopPropagation();
-                                    ScenarioClick();
-
-                                })
                                 
                             })()
                             

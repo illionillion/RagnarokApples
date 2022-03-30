@@ -12,8 +12,143 @@ export default class ScenarioPlayer {
         this.movingFlag=false;
         this.colorFlag=false;
         this.sizeFlag=false;
-
+        this.nowEveId = state.textEventId
         this.imagePreload();
+        this.init()
+    }
+
+    /**
+     * イベントの設定
+     */
+    init(){
+
+        // テキストのパーツ
+        const screen = document.getElementById('screen');
+        const dialogue = document.getElementById('dialogue');
+        const dialogueText = document.getElementById('dialogue-text-area');
+        const autocheck = document.getElementById('autocheck');
+        const darkeningFloor = document.getElementById('darkening-floor');
+        const onePicture = document.getElementById('one-picture');
+        
+        dialogueText.innerHTML=''
+        document.getElementById('one-picture-text').innerHTML='';
+        this.state.autoPlaying=false
+        this.state.autoPlayingCheck=false
+        this.state.title=true;
+        document.querySelector('#screen .msg-txt').classList.remove('none');
+
+
+        const ScenarioClick = () => {
+            let text = this.state.onePictureSwitch ? document.querySelectorAll('#one-picture-text .op0') : document.querySelectorAll('#dialogue-text-area .op0');
+
+            if (text.length===0 && !this.state.autoPlaying) {
+                this.Loading();
+                // console.log(text);
+                text = this.state.onePictureSwitch ? document.querySelectorAll('#one-picture-text .op0') : document.querySelectorAll('#dialogue-text-area .op0');
+            }
+            if (!this.movingFlag) {
+                // this.state.autoPlayingCheckでautoの待機中にイベントが発生するのを防ぐ
+                console.log(this.state.autoPlaying);
+                console.log(this.state.autoPlayingCheck);
+                if (this.state.autoPlaying && this.state.autoPlayingCheck) {
+                    console.log('cancel');//autoの待機中にイベントが発生するのを防ぐ
+                    return;
+                }else if(this.state.autoPlaying && !this.state.autoPlayingCheck){
+                    this.state.autoPlayingCheck=true;//auto初回のみ通る
+                }
+                this.AnimationStart(text);
+            }else{
+                    
+                this.AnimationForcedEnd(text);
+
+            }
+        }
+    
+
+        // テキストボックス以外をクリックすると、テキストボックスが消えたり現れたりする
+        const textBoxShowHide = () => {
+            if (this.state.textEventId!=this.nowEveId) {
+                screen.removeEventListener('click',textBoxShowHide)
+                return
+            }
+            if (this.state.dialogue) {
+                // 非表示
+                dialogue.classList.add('none');
+                autocheck.classList.add('none');
+                this.state.dialogue=false;
+                // this.movingFlag = false;//アニメーション停止
+                this.AnimationPause();
+            }else{
+                // 表示
+                dialogue.classList.remove('none');
+                autocheck.classList.remove('none');
+                this.state.dialogue=true;
+                // this.AnimationRestart();
+            }
+
+        }
+        screen.addEventListener('click',textBoxShowHide,false)
+    
+        // テキストボックスクリックでアニメーション再生
+        const clickDialogue = e => {
+            if (this.state.textEventId!=this.nowEveId) {
+                dialogue.removeEventListener('click',clickDialogue)
+                return
+            }
+            e.stopPropagation();//イベントの伝搬を防止
+            if (this.state.title) {
+                this.state.title=false;//いらない？
+                document.querySelector('#screen .msg-txt').classList.add('none');
+                this.Loading();
+            }else{
+                ScenarioClick();
+            }
+        }
+        dialogue.addEventListener('click',clickDialogue,false)
+
+        // AutoのON/OFF
+        const autoToggle = e => {
+            if (this.state.textEventId!=this.nowEveId) {
+                autocheck.removeEventListener('click',autoToggle)
+                return
+            }
+            e.stopPropagation();
+            this.state.autoPlaying=this.state.autoPlaying ? false : true
+            e.target.textContent = this.state.autoPlaying ? 'Auto ON' :'Auto OFF';
+            // auto機能をONからOFFに変更したときautoPlayingCheckを初期化
+            if (!this.state.autoPlaying) {
+                this.state.autoPlayingCheck=false;
+            }
+            //autoで再生中にautoをoffにする時だけ
+            if (this.state.autoPlaying && this.movingFlag) {
+                this.state.autoPlayingCheck=true;
+            }
+            // console.log(this.state.autoPlaying);
+        }
+        autocheck.textContent = this.state.autoPlaying ? 'Auto ON' :'Auto OFF';
+        autocheck.addEventListener('click',autoToggle,false);
+
+        // 暗転要素の伝搬禁止
+        const darkeningPrev = e => {
+            if (this.state.textEventId!=this.nowEveId) {
+                darkeningFloor.removeEventListener('click',darkeningPrev)
+                return
+            }
+            e.stopPropagation();
+        }
+        darkeningFloor.addEventListener('click',darkeningPrev,false)
+
+        // 一枚絵の時のイベント発火
+        const onePictureClick = e => {
+            if (this.state.textEventId!=this.nowEveId) {
+                onePicture.removeEventListener('click',onePictureClick)
+                return
+            }
+            e.stopPropagation();
+            ScenarioClick();
+        }
+        onePicture.addEventListener('click',onePictureClick,false)
+
     }
 
     /**
@@ -270,6 +405,8 @@ export default class ScenarioPlayer {
                     await this.timer(1000);
                     // 暗転解除
                     document.getElementById('darkening-floor').classList.add('op0')
+
+                    // ここの時点でクリックイベントを削除？
 
                 }
             }
