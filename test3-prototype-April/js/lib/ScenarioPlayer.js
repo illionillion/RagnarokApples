@@ -32,10 +32,11 @@ export default class ScenarioPlayer {
         
         dialogueText.innerHTML=''
         document.getElementById('one-picture-text').innerHTML='';
+        document.getElementById('dialogue-name-area').innerHTML='';
         this.state.autoPlaying=false
         this.state.autoPlayingCheck=false
         this.state.title=true;
-        document.querySelector('#screen .msg-txt').classList.remove('none');
+        // document.querySelector('#screen .msg-txt').classList.remove('none');
 
 
         const ScenarioClick = () => {
@@ -98,7 +99,7 @@ export default class ScenarioPlayer {
             e.stopPropagation();//イベントの伝搬を防止
             if (this.state.title) {
                 this.state.title=false;//いらない？
-                document.querySelector('#screen .msg-txt').classList.add('none');
+                // document.querySelector('#screen .msg-txt').classList.add('none');
                 this.Loading();
             }else{
                 ScenarioClick();
@@ -334,6 +335,22 @@ export default class ScenarioPlayer {
                 (async ()=>{
                     let fastFlag = false;
                     for (const ele of text) {
+                        if (!this.movingFlag) {
+                            // console.log("stop");
+                            if (!this.state.dialogue) {
+                                this.state.autoPlayingCheck=false;
+                                // console.log('');
+                                return;//オートで再生中にダイアログ非表示で停止させた場合
+                            }else{
+                                break;//テキスト強制終了でautoで次へい行かせる
+                            }
+                        }
+                        if (!this.state.dialogue && !this.state.onePictureSwitch) {
+                            this.state.autoPlayingCheck=false;
+                            this.movingFlag=false;
+                            // console.log('');
+                            return;//オートで再生中にダイアログ非表示で停止させた場合
+                        }
                         await this.timer(10)
                         if (ele.parentNode.classList.contains('fast-show')) {//1枚絵の時だけ先行して別速度で表示させる
                             fastFlag=true;
@@ -375,25 +392,11 @@ export default class ScenarioPlayer {
 
             }
             this.movingFlag=false;
-            
-            //オート機能を作りたいが難しい
-            if (this.state.autoPlaying) {
 
-                await this.timer(1000);//この待機中にAnimationStartが走るとおかしくなる
-                console.log('auto');
-                // console.log(text);
-                const nextFlag = this.msgindex >= Object.keys(this.TextList).length
-                if (!this.state.dialogue && !this.state.onePictureSwitch) {
-                    this.state.autoPlayingCheck=false;
-                    return;
-                }
-                this.Loading();
-                const nexttext = this.state.onePictureSwitch ? document.querySelectorAll('#one-picture-text .op0') : document.querySelectorAll('#dialogue-text-area .op0');
-                if(!nextFlag) {
-                    this.AnimationStart(nexttext);
-                }else{
+            const toMap = () => {
+                (async ()=>{
+
                     console.log("end");
-                    
                     // 暗転
                     document.getElementById('darkening-floor').classList.remove('op0')
                     // タイマー
@@ -405,10 +408,34 @@ export default class ScenarioPlayer {
                     await this.timer(1000);
                     // 暗転解除
                     document.getElementById('darkening-floor').classList.add('op0')
+                    
+                })()
 
-                    // ここの時点でクリックイベントを削除？
+            }
+            
+            const nextFlag = this.msgindex >= Object.keys(this.TextList).length
+            //オート機能を作りたいが難しい
+            if (this.state.autoPlaying) {
 
+                await this.timer(1000);//この待機中にAnimationStartが走るとおかしくなる
+                console.log('auto');
+                // console.log(text);
+                if (!this.state.dialogue && !this.state.onePictureSwitch) {
+                    this.state.autoPlayingCheck=false;
+                    return;
                 }
+                this.Loading();
+                const nexttext = this.state.onePictureSwitch ? document.querySelectorAll('#one-picture-text .op0') : document.querySelectorAll('#dialogue-text-area .op0');
+                if(!nextFlag) {
+                    this.AnimationStart(nexttext);
+                }else{
+
+                    toMap()
+                    
+                }
+
+            }else{
+                if (nextFlag) toMap()
             }
                 
         })();
