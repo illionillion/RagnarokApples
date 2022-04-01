@@ -397,6 +397,8 @@ export default class ScenarioPlayer {
                 (async ()=>{
 
                     console.log("end");
+
+                    
                     // 暗転
                     document.getElementById('darkening-floor').classList.remove('op0')
                     // タイマー
@@ -404,11 +406,15 @@ export default class ScenarioPlayer {
                     // シナリオ画面へ遷移
                     document.getElementById('textScreen').classList.add('none')
                     document.getElementById('mapScreen').classList.remove('none')
+                    document.getElementById('textBackground').src='images/background/concept.png'
+                    document.querySelector('#character-left img').src='images/character/transparent_background.png'
+                    document.querySelector('#character-center img').src='images/character/transparent_background.png'
+                    document.querySelector('#character-right img').src='images/character/transparent_background.png'
                     // タイマー
                     await this.timer(1000);
                     // 暗転解除
                     document.getElementById('darkening-floor').classList.add('op0')
-                    
+
                 })()
 
             }
