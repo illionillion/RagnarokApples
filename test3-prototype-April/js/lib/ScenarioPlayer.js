@@ -340,7 +340,8 @@ export default class ScenarioPlayer {
                             if (!this.state.dialogue) {
                                 this.state.autoPlayingCheck=false;
                                 // console.log('');
-                                return;//オートで再生中にダイアログ非表示で停止させた場合
+                                break
+                                // return;//オートで再生中にダイアログ非表示で停止させた場合
                             }else{
                                 break;//テキスト強制終了でautoで次へい行かせる
                             }
@@ -349,7 +350,8 @@ export default class ScenarioPlayer {
                             this.state.autoPlayingCheck=false;
                             this.movingFlag=false;
                             // console.log('');
-                            return;//オートで再生中にダイアログ非表示で停止させた場合
+                            break
+                            // return;//オートで再生中にダイアログ非表示で停止させた場合
                         }
                         await this.timer(10)
                         if (ele.parentNode.classList.contains('fast-show')) {//1枚絵の時だけ先行して別速度で表示させる
@@ -372,7 +374,8 @@ export default class ScenarioPlayer {
                     if (!this.state.dialogue) {
                         this.state.autoPlayingCheck=false;
                         // console.log('');
-                        return;//オートで再生中にダイアログ非表示で停止させた場合
+                        break
+                        // return;//オートで再生中にダイアログ非表示で停止させた場合
                     }else{
                         break;//テキスト強制終了でautoで次へい行かせる
                     }
@@ -381,7 +384,8 @@ export default class ScenarioPlayer {
                     this.state.autoPlayingCheck=false;
                     this.movingFlag=false;
                     // console.log('');
-                    return;//オートで再生中にダイアログ非表示で停止させた場合
+                    break;
+                    // return;//オートで再生中にダイアログ非表示で停止させた場合
                 }
                 if(!ele.classList.contains('op0')){//アニメーション再スタート時op0持ってない場合は飛ばす
                     continue;
@@ -397,7 +401,6 @@ export default class ScenarioPlayer {
                 (async ()=>{
 
                     console.log("end");
-
                     
                     // 暗転
                     document.getElementById('darkening-floor').classList.remove('op0')
