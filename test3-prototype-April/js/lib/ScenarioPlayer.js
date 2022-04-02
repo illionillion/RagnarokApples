@@ -439,12 +439,12 @@ export default class ScenarioPlayer {
                     this.AnimationStart(nexttext);
                 }else{
 
-                    toMap()
+                    toMap() //マップへ戻る(auto)
                     
                 }
 
             }else{
-                if (nextFlag) toMap()
+                if (nextFlag) toMap() //マップへ戻る(非auto)
             }
                 
         })();
