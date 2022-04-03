@@ -34,7 +34,7 @@ export default class ScenarioPlayer {
         this.dialogueText.innerHTML=''
         document.getElementById('one-picture-text').innerHTML='';
         document.getElementById('dialogue-name-area').innerHTML='';
-        this.state.autoPlaying=false
+        // this.state.autoPlaying=false
         this.state.autoPlayingCheck=false
         this.state.title=true;
         // document.querySelector('#screen .msg-txt').classList.remove('none');
