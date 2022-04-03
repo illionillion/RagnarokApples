@@ -16,21 +16,22 @@ export default class ScenarioPlayer {
         this.imagePreload();
         this.init()
     }
+    
+    // テキストのパーツ
+    screen = document.getElementById('screen');
+    dialogue = document.getElementById('dialogue');
+    dialogueText = document.getElementById('dialogue-text-area');
+    autocheck = document.getElementById('autocheck');
+    darkeningFloor = document.getElementById('darkening-floor');
+    onePicture = document.getElementById('one-picture');
 
     /**
-     * イベントの設定
+     * シナリオ画面遷移とイベントの設定
      */
     init(){
-
-        // テキストのパーツ
-        const screen = document.getElementById('screen');
-        const dialogue = document.getElementById('dialogue');
-        const dialogueText = document.getElementById('dialogue-text-area');
-        const autocheck = document.getElementById('autocheck');
-        const darkeningFloor = document.getElementById('darkening-floor');
-        const onePicture = document.getElementById('one-picture');
         
-        dialogueText.innerHTML=''
+        // 初期化
+        this.dialogueText.innerHTML=''
         document.getElementById('one-picture-text').innerHTML='';
         document.getElementById('dialogue-name-area').innerHTML='';
         this.state.autoPlaying=false
@@ -38,177 +39,141 @@ export default class ScenarioPlayer {
         this.state.title=true;
         // document.querySelector('#screen .msg-txt').classList.remove('none');
 
+        // イベント付与
+        this.screen.addEventListener('click',this.textBoxShowHide,false)    
+        this.dialogue.addEventListener('click',this.clickDialogue,false)
+        this.autocheck.textContent = this.state.autoPlaying ? 'Auto ON' :'Auto OFF';
+        this.autocheck.addEventListener('click',this.autoToggle,false);
+        this.darkeningFloor.addEventListener('click',this.darkeningPrev,false)
+        this.onePicture.addEventListener('click',this.onePictureClick,false)
 
-        const ScenarioClick = () => {
-            let text = this.state.onePictureSwitch ? document.querySelectorAll('#one-picture-text .op0') : document.querySelectorAll('#dialogue-text-area .op0');
+    }
 
-            if (text.length===0 && !this.state.autoPlaying) {
-                this.Loading();
-                // console.log(text);
-                text = this.state.onePictureSwitch ? document.querySelectorAll('#one-picture-text .op0') : document.querySelectorAll('#dialogue-text-area .op0');
-            }
-            if (!this.movingFlag) {
-                // this.state.autoPlayingCheckでautoの待機中にイベントが発生するのを防ぐ
-                console.log(this.state.autoPlaying);
-                console.log(this.state.autoPlayingCheck);
-                if (this.state.autoPlaying && this.state.autoPlayingCheck) {
-                    console.log('cancel');//autoの待機中にイベントが発生するのを防ぐ
-                    return;
-                }else if(this.state.autoPlaying && !this.state.autoPlayingCheck){
-                    this.state.autoPlayingCheck=true;//auto初回のみ通る
-                }
-                this.AnimationStart(text);
-            }else{
-                    
-                this.AnimationForcedEnd(text);
+    /**
+     * クリックされた時にアニメーションを走らせるかどうか
+     * @returns キャンセルする
+     */
+    ScenarioClick = () => {
+        let text = this.state.onePictureSwitch ? document.querySelectorAll('#one-picture-text .op0') : document.querySelectorAll('#dialogue-text-area .op0');
 
-            }
+        if (text.length===0 && !this.state.autoPlaying) {
+            this.Loading();
+            // console.log(text);
+            text = this.state.onePictureSwitch ? document.querySelectorAll('#one-picture-text .op0') : document.querySelectorAll('#dialogue-text-area .op0');
         }
+        if (!this.movingFlag) {
+            // this.state.autoPlayingCheckでautoの待機中にイベントが発生するのを防ぐ
+            console.log(this.state.autoPlaying);
+            console.log(this.state.autoPlayingCheck);
+            if (this.state.autoPlaying && this.state.autoPlayingCheck) {
+                console.log('cancel');//autoの待機中にイベントが発生するのを防ぐ
+                return;
+            }else if(this.state.autoPlaying && !this.state.autoPlayingCheck){
+                this.state.autoPlayingCheck=true;//auto初回のみ通る
+            }
+            this.AnimationStart(text);
+        }else{
+                
+            this.AnimationForcedEnd(text);
+
+        }
+    }
+
+    /**
+     * テキストボックス以外をクリックすると、テキストボックスが消えたり現れたりする
+     * @returns イベント削除とキャンセル
+     */
+    textBoxShowHide = () => {
+        if (this.state.textEventId != this.nowEveId) {
+            this.screen.removeEventListener('click',this.textBoxShowHide)
+            return
+        }
+        if (this.state.dialogue) {
+            // 非表示
+            this.dialogue.classList.add('none');
+            this.autocheck.classList.add('none');
+            this.state.dialogue=false;
+            // this.movingFlag = false;//アニメーション停止
+            this.AnimationPause();
+        }else{
+            // 表示
+            this.dialogue.classList.remove('none');
+            this.autocheck.classList.remove('none');
+            this.state.dialogue=true;
+            // this.AnimationRestart();
+        }
+
+    }
+
+    /**
+     * テキストボックスクリックでアニメーション再生
+     * @param {*} e 要素
+     * @returns イベント削除とキャンセル
+     */
+    clickDialogue = e => {
+        if (this.state.textEventId!=this.nowEveId) {
+            this.dialogue.removeEventListener('click',this.clickDialogue)
+            return
+        }
+        e.stopPropagation();//イベントの伝搬を防止
+        if (this.state.title) {
+            this.state.title=false;//いらない？
+            // document.querySelector('#screen .msg-txt').classList.add('none');
+            this.Loading();
+        }else{
+            this.ScenarioClick();
+        }
+    }
+
+    /**
+     * AutoのON/OFF
+     * @param {*} e 要素
+     * @returns イベント削除とキャンセル
+     */
+    autoToggle = e => {
+        if (this.state.textEventId!=this.nowEveId) {
+            this.autocheck.removeEventListener('click',this.autoToggle)
+            return
+        }
+        e.stopPropagation();
+        this.state.autoPlaying=this.state.autoPlaying ? false : true
+        e.target.textContent = this.state.autoPlaying ? 'Auto ON' :'Auto OFF';
+        // auto機能をONからOFFに変更したときautoPlayingCheckを初期化
+        if (!this.state.autoPlaying) {
+            this.state.autoPlayingCheck=false;
+        }
+        //autoで再生中にautoをoffにする時だけ
+        if (this.state.autoPlaying && this.movingFlag) {
+            this.state.autoPlayingCheck=true;
+        }
+        // console.log(this.state.autoPlaying);
+    }
     
-
-        // テキストボックス以外をクリックすると、テキストボックスが消えたり現れたりする
-        const textBoxShowHide = () => {
-            if (this.state.textEventId!=this.nowEveId) {
-                screen.removeEventListener('click',textBoxShowHide)
-                return
-            }
-            if (this.state.dialogue) {
-                // 非表示
-                dialogue.classList.add('none');
-                autocheck.classList.add('none');
-                this.state.dialogue=false;
-                // this.movingFlag = false;//アニメーション停止
-                this.AnimationPause();
-            }else{
-                // 表示
-                dialogue.classList.remove('none');
-                autocheck.classList.remove('none');
-                this.state.dialogue=true;
-                // this.AnimationRestart();
-            }
-
+    /**
+     * 暗転要素の伝搬禁止
+     * @param {*} e 要素
+     * @returns イベント削除とキャンセル
+     */
+    darkeningPrev = e => {
+        if (this.state.textEventId!=this.nowEveId) {
+            this.darkeningFloor.removeEventListener('click',this.darkeningPrev)
+            return
         }
-        screen.addEventListener('click',textBoxShowHide,false)
-    
-        // テキストボックスクリックでアニメーション再生
-        const clickDialogue = e => {
-            if (this.state.textEventId!=this.nowEveId) {
-                dialogue.removeEventListener('click',clickDialogue)
-                return
-            }
-            e.stopPropagation();//イベントの伝搬を防止
-            if (this.state.title) {
-                this.state.title=false;//いらない？
-                // document.querySelector('#screen .msg-txt').classList.add('none');
-                this.Loading();
-            }else{
-                ScenarioClick();
-            }
-        }
-        dialogue.addEventListener('click',clickDialogue,false)
-
-        // AutoのON/OFF
-        const autoToggle = e => {
-            if (this.state.textEventId!=this.nowEveId) {
-                autocheck.removeEventListener('click',autoToggle)
-                return
-            }
-            e.stopPropagation();
-            this.state.autoPlaying=this.state.autoPlaying ? false : true
-            e.target.textContent = this.state.autoPlaying ? 'Auto ON' :'Auto OFF';
-            // auto機能をONからOFFに変更したときautoPlayingCheckを初期化
-            if (!this.state.autoPlaying) {
-                this.state.autoPlayingCheck=false;
-            }
-            //autoで再生中にautoをoffにする時だけ
-            if (this.state.autoPlaying && this.movingFlag) {
-                this.state.autoPlayingCheck=true;
-            }
-            // console.log(this.state.autoPlaying);
-        }
-        autocheck.textContent = this.state.autoPlaying ? 'Auto ON' :'Auto OFF';
-        autocheck.addEventListener('click',autoToggle,false);
-
-        // 暗転要素の伝搬禁止
-        const darkeningPrev = e => {
-            if (this.state.textEventId!=this.nowEveId) {
-                darkeningFloor.removeEventListener('click',darkeningPrev)
-                return
-            }
-            e.stopPropagation();
-        }
-        darkeningFloor.addEventListener('click',darkeningPrev,false)
-
-        // 一枚絵の時のイベント発火
-        const onePictureClick = e => {
-            if (this.state.textEventId!=this.nowEveId) {
-                onePicture.removeEventListener('click',onePictureClick)
-                return
-            }
-            e.stopPropagation();
-            ScenarioClick();
-        }
-        onePicture.addEventListener('click',onePictureClick,false)
-
+        e.stopPropagation();
     }
 
     /**
-     * タイマー処理
-     * @param {*} s 遅らせる秒数
-     * @returns Promise
+     * 一枚絵の時のイベント発火
+     * @param {*} e 要素
+     * @returns イベント削除とキャンセル
      */
-    timer(s){
-        return new Promise((resolve,reject)=>{
-            setTimeout(() => {
-                resolve();
-            }, s);
-        })
-    }
-
-    /**
-     * キャラを設定する
-     * @param {*} props 
-     */
-    characterSetting (props){
-        // console.log(props);
-        for (const positon in props) {
-            if (Object.hasOwnProperty.call(props, positon)) {
-                const element = props[positon];
-                document.querySelector(`#character-area [data-position=${positon}] img`).src=element.src;
-                document.querySelector(`#character-area [data-position=${positon}] img`).alt=element.name;
-            }
+    onePictureClick = e => {
+        if (this.state.textEventId!=this.nowEveId) {
+            this.onePicture.removeEventListener('click',this.onePictureClick)
+            return
         }
-    }
-    /**
-     * 背景画像設定
-     * @param {*} url 
-     */
-     backgroundSetting (url) {
-
-        // srcを変えるだけだが、切り替えに時間がかかってしまう
-        document.getElementById('textBackground').src=url;
-
-    }
-    /**
-     * 画像のプリロード
-     */
-    imagePreload () {
-        // const imgFragment = document.createDocumentFragment();
-        for (const textEle of this.TextList) {
-            // console.log(textEle['backgroundImage']);
-            const imgele = document.createElement('img');
-            imgele.src = textEle['backgroundImage'];
-
-            for (const key in textEle['characterList']) {
-                if (Object.hasOwnProperty.call(textEle['characterList'], key)) {
-                    // console.log(textEle['characterList'][key]['src']);
-                    const charimgele = document.createElement('img');
-                    charimgele.src =  textEle['characterList'][key]['src'];
-                    
-                }
-            }
-        }
-        // document.getElementById('imageholder').appendChild(imgFragment);
+        e.stopPropagation();
+        this.ScenarioClick();
     }
 
     /**
@@ -217,12 +182,6 @@ export default class ScenarioPlayer {
     Loading(){
 
         if (this.msgindex>=Object.keys(this.TextList).length) {
-            // alert('終了');
-            // (async ()=>{
-
-            //     console.log("end");
-    
-            // })
             return;
             // this.msgindex=0;
         }
@@ -340,8 +299,8 @@ export default class ScenarioPlayer {
                             if (!this.state.dialogue) {
                                 this.state.autoPlayingCheck=false;
                                 // console.log('');
-                                break
-                                // return;//オートで再生中にダイアログ非表示で停止させた場合
+                                // break
+                                return;//オートで再生中にダイアログ非表示で停止させた場合
                             }else{
                                 break;//テキスト強制終了でautoで次へい行かせる
                             }
@@ -350,8 +309,8 @@ export default class ScenarioPlayer {
                             this.state.autoPlayingCheck=false;
                             this.movingFlag=false;
                             // console.log('');
-                            break
-                            // return;//オートで再生中にダイアログ非表示で停止させた場合
+                            // break
+                            return;//オートで再生中にダイアログ非表示で停止させた場合
                         }
                         await this.timer(10)
                         if (ele.parentNode.classList.contains('fast-show')) {//1枚絵の時だけ先行して別速度で表示させる
@@ -374,8 +333,8 @@ export default class ScenarioPlayer {
                     if (!this.state.dialogue) {
                         this.state.autoPlayingCheck=false;
                         // console.log('');
-                        break
-                        // return;//オートで再生中にダイアログ非表示で停止させた場合
+                        // break
+                        return;//オートで再生中にダイアログ非表示で停止させた場合
                     }else{
                         break;//テキスト強制終了でautoで次へい行かせる
                     }
@@ -384,8 +343,8 @@ export default class ScenarioPlayer {
                     this.state.autoPlayingCheck=false;
                     this.movingFlag=false;
                     // console.log('');
-                    break;
-                    // return;//オートで再生中にダイアログ非表示で停止させた場合
+                    // break;
+                    return;//オートで再生中にダイアログ非表示で停止させた場合
                 }
                 if(!ele.classList.contains('op0')){//アニメーション再スタート時op0持ってない場合は飛ばす
                     continue;
@@ -397,32 +356,8 @@ export default class ScenarioPlayer {
             }
             this.movingFlag=false;
 
-            const toMap = () => {
-                (async ()=>{
-
-                    console.log("end");
-                    
-                    // 暗転
-                    document.getElementById('darkening-floor').classList.remove('op0')
-                    // タイマー
-                    await this.timer(1000);
-                    // シナリオ画面へ遷移
-                    document.getElementById('textScreen').classList.add('none')
-                    document.getElementById('mapScreen').classList.remove('none')
-                    document.getElementById('textBackground').src='images/background/concept.png'
-                    document.querySelector('#character-left img').src='images/character/transparent_background.png'
-                    document.querySelector('#character-center img').src='images/character/transparent_background.png'
-                    document.querySelector('#character-right img').src='images/character/transparent_background.png'
-                    // タイマー
-                    await this.timer(1000);
-                    // 暗転解除
-                    document.getElementById('darkening-floor').classList.add('op0')
-
-                })()
-
-            }
             
-            const nextFlag = this.msgindex >= Object.keys(this.TextList).length
+            const nextFlag = this.msgindex >= Object.keys(this.TextList).length // true => 次がない場合
             //オート機能を作りたいが難しい
             if (this.state.autoPlaying) {
 
@@ -439,21 +374,57 @@ export default class ScenarioPlayer {
                     this.AnimationStart(nexttext);
                 }else{
 
-                    toMap() //マップへ戻る(auto)
+                    this.toMap() //マップへ戻る(auto)
                     
                 }
 
             }else{
-                if (nextFlag) toMap() //マップへ戻る(非auto)
+                if (nextFlag) this.toMap() //マップへ戻る(非auto)
             }
                 
         })();
     }
+    
+    /**
+     * シナリオ画面からマップ画面へ戻る
+     */
+    toMap = () => {
+        (async ()=>{
 
+            console.log("end");
+            
+            // 暗転
+            document.getElementById('darkening-floor').classList.remove('op0')
+            // タイマー
+            await this.timer(1000);
+            // シナリオ画面へ遷移
+            document.getElementById('textScreen').classList.add('none')
+            document.getElementById('mapScreen').classList.remove('none')
+            // いろいろ初期化
+            document.getElementById('textBackground').src='images/background/concept.png'
+            document.querySelector('#character-left img').src='images/character/transparent_background.png'
+            document.querySelector('#character-center img').src='images/character/transparent_background.png'
+            document.querySelector('#character-right img').src='images/character/transparent_background.png'
+            // タイマー
+            await this.timer(1000);
+            // 暗転解除
+            document.getElementById('darkening-floor').classList.add('op0')
+
+        })()
+
+    }
+
+    /**
+     * アニメーションを一時停止
+     */
     AnimationPause () {
         this.movingFlag=false;
     }
 
+    /**
+     * アニメーションを再スタート
+     * @returns キャンセル
+     */
     AnimationRestart () {
         // console.log(this.nowEle);
         if (this.movingFlag) {
@@ -474,4 +445,65 @@ export default class ScenarioPlayer {
         });
     }
 
+    /**
+     * タイマー処理
+     * @param {*} s 遅らせる秒数
+     * @returns Promise
+     */
+    timer(s){
+        return new Promise((resolve,reject)=>{
+            setTimeout(() => {
+                resolve();
+            }, s);
+        })
+    }
+
+    /**
+     * キャラを設定する
+     * @param {*} props 
+     */
+    characterSetting (props){
+        // console.log(props);
+        for (const positon in props) {
+            if (Object.hasOwnProperty.call(props, positon)) {
+                const element = props[positon];
+                document.querySelector(`#character-area [data-position=${positon}] img`).src=element.src;
+                document.querySelector(`#character-area [data-position=${positon}] img`).alt=element.name;
+            }
+        }
+    }
+
+    /**
+     * 背景画像設定
+     * @param {*} url 
+     */
+    backgroundSetting (url) {
+
+        // srcを変えるだけだが、切り替えに時間がかかってしまう
+        document.getElementById('textBackground').src=url;
+
+    }
+
+    /**
+     * 画像のプリロード
+     */
+    imagePreload () {
+        // const imgFragment = document.createDocumentFragment();
+        for (const textEle of this.TextList) {
+            // console.log(textEle['backgroundImage']);
+            const imgele = document.createElement('img');
+            imgele.src = textEle['backgroundImage'];
+
+            for (const key in textEle['characterList']) {
+                if (Object.hasOwnProperty.call(textEle['characterList'], key)) {
+                    // console.log(textEle['characterList'][key]['src']);
+                    const charimgele = document.createElement('img');
+                    charimgele.src =  textEle['characterList'][key]['src'];
+                    
+                }
+            }
+        }
+        // document.getElementById('imageholder').appendChild(imgFragment);
+    } 
+    
 }
