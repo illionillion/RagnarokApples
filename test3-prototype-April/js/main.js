@@ -152,6 +152,23 @@ import mapItems from "./lib/mapItems.json.js"
             // console.log(state.FloatCheck)
         })
 
+        let floatSpbTextList = [
+            'あああああ',
+            'いいいいい',
+            'ううううう'
+        ]
+        let floatSpbTextCount = 0
+        // マップ②の画面下のテキスト処理
+        const floatSpb = document.getElementById('FloatSpeechBubble')
+        const floatSpbText = document.querySelector('#FloatSpeechBubble .textarea')
+        console.log(floatSpbText);
+        floatSpbText.addEventListener('click', e => {
+            // console.log(e.target.innerHTML);
+            if (floatSpbTextCount >= floatSpbTextList.length) floatSpbTextCount = 0
+            e.target.innerHTML = floatSpbTextList[floatSpbTextCount]
+            floatSpbTextCount++
+        })
+
 
     })
 })()
