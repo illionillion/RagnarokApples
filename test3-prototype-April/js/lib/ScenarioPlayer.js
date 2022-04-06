@@ -1,3 +1,4 @@
+import TextAudio from "./TextAudio.json.js";
 export default class ScenarioPlayer {
 
     /**
@@ -6,24 +7,31 @@ export default class ScenarioPlayer {
      * @param {*} state ゲームのステータスのオブジェクト
      */
     constructor(TextList,state){
-        this.TextList=TextList
-        this.state=state
-        this.msgindex=0;
-        this.movingFlag=false;
-        this.colorFlag=false;
-        this.sizeFlag=false;
-        this.nowEveId = state.textEventId
-        this.imagePreload();
+        this.TextList=TextList //シナリオのテキストとそのデータ
+        this.state=state //mainから参照するゲームのデータ
+        this.msgindex=0 //現在のテキストの番号
+        this.movingFlag=false //テキストアニメーションが動いてるか
+        this.colorFlag=false //文字設定処理：色
+        this.sizeFlag=false //文字設定処理：大文字
+        this.nowEveId = state.textEventId //ScenarioPlayerの世代、これは違えばイベント削除
+        this.audios=TextAudio[state.nowPart] //読み込んだaudioのデータ全体
+        this.audioNum=0 //audioの番号
+        this.audioStart=0 //次の音声の再生開始させる番号
+        this.audioEnd=0 //次の音声の再生終了させる番号
+        this.audioList=[]//new Audio()プリロード
+        this.audioObj=null //new Audio()格納
+        this.audioLoad=false // canplaythroughになったらtrue
+        this.imagePreload()
         this.init()
     }
     
     // テキストのパーツ
-    screen = document.getElementById('screen');
-    dialogue = document.getElementById('dialogue');
-    dialogueText = document.getElementById('dialogue-text-area');
-    autocheck = document.getElementById('autocheck');
-    darkeningFloor = document.getElementById('darkening-floor');
-    onePicture = document.getElementById('one-picture');
+    screen = document.getElementById('screen')
+    dialogue = document.getElementById('dialogue')
+    dialogueText = document.getElementById('dialogue-text-area')
+    autocheck = document.getElementById('autocheck')
+    darkeningFloor = document.getElementById('darkening-floor')
+    onePicture = document.getElementById('one-picture')
 
     /**
      * シナリオ画面遷移とイベントの設定
@@ -32,21 +40,25 @@ export default class ScenarioPlayer {
         
         // 初期化
         this.dialogueText.innerHTML=''
-        document.getElementById('one-picture-text').innerHTML='';
-        document.getElementById('dialogue-name-area').innerHTML='';
+        document.getElementById('one-picture-text').innerHTML=''
+        document.getElementById('dialogue-name-area').innerHTML=''
         // this.state.autoPlaying=false
         this.state.autoPlayingCheck=false
-        this.state.title=true;
-        // document.querySelector('#screen .msg-txt').classList.remove('none');
+        this.state.title=true
+        // document.querySelector('#screen .msg-txt').classList.remove('none')
 
         // イベント付与
         this.screen.addEventListener('click',this.textBoxShowHide,false)    
         this.dialogue.addEventListener('click',this.clickDialogue,false)
-        this.autocheck.textContent = this.state.autoPlaying ? 'Auto ON' :'Auto OFF';
-        this.autocheck.addEventListener('click',this.autoToggle,false);
+        this.autocheck.textContent = this.state.autoPlaying ? 'Auto ON' :'Auto OFF'
+        this.autocheck.addEventListener('click',this.autoToggle,false)
         this.darkeningFloor.addEventListener('click',this.darkeningPrev,false)
         this.onePicture.addEventListener('click',this.onePictureClick,false)
 
+        // プリロード
+        this.AudioPreload()
+        // 1番目に流させる音声を設定
+        this.AudioLoading()
     }
 
     /**
@@ -54,27 +66,27 @@ export default class ScenarioPlayer {
      * @returns キャンセルする
      */
     ScenarioClick = () => {
-        let text = this.state.onePictureSwitch ? document.querySelectorAll('#one-picture-text .op0') : document.querySelectorAll('#dialogue-text-area .op0');
+        let text = this.state.onePictureSwitch ? document.querySelectorAll('#one-picture-text .op0') : document.querySelectorAll('#dialogue-text-area .op0')
 
         if (text.length===0 && !this.state.autoPlaying) {
-            this.Loading();
-            // console.log(text);
-            text = this.state.onePictureSwitch ? document.querySelectorAll('#one-picture-text .op0') : document.querySelectorAll('#dialogue-text-area .op0');
+            this.Loading()
+            // console.log(text)
+            text = this.state.onePictureSwitch ? document.querySelectorAll('#one-picture-text .op0') : document.querySelectorAll('#dialogue-text-area .op0')
         }
         if (!this.movingFlag) {
             // this.state.autoPlayingCheckでautoの待機中にイベントが発生するのを防ぐ
-            console.log(this.state.autoPlaying);
-            console.log(this.state.autoPlayingCheck);
+            console.log(this.state.autoPlaying)
+            console.log(this.state.autoPlayingCheck)
             if (this.state.autoPlaying && this.state.autoPlayingCheck) {
-                console.log('cancel');//autoの待機中にイベントが発生するのを防ぐ
-                return;
+                console.log('cancel')//autoの待機中にイベントが発生するのを防ぐ
+                return
             }else if(this.state.autoPlaying && !this.state.autoPlayingCheck){
-                this.state.autoPlayingCheck=true;//auto初回のみ通る
+                this.state.autoPlayingCheck=true//auto初回のみ通る
             }
-            this.AnimationStart(text);
+            this.AnimationStart(text)
         }else{
                 
-            this.AnimationForcedEnd(text);
+            this.AnimationForcedEnd(text)
 
         }
     }
@@ -90,17 +102,17 @@ export default class ScenarioPlayer {
         }
         if (this.state.dialogue) {
             // 非表示
-            this.dialogue.classList.add('none');
-            this.autocheck.classList.add('none');
-            this.state.dialogue=false;
-            // this.movingFlag = false;//アニメーション停止
-            this.AnimationPause();
+            this.dialogue.classList.add('none')
+            this.autocheck.classList.add('none')
+            this.state.dialogue=false
+            // this.movingFlag = false//アニメーション停止
+            this.AnimationPause()
         }else{
             // 表示
-            this.dialogue.classList.remove('none');
-            this.autocheck.classList.remove('none');
-            this.state.dialogue=true;
-            // this.AnimationRestart();
+            this.dialogue.classList.remove('none')
+            this.autocheck.classList.remove('none')
+            this.state.dialogue=true
+            // this.AnimationRestart()
         }
 
     }
@@ -181,6 +193,9 @@ export default class ScenarioPlayer {
      */
     Loading(){
 
+        // 　音声終了
+        this.AudioStop()
+
         if (this.msgindex>=Object.keys(this.TextList).length) {
             return;
             // this.msgindex=0;
@@ -256,6 +271,9 @@ export default class ScenarioPlayer {
             document.getElementById('dialogue-text-area').innerHTML='';
             document.getElementById('dialogue-text-area').appendChild(msgfragment);
         }
+
+        // 音声再生
+        this.AudioPlaying()
         
         this.msgindex++;
     
@@ -356,9 +374,7 @@ export default class ScenarioPlayer {
             }
             this.movingFlag=false;
 
-            
             const nextFlag = this.msgindex >= Object.keys(this.TextList).length // true => 次がない場合
-            //オート機能を作りたいが難しい
             if (this.state.autoPlaying) {
 
                 await this.timer(1000);//この待機中にAnimationStartが走るとおかしくなる
@@ -447,7 +463,7 @@ export default class ScenarioPlayer {
 
     /**
      * タイマー処理
-     * @param {*} s 遅らせる秒数
+     * @param {Number} s 遅らせる秒数
      * @returns Promise
      */
     timer(s){
@@ -505,5 +521,81 @@ export default class ScenarioPlayer {
         }
         // document.getElementById('imageholder').appendChild(imgFragment);
     } 
-    
+
+    /**
+     * 音声ファイルのプリロード
+     */
+    AudioPreload = () =>{
+        for (const i in this.audios) {
+            if (Object.hasOwnProperty.call(this.audios, i)) {
+
+                const v = this.audios[i];
+                let obj = {}
+                obj.audio = new Audio(`audio/${v.file}`)
+                obj.audio.loop = true
+                obj.audioLoad=false
+                this.audioList[i] = obj
+                obj.audio.addEventListener('canplaythrough', e => {
+                    // console.log('throught');
+                        obj.audioLoad = true
+                })
+
+            }
+        }
+
+    }
+
+    /**
+     * 音声ファイル読み込み
+     * (プリロードしてるのでオーディオファイルの変更)
+     * .play()してからのタイムラグは直らなかった
+     */
+    AudioLoading = () => {
+        if (this.audioNum >= this.audios.length) {
+            return
+        }
+        // this.audioObj = new Audio(`audio/${this.audios[this.audioNum].file}`)
+        // this.audioObj = this.audioList[this.audioNum]
+        this.audioObj = this.audioList[this.audioNum].audio
+        this.audioStart = this.audios[this.audioNum].start
+        this.audioEnd = this.audios[this.audioNum].end
+        // this.audioObj.addEventListener('canplaythrough', e => {
+        //     // console.log('throught');
+        //         this.audioLoad = true
+        // })
+        // this.audioNum++
+
+    }
+
+    /**
+     * 音声再生
+     */
+    AudioPlaying = () => {
+        if (this.msgindex === this.audioStart) {
+
+            // if (this.audioLoad) {
+            if (this.audioList[this.audioNum].audioLoad) {
+                console.log('play');
+                this.audioObj.play()
+                this.timer(1000)
+            }else{
+                console.log('読み込めていない');
+                // 再帰で再実行？
+                this.AudioPlaying()
+            }
+
+        }
+    }
+
+    /**
+     * 音性終了
+     */
+    AudioStop = () => {
+        if (this.msgindex > this.audioEnd) {
+            this.audioObj.pause()
+            this.audioLoad = false
+            this.audioNum++
+            this.AudioLoading()
+        }
+    }
 }

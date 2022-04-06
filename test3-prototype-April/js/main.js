@@ -19,7 +19,8 @@ import mapItems from "./lib/mapItems.json.js"
         autoPlaying:false,
         autoPlayingCheck:false,
         onePictureSwitch:false,
-        textEventId:0
+        textEventId:0,
+        nowPart:null
     }
     let TextPlayer
     // let textEventId = 0
@@ -94,6 +95,7 @@ import mapItems from "./lib/mapItems.json.js"
                                 console.log(TextData[partKey]);//選択されたシナリオ
 
                                 gameState.textEventId++;
+                                gameState.nowPart=partKey
                                 TextPlayer=new ScenarioPlayer(TextData[partKey],gameState)//プレイヤー生成
                                 
                                 /*------------------
