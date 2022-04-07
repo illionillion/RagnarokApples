@@ -407,6 +407,7 @@ export default class ScenarioPlayer {
     toMap = () => {
         (async ()=>{
 
+            this.AudioStop()
             console.log("end");
             
             // 暗転
@@ -533,11 +534,15 @@ export default class ScenarioPlayer {
                 let obj = {}
                 obj.audio = new Audio(`audio/${v.file}`)
                 obj.audio.loop = true
+                obj.audio.preload = 'auto'
                 obj.audioLoad=false
                 this.audioList[i] = obj
                 obj.audio.addEventListener('canplaythrough', e => {
                     // console.log('throught');
                         obj.audioLoad = true
+                })
+                obj.audio.addEventListener('timeupdate',e=>{
+                    // console.log(obj.audio.currentTime);
                 })
 
             }
@@ -546,24 +551,15 @@ export default class ScenarioPlayer {
     }
 
     /**
-     * 音声ファイル読み込み
-     * (プリロードしてるのでオーディオファイルの変更)
-     * .play()してからのタイムラグは直らなかった
+     * 音声ファイル読み込み・変更
      */
     AudioLoading = () => {
         if (this.audioNum >= this.audios.length) {
             return
         }
-        // this.audioObj = new Audio(`audio/${this.audios[this.audioNum].file}`)
-        // this.audioObj = this.audioList[this.audioNum]
         this.audioObj = this.audioList[this.audioNum].audio
         this.audioStart = this.audios[this.audioNum].start
         this.audioEnd = this.audios[this.audioNum].end
-        // this.audioObj.addEventListener('canplaythrough', e => {
-        //     // console.log('throught');
-        //         this.audioLoad = true
-        // })
-        // this.audioNum++
 
     }
 
@@ -580,7 +576,7 @@ export default class ScenarioPlayer {
                 this.timer(1000)
             }else{
                 console.log('読み込めていない');
-                // 再帰で再実行？
+                // 再帰で再実行
                 this.AudioPlaying()
             }
 
@@ -592,6 +588,7 @@ export default class ScenarioPlayer {
      */
     AudioStop = () => {
         if (this.msgindex > this.audioEnd) {
+            console.log('pause');
             this.audioObj.pause()
             this.audioLoad = false
             this.audioNum++
