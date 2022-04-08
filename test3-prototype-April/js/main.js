@@ -8,19 +8,11 @@ import mapItems from "./lib/mapItems.json.js"
 (function(){
     const state={
         now:1,
-        FloatCheck:true
     }
-    let gameState = {
-        title:true,
-        textloading:false,
-        // msgindex:0,
-        dialogue:true,
-        // autoPlaying:true
-        autoPlaying:false,
-        autoPlayingCheck:false,
-        onePictureSwitch:false,
+    const gameState = {
         textEventId:0,
-        nowPart:null
+        nowPart:null,
+        FloatCheck:true
     }
     let TextPlayer
     // let textEventId = 0
@@ -30,15 +22,15 @@ import mapItems from "./lib/mapItems.json.js"
         FrameSizing()
     })
     window.addEventListener('load',(e)=>{
-        // テキストのパーツ
-        const screen = document.getElementById('screen');
-        const dialogue = document.getElementById('dialogue');
-        const dialogueText = document.getElementById('dialogue-text-area');
-        const autocheck = document.getElementById('autocheck');
-        const darkeningFloor = document.getElementById('darkening-floor');
-        const onePicture = document.getElementById('one-picture');
         
         FrameSizing()
+
+        // 伝搬チェック用
+        // document.querySelectorAll('*').forEach(element => {
+        //     element.addEventListener('click',e=>{
+        //         console.log(e.target);
+        //     })
+        // });
 
         // マップアイテムの生成
         const eleFragment = document.createDocumentFragment()
@@ -142,16 +134,16 @@ import mapItems from "./lib/mapItems.json.js"
         })
 
         FloatCheck.addEventListener('click',(e)=>{ //2と3の切り替え 
-            if (state.FloatCheck) {
-                state.FloatCheck=false
+            if (gameState.FloatCheck) {
+                gameState.FloatCheck=false
                 FloatCheck.innerHTML='OFF'
                 TextFloat.classList.add('op0')
             }else{
-                state.FloatCheck=true
+                gameState.FloatCheck=true
                 FloatCheck.innerHTML='ON'
                 TextFloat.classList.remove('op0')
             }
-            // console.log(state.FloatCheck)
+            // console.log(gameState.FloatCheck)
         })
 
         let floatSpbTextList = [

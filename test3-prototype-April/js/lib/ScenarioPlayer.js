@@ -7,27 +7,38 @@ export default class ScenarioPlayer {
      * @param {*} state ゲームのステータスのオブジェクト
      */
     constructor(TextList,state){
-        this.TextList=TextList //シナリオのテキストとそのデータ
-        this.state=state //mainから参照するゲームのデータ
-        this.msgindex=0 //現在のテキストの番号
-        this.movingFlag=false //テキストアニメーションが動いてるか
-        this.colorFlag=false //文字設定処理：色
-        this.sizeFlag=false //文字設定処理：大文字
-        this.nowEveId = state.textEventId //ScenarioPlayerの世代、これは違えばイベント削除
-        this.audios=TextAudio[state.nowPart] //読み込んだaudioのデータ全体
-        this.audioNum=0 //audioの番号
-        this.audioStart=0 //次の音声の再生開始させる番号
-        this.audioEnd=0 //次の音声の再生終了させる番号
-        this.audioList=[]//new Audio()プリロード
-        this.audioObj=null //new Audio()格納
-        this.audioLoad=false // canplaythroughになったらtrue
+
+        this.TextList = TextList //シナリオのテキストとそのデータ
+        this.state = state //mainから参照するゲームのデータ
+        this.msgindex = 0 //現在のテキストの番号
+        
+        this.startFlag = true //スタート時のチェック
+        this.dialogueFlag = true //ダイアログが表示か非表示化
+        this.autoPlaying = false //auto機能がオンになっているか
+        this.autoPlayingCheck = false //autoが手動で実行されたか
+        this.onePictureSwitch = false //一枚絵使用
+        this.movingFlag = false //テキストアニメーションが動いてるか
+        
+        this.colorFlag = false //文字設定処理：色
+        this.sizeFlag = false //文字設定処理：大文字
+        
+        this.nowEveId  =  state.textEventId //ScenarioPlayerの世代、これは違えばイベント削除
+
+        this.audios = TextAudio[state.nowPart] //読み込んだaudioのデータ全体
+        this.audioNum = 0 //audioの番号
+        this.audioStart = 0 //次の音声の再生開始させる番号
+        this.audioEnd = 0 //次の音声の再生終了させる番号
+        this.audioList = []//new Audio()プリロード
+        this.audioObj = null //new Audio()格納
+        this.audioLoad = false // canplaythroughになったらtrue
+        this.toMapFlag = false //toMapをさせるときの判定
         this.imagePreload()
         this.init()
     }
     
     // テキストのパーツ
-    screen = document.getElementById('screen')
-    dialogue = document.getElementById('dialogue')
+    screen = document.getElementById('textScreen')
+    dialogueEle = document.getElementById('dialogue')
     dialogueText = document.getElementById('dialogue-text-area')
     autocheck = document.getElementById('autocheck')
     darkeningFloor = document.getElementById('darkening-floor')
@@ -42,15 +53,15 @@ export default class ScenarioPlayer {
         this.dialogueText.innerHTML=''
         document.getElementById('one-picture-text').innerHTML=''
         document.getElementById('dialogue-name-area').innerHTML=''
-        // this.state.autoPlaying=false
-        this.state.autoPlayingCheck=false
-        this.state.title=true
+        // this.autoPlaying=false
+        this.autoPlayingCheck=false
+        this.startFlag=true
         // document.querySelector('#screen .msg-txt').classList.remove('none')
 
         // イベント付与
         this.screen.addEventListener('click',this.textBoxShowHide,false)    
-        this.dialogue.addEventListener('click',this.clickDialogue,false)
-        this.autocheck.textContent = this.state.autoPlaying ? 'Auto ON' :'Auto OFF'
+        this.dialogueEle.addEventListener('click',this.clickDialogue,false)
+        this.autocheck.textContent = this.autoPlaying ? 'Auto ON' :'Auto OFF'
         this.autocheck.addEventListener('click',this.autoToggle,false)
         this.darkeningFloor.addEventListener('click',this.darkeningPrev,false)
         this.onePicture.addEventListener('click',this.onePictureClick,false)
@@ -66,22 +77,22 @@ export default class ScenarioPlayer {
      * @returns キャンセルする
      */
     ScenarioClick = () => {
-        let text = this.state.onePictureSwitch ? document.querySelectorAll('#one-picture-text .op0') : document.querySelectorAll('#dialogue-text-area .op0')
+        let text = this.onePictureSwitch ? document.querySelectorAll('#one-picture-text .op0') : document.querySelectorAll('#dialogue-text-area .op0')
 
-        if (text.length===0 && !this.state.autoPlaying) {
+        if (text.length===0 && !this.autoPlaying) {
             this.Loading()
             // console.log(text)
-            text = this.state.onePictureSwitch ? document.querySelectorAll('#one-picture-text .op0') : document.querySelectorAll('#dialogue-text-area .op0')
+            text = this.onePictureSwitch ? document.querySelectorAll('#one-picture-text .op0') : document.querySelectorAll('#dialogue-text-area .op0')
         }
         if (!this.movingFlag) {
-            // this.state.autoPlayingCheckでautoの待機中にイベントが発生するのを防ぐ
-            console.log(this.state.autoPlaying)
-            console.log(this.state.autoPlayingCheck)
-            if (this.state.autoPlaying && this.state.autoPlayingCheck) {
+            // this.autoPlayingCheckでautoの待機中にイベントが発生するのを防ぐ
+            console.log(this.autoPlaying)
+            console.log(this.autoPlayingCheck)
+            if (this.autoPlaying && this.autoPlayingCheck) {
                 console.log('cancel')//autoの待機中にイベントが発生するのを防ぐ
                 return
-            }else if(this.state.autoPlaying && !this.state.autoPlayingCheck){
-                this.state.autoPlayingCheck=true//auto初回のみ通る
+            }else if(this.autoPlaying && !this.autoPlayingCheck){
+                this.autoPlayingCheck=true//auto初回のみ通る
             }
             this.AnimationStart(text)
         }else{
@@ -100,18 +111,18 @@ export default class ScenarioPlayer {
             this.screen.removeEventListener('click',this.textBoxShowHide)
             return
         }
-        if (this.state.dialogue) {
+        if (this.dialogueFlag) {
             // 非表示
-            this.dialogue.classList.add('none')
+            this.dialogueEle.classList.add('none')
             this.autocheck.classList.add('none')
-            this.state.dialogue=false
+            this.dialogueFlag=false
             // this.movingFlag = false//アニメーション停止
             this.AnimationPause()
         }else{
             // 表示
-            this.dialogue.classList.remove('none')
+            this.dialogueEle.classList.remove('none')
             this.autocheck.classList.remove('none')
-            this.state.dialogue=true
+            this.dialogueFlag=true
             // this.AnimationRestart()
         }
 
@@ -124,12 +135,12 @@ export default class ScenarioPlayer {
      */
     clickDialogue = e => {
         if (this.state.textEventId!=this.nowEveId) {
-            this.dialogue.removeEventListener('click',this.clickDialogue)
+            this.dialogueEle.removeEventListener('click',this.clickDialogue)
             return
         }
         e.stopPropagation();//イベントの伝搬を防止
-        if (this.state.title) {
-            this.state.title=false;//いらない？
+        if (this.startFlag) {
+            this.startFlag=false;//いらない？
             // document.querySelector('#screen .msg-txt').classList.add('none');
             this.Loading();
         }else{
@@ -148,17 +159,17 @@ export default class ScenarioPlayer {
             return
         }
         e.stopPropagation();
-        this.state.autoPlaying=this.state.autoPlaying ? false : true
-        e.target.textContent = this.state.autoPlaying ? 'Auto ON' :'Auto OFF';
+        this.autoPlaying=this.autoPlaying ? false : true
+        e.target.textContent = this.autoPlaying ? 'Auto ON' :'Auto OFF';
         // auto機能をONからOFFに変更したときautoPlayingCheckを初期化
-        if (!this.state.autoPlaying) {
-            this.state.autoPlayingCheck=false;
+        if (!this.autoPlaying) {
+            this.autoPlayingCheck=false;
         }
         //autoで再生中にautoをoffにする時だけ
-        if (this.state.autoPlaying && this.movingFlag) {
-            this.state.autoPlayingCheck=true;
+        if (this.autoPlaying && this.movingFlag) {
+            this.autoPlayingCheck=true;
         }
-        // console.log(this.state.autoPlaying);
+        // console.log(this.autoPlaying);
     }
     
     /**
@@ -255,7 +266,7 @@ export default class ScenarioPlayer {
 
         //一枚絵の時
         if (this.TextList[this.msgindex]['onePicture']) {
-            this.state.onePictureSwitch=true;
+            this.onePictureSwitch=true;
             // #onePictureに操作
             document.getElementById('one-picture').classList.remove('op0');
             document.getElementById('dialogue').classList.add('op0');
@@ -263,7 +274,7 @@ export default class ScenarioPlayer {
             document.getElementById('one-picture-text').appendChild(msgfragment);
             console.log(this.TextList[this.msgindex]);
         }else{
-            this.state.onePictureSwitch=false;
+            this.onePictureSwitch=false;
             document.getElementById('one-picture').classList.add('op0');
             document.getElementById('dialogue').classList.remove('op0');
             document.getElementById('dialogue-name-area').classList.add('op0');
@@ -285,6 +296,11 @@ export default class ScenarioPlayer {
      */
     AnimationStart(text){
         this.nowEle = text;
+        // console.log(text);
+        if (this.toMapFlag) {
+            this.toMap() //マップへ戻る(非auto)
+            return
+        }
         (async()=>{
             
             if (document.getElementById('textBackground').src.indexOf(this.TextList[this.msgindex - 1]['backgroundImage'])===-1) { //画像の変更がある時のみ暗転
@@ -314,8 +330,8 @@ export default class ScenarioPlayer {
                     for (const ele of text) {
                         if (!this.movingFlag) {
                             // console.log("stop");
-                            if (!this.state.dialogue) {
-                                this.state.autoPlayingCheck=false;
+                            if (!this.dialogueFlag) {
+                                this.autoPlayingCheck=false;
                                 // console.log('');
                                 // break
                                 return;//オートで再生中にダイアログ非表示で停止させた場合
@@ -323,8 +339,8 @@ export default class ScenarioPlayer {
                                 break;//テキスト強制終了でautoで次へい行かせる
                             }
                         }
-                        if (!this.state.dialogue && !this.state.onePictureSwitch) {
-                            this.state.autoPlayingCheck=false;
+                        if (!this.dialogueFlag && !this.onePictureSwitch) {
+                            this.autoPlayingCheck=false;
                             this.movingFlag=false;
                             // console.log('');
                             // break
@@ -348,8 +364,8 @@ export default class ScenarioPlayer {
             for (const ele of text) {
                 if (!this.movingFlag) {
                     // console.log("stop");
-                    if (!this.state.dialogue) {
-                        this.state.autoPlayingCheck=false;
+                    if (!this.dialogueFlag) {
+                        this.autoPlayingCheck=false;
                         // console.log('');
                         // break
                         return;//オートで再生中にダイアログ非表示で停止させた場合
@@ -357,8 +373,8 @@ export default class ScenarioPlayer {
                         break;//テキスト強制終了でautoで次へい行かせる
                     }
                 }
-                if (!this.state.dialogue && !this.state.onePictureSwitch) {
-                    this.state.autoPlayingCheck=false;
+                if (!this.dialogueFlag && !this.onePictureSwitch) {
+                    this.autoPlayingCheck=false;
                     this.movingFlag=false;
                     // console.log('');
                     // break;
@@ -375,27 +391,30 @@ export default class ScenarioPlayer {
             this.movingFlag=false;
 
             const nextFlag = this.msgindex >= Object.keys(this.TextList).length // true => 次がない場合
-            if (this.state.autoPlaying) {
+            if (this.autoPlaying) {
 
                 await this.timer(1000);//この待機中にAnimationStartが走るとおかしくなる
                 console.log('auto');
                 // console.log(text);
-                if (!this.state.dialogue && !this.state.onePictureSwitch) {
-                    this.state.autoPlayingCheck=false;
+                if (!this.dialogueFlag && !this.onePictureSwitch) {
+                    this.autoPlayingCheck=false;
                     return;
                 }
                 this.Loading();
-                const nexttext = this.state.onePictureSwitch ? document.querySelectorAll('#one-picture-text .op0') : document.querySelectorAll('#dialogue-text-area .op0');
+                const nexttext = this.onePictureSwitch ? document.querySelectorAll('#one-picture-text .op0') : document.querySelectorAll('#dialogue-text-area .op0');
                 if(!nextFlag) {
                     this.AnimationStart(nexttext);
                 }else{
-
+                    this.toMapFlag = true
                     this.toMap() //マップへ戻る(auto)
                     
                 }
 
-            }else{
-                if (nextFlag) this.toMap() //マップへ戻る(非auto)
+            }
+            else{
+                if (nextFlag) {
+                    this.toMapFlag = true
+                }
             }
                 
         })();
