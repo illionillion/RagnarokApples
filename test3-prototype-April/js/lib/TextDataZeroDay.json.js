@@ -6,21 +6,21 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
             "characterList":{//各キャラの設定
                 "left":{//左
                     "name":"キャラ(左)",
-                    "src":"images/character/bengal.png",
+                    "src":"bengal.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
                 },
                 "center":{//中央
                     "name":"キャラ(中)",
-                    "src":"images/character/transparent_background.png",
+                    "src":"transparent_background.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
                 },
                 "right":{//右
                     "name":"キャラ(右)",
-                    "src":"images/character/transparent_background.png",
+                    "src":"transparent_background.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
@@ -33,7 +33,7 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
 
                 }
             },
-            "backgroundImage":"images/background/city01.jpeg"
+            "backgroundImage":"city01.jpeg"
         },
         {
             "textId":1,
@@ -41,21 +41,21 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
             "characterList":{//各キャラの設定
                 "left":{//左
                     "name":"キャラ(左)",
-                    "src":"images/character/bengal.png",
+                    "src":"bengal.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
                 },
                 "center":{//中央
                     "name":"キャラ(中)",
-                    "src":"images/character/transparent_background.png",
+                    "src":"transparent_background.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
                 },
                 "right":{//右
                     "name":"キャラ(右)",
-                    "src":"images/character/transparent_background.png",
+                    "src":"transparent_background.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
@@ -68,7 +68,7 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
 
                 }
             },
-            "backgroundImage":"images/background/city01.jpeg"
+            "backgroundImage":"city01.jpeg"
         },
         {
             "textId":2,
@@ -76,21 +76,21 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
             "characterList":{//各キャラの設定
                 "left":{//左
                     "name":"キャラ(左)",
-                    "src":"images/character/bengal.png",
+                    "src":"bengal.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
                 },
                 "center":{//中央
                     "name":"キャラ(中)",
-                    "src":"images/character/transparent_background.png",
+                    "src":"transparent_background.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
                 },
                 "right":{//右
                     "name":"キャラ(右)",
-                    "src":"images/character/transparent_background.png",
+                    "src":"transparent_background.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
@@ -103,7 +103,7 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
 
                 }
             },
-            "backgroundImage":"images/background/city01.jpeg"
+            "backgroundImage":"city01.jpeg"
         },
         {
             "textId":3,
@@ -111,21 +111,21 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
             "characterList":{//各キャラの設定
                 "left":{//左
                     "name":"キャラ(左)",
-                    "src":"images/character/bengal.png",
+                    "src":"bengal.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
                 },
                 "center":{//中央
                     "name":"キャラ(中)",
-                    "src":"images/character/transparent_background.png",
+                    "src":"transparent_background.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
                 },
                 "right":{//右
                     "name":"キャラ(右)",
-                    "src":"images/character/transparent_background.png",
+                    "src":"transparent_background.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
@@ -138,7 +138,7 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
 
                 }
             },
-            "backgroundImage":"images/background/city01.jpeg"
+            "backgroundImage":"city01.jpeg"
         },
         {
             "textId":4,
@@ -146,21 +146,21 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
             "characterList":{//各キャラの設定
                 "left":{//左
                     "name":"キャラ(左)",
-                    "src":"images/character/bengal.png",
+                    "src":"bengal.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
                 },
                 "center":{//中央
                     "name":"キャラ(中)",
-                    "src":"images/character/transparent_background.png",
+                    "src":"transparent_background.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
                 },
                 "right":{//右
                     "name":"キャラ(右)",
-                    "src":"images/character/transparent_background.png",
+                    "src":"transparent_background.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
@@ -173,7 +173,7 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
 
                 }
             },
-            "backgroundImage":"images/background/city01.jpeg"
+            "backgroundImage":"city01.jpeg"
         },
         {
             "textId":5,
@@ -181,21 +181,21 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
             "characterList":{//各キャラの設定
                 "left":{//左
                     "name":"キャラ(左)",
-                    "src":"images/character/bengal.png",
+                    "src":"bengal.png",
                     "status":{
                         "brightnessDown":true//明度(true)の時は落とす
                     }
                 },
                 "center":{//中央
                     "name":"キャラ(中)",
-                    "src":"images/character/transparent_background.png",
+                    "src":"transparent_background.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
                 },
                 "right":{//右
                     "name":"ニア",
-                    "src":"images/character/bibian.png",
+                    "src":"bibian.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
@@ -208,7 +208,7 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
 
                 }
             },
-            "backgroundImage":"images/background/city01.jpeg"
+            "backgroundImage":"city01.jpeg"
         },
         {
             "textId":6,
@@ -216,21 +216,21 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
             "characterList":{//各キャラの設定
                 "left":{//左
                     "name":"キャラ(左)",
-                    "src":"images/character/bengal.png",
+                    "src":"bengal.png",
                     "status":{
                         "brightnessDown":true//明度(true)の時は落とす
                     }
                 },
                 "center":{//中央
                     "name":"キャラ(中)",
-                    "src":"images/character/transparent_background.png",
+                    "src":"transparent_background.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
                 },
                 "right":{//右
                     "name":"ニア",
-                    "src":"images/character/bibian.png",
+                    "src":"bibian.png",
                     "status":{
                         "brightnessDown":true//明度(true)の時は落とす
                     }
@@ -243,7 +243,7 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
 
                 }
             },
-            "backgroundImage":"images/background/city01.jpeg"
+            "backgroundImage":"city01.jpeg"
         },
         {
             "textId":7,
@@ -251,21 +251,21 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
             "characterList":{//各キャラの設定
                 "left":{//左
                     "name":"キャラ(左)",
-                    "src":"images/character/bengal.png",
+                    "src":"bengal.png",
                     "status":{
                         "brightnessDown":true//明度(true)の時は落とす
                     }
                 },
                 "center":{//中央
                     "name":"キャラ(中)",
-                    "src":"images/character/transparent_background.png",
+                    "src":"transparent_background.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
                 },
                 "right":{//右
                     "name":"ニア",
-                    "src":"images/character/bibian.png",
+                    "src":"bibian.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
@@ -278,7 +278,7 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
 
                 }
             },
-            "backgroundImage":"images/background/city01.jpeg"
+            "backgroundImage":"city01.jpeg"
         },
         {
             "textId":8,
@@ -286,21 +286,21 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
             "characterList":{//各キャラの設定
                 "left":{//左
                     "name":"キャラ(左)",
-                    "src":"images/character/bengal.png",
+                    "src":"bengal.png",
                     "status":{
                         "brightnessDown":true//明度(true)の時は落とす
                     }
                 },
                 "center":{//中央
                     "name":"キャラ(中)",
-                    "src":"images/character/transparent_background.png",
+                    "src":"transparent_background.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
                 },
                 "right":{//右
                     "name":"ニア",
-                    "src":"images/character/bibian.png",
+                    "src":"bibian.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
@@ -313,7 +313,7 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
 
                 }
             },
-            "backgroundImage":"images/background/city01.jpeg"
+            "backgroundImage":"city01.jpeg"
         },
         {
             "textId":9,
@@ -321,21 +321,21 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
             "characterList":{//各キャラの設定
                 "left":{//左
                     "name":"キャラ(左)",
-                    "src":"images/character/bengal.png",
+                    "src":"bengal.png",
                     "status":{
                         "brightnessDown":true//明度(true)の時は落とす
                     }
                 },
                 "center":{//中央
                     "name":"キャラ(中)",
-                    "src":"images/character/transparent_background.png",
+                    "src":"transparent_background.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
                 },
                 "right":{//右
                     "name":"ニア",
-                    "src":"images/character/bibian.png",
+                    "src":"bibian.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
@@ -348,7 +348,7 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
 
                 }
             },
-            "backgroundImage":"images/background/city01.jpeg"
+            "backgroundImage":"city01.jpeg"
         },
         {
             "textId":10,
@@ -356,21 +356,21 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
             "characterList":{//各キャラの設定
                 "left":{//左
                     "name":"キャラ(左)",
-                    "src":"images/character/bengal.png",
+                    "src":"bengal.png",
                     "status":{
                         "brightnessDown":true//明度(true)の時は落とす
                     }
                 },
                 "center":{//中央
                     "name":"キャラ(中)",
-                    "src":"images/character/transparent_background.png",
+                    "src":"transparent_background.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
                 },
                 "right":{//右
                     "name":"ニア",
-                    "src":"images/character/bibian.png",
+                    "src":"bibian.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
@@ -383,7 +383,7 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
 
                 }
             },
-            "backgroundImage":"images/background/city01.jpeg"
+            "backgroundImage":"city01.jpeg"
         },
         {
             "textId":11,
@@ -391,21 +391,21 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
             "characterList":{//各キャラの設定
                 "left":{//左
                     "name":"キャラ(左)",
-                    "src":"images/character/bengal.png",
+                    "src":"bengal.png",
                     "status":{
                         "brightnessDown":true//明度(true)の時は落とす
                     }
                 },
                 "center":{//中央
                     "name":"キャラ(中)",
-                    "src":"images/character/transparent_background.png",
+                    "src":"transparent_background.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
                 },
                 "right":{//右
                     "name":"ニア",
-                    "src":"images/character/bibian.png",
+                    "src":"bibian.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
@@ -418,7 +418,7 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
 
                 }
             },
-            "backgroundImage":"images/background/city01.jpeg"
+            "backgroundImage":"city01.jpeg"
         },
         {
             "textId":12,
@@ -426,21 +426,21 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
             "characterList":{//各キャラの設定
                 "left":{//左
                     "name":"キャラ(左)",
-                    "src":"images/character/bengal.png",
+                    "src":"bengal.png",
                     "status":{
                         "brightnessDown":true//明度(true)の時は落とす
                     }
                 },
                 "center":{//中央
                     "name":"キャラ(中)",
-                    "src":"images/character/transparent_background.png",
+                    "src":"transparent_background.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
                 },
                 "right":{//右
                     "name":"ニア",
-                    "src":"images/character/bibian.png",
+                    "src":"bibian.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
@@ -453,7 +453,7 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
 
                 }
             },
-            "backgroundImage":"images/background/city01.jpeg"
+            "backgroundImage":"city01.jpeg"
         },
         {
             "textId":13,
@@ -461,21 +461,21 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
             "characterList":{//各キャラの設定
                 "left":{//左
                     "name":"キャラ(左)",
-                    "src":"images/character/bengal.png",
+                    "src":"bengal.png",
                     "status":{
                         "brightnessDown":true//明度(true)の時は落とす
                     }
                 },
                 "center":{//中央
                     "name":"キャラ(中)",
-                    "src":"images/character/transparent_background.png",
+                    "src":"transparent_background.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
                 },
                 "right":{//右
                     "name":"ニア",
-                    "src":"images/character/bibian.png",
+                    "src":"bibian.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
@@ -488,7 +488,7 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
 
                 }
             },
-            "backgroundImage":"images/background/city01.jpeg"
+            "backgroundImage":"city01.jpeg"
         },
         {
             "textId":14,
@@ -496,21 +496,21 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
             "characterList":{//各キャラの設定
                 "left":{//左
                     "name":"キャラ(左)",
-                    "src":"images/character/bengal.png",
+                    "src":"bengal.png",
                     "status":{
                         "brightnessDown":true//明度(true)の時は落とす
                     }
                 },
                 "center":{//中央
                     "name":"キャラ(中)",
-                    "src":"images/character/transparent_background.png",
+                    "src":"transparent_background.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
                 },
                 "right":{//右
                     "name":"ニア",
-                    "src":"images/character/bibian.png",
+                    "src":"bibian.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
@@ -523,7 +523,7 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
 
                 }
             },
-            "backgroundImage":"images/background/city01.jpeg"
+            "backgroundImage":"city01.jpeg"
         },
         {
             "textId":15,
@@ -531,21 +531,21 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
             "characterList":{//各キャラの設定
                 "left":{//左
                     "name":"キャラ(左)",
-                    "src":"images/character/bengal.png",
+                    "src":"bengal.png",
                     "status":{
                         "brightnessDown":true//明度(true)の時は落とす
                     }
                 },
                 "center":{//中央
                     "name":"キャラ(中)",
-                    "src":"images/character/transparent_background.png",
+                    "src":"transparent_background.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
                 },
                 "right":{//右
                     "name":"ニア",
-                    "src":"images/character/bibian.png",
+                    "src":"bibian.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
@@ -558,7 +558,7 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
 
                 }
             },
-            "backgroundImage":"images/background/city01.jpeg"
+            "backgroundImage":"city01.jpeg"
         },
         {
             "textId":16,
@@ -566,21 +566,21 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
             "characterList":{//各キャラの設定
                 "left":{//左
                     "name":"キャラ(左)",
-                    "src":"images/character/bengal.png",
+                    "src":"bengal.png",
                     "status":{
                         "brightnessDown":true//明度(true)の時は落とす
                     }
                 },
                 "center":{//中央
                     "name":"キャラ(中)",
-                    "src":"images/character/transparent_background.png",
+                    "src":"transparent_background.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
                 },
                 "right":{//右
                     "name":"ニア",
-                    "src":"images/character/bibian.png",
+                    "src":"bibian.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
@@ -593,7 +593,7 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
 
                 }
             },
-            "backgroundImage":"images/background/city01.jpeg"
+            "backgroundImage":"city01.jpeg"
         },
         {
             "textId":17,
@@ -601,21 +601,21 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
             "characterList":{//各キャラの設定
                 "left":{//左
                     "name":"キャラ(左)",
-                    "src":"images/character/bengal.png",
+                    "src":"bengal.png",
                     "status":{
                         "brightnessDown":true//明度(true)の時は落とす
                     }
                 },
                 "center":{//中央
                     "name":"キャラ(中)",
-                    "src":"images/character/transparent_background.png",
+                    "src":"transparent_background.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
                 },
                 "right":{//右
                     "name":"ニア",
-                    "src":"images/character/bibian.png",
+                    "src":"bibian.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
@@ -628,7 +628,7 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
 
                 }
             },
-            "backgroundImage":"images/background/city01.jpeg"
+            "backgroundImage":"city01.jpeg"
         },
         {
             "textId":18,
@@ -636,21 +636,21 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
             "characterList":{//各キャラの設定
                 "left":{//左
                     "name":"キャラ(左)",
-                    "src":"images/character/bengal.png",
+                    "src":"bengal.png",
                     "status":{
                         "brightnessDown":true//明度(true)の時は落とす
                     }
                 },
                 "center":{//中央
                     "name":"キャラ(中)",
-                    "src":"images/character/transparent_background.png",
+                    "src":"transparent_background.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
                 },
                 "right":{//右
                     "name":"ニア",
-                    "src":"images/character/bibian.png",
+                    "src":"bibian.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
@@ -663,7 +663,112 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
 
                 }
             },
-            "backgroundImage":"images/background/city01.jpeg"
+            "backgroundImage":"city01.jpeg"
+        },
+        {
+            "textId":19,
+            "onePicture":false,
+            "characterList":{//各キャラの設定
+                "left":{//左
+                    "name":"キャラ(左)",
+                    "src":"bengal.png",
+                    "status":{
+                        "brightnessDown":true//明度(true)の時は落とす
+                    }
+                },
+                "center":{//中央
+                    "name":"キャラ(中)",
+                    "src":"transparent_background.png",
+                    "status":{
+                        "brightnessDown":false//明度(true)の時は落とす
+                    }
+                },
+                "right":{//右
+                    "name":"ニア",
+                    "src":"bibian.png",
+                    "status":{
+                        "brightnessDown":false//明度(true)の時は落とす
+                    }
+                }
+            },
+            "characterText":{
+                "name":"タウ",
+                "text":"「だったら…。だったら、ずっとここに居ればいいじゃないか！幸い、僕らイデアは何も食べなくても生きていける。なのになぜ、危険を冒してまでそんな事を…」",
+                "effect":{
+
+                }
+            },
+            "backgroundImage":"city01.jpeg"
+        },
+        {
+            "textId":20,
+            "onePicture":false,
+            "characterList":{//各キャラの設定
+                "left":{//左
+                    "name":"キャラ(左)",
+                    "src":"bengal.png",
+                    "status":{
+                        "brightnessDown":true//明度(true)の時は落とす
+                    }
+                },
+                "center":{//中央
+                    "name":"キャラ(中)",
+                    "src":"transparent_background.png",
+                    "status":{
+                        "brightnessDown":false//明度(true)の時は落とす
+                    }
+                },
+                "right":{//右
+                    "name":"ニア",
+                    "src":"bibian.png",
+                    "status":{
+                        "brightnessDown":false//明度(true)の時は落とす
+                    }
+                }
+            },
+            "characterText":{
+                "name":"ニア",
+                "text":"「戦わなくちゃいけない理由が出来たから。今度は誰かの意思じゃない。私自身の意思で戦ってる」",
+                "effect":{
+
+                }
+            },
+            "backgroundImage":"city01.jpeg"
+        },
+        {
+            "textId":21,
+            "onePicture":false,
+            "characterList":{//各キャラの設定
+                "left":{//左
+                    "name":"キャラ(左)",
+                    "src":"bengal.png",
+                    "status":{
+                        "brightnessDown":true//明度(true)の時は落とす
+                    }
+                },
+                "center":{//中央
+                    "name":"キャラ(中)",
+                    "src":"transparent_background.png",
+                    "status":{
+                        "brightnessDown":false//明度(true)の時は落とす
+                    }
+                },
+                "right":{//右
+                    "name":"ニア",
+                    "src":"bibian.png",
+                    "status":{
+                        "brightnessDown":false//明度(true)の時は落とす
+                    }
+                }
+            },
+            "characterText":{
+                "name":"タウ",
+                "text":"「別にニアじゃなくたっていいのに。大体、これまで散々戦って傷ついてきたのに、これ以上ニアが傷つく必要なんてないよ！」",
+                "effect":{
+
+                }
+            },
+            "backgroundImage":"city01.jpeg"
         },
     ]
 }
