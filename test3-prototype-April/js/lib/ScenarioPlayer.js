@@ -503,8 +503,9 @@ export default class ScenarioPlayer {
         for (const positon in props) {
             if (Object.hasOwnProperty.call(props, positon)) {
                 const element = props[positon];
-                document.querySelector(`#character-area [data-position=${positon}] img`).src=element.src;
-                document.querySelector(`#character-area [data-position=${positon}] img`).alt=element.name;
+                const src = `images/character/${element.src}`
+                document.querySelector(`#character-area [data-position=${positon}] img`).src= src 
+                document.querySelector(`#character-area [data-position=${positon}] img`).alt=element.name
             }
         }
     }
@@ -516,7 +517,8 @@ export default class ScenarioPlayer {
     backgroundSetting (url) {
 
         // srcを変えるだけだが、切り替えに時間がかかってしまう
-        document.getElementById('textBackground').src=url;
+        const src = `images/background/${url}`
+        document.getElementById('textBackground').src= src
 
     }
 
@@ -524,17 +526,19 @@ export default class ScenarioPlayer {
      * 画像のプリロード
      */
     imagePreload () {
-        // const imgFragment = document.createDocumentFragment();
+        // const imgFragment = document.createDocumentFragment()
         for (const textEle of this.TextList) {
-            // console.log(textEle['backgroundImage']);
-            const imgele = document.createElement('img');
-            imgele.src = textEle['backgroundImage'];
+            // console.log(textEle['backgroundImage'])
+            const imgele = document.createElement('img')
+            const imgsrc = `images/background/${textEle['backgroundImage']}`
+            imgele.src = imgsrc
 
             for (const key in textEle['characterList']) {
                 if (Object.hasOwnProperty.call(textEle['characterList'], key)) {
-                    // console.log(textEle['characterList'][key]['src']);
-                    const charimgele = document.createElement('img');
-                    charimgele.src =  textEle['characterList'][key]['src'];
+                    // console.log(textEle['characterList'][key]['src'])
+                    const charimgele = document.createElement('img')
+                    const charsrc = `images/character/${textEle['characterList'][key]['src']}`
+                    charimgele.src =  charsrc
                     
                 }
             }
