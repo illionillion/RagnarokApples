@@ -9,15 +9,16 @@ export default {
             left:'17%'
         }
     },
-    // point2:{
-    //     place:'場所2',
-    //     style:{
-    //         width:'16%',
-    //         height:'25%',
-    //         top:'53%',
-    //         left:'13%'
-    //     }
-    // },
+    point2:{
+        place:'場所2',
+        partKey:"A1",
+        style:{
+            width:'16%',
+            height:'25%',
+            top:'53%',
+            left:'13%'
+        }
+    },
     // point3:{
     //     place:'場所3',
     //     style:{

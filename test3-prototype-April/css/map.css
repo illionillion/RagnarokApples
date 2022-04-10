@@ -46,7 +46,19 @@
 
 .map-touch {
     position: absolute;
-    background-color: rgba(0, 0, 0, 0.699);}
+    background-color: rgba(0, 0, 0, 0.699);
+    animation: flash 4.5s linear infinite;
+}
+
+@keyframes flash {
+    0%,100% {
+      opacity: 1;
+    }
+  
+    50% {
+      opacity: 0.5;
+    }
+  }
 
 #mapSelectFloat{
     position: absolute;
