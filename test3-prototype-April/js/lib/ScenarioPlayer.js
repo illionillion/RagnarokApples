@@ -213,13 +213,17 @@ export default class ScenarioPlayer {
         }
         console.log(this.TextList[this.msgindex]);
         
-        const msgfragment = document.createDocumentFragment();
-        let largeHolder;
+        const spanFragment = document.createDocumentFragment();
+        let largeHolder;//大文字格納用
+
+        const pFragment = document.createDocumentFragment();
+        let pEle = document.createElement('p')
+        let pCount = 0
 
         let speakerName = this.TextList[this.msgindex]['characterText']['name'];//名前
         for (let i = 0; i < this.TextList[this.msgindex]['characterText']['text'].length; i++) {
             const element = this.TextList[this.msgindex]['characterText']['text'][i];
-            if (element==='/') {//赤文字
+            if (element === '/') {//赤文字
                 // console.log(element);
                 if (this.colorFlag) {
                     this.colorFlag=false;
@@ -228,7 +232,7 @@ export default class ScenarioPlayer {
                 this.colorFlag=true;
                 continue;
             }
-            if (element==='*') {//大文字
+            if (element === '*') {//大文字
                 // console.log(element);
                 if (this.sizeFlag) {
                     this.sizeFlag=false;
@@ -237,7 +241,17 @@ export default class ScenarioPlayer {
                 this.sizeFlag=true;
                 continue;
             }
-            const span = document.createElement('span');
+            if (element === '$') {// 改行
+                pEle.appendChild(spanFragment)
+                pEle.dataset.pcount=pCount
+                pFragment.appendChild(pEle)
+                pEle = document.createElement('p')//初期化
+                this.colorFlag = false
+                this.sizeFlag = false
+                pCount++
+                continue;
+            }
+            const span = document.createElement('span');//1文字格納
             span.textContent=element;
             span.className='op0';
             if (this.colorFlag) {
@@ -257,11 +271,14 @@ export default class ScenarioPlayer {
                 }
             }
             if (largeHolder) {
-                msgfragment.appendChild(largeHolder);
+                spanFragment.appendChild(largeHolder);
             }
             largeHolder=null;
-            msgfragment.appendChild(span);
+            spanFragment.appendChild(span);
         }
+        pEle.appendChild(spanFragment)
+        pEle.dataset.pcount=pCount
+        pFragment.appendChild(pEle)
         this.colorFlag=false;
 
         //一枚絵の時
@@ -271,7 +288,8 @@ export default class ScenarioPlayer {
             document.getElementById('one-picture').classList.remove('op0');
             document.getElementById('dialogue').classList.add('op0');
             document.getElementById('one-picture-text').innerHTML='';
-            document.getElementById('one-picture-text').appendChild(msgfragment);
+            // document.getElementById('one-picture-text').appendChild(spanFragment);
+            document.getElementById('one-picture-text').appendChild(pFragment);
             console.log(this.TextList[this.msgindex]);
         }else{
             this.onePictureSwitch=false;
@@ -280,7 +298,8 @@ export default class ScenarioPlayer {
             document.getElementById('dialogue-name-area').classList.add('op0');
             document.getElementById('dialogue-name-area').innerHTML=speakerName;
             document.getElementById('dialogue-text-area').innerHTML='';
-            document.getElementById('dialogue-text-area').appendChild(msgfragment);
+            // document.getElementById('dialogue-text-area').appendChild(spanFragment);
+            document.getElementById('dialogue-text-area').appendChild(pFragment);
         }
 
         // 音声再生
