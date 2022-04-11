@@ -218,7 +218,7 @@ export default class ScenarioPlayer {
 
         const pFragment = document.createDocumentFragment();
         let pEle = document.createElement('p')
-        let pCount = 0
+        let pCount = 0 //行カウント
 
         let speakerName = this.TextList[this.msgindex]['characterText']['name'];//名前
         for (let i = 0; i < this.TextList[this.msgindex]['characterText']['text'].length; i++) {
@@ -266,7 +266,7 @@ export default class ScenarioPlayer {
                 // 一枚絵且つ、大文字の時は速めに表示させるので別にする
                 if (this.TextList[this.msgindex]['onePicture']) {
                     largeHolder.appendChild(span);
-                    console.log(largeHolder);
+                    // console.log(largeHolder);
                     continue;
                 }
             }
@@ -290,7 +290,7 @@ export default class ScenarioPlayer {
             document.getElementById('one-picture-text').innerHTML='';
             // document.getElementById('one-picture-text').appendChild(spanFragment);
             document.getElementById('one-picture-text').appendChild(pFragment);
-            console.log(this.TextList[this.msgindex]);
+            // console.log(this.TextList[this.msgindex]);
         }else{
             this.onePictureSwitch=false;
             document.getElementById('one-picture').classList.add('op0');
@@ -583,9 +583,9 @@ export default class ScenarioPlayer {
                     // console.log('throught');
                         obj.audioLoad = true
                 })
-                obj.audio.addEventListener('timeupdate',e=>{
-                    // console.log(obj.audio.currentTime);
-                })
+                // obj.audio.addEventListener('timeupdate',e=>{
+                //     // console.log(obj.audio.currentTime);
+                // })
 
             }
         }
@@ -611,7 +611,6 @@ export default class ScenarioPlayer {
     AudioPlaying = () => {
         if (this.msgindex === this.audioStart) {
 
-            // if (this.audioLoad) {
             if (this.audioList[this.audioNum].audioLoad) {
                 console.log('play');
                 this.audioObj.play()
@@ -629,7 +628,7 @@ export default class ScenarioPlayer {
      * 音性終了
      */
     AudioStop = () => {
-        if (this.msgindex > this.audioEnd) {
+        if (this.msgindex === this.audioEnd + 1) {
             console.log('pause');
             this.audioObj.pause()
             this.audioLoad = false
