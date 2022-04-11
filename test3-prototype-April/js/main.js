@@ -10,12 +10,13 @@ import mapItems from "./lib/mapItems.json.js"
         now:1,
     }
     const gameState = {
-        textEventId:0,
-        nowPart:null,
-        FloatCheck:true
+        textEventId: -1,
+        nowPart: null,
+        FloatCheck: true,
+        nowDate: 0
     }
     let TextPlayer
-    // let textEventId = 0
+    const TextPlayerList = []
     
     // console.log(document.getElementById('screen'))
     window.addEventListener('resize',(e)=>{
@@ -90,6 +91,10 @@ import mapItems from "./lib/mapItems.json.js"
                                 gameState.nowPart=partKey
                                 TextPlayer=new ScenarioPlayer(TextData[partKey],gameState)//プレイヤー生成
                                 
+                                // TextPlayerList[gameState.textEventId]=new ScenarioPlayer(TextData[partKey],gameState)//プレイヤー生成
+                                // console.log(gameState);
+                                // console.log(TextPlayerList);
+                                
                                 /*------------------
                                     テキストの処理 
                                 ------------------*/
@@ -127,7 +132,8 @@ import mapItems from "./lib/mapItems.json.js"
         const FloatCheck = document.getElementById('FloatCheck')
         const TextFloat = document.getElementById('mapTextFloat')
         const TextCover = document.getElementById('mapTextCover')
-        spb.addEventListener('click', (e) => { //1から2へ遷移
+        // spb.addEventListener('click', (e) => { //1から2へ遷移
+        TextCover.addEventListener('click', (e) => { //1から2へ遷移
             TextCover.classList.add('none')
             FloatCheck.classList.remove('op0')
             TextFloat.classList.remove('op0')
@@ -162,6 +168,17 @@ import mapItems from "./lib/mapItems.json.js"
             e.target.innerHTML = floatSpbTextList[floatSpbTextCount]
             floatSpbTextCount++
         })
+
+
+        /**
+         * 日付の設定
+         */
+        const setDate = () => {
+            // 日付の設定
+            document.getElementById('date').innerHTML=`${gameState.nowDate}日目`
+        }
+
+        setDate()
 
 
     })
