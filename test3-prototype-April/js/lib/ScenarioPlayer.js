@@ -53,10 +53,8 @@ export default class ScenarioPlayer {
         this.dialogueText.innerHTML=''
         document.getElementById('one-picture-text').innerHTML=''
         document.getElementById('dialogue-name-area').innerHTML=''
-        // this.autoPlaying=false
         this.autoPlayingCheck=false
         this.startFlag=true
-        // document.querySelector('#screen .msg-txt').classList.remove('none')
 
         // イベント付与
         this.screen.addEventListener('click',this.textBoxShowHide,false)    
@@ -116,14 +114,12 @@ export default class ScenarioPlayer {
             this.dialogueEle.classList.add('none')
             this.autocheck.classList.add('none')
             this.dialogueFlag=false
-            // this.movingFlag = false//アニメーション停止
             this.AnimationPause()
         }else{
             // 表示
             this.dialogueEle.classList.remove('none')
             this.autocheck.classList.remove('none')
             this.dialogueFlag=true
-            // this.AnimationRestart()
         }
 
     }
@@ -141,7 +137,6 @@ export default class ScenarioPlayer {
         e.stopPropagation();//イベントの伝搬を防止
         if (this.startFlag) {
             this.startFlag=false;//いらない？
-            // document.querySelector('#screen .msg-txt').classList.add('none');
             this.Loading();
         }else{
             this.ScenarioClick();
@@ -288,7 +283,6 @@ export default class ScenarioPlayer {
             document.getElementById('one-picture').classList.remove('op0');
             document.getElementById('dialogue').classList.add('op0');
             document.getElementById('one-picture-text').innerHTML='';
-            // document.getElementById('one-picture-text').appendChild(spanFragment);
             document.getElementById('one-picture-text').appendChild(pFragment);
             // console.log(this.TextList[this.msgindex]);
         }else{
@@ -298,7 +292,6 @@ export default class ScenarioPlayer {
             document.getElementById('dialogue-name-area').classList.add('op0');
             document.getElementById('dialogue-name-area').innerHTML=speakerName;
             document.getElementById('dialogue-text-area').innerHTML='';
-            // document.getElementById('dialogue-text-area').appendChild(spanFragment);
             document.getElementById('dialogue-text-area').appendChild(pFragment);
         }
 
@@ -545,7 +538,6 @@ export default class ScenarioPlayer {
      * 画像のプリロード
      */
     imagePreload () {
-        // const imgFragment = document.createDocumentFragment()
         for (const textEle of this.TextList) {
             // console.log(textEle['backgroundImage'])
             const imgele = document.createElement('img')
@@ -562,7 +554,6 @@ export default class ScenarioPlayer {
                 }
             }
         }
-        // document.getElementById('imageholder').appendChild(imgFragment);
     } 
 
     /**

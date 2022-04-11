@@ -18,7 +18,6 @@ import mapItems from "./lib/mapItems.json.js"
     let TextPlayer
     const TextPlayerList = []
     
-    // console.log(document.getElementById('screen'))
     window.addEventListener('resize',(e)=>{
         FrameSizing()
     })
@@ -70,7 +69,7 @@ import mapItems from "./lib/mapItems.json.js"
                             })
                         }
                         if( e.target === yesBtn ) { // yesが押された
-                            //alert(`${placeName}が選択されました`)
+                            
                             (async ()=>{
 
                                 // 暗転
@@ -132,7 +131,6 @@ import mapItems from "./lib/mapItems.json.js"
         const FloatCheck = document.getElementById('FloatCheck')
         const TextFloat = document.getElementById('mapTextFloat')
         const TextCover = document.getElementById('mapTextCover')
-        // spb.addEventListener('click', (e) => { //1から2へ遷移
         TextCover.addEventListener('click', (e) => { //1から2へ遷移
             TextCover.classList.add('none')
             FloatCheck.classList.remove('op0')
