@@ -14,6 +14,11 @@ export default {
             "start":10,
             "end":18,
             "file":"7a1e50428682eba3.mp3"
+        },
+        {
+            "start":22,
+            "end":30,
+            "file":"7a1e50428682eba3.mp3"
         }
     ]
 }
