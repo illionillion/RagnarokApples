@@ -20,7 +20,9 @@ import mapItems from "./lib/mapItems.json.js"
         FrameSizing()
     })
     window.addEventListener('load',(e)=>{
-        
+
+        document.body.oncontextmenu = () => {return false}
+
         FrameSizing()
 
         // 伝搬チェック用
