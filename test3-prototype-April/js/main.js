@@ -6,14 +6,12 @@ import FrameSizing from "./lib/FrameSizing.js"
 import mapItems from "./lib/mapItems.json.js"
 
 (function(){
-    const state={
-        now:1,
-    }
     const gameState = {
         textEventId: -1,
         nowPart: null,
         FloatCheck: true,
-        nowDate: 0
+        nowDate: 0,
+        eventState: 'title'
     }
     let TextPlayer
     const TextPlayerList = []
@@ -33,23 +31,24 @@ import mapItems from "./lib/mapItems.json.js"
         // });
 
         // マップアイテムの生成
+        gameState.eventState = 'map'
         const eleFragment = document.createDocumentFragment()
         for (const itemId in mapItems) {
             if (Object.hasOwnProperty.call(mapItems, itemId)) {
                 const item = mapItems[itemId]
                 const itemEle = document.createElement('div')
-                itemEle.id=itemId
-                itemEle.className='map-touch'
-                itemEle.dataset.place=item.place
+                itemEle.id = itemId
+                itemEle.className = 'map-touch'
+                itemEle.dataset.place = item.place
 
                 // イベント付与
                 itemEle.addEventListener('click',(e)=>{
                 
-                    const float=document.getElementById('mapWrapper')
+                    const float = document.getElementById('mapWrapper')
                     float.classList.remove('none')
                     const pname = document.getElementById('placeName')
-                    const placeName=e.target.dataset.place
-                    pname.innerHTML=placeName
+                    const placeName = e.target.dataset.place
+                    pname.innerHTML = placeName
 
                     const partKey = item.partKey
     
@@ -87,8 +86,8 @@ import mapItems from "./lib/mapItems.json.js"
                                 console.log(TextData[partKey]);//選択されたシナリオ
 
                                 gameState.textEventId++;
-                                gameState.nowPart=partKey
-                                TextPlayer=new ScenarioPlayer(TextData[partKey],gameState)//プレイヤー生成
+                                gameState.nowPart = partKey
+                                TextPlayer = new ScenarioPlayer(TextData[partKey], gameState)//プレイヤー生成
                                 
                                 // TextPlayerList[gameState.textEventId]=new ScenarioPlayer(TextData[partKey],gameState)//プレイヤー生成
                                 // console.log(gameState);
@@ -115,7 +114,7 @@ import mapItems from "./lib/mapItems.json.js"
                 for (const prop in styles) {
                     if (Object.hasOwnProperty.call(styles, prop)) {
                         const val = styles[prop]
-                        itemEle.style[prop]=val
+                        itemEle.style[prop] = val
                     }
                 }
 
@@ -139,12 +138,12 @@ import mapItems from "./lib/mapItems.json.js"
 
         FloatCheck.addEventListener('click',(e)=>{ //2と3の切り替え 
             if (gameState.FloatCheck) {
-                gameState.FloatCheck=false
-                FloatCheck.innerHTML='OFF'
+                gameState.FloatCheck = false
+                FloatCheck.innerHTML = 'OFF'
                 TextFloat.classList.add('op0')
             }else{
-                gameState.FloatCheck=true
-                FloatCheck.innerHTML='ON'
+                gameState.FloatCheck = true
+                FloatCheck.innerHTML = 'ON'
                 TextFloat.classList.remove('op0')
             }
             // console.log(gameState.FloatCheck)
@@ -173,7 +172,7 @@ import mapItems from "./lib/mapItems.json.js"
          */
         const setDate = () => {
             // 日付の設定
-            document.getElementById('date').innerHTML=`${gameState.nowDate}日目`
+            document.getElementById('date').innerHTML = `${gameState.nowDate}日目`
         }
 
         setDate()
