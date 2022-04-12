@@ -1,61 +1,68 @@
 @charset "utf-8";
 /* フォント */
 @font-face {
-    font-family: 'Noto Serif JP';
-    src: url('./fonts/Noto_Serif_JP/NotoSerifJP-Regular.otf') format("truetype");
+  font-family: "Noto Serif JP";
+  src: url("./fonts/Noto_Serif_JP/NotoSerifJP-Regular.otf") format("truetype");
 }
 
-body{
-    margin: 0;
+* {
+  user-select: none !important;
+}
+img {
+  -webkit-user-drag: none;
 }
 
-#frame{
-    overflow: hidden;
-    /* min-width: 1024px;
+body {
+  margin: 0;
+}
+
+#frame {
+  overflow: hidden;
+  /* min-width: 1024px;
     min-height: 768px; */
-    min-width: 1280px;
-    min-height: 720px;
-    width: 100%;
-    height: 100%;
-    margin: auto;
+  min-width: 1280px;
+  min-height: 720px;
+  width: 100%;
+  height: 100%;
+  margin: auto;
 }
 
-#screen{
-    width: 100%;
-    height: 100%;
-    margin: auto;
-    background-color: #000;
-    color: #fff;
-    position: relative;
+#screen {
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  background-color: #000;
+  color: #fff;
+  position: relative;
 }
 
 /* 暗転する */
-#darkening-floor{
-    position: absolute;
-    top: 0%;
-    width: 100%;
-    height: 100%;
-    background-color: #000;
-    z-index: 3;
-    transition: 500ms;
+#darkening-floor {
+  position: absolute;
+  top: 0%;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  z-index: 3;
+  transition: 500ms;
 }
-#darkening-floor.op0{
-    z-index: -1;
+#darkening-floor.op0 {
+  z-index: -1;
 }
 
 /* 非表示(完全に) */
-.none{
-    display: none;
+.none {
+  display: none;
 }
 /* 非表示(透明) */
-.op0{
-    opacity: 0;
+.op0 {
+  opacity: 0;
 }
 /* 赤文字 */
-.red{
-    color: #f00;
+.red {
+  color: #f00;
 }
 /* 大文字 */
-.large{
-    font-size: 1.5em;
+.large {
+  font-size: 1.5em;
 }
