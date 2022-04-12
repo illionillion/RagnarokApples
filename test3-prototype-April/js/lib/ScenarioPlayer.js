@@ -18,6 +18,7 @@ export default class ScenarioPlayer {
         this.autoPlayingCheck = false //autoが手動で実行されたか
         this.onePictureSwitch = false //一枚絵使用
         this.movingFlag = false //テキストアニメーションが動いてるか
+        this.screenDarking = false //暗転中か
         
         this.colorFlag = false //文字設定処理：色
         this.sizeFlag = false //文字設定処理：大文字
@@ -30,7 +31,6 @@ export default class ScenarioPlayer {
         this.audioEnd = 0 //次の音声の再生終了させる番号
         this.audioList = []//new Audio()プリロード
         this.audioObj = null //new Audio()格納
-        this.audioLoad = false // canplaythroughになったらtrue
         this.toMapFlag = false //toMapをさせるときの判定
         this.imagePreload()
         this.init()
@@ -49,6 +49,8 @@ export default class ScenarioPlayer {
      */
     init(){
         
+        this.state.eventState = 'ScenarioPlayer'
+
         // 初期化
         this.dialogueText.innerHTML=''
         document.getElementById('one-picture-text').innerHTML=''
@@ -108,6 +110,9 @@ export default class ScenarioPlayer {
         if (this.state.textEventId != this.nowEveId) {
             this.screen.removeEventListener('click',this.textBoxShowHide)
             return
+        }
+        if (this.screenDarking) { //暗転中は動かさない
+            return 
         }
         if (this.dialogueFlag) {
             // 非表示
@@ -316,7 +321,7 @@ export default class ScenarioPlayer {
         (async()=>{
             
             if (document.getElementById('textBackground').src.indexOf(this.TextList[this.msgindex - 1]['backgroundImage'])===-1) { //画像の変更がある時のみ暗転
-                
+                this.screenDarking = true
                 document.getElementById('autocheck').classList.add('op0');
                 document.getElementById('darkening-floor').classList.remove('op0');//暗転
                 await this.timer(500);
@@ -328,6 +333,7 @@ export default class ScenarioPlayer {
                 document.getElementById('darkening-floor').classList.add('op0');//暗転解除
                 document.getElementById('autocheck').classList.remove('op0');
                 await this.timer(1000);
+                this.screenDarking = false
             }else{
                 //画像が同じ=>暗転しない場合
                 document.getElementById('dialogue-name-area').classList.remove('op0');//名前表示
@@ -440,7 +446,8 @@ export default class ScenarioPlayer {
 
             this.AudioStop()
             console.log("end");
-            
+            this.state.eventState = 'map'
+            this.screenDarking = true
             // 暗転
             document.getElementById('darkening-floor').classList.remove('op0')
             // タイマー
@@ -457,6 +464,7 @@ export default class ScenarioPlayer {
             await this.timer(1000);
             // 暗転解除
             document.getElementById('darkening-floor').classList.add('op0')
+            this.screenDarking = false
 
         })()
 
@@ -605,7 +613,6 @@ export default class ScenarioPlayer {
             if (this.audioList[this.audioNum].audioLoad) {
                 console.log('play');
                 this.audioObj.play()
-                this.timer(1000)
             }else{
                 console.log('読み込めていない');
                 // 再帰で再実行
@@ -622,7 +629,6 @@ export default class ScenarioPlayer {
         if (this.msgindex === this.audioEnd + 1) {
             console.log('pause');
             this.audioObj.pause()
-            this.audioLoad = false
             this.audioNum++
             this.AudioLoading()
         }
