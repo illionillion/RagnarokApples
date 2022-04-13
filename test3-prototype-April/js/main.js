@@ -57,6 +57,10 @@ import mapItems from "./lib/mapItems.json.js"
                     const yesBtn = document.getElementById('mapSelectYes')
                     const noBtn = document.getElementById('mapSelectNo')
     
+                    /**
+                     * 付与するYES/NO選択イベント
+                     * @param {*} e event
+                     */
                     const selectEve = (e) => {
                         float.classList.add('none')
                         e.target.removeEventListener('click',selectEve,false)//クリックされたボタンのイベントを削除
@@ -160,7 +164,7 @@ import mapItems from "./lib/mapItems.json.js"
         // マップ②の画面下のテキスト処理
         const floatSpb = document.getElementById('FloatSpeechBubble')
         const floatSpbText = document.querySelector('#FloatSpeechBubble .textarea')
-        console.log(floatSpbText);
+        // console.log(floatSpbText);
         floatSpbText.addEventListener('click', e => {
             // console.log(e.target.innerHTML);
             if (floatSpbTextCount >= floatSpbTextList.length) floatSpbTextCount = 0
