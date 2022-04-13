@@ -1,6 +1,47 @@
 <mxfile host="65bd71144e">
+    <diagram id="fI_3YyKgW0vz0LTgVX2D" name="マップアイテム1個分のデータ構造">
+        <mxGraphModel dx="690" dy="575" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="#FFFFFF" math="0" shadow="0">
+            <root>
+                <mxCell id="YQqUrdWAzk3--UNUYOaE-0"/>
+                <mxCell id="YQqUrdWAzk3--UNUYOaE-1" parent="YQqUrdWAzk3--UNUYOaE-0"/>
+                <mxCell id="XsocSVQV3wJVJDHN6sR5-0" value="マップ1個" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;strokeColor=#000000;" parent="YQqUrdWAzk3--UNUYOaE-1" vertex="1">
+                    <mxGeometry x="40" y="120" width="140" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="XsocSVQV3wJVJDHN6sR5-1" value="場所の名前" style="text;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontColor=#000000;" parent="XsocSVQV3wJVJDHN6sR5-0" vertex="1">
+                    <mxGeometry y="30" width="140" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="XsocSVQV3wJVJDHN6sR5-2" value="シナリオのID" style="text;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontColor=#000000;" parent="XsocSVQV3wJVJDHN6sR5-0" vertex="1">
+                    <mxGeometry y="60" width="140" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="XsocSVQV3wJVJDHN6sR5-3" value="位置設定" style="text;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontColor=#000000;" parent="XsocSVQV3wJVJDHN6sR5-0" vertex="1">
+                    <mxGeometry y="90" width="140" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="XsocSVQV3wJVJDHN6sR5-4" value="位置設定" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;strokeColor=#000000;" parent="YQqUrdWAzk3--UNUYOaE-1" vertex="1">
+                    <mxGeometry x="280" y="120" width="140" height="150" as="geometry"/>
+                </mxCell>
+                <mxCell id="XsocSVQV3wJVJDHN6sR5-5" value="width（横幅）" style="text;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontColor=#000000;" parent="XsocSVQV3wJVJDHN6sR5-4" vertex="1">
+                    <mxGeometry y="30" width="140" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="XsocSVQV3wJVJDHN6sR5-6" value="height（縦幅）" style="text;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontColor=#000000;" parent="XsocSVQV3wJVJDHN6sR5-4" vertex="1">
+                    <mxGeometry y="60" width="140" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="XsocSVQV3wJVJDHN6sR5-7" value="left（x座標）" style="text;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontColor=#000000;" parent="XsocSVQV3wJVJDHN6sR5-4" vertex="1">
+                    <mxGeometry y="90" width="140" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="XsocSVQV3wJVJDHN6sR5-8" value="top（y座標）" style="text;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontColor=#000000;" parent="XsocSVQV3wJVJDHN6sR5-4" vertex="1">
+                    <mxGeometry y="120" width="140" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="XsocSVQV3wJVJDHN6sR5-10" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.107;entryDx=0;entryDy=0;entryPerimeter=0;fontColor=#000000;strokeColor=#000000;" parent="YQqUrdWAzk3--UNUYOaE-1" source="XsocSVQV3wJVJDHN6sR5-3" target="XsocSVQV3wJVJDHN6sR5-4" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="Z2YKqPtXfKH2HsqB6vQj-2" value="マップアイテム1個分のデータ構造" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;" parent="YQqUrdWAzk3--UNUYOaE-1" vertex="1">
+                    <mxGeometry x="40" y="20" width="240" height="60" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
     <diagram id="T481GvsG6QxaYDrW9BVG" name="テキスト1個分のデータ構造">
-        <mxGraphModel dx="672" dy="680" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="none" math="0" shadow="0">
+        <mxGraphModel dx="690" dy="575" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="none" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -74,47 +115,6 @@
                 </mxCell>
                 <mxCell id="Z-Kf4MDGf3L03f3dKawW-28" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.163;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="6" target="24" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
-                </mxCell>
-            </root>
-        </mxGraphModel>
-    </diagram>
-    <diagram id="fI_3YyKgW0vz0LTgVX2D" name="マップアイテム1個分のデータ構造">
-        <mxGraphModel dx="672" dy="680" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
-            <root>
-                <mxCell id="YQqUrdWAzk3--UNUYOaE-0"/>
-                <mxCell id="YQqUrdWAzk3--UNUYOaE-1" parent="YQqUrdWAzk3--UNUYOaE-0"/>
-                <mxCell id="XsocSVQV3wJVJDHN6sR5-0" value="マップ1個" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="YQqUrdWAzk3--UNUYOaE-1">
-                    <mxGeometry x="40" y="120" width="140" height="120" as="geometry"/>
-                </mxCell>
-                <mxCell id="XsocSVQV3wJVJDHN6sR5-1" value="場所の名前" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" vertex="1" parent="XsocSVQV3wJVJDHN6sR5-0">
-                    <mxGeometry y="30" width="140" height="30" as="geometry"/>
-                </mxCell>
-                <mxCell id="XsocSVQV3wJVJDHN6sR5-2" value="シナリオのID" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" vertex="1" parent="XsocSVQV3wJVJDHN6sR5-0">
-                    <mxGeometry y="60" width="140" height="30" as="geometry"/>
-                </mxCell>
-                <mxCell id="XsocSVQV3wJVJDHN6sR5-3" value="位置設定" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" vertex="1" parent="XsocSVQV3wJVJDHN6sR5-0">
-                    <mxGeometry y="90" width="140" height="30" as="geometry"/>
-                </mxCell>
-                <mxCell id="XsocSVQV3wJVJDHN6sR5-4" value="位置設定" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="YQqUrdWAzk3--UNUYOaE-1">
-                    <mxGeometry x="280" y="120" width="140" height="150" as="geometry"/>
-                </mxCell>
-                <mxCell id="XsocSVQV3wJVJDHN6sR5-5" value="width（横幅）" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" vertex="1" parent="XsocSVQV3wJVJDHN6sR5-4">
-                    <mxGeometry y="30" width="140" height="30" as="geometry"/>
-                </mxCell>
-                <mxCell id="XsocSVQV3wJVJDHN6sR5-6" value="height（縦幅）" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" vertex="1" parent="XsocSVQV3wJVJDHN6sR5-4">
-                    <mxGeometry y="60" width="140" height="30" as="geometry"/>
-                </mxCell>
-                <mxCell id="XsocSVQV3wJVJDHN6sR5-7" value="left（x座標）" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" vertex="1" parent="XsocSVQV3wJVJDHN6sR5-4">
-                    <mxGeometry y="90" width="140" height="30" as="geometry"/>
-                </mxCell>
-                <mxCell id="XsocSVQV3wJVJDHN6sR5-8" value="top（y座標）" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;" vertex="1" parent="XsocSVQV3wJVJDHN6sR5-4">
-                    <mxGeometry y="120" width="140" height="30" as="geometry"/>
-                </mxCell>
-                <mxCell id="XsocSVQV3wJVJDHN6sR5-10" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.107;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="YQqUrdWAzk3--UNUYOaE-1" source="XsocSVQV3wJVJDHN6sR5-3" target="XsocSVQV3wJVJDHN6sR5-4">
-                    <mxGeometry relative="1" as="geometry"/>
-                </mxCell>
-                <mxCell id="Z2YKqPtXfKH2HsqB6vQj-2" value="マップアイテム1個分のデータ構造" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="YQqUrdWAzk3--UNUYOaE-1">
-                    <mxGeometry x="40" y="20" width="240" height="60" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
