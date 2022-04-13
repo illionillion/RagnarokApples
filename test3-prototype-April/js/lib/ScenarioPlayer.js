@@ -63,7 +63,7 @@ export default class ScenarioPlayer {
         this.dialogueEle.addEventListener('click',this.clickDialogue,false)
         this.autocheck.textContent = this.autoPlaying ? 'Auto ON' :'Auto OFF'
         this.autocheck.addEventListener('click',this.autoToggle,false)
-        this.darkeningFloor.addEventListener('click',this.darkeningPrev,false)
+        this.darkeningFloor.addEventListener('click',this.darkeningElePrev,false)
         this.onePicture.addEventListener('click',this.onePictureClick,false)
 
         // プリロード
@@ -177,9 +177,9 @@ export default class ScenarioPlayer {
      * @param {*} e 要素
      * @returns イベント削除とキャンセル
      */
-    darkeningPrev = e => {
+    darkeningElePrev = e => {
         if (this.state.textEventId!=this.nowEveId) {
-            this.darkeningFloor.removeEventListener('click',this.darkeningPrev)
+            this.darkeningFloor.removeEventListener('click',this.darkeningElePrev)
             return
         }
         e.stopPropagation();
@@ -320,20 +320,20 @@ export default class ScenarioPlayer {
         }
         (async()=>{
             
-            if (document.getElementById('textBackground').src.indexOf(this.TextList[this.msgindex - 1]['backgroundImage'])===-1) { //画像の変更がある時のみ暗転
+            if (document.getElementById('textBackground').src.indexOf(this.TextList[this.msgindex - 1]['backgroundImage']) === -1) { //画像の変更がある時のみ暗転
+                //暗転
                 this.screenDarking = true
-                document.getElementById('autocheck').classList.add('op0');
                 document.getElementById('darkening-floor').classList.remove('op0');//暗転
-                await this.timer(500);
-                document.getElementById('dialogue-name-area').classList.remove('op0');//名前表示
-                this.characterSetting(this.TextList[this.msgindex - 1]['characterList']);//キャラ画像反映
-                this.backgroundSetting(this.TextList[this.msgindex - 1]['backgroundImage'])//読み込み終了=>画面反映まで暗転させたい
+                await this.timer(1000);
+                    document.getElementById('dialogue-name-area').classList.remove('op0');//名前表示
+                    this.characterSetting(this.TextList[this.msgindex - 1]['characterList']);//キャラ画像反映
+                    this.backgroundSetting(this.TextList[this.msgindex - 1]['backgroundImage'])//読み込み終了=>画面反映まで暗転させたい
                 // 2秒間暗転させる処理書きたい
                 await this.timer(1000);
                 document.getElementById('darkening-floor').classList.add('op0');//暗転解除
-                document.getElementById('autocheck').classList.remove('op0');
-                await this.timer(1000);
                 this.screenDarking = false
+                await this.timer(1000);
+
             }else{
                 //画像が同じ=>暗転しない場合
                 document.getElementById('dialogue-name-area').classList.remove('op0');//名前表示
@@ -447,24 +447,26 @@ export default class ScenarioPlayer {
             this.AudioStop()
             console.log("end");
             this.state.eventState = 'map'
-            this.screenDarking = true
+
             // 暗転
+            this.screenDarking = true
             document.getElementById('darkening-floor').classList.remove('op0')
             // タイマー
             await this.timer(1000);
-            // シナリオ画面へ遷移
-            document.getElementById('textScreen').classList.add('none')
-            document.getElementById('mapScreen').classList.remove('none')
-            // いろいろ初期化
-            document.getElementById('textBackground').src='images/background/concept.png'
-            document.querySelector('#character-left img').src='images/character/transparent_background.png'
-            document.querySelector('#character-center img').src='images/character/transparent_background.png'
-            document.querySelector('#character-right img').src='images/character/transparent_background.png'
+                // シナリオ画面へ遷移
+                document.getElementById('textScreen').classList.add('none')
+                document.getElementById('mapScreen').classList.remove('none')
+                // いろいろ初期化
+                document.getElementById('textBackground').src='images/background/concept.png'
+                document.querySelector('#character-left img').src='images/character/transparent_background.png'
+                document.querySelector('#character-center img').src='images/character/transparent_background.png'
+                document.querySelector('#character-right img').src='images/character/transparent_background.png'
             // タイマー
             await this.timer(1000);
             // 暗転解除
             document.getElementById('darkening-floor').classList.add('op0')
             this.screenDarking = false
+            await this.timer(1000);
 
         })()
 
@@ -499,6 +501,29 @@ export default class ScenarioPlayer {
             this.movingFlag=false;
 
         });
+    }
+
+    /**
+     * 暗転処理
+     * @param {function} func 関数(暗転中にさせたい処理) 
+     */
+    toDarking = (func) => {
+        return new Promise((res,rej)=>{
+
+            (async ()=>{
+                //暗転
+                this.screenDarking = true
+                document.getElementById('darkening-floor').classList.remove('op0');//暗転
+                await this.timer(1000)
+                if(func) func()
+                console.log('func');
+                await this.timer(1000);
+                document.getElementById('darkening-floor').classList.add('op0');//暗転解除
+                this.screenDarking = false
+                await this.timer(1000);
+                res()
+            })()
+        })
     }
 
     /**
