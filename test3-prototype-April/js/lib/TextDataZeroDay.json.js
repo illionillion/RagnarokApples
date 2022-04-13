@@ -348,7 +348,7 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
 
                 }
             },
-            "backgroundImage":"city01.jpeg"
+            "backgroundImage":"city02.jpeg"
         },
         {
             "textId":10,
@@ -383,7 +383,7 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
 
                 }
             },
-            "backgroundImage":"city01.jpeg"
+            "backgroundImage":"city02.jpeg"
         },
         {
             "textId":11,
@@ -418,7 +418,7 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
 
                 }
             },
-            "backgroundImage":"city01.jpeg"
+            "backgroundImage":"city02.jpeg"
         },
         {
             "textId":12,
@@ -453,7 +453,7 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
 
                 }
             },
-            "backgroundImage":"city01.jpeg"
+            "backgroundImage":"city02.jpeg"
         },
         {
             "textId":13,
@@ -488,7 +488,7 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
 
                 }
             },
-            "backgroundImage":"city01.jpeg"
+            "backgroundImage":"city02.jpeg"
         },
         {
             "textId":14,
