@@ -37,3 +37,10 @@ updoot {
   number value
 }
 ```
+
+
+```mermaid
+graph LR
+  ID1("ノード1") -- "リンク" --> ID2(("ノード2"))
+  ID2 --"繋げる"--> ID3["テキスト"]
+```
