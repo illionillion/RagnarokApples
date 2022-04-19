@@ -145,11 +145,11 @@ import mapItems from "./lib/mapItems.json.js"
         FloatCheck.addEventListener('click',(e)=>{ //2と3の切り替え 
             if (gameState.FloatCheck) {
                 gameState.FloatCheck = false
-                FloatCheck.innerHTML = 'OFF'
+                FloatCheck.children.innerHTML = 'OFF'
                 TextFloat.classList.add('op0')
             }else{
                 gameState.FloatCheck = true
-                FloatCheck.innerHTML = 'ON'
+                FloatCheck.children.innerHTML = 'ON'
                 TextFloat.classList.remove('op0')
             }
             // console.log(gameState.FloatCheck)
@@ -178,7 +178,7 @@ import mapItems from "./lib/mapItems.json.js"
          */
         const setDate = () => {
             // 日付の設定
-            document.getElementById('date').innerHTML = `${gameState.nowDate}日目`
+            document.querySelector('#date > p').innerHTML = `${gameState.nowDate}日目`
         }
 
         setDate()

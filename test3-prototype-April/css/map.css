@@ -8,10 +8,15 @@
     left: 20px;
     background-color: rgba(0, 0, 0, 0.582);
     text-align: center;
-    font-size: 2em;
     z-index: 2;
     font-family: 'Noto Serif JP', serif;
+    
+}
 
+#date p {
+    margin: 0 auto;
+    width: 100%;
+    font-size: 2vw;
 }
 
 #mapBackground{
@@ -83,14 +88,14 @@
     height: 20%;
     color: #000;
     text-align: center;
-    font-size: 2rem;
+    font-size: 2vw;
 }
 
 #mapSelectButton {
     position: absolute;
     left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
+    top: 40%;
+    transform: translate(-50%,-40%);
     width: 100%;
     height: 35%;
     display: flex;
@@ -104,6 +109,8 @@
     border-radius: 25px;
     text-align: center;
     margin: 10px auto;
+    margin-top: 0;
+    font-size: 1.2vw;
 }
 
 #mapCharacterList{
@@ -171,6 +178,7 @@
     transform: translate(-50%,-50%);
     color: #000;
     text-align: center;
+    font-size: 1.5vw;
 }
 #speechBubble{
     position: relative;
@@ -215,19 +223,25 @@
 
 #FloatSpeechBubble .textarea{
     height: 100%;
+    font-size: 1.2vw;
 }
 
+#FloatCheck p{
+    margin: 0 auto;
+    width: 100%;
+    font-size: 2vw;
+}
 #FloatCheck{
     position: absolute;
-    /* top: 5%;
-    right: 5%; */
-    top: 10px;
+    /* top: 15%;
+    right: 20%; */
+    top: 15px;
     right: 15px;
     width: 10%;
     height: 6%;
-    line-height: 50px;
+    /* line-height: 50px; */
     background-color: rgba(0, 0, 0, 0.4);
     text-align: center;
-    font-size: 1.2rem;
+    /* font-size: 1.2rem; */
     z-index: 2;
 }
