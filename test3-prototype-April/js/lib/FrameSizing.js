@@ -4,12 +4,20 @@ export default function FrameSizing(){
     //PC画面の幅を取得してから16:9で計算
     //縦のサイズを割り当てる
 
-    const ScreenWidth = window.innerWidth
+    let ScreenWidth = document.documentElement.clientWidth
     console.log(ScreenWidth);
-    const windowHeight = window.innerHeight
-    const Height = 9 * ScreenWidth / 16 
-    const ScreenHeight = Height > windowHeight ? windowHeight : Height
+    // console.log(document.getElementById('frame').style);
+    let ScreenHeight = 9 * ScreenWidth / 16 
+    let windowHeight = document.documentElement.clientHeight
+    // let ScreenHeight = 3 * ScreenWidth / 4
+    // let ScreenHeight = 10 * ScreenWidth / 16
     console.log(ScreenHeight);
-    console.log(window.innerHeight);
-    document.getElementById('frame').style.height=`${ScreenHeight}px`
+    console.log(windowHeight);
+    if (ScreenHeight > windowHeight) {
+
+        ScreenHeight = windowHeight
+        ScreenWidth = 16 * ScreenHeight / 9 
+    }
+    document.getElementById('frame').style.width = `${ScreenWidth}px`
+    document.getElementById('frame').style.height = `${ScreenHeight}px`
 }
