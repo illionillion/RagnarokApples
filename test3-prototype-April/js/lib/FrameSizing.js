@@ -5,12 +5,9 @@ export default function FrameSizing(){
     //縦のサイズを割り当てる
 
     let ScreenWidth = document.documentElement.clientWidth
-    console.log(ScreenWidth);
-    // console.log(document.getElementById('frame').style);
     let ScreenHeight = 9 * ScreenWidth / 16 
-    let windowHeight = document.documentElement.clientHeight
-    // let ScreenHeight = 3 * ScreenWidth / 4
-    // let ScreenHeight = 10 * ScreenWidth / 16
+    const windowHeight = document.documentElement.clientHeight
+    console.log(ScreenWidth);
     console.log(ScreenHeight);
     console.log(windowHeight);
     if (ScreenHeight > windowHeight) {
