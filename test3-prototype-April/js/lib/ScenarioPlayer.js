@@ -551,7 +551,6 @@ export default class ScenarioPlayer {
                 const src = `images/character/${element.src}`
                 document.querySelector(`#character-area [data-position=${positon}] img`).src= src 
                 document.querySelector(`#character-area [data-position=${positon}] img`).alt=element.name
-                console.log(element.status.brightnessDown);
                 if (element.status.brightnessDown) {
                     document.querySelector(`#character-area [data-position=${positon}] img`).style.opacity = '0.8';
                 }else{
