@@ -32,6 +32,10 @@ export default class ScenarioPlayer {
         this.audioList = []//new Audio()プリロード
         this.audioObj = null //new Audio()格納
         this.toMapFlag = false //toMapをさせるときの判定
+
+        this.imageBackList = []
+        this.imageCharList = []
+
         this.imagePreload()
         this.init()
     }
@@ -577,18 +581,29 @@ export default class ScenarioPlayer {
      */
     imagePreload () {
         for (const textEle of this.TextList) {
-            // console.log(textEle['backgroundImage'])
-            const imgele = document.createElement('img')
-            const imgsrc = `images/background/${textEle['backgroundImage']}`
-            imgele.src = imgsrc
+            const imgname = textEle['backgroundImage']
+            // もし初回なら
+            // console.log(this.imageBackList);
+            if (this.imageBackList.indexOf(imgname) === -1) {
+                console.log(imgname)
+                this.imageBackList.push(imgname)
+                const imgele = document.createElement('img')
+                const imgsrc = `images/background/${imgname}`
+                imgele.src = imgsrc
+            }
 
-            for (const key in textEle['characterList']) {
-                if (Object.hasOwnProperty.call(textEle['characterList'], key)) {
-                    // console.log(textEle['characterList'][key]['src'])
-                    const charimgele = document.createElement('img')
-                    const charsrc = `images/character/${textEle['characterList'][key]['src']}`
-                    charimgele.src =  charsrc
-                    
+            const charObj = textEle['characterList']
+            for (const key in charObj) {
+                if (Object.hasOwnProperty.call(charObj, key)) {
+                    const charname = charObj[key]['src']
+                    if (this.imageCharList.indexOf(charname) === -1) {
+                        // console.log(this.imageCharList);
+                        console.log(charname)
+                        this.imageCharList.push(charname)
+                        const charimgele = document.createElement('img')
+                        const charsrc = `images/character/${charname}`
+                        charimgele.src =  charsrc
+                    }
                 }
             }
         }
