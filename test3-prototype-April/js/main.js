@@ -156,20 +156,21 @@ import mapItems from "./lib/mapItems.json.js"
         })
 
         let floatSpbTextList = [
-            'あああああ',
-            'いいいいい',
-            'ううううう'
+            'Tips:黒い四角の範囲が選択できます',
+            'どこへ行こう？',
+            '上の方かな？',
         ]
         let floatSpbTextCount = 0
         // マップ②の画面下のテキスト処理
         const floatSpb = document.getElementById('FloatSpeechBubble')
         const floatSpbText = document.querySelector('#FloatSpeechBubble .textarea')
         // console.log(floatSpbText);
+        floatSpbText.innerHTML = floatSpbTextList[floatSpbTextCount]
         floatSpbText.addEventListener('click', e => {
             // console.log(e.target.innerHTML);
+            floatSpbTextCount++
             if (floatSpbTextCount >= floatSpbTextList.length) floatSpbTextCount = 0
             e.target.innerHTML = floatSpbTextList[floatSpbTextCount]
-            floatSpbTextCount++
         })
 
 
