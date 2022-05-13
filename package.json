@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/illionillion/dev-novelgame-test2022#readme",
   "devDependencies": {
+    "asar": "^3.1.0",
     "electron": "^18.1.0",
     "electron-builder": "^23.0.3",
     "eslint": "^8.12.0",
