@@ -17,9 +17,15 @@ const createWindow = () =>{
         // frame: false 
         // titleBarStyle: 'hidden'
     })
-
+    
+    // ここで開く前にレンダラーのasarをサーバーから差し替え
     // ファイルを開く
-    win.loadFile('./test3-prototype-April/index.html')//その都度変える
+    if (app.isPackaged) {//アプリがパッケージングされてる場合
+        win.loadFile('./test3-prototype-April/index.html')
+    }else{
+        win.loadURL(__dirname + '/render.asar/index.html') //asarの中のアプリを開く
+    }
+    
     if (app.isPackaged) {
     //    // メニューバー非表示
         win.setMenuBarVisibility(false);//Windowsのみ可能
@@ -64,18 +70,18 @@ if (app.isPackaged) {//アプリがパッケージングされてる場合
 app.whenReady().then(createWindow)
 
 // 全てのウィンドウが閉じられた時の処理
-app.on('window-all-closed',()=>{
+app.on('window-all-closed', () => {
     // macOS以外はアプリを終了する
-    if (process.platform!=='darwin') {
+    if (process.platform !== 'darwin') {
         app.quit()
     }
 })
 
 // アプリがアクティブになった時
 //(macOSはDocアイコンがクリックされたとき)
-app.on('activate',()=>{
+app.on('activate', () => {
     // ウィンドウがすべて閉じられている場合は新しく開く
-    if (BrowserWindow.getAllWindows().length===0) {
+    if (BrowserWindow.getAllWindows().length === 0) {
         createWindow()
     }
 })
