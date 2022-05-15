@@ -35,7 +35,6 @@
       "package-lock.json",
       "main.js",
       "app.png",
-      "render.asar",
       "test3-prototype-April"
     ],
     "mac": {

@@ -21,7 +21,7 @@ const createWindow = () =>{
     // ここで開く前にレンダラーのasarをサーバーから差し替え
     // ファイルを開く
     if (app.isPackaged) {//アプリがパッケージングされてる場合
-        win.loadFile('./test3-prototype-April/index.html')
+        win.loadURL(app.getPath('userData') + '/render.asar/index.html') //asarの中のアプリを開く
     }else{
         win.loadURL(__dirname + '/render.asar/index.html') //asarの中のアプリを開く
     }
