@@ -26,10 +26,10 @@ const createWindow = () =>{
         win.loadURL(__dirname + '/render.asar/index.html') //asarの中のアプリを開く
     }
     
-    if (app.isPackaged) {
-    //    // メニューバー非表示
-        win.setMenuBarVisibility(false);//Windowsのみ可能
-    }
+    // if (app.isPackaged) {
+    // //    // メニューバー非表示
+    //     win.setMenuBarVisibility(false);//Windowsのみ可能
+    // }
     // win.setMenuBarVisibility(false);//Windowsのみ可能
 
 }
