@@ -143,15 +143,17 @@ import mapItems from "./lib/mapItems.json.js"
         })
 
         FloatCheck.addEventListener('click',(e)=>{ //2と3の切り替え 
+            if(!TextCover.classList.contains('none')) return
             if (gameState.FloatCheck) {
                 gameState.FloatCheck = false
-                FloatCheck.children.innerHTML = 'OFF'
+                FloatCheck.children[0].innerHTML = 'OFF'
                 TextFloat.classList.add('op0')
             }else{
                 gameState.FloatCheck = true
-                FloatCheck.children.innerHTML = 'ON'
+                FloatCheck.children[0].innerHTML = 'ON'
                 TextFloat.classList.remove('op0')
             }
+            // console.log(FloatCheck);
             // console.log(gameState.FloatCheck)
         })
 
