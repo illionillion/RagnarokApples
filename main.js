@@ -18,7 +18,36 @@ const createWindow = () =>{
         // titleBarStyle: 'hidden'
     })
     
-    // ここで開く前にレンダラーのasarをサーバーから差し替え
+    // // ここで開く前にレンダラーのasarをサーバーから差し替え
+    // if (!app.isPackaged) {
+    //     // モジュールロード
+    //     const http = require('http');
+    //     const fs = require('fs');
+
+    //     // URLを指定 
+    //     const url = __dirname + '/render.asar';
+
+    //     // 出力ファイル名を指定
+    //     const outFile = fs.createWriteStream(app.getPath('userData') + 'render.asar');
+
+    //     // ダウンロード開始
+    //     const req = http.get(url, function (res) {
+
+    //         // ダウンロードした内容をそのまま、ファイル書き出し。
+    //         res.pipe(outFile);
+
+    //         // 終わったらファイルストリームをクローズ。
+    //         res.on('end', function () {
+    //             outFile.close();
+    //         }); 
+    //     });
+
+    //     // エラーがあれば扱う。
+    //     req.on('error', function (err) {
+    //         console.log('Error: ', err); return;
+    //     });
+    // }
+
     // ファイルを開く
     if (app.isPackaged) {//アプリがパッケージングされてる場合
         win.loadURL(app.getPath('userData') + '/render.asar/index.html') //asarの中のアプリを開く
