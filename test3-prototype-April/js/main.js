@@ -161,6 +161,7 @@ import mapItems from "./lib/mapItems.json.js"
             'Tips:黒い四角の範囲が選択できます',
             'どこへ行こう？',
             '上の方かな？',
+            '下でもあり',
         ]
         let floatSpbTextCount = 0
         // マップ②の画面下のテキスト処理
