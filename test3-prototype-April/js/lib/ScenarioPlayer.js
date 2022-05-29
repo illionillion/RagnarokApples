@@ -14,7 +14,8 @@ export default class ScenarioPlayer {
         
         this.startFlag = true //スタート時のチェック
         this.dialogueFlag = true //ダイアログが表示か非表示化
-        this.autoPlaying = false //auto機能がオンになっているか
+        // this.autoPlaying = false //auto機能がオンになっているか
+        this.autoPlaying = state.autoPlayingFlag //auto機能がオンになっているか
         this.autoPlayingCheck = false //autoが手動で実行されたか
         this.onePictureSwitch = false //一枚絵使用
         this.movingFlag = false //テキストアニメーションが動いてるか
@@ -47,6 +48,7 @@ export default class ScenarioPlayer {
     autocheck = document.getElementById('autocheck')
     darkeningFloor = document.getElementById('darkening-floor')
     onePicture = document.getElementById('one-picture')
+    skipButton = document.getElementById('skipButton')
 
     /**
      * シナリオ画面遷移とイベントの設定
@@ -56,11 +58,11 @@ export default class ScenarioPlayer {
         this.state.eventState = 'ScenarioPlayer'
 
         // 初期化
-        this.dialogueText.innerHTML=''
-        document.getElementById('one-picture-text').innerHTML=''
-        document.getElementById('dialogue-name-area').innerHTML=''
-        this.autoPlayingCheck=false
-        this.startFlag=true
+        this.dialogueText.innerHTML = ''
+        document.getElementById('one-picture-text').innerHTML = ''
+        document.getElementById('dialogue-name-area').innerHTML = ''
+        this.autoPlayingCheck = false
+        this.startFlag = true
 
         // イベント付与
         this.screen.addEventListener('click',this.textBoxShowHide,false)    
@@ -69,6 +71,7 @@ export default class ScenarioPlayer {
         this.autocheck.addEventListener('click',this.autoToggle,false)
         this.darkeningFloor.addEventListener('click',this.darkeningElePrev,false)
         this.onePicture.addEventListener('click',this.onePictureClick,false)
+        this.skipButton.addEventListener('click',this.toSkip,false)
 
         // プリロード
         this.AudioPreload()
@@ -83,7 +86,7 @@ export default class ScenarioPlayer {
     ScenarioClick = () => {
         let text = this.onePictureSwitch ? document.querySelectorAll('#one-picture-text .op0') : document.querySelectorAll('#dialogue-text-area .op0')
 
-        if (text.length===0 && !this.autoPlaying) {
+        if (text.length === 0 && !this.autoPlaying) {
             this.Loading()
             // console.log(text)
             text = this.onePictureSwitch ? document.querySelectorAll('#one-picture-text .op0') : document.querySelectorAll('#dialogue-text-area .op0')
@@ -96,7 +99,7 @@ export default class ScenarioPlayer {
                 console.log('cancel')//autoの待機中にイベントが発生するのを防ぐ
                 return
             }else if(this.autoPlaying && !this.autoPlayingCheck){
-                this.autoPlayingCheck=true//auto初回のみ通る
+                this.autoPlayingCheck = true//auto初回のみ通る
             }
             this.AnimationStart(text)
         }else{
@@ -122,13 +125,15 @@ export default class ScenarioPlayer {
             // 非表示
             this.dialogueEle.classList.add('none')
             this.autocheck.classList.add('none')
-            this.dialogueFlag=false
+            this.skipButton.classList.add('none')
+            this.dialogueFlag = false
             this.AnimationPause()
         }else{
             // 表示
             this.dialogueEle.classList.remove('none')
             this.autocheck.classList.remove('none')
-            this.dialogueFlag=true
+            this.skipButton.classList.remove('none')
+            this.dialogueFlag = true
         }
 
     }
@@ -139,13 +144,13 @@ export default class ScenarioPlayer {
      * @returns イベント削除とキャンセル
      */
     clickDialogue = e => {
-        if (this.state.textEventId!=this.nowEveId) {
+        if (this.state.textEventId != this.nowEveId) {
             this.dialogueEle.removeEventListener('click',this.clickDialogue)
             return
         }
         e.stopPropagation();//イベントの伝搬を防止
         if (this.startFlag) {
-            this.startFlag=false;//いらない？
+            this.startFlag = false;//いらない？
             this.Loading();
         }else{
             this.ScenarioClick();
@@ -158,22 +163,32 @@ export default class ScenarioPlayer {
      * @returns イベント削除とキャンセル
      */
     autoToggle = e => {
-        if (this.state.textEventId!=this.nowEveId) {
+        if (this.state.textEventId != this.nowEveId) {
             this.autocheck.removeEventListener('click',this.autoToggle)
             return
         }
         e.stopPropagation();
-        this.autoPlaying=this.autoPlaying ? false : true
+        this.autoPlaying = this.autoPlaying ? false : true
+        this.state.autoPlayingFlag = this.autoPlaying
         e.target.textContent = this.autoPlaying ? 'Auto ON' :'Auto OFF';
         // auto機能をONからOFFに変更したときautoPlayingCheckを初期化
         if (!this.autoPlaying) {
-            this.autoPlayingCheck=false;
+            this.autoPlayingCheck = false;
         }
         //autoで再生中にautoをoffにする時だけ
         if (this.autoPlaying && this.movingFlag) {
-            this.autoPlayingCheck=true;
+            this.autoPlayingCheck = true;
         }
         // console.log(this.autoPlaying);
+    }
+
+    /**
+     * デバッグ用のスキップ機能（開発中）
+     * @param {*} e event
+     */
+    toSkip = e => {
+        // this.msgindex = Object.keys(this.TextList).length
+        e.stopPropagation()
     }
     
     /**
@@ -182,7 +197,7 @@ export default class ScenarioPlayer {
      * @returns イベント削除とキャンセル
      */
     darkeningElePrev = e => {
-        if (this.state.textEventId!=this.nowEveId) {
+        if (this.state.textEventId != this.nowEveId) {
             this.darkeningFloor.removeEventListener('click',this.darkeningElePrev)
             return
         }
@@ -195,7 +210,7 @@ export default class ScenarioPlayer {
      * @returns イベント削除とキャンセル
      */
     onePictureClick = e => {
-        if (this.state.textEventId!=this.nowEveId) {
+        if (this.state.textEventId != this.nowEveId) {
             this.onePicture.removeEventListener('click',this.onePictureClick)
             return
         }
@@ -211,7 +226,7 @@ export default class ScenarioPlayer {
         // 　音声終了
         this.AudioStop()
 
-        if (this.msgindex>=Object.keys(this.TextList).length) {
+        if (this.msgindex >= Object.keys(this.TextList).length) {
             return;
             // this.msgindex=0;
         }
@@ -230,19 +245,19 @@ export default class ScenarioPlayer {
             if (element === '/') {//赤文字
                 // console.log(element);
                 if (this.colorFlag) {
-                    this.colorFlag=false;
+                    this.colorFlag = false;
                     continue;
                 }
-                this.colorFlag=true;
+                this.colorFlag = true;
                 continue;
             }
             if (element === '*') {//大文字
                 // console.log(element);
                 if (this.sizeFlag) {
-                    this.sizeFlag=false;
+                    this.sizeFlag = false;
                     continue;
                 }
-                this.sizeFlag=true;
+                this.sizeFlag = true;
                 continue;
             }
             if (element === '$') {// 改行
@@ -256,16 +271,16 @@ export default class ScenarioPlayer {
                 continue;
             }
             const span = document.createElement('span');//1文字格納
-            span.textContent=element;
-            span.className='op0';
+            span.textContent = element;
+            span.className = 'op0';
             if (this.colorFlag) {
                 span.classList.add('red');
             }
             if (this.sizeFlag) {
                 span.classList.add('large');
                 if (!largeHolder) {
-                    largeHolder=document.createElement('span');
-                    largeHolder.className='fast-show';
+                    largeHolder = document.createElement('span');
+                    largeHolder.className = 'fast-show';
                 }
                 // 一枚絵且つ、大文字の時は速めに表示させるので別にする
                 if (this.TextList[this.msgindex]['onePicture']) {
@@ -277,30 +292,30 @@ export default class ScenarioPlayer {
             if (largeHolder) {
                 spanFragment.appendChild(largeHolder);
             }
-            largeHolder=null;
+            largeHolder = null;
             spanFragment.appendChild(span);
         }
         pEle.appendChild(spanFragment)
-        pEle.dataset.pcount=pCount
+        pEle.dataset.pcount = pCount
         pFragment.appendChild(pEle)
-        this.colorFlag=false;
+        this.colorFlag = false;
 
         //一枚絵の時
         if (this.TextList[this.msgindex]['onePicture']) {
-            this.onePictureSwitch=true;
+            this.onePictureSwitch = true;
             // #onePictureに操作
             document.getElementById('one-picture').classList.remove('op0');
             document.getElementById('dialogue').classList.add('op0');
-            document.getElementById('one-picture-text').innerHTML='';
+            document.getElementById('one-picture-text').innerHTML = '';
             document.getElementById('one-picture-text').appendChild(pFragment);
             // console.log(this.TextList[this.msgindex]);
         }else{
-            this.onePictureSwitch=false;
+            this.onePictureSwitch = false;
             document.getElementById('one-picture').classList.add('op0');
             document.getElementById('dialogue').classList.remove('op0');
             document.getElementById('dialogue-name-area').classList.add('op0');
-            document.getElementById('dialogue-name-area').innerHTML=speakerName;
-            document.getElementById('dialogue-text-area').innerHTML='';
+            document.getElementById('dialogue-name-area').innerHTML = speakerName;
+            document.getElementById('dialogue-text-area').innerHTML = '';
             document.getElementById('dialogue-text-area').appendChild(pFragment);
         }
 
@@ -315,74 +330,38 @@ export default class ScenarioPlayer {
      * アニメーション再生
      * @param {*} text cp0クラスがついているspanタグ
      */
-    AnimationStart(text){
+    AnimationStart = async (text) => {
         this.nowEle = text;
         // console.log(text);
         if (this.toMapFlag) {
             this.toMap() //マップへ戻る(非auto)
             return
         }
-        (async()=>{
-            
-            if (document.getElementById('textBackground').src.indexOf(this.TextList[this.msgindex - 1]['backgroundImage']) === -1) { //画像の変更がある時のみ暗転
-                //暗転
-                this.screenDarking = true
-                document.getElementById('darkening-floor').classList.remove('op0');//暗転
-                await this.timer(1000);
-                    document.getElementById('dialogue-name-area').classList.remove('op0');//名前表示
-                    this.characterSetting(this.TextList[this.msgindex - 1]['characterList']);//キャラ画像反映
-                    this.backgroundSetting(this.TextList[this.msgindex - 1]['backgroundImage'])//読み込み終了=>画面反映まで暗転させたい
-                // 2秒間暗転させる処理書きたい
-                await this.timer(1000);
-                document.getElementById('darkening-floor').classList.add('op0');//暗転解除
-                this.screenDarking = false
-                await this.timer(1000);
+        
+        if (document.getElementById('textBackground').src.indexOf(this.TextList[this.msgindex - 1]['backgroundImage']) === -1) { //画像の変更がある時のみ暗転
+            //暗転
+            this.screenDarking = true
+            document.getElementById('darkening-floor').classList.remove('op0');//暗転
+            await this.timer(1000);
+            document.getElementById('dialogue-name-area').classList.remove('op0');//名前表示
+            this.characterSetting(this.TextList[this.msgindex - 1]['characterList']);//キャラ画像反映
+            this.backgroundSetting(this.TextList[this.msgindex - 1]['backgroundImage'])//読み込み終了=>画面反映まで暗転させたい
+            // 2秒間暗転させる処理書きたい
+            await this.timer(1000);
+            document.getElementById('darkening-floor').classList.add('op0');//暗転解除
+            this.screenDarking = false
+            await this.timer(1000);
 
-            }else{
-                //画像が同じ=>暗転しない場合
-                document.getElementById('dialogue-name-area').classList.remove('op0');//名前表示
-                this.characterSetting(this.TextList[this.msgindex - 1]['characterList']);//キャラ画像反映
-            }
+        }else{
+            //画像が同じ=>暗転しない場合
+            document.getElementById('dialogue-name-area').classList.remove('op0');//名前表示
+            this.characterSetting(this.TextList[this.msgindex - 1]['characterList']);//キャラ画像反映
+        }
 
-            // テキスト1文字ずつ描画
-            this.movingFlag=true;
-            const p = new Promise((resolve,reject)=>{
-                (async ()=>{
-                    let fastFlag = false;
-                    for (const ele of text) {
-                        if (!this.movingFlag) {
-                            // console.log("stop");
-                            if (!this.dialogueFlag) {
-                                this.autoPlayingCheck=false;
-                                // console.log('');
-                                // break
-                                return;//オートで再生中にダイアログ非表示で停止させた場合
-                            }else{
-                                break;//テキスト強制終了でautoで次へい行かせる
-                            }
-                        }
-                        if (!this.dialogueFlag && !this.onePictureSwitch) {
-                            this.autoPlayingCheck=false;
-                            this.movingFlag=false;
-                            // console.log('');
-                            // break
-                            return;//オートで再生中にダイアログ非表示で停止させた場合
-                        }
-                        await this.timer(10)
-                        if (ele.parentNode.classList.contains('fast-show')) {//1枚絵の時だけ先行して別速度で表示させる
-                            fastFlag=true;
-                            ele.classList.remove('op0');
-                            await this.timer(100)
-                        }else{
-                            if (fastFlag) {
-                                await this.timer(500)
-                                fastFlag=false;
-                            }
-                        }
-                    }
-                })()
-                resolve();
-            })
+        // テキスト1文字ずつ描画
+        this.movingFlag=true;
+        const p = new Promise( async (resolve,reject)=>{
+            let fastFlag = false;
             for (const ele of text) {
                 if (!this.movingFlag) {
                     // console.log("stop");
@@ -396,83 +375,122 @@ export default class ScenarioPlayer {
                     }
                 }
                 if (!this.dialogueFlag && !this.onePictureSwitch) {
-                    this.autoPlayingCheck=false;
-                    this.movingFlag=false;
+                    this.autoPlayingCheck = false;
+                    this.movingFlag = false;
                     // console.log('');
-                    // break;
+                    // break
                     return;//オートで再生中にダイアログ非表示で停止させた場合
                 }
-                if(!ele.classList.contains('op0')){//アニメーション再スタート時op0持ってない場合は飛ばす
-                    continue;
-                }
-                await this.timer(100);
-                // console.log(ele);
-                ele.classList.remove('op0');
-
-            }
-            this.movingFlag=false;
-
-            const nextFlag = this.msgindex >= Object.keys(this.TextList).length // true => 次がない場合
-            if (this.autoPlaying) {
-
-                await this.timer(1000);//この待機中にAnimationStartが走るとおかしくなる
-                console.log('auto');
-                // console.log(text);
-                if (!this.dialogueFlag && !this.onePictureSwitch) {
-                    this.autoPlayingCheck=false;
-                    return;
-                }
-                this.Loading();
-                const nexttext = this.onePictureSwitch ? document.querySelectorAll('#one-picture-text .op0') : document.querySelectorAll('#dialogue-text-area .op0');
-                if(!nextFlag) {
-                    this.AnimationStart(nexttext);
+                await this.timer(10)
+                if (ele.parentNode.classList.contains('fast-show')) {//1枚絵の時だけ先行して別速度で表示させる
+                    fastFlag = true;
+                    ele.classList.remove('op0');
+                    await this.timer(100)
                 }else{
-                    this.toMapFlag = true
-                    this.toMap() //マップへ戻る(auto)
-                    
+                    if (fastFlag) {
+                        await this.timer(500)
+                        fastFlag = false;
+                    }
                 }
+            }
+            resolve();
+        })
+        for (const ele of text) {
+            if (!this.movingFlag) {
+                // console.log("stop");
+                if (!this.dialogueFlag) {
+                    this.autoPlayingCheck = false;
+                    // console.log('');
+                    // break
+                    return;//オートで再生中にダイアログ非表示で停止させた場合
+                }else{
+                    break;//テキスト強制終了でautoで次へい行かせる
+                }
+            }
+            if (!this.dialogueFlag && !this.onePictureSwitch) {
+                this.autoPlayingCheck = false;
+                this.movingFlag = false;
+                // console.log('');
+                // break;
+                return;//オートで再生中にダイアログ非表示で停止させた場合
+            }
+            if(!ele.classList.contains('op0')){//アニメーション再スタート時op0持ってない場合は飛ばす
+                continue;
+            }
+            await this.timer(100);
+            // console.log(ele);
+            ele.classList.remove('op0');
 
-            }
-            else{
-                if (nextFlag) {
-                    this.toMapFlag = true
-                }
-            }
-                
-        })();
+        }
+
+        this.next()
+
     }
     
     /**
+     * 次のテキスト・マップへ移動
+     * @returns 中断
+     */
+    next = async () => {
+
+        this.movingFlag = false;
+
+        const nextFlag = this.msgindex >= Object.keys(this.TextList).length // true => 次がない場合
+        if (this.autoPlaying) {
+
+            await this.timer(1000);//この待機中にAnimationStartが走るとおかしくなる
+            console.log('auto');
+            // console.log(text);
+            if (!this.dialogueFlag && !this.onePictureSwitch) {
+                this.autoPlayingCheck = false;
+                return;
+            }
+            this.Loading();
+            const nexttext = this.onePictureSwitch ? document.querySelectorAll('#one-picture-text .op0') : document.querySelectorAll('#dialogue-text-area .op0');
+            if(!nextFlag) {
+                this.AnimationStart(nexttext);
+            }else{
+                this.toMapFlag = true
+                this.toMap() //マップへ戻る(auto)
+                
+            }
+
+        }else{
+            if (nextFlag) {
+                this.toMapFlag = true
+            }
+        }
+
+    }
+
+    /**
      * シナリオ画面からマップ画面へ戻る
      */
-    toMap = () => {
-        (async ()=>{
+    toMap = async() => {
 
-            this.AudioStop()
-            console.log("end");
-            this.state.eventState = 'map'
+        this.AudioStop()
+        console.log("end");
+        this.state.eventState = 'map'
 
-            // 暗転
-            this.screenDarking = true
-            document.getElementById('darkening-floor').classList.remove('op0')
-            // タイマー
-            await this.timer(1000);
-                // シナリオ画面へ遷移
-                document.getElementById('textScreen').classList.add('none')
-                document.getElementById('mapScreen').classList.remove('none')
-                // いろいろ初期化
-                document.getElementById('textBackground').src='images/background/concept.png'
-                document.querySelector('#character-left img').src='images/character/transparent_background.png'
-                document.querySelector('#character-center img').src='images/character/transparent_background.png'
-                document.querySelector('#character-right img').src='images/character/transparent_background.png'
-            // タイマー
-            await this.timer(1000);
-            // 暗転解除
-            document.getElementById('darkening-floor').classList.add('op0')
-            this.screenDarking = false
-            await this.timer(1000);
-
-        })()
+        // 暗転
+        this.screenDarking = true
+        document.getElementById('darkening-floor').classList.remove('op0')
+        // タイマー
+        await this.timer(1000);
+            // シナリオ画面へ遷移
+            document.getElementById('textScreen').classList.add('none')
+            document.getElementById('mapScreen').classList.remove('none')
+            // いろいろ初期化
+            document.getElementById('textBackground').src='images/background/concept.png'
+            document.querySelector('#character-left img').src='images/character/transparent_background.png'
+            document.querySelector('#character-center img').src='images/character/transparent_background.png'
+            document.querySelector('#character-right img').src='images/character/transparent_background.png'
+        // タイマー
+        await this.timer(1000);
+        // 暗転解除
+        document.getElementById('darkening-floor').classList.add('op0')
+        this.screenDarking = false
+        await this.timer(1000);
 
     }
 
@@ -480,7 +498,7 @@ export default class ScenarioPlayer {
      * アニメーションを一時停止
      */
     AnimationPause () {
-        this.movingFlag=false;
+        this.movingFlag = false;
     }
 
     /**
@@ -502,7 +520,7 @@ export default class ScenarioPlayer {
     AnimationForcedEnd(text){
         text.forEach(element => {
             element.classList.remove('op0');
-            this.movingFlag=false;
+            this.movingFlag = false;
 
         });
     }
@@ -512,21 +530,18 @@ export default class ScenarioPlayer {
      * @param {function} func 関数(暗転中にさせたい処理) 
      */
     toDarking = (func) => {
-        return new Promise((res,rej)=>{
-
-            (async ()=>{
-                //暗転
-                this.screenDarking = true
-                document.getElementById('darkening-floor').classList.remove('op0');//暗転
-                await this.timer(1000)
-                if(func) func()
-                console.log('func');
-                await this.timer(1000);
-                document.getElementById('darkening-floor').classList.add('op0');//暗転解除
-                this.screenDarking = false
-                await this.timer(1000);
-                res()
-            })()
+        return new Promise( async(res,rej)=>{
+            //暗転
+            this.screenDarking = true
+            document.getElementById('darkening-floor').classList.remove('op0');//暗転
+            await this.timer(1000)
+            if(func) func()
+            console.log('func');
+            await this.timer(1000);
+            document.getElementById('darkening-floor').classList.add('op0');//暗転解除
+            this.screenDarking = false
+            await this.timer(1000);
+            res()
         })
     }
 
@@ -553,8 +568,8 @@ export default class ScenarioPlayer {
             if (Object.hasOwnProperty.call(props, positon)) {
                 const element = props[positon];
                 const src = `images/character/${element.src}`
-                document.querySelector(`#character-area [data-position=${positon}] img`).src= src 
-                document.querySelector(`#character-area [data-position=${positon}] img`).alt=element.name
+                document.querySelector(`#character-area [data-position=${positon}] img`).src = src 
+                document.querySelector(`#character-area [data-position=${positon}] img`).alt = element.name
                 if (element.status.brightnessDown) {
                     document.querySelector(`#character-area [data-position=${positon}] img`).style.opacity = '0.8';
                 }else{
@@ -572,7 +587,7 @@ export default class ScenarioPlayer {
 
         // srcを変えるだけだが、切り替えに時間がかかってしまう
         const src = `images/background/${url}`
-        document.getElementById('textBackground').src= src
+        document.getElementById('textBackground').src = src
 
     }
 
@@ -621,11 +636,10 @@ export default class ScenarioPlayer {
                 obj.audio = new Audio(`audio/${v.file}`)
                 obj.audio.loop = true
                 obj.audio.preload = 'auto'
-                obj.audioLoad=false
+                obj.audioLoad = false
                 this.audioList[i] = obj
                 obj.audio.addEventListener('canplaythrough', e => {
-                    // console.log('throught');
-                        obj.audioLoad = true
+                    obj.audioLoad = true
                 })
                 // obj.audio.addEventListener('timeupdate',e=>{
                 //     // console.log(obj.audio.currentTime);

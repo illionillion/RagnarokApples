@@ -34,6 +34,15 @@
     font-family: 'Noto Serif JP', serif;
     font-size: 1.2vw;
 }
+/* スキップ */
+#skipButton{
+    position: absolute;
+    bottom: 10%;
+    right: 18%;
+    z-index: 2;
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.2vw;
+}
 /* 一枚目テキスト */
 #one-picture{
     position: absolute;

@@ -11,7 +11,8 @@ import mapItems from "./lib/mapItems.json.js"
         nowPart: null,
         FloatCheck: true,
         nowDate: 0,
-        eventState: 'title'
+        eventState: 'title',
+        autoPlayingFlag: false,
     }
     let TextPlayer
     const TextPlayerList = []
@@ -61,7 +62,7 @@ import mapItems from "./lib/mapItems.json.js"
                      * 付与するYES/NO選択イベント
                      * @param {*} e event
                      */
-                    const selectEve = (e) => {
+                    const selectEve = async(e) => {
                         float.classList.add('none')
                         e.target.removeEventListener('click',selectEve,false)//クリックされたボタンのイベントを削除
                         e.target === yesBtn ? noBtn : yesBtn .removeEventListener('click',selectEve,false)//クリックされなかったボタンのイベントを削除
@@ -73,38 +74,34 @@ import mapItems from "./lib/mapItems.json.js"
                                 }, s);
                             })
                         }
+                        
                         if( e.target === yesBtn ) { // yesが押された
+
+                            // 暗転
+                            document.getElementById('darkening-floor').classList.remove('op0')
+                            // タイマー
+                            await timer(1000);
+                            // シナリオ画面へ遷移
+                            document.getElementById('textScreen').classList.remove('none')
+                            document.getElementById('mapScreen').classList.add('none')
+                            // タイマー
+                            await timer(1000);
+                            // 暗転解除
+                            document.getElementById('darkening-floor').classList.add('op0')
                             
-                            (async ()=>{
+                            console.log(TextData[partKey]);//選択されたシナリオ
 
-                                // 暗転
-                                document.getElementById('darkening-floor').classList.remove('op0')
-                                // タイマー
-                                await timer(1000);
-                                // シナリオ画面へ遷移
-                                document.getElementById('textScreen').classList.remove('none')
-                                document.getElementById('mapScreen').classList.add('none')
-                                // タイマー
-                                await timer(1000);
-                                // 暗転解除
-                                document.getElementById('darkening-floor').classList.add('op0')
-                                
-                                console.log(TextData[partKey]);//選択されたシナリオ
-
-                                gameState.textEventId++;
-                                gameState.nowPart = partKey
-                                TextPlayer = new ScenarioPlayer(TextData[partKey], gameState)//プレイヤー生成
-                                
-                                // TextPlayerList[gameState.textEventId]=new ScenarioPlayer(TextData[partKey],gameState)//プレイヤー生成
-                                // console.log(gameState);
-                                // console.log(TextPlayerList);
-                                
-                                /*------------------
-                                    テキストの処理 
-                                ------------------*/
-
-                                
-                            })()
+                            gameState.textEventId++;
+                            gameState.nowPart = partKey
+                            TextPlayer = new ScenarioPlayer(TextData[partKey], gameState)//プレイヤー生成
+                            
+                            // TextPlayerList[gameState.textEventId]=new ScenarioPlayer(TextData[partKey],gameState)//プレイヤー生成
+                            // console.log(gameState);
+                            // console.log(TextPlayerList);
+                            
+                            /*------------------
+                                テキストの処理 
+                            ------------------*/
                             
                         }
                     
