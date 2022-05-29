@@ -113,7 +113,11 @@ export default class ScenarioPlayer {
      * テキストボックス以外をクリックすると、テキストボックスが消えたり現れたりする
      * @returns イベント削除とキャンセル
      */
-    textBoxShowHide = () => {
+    textBoxShowHide = e => {
+        if(this.onePictureSwitch) { //ここで再生開始時、1枚目だった場合非表示にさせない
+            // console.error('cancel');
+            return;
+        }
         if (this.state.textEventId != this.nowEveId) {
             this.screen.removeEventListener('click',this.textBoxShowHide)
             return
