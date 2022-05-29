@@ -20,37 +20,35 @@ const createWindow = () =>{
         // frame: false 
         // titleBarStyle: 'hidden'
     })
-    
-    // ここで開く前にレンダラーのasarをサーバーから差し替え
+    if (app.isPackaged) {//アプリがパッケージングされてる場合
+        // ここで開く前にレンダラーのasarをサーバーから差し替え
+        // URLを指定 
+        const url = 'https://drive.google.com/uc?id=1mHfOd4seMjFuknv6hB1C55U9kMiw64sN&confirm=t';
+        
+        // 出力ファイル名を指定
+        const outFile = originalfs.createWriteStream(app.getPath('userData') + '/render.asar');
+        // const outFile = fs.createWriteStream('./rendertest.asar');
 
-    // URLを指定 
-    const url = 'https://drive.google.com/uc?id=1mHfOd4seMjFuknv6hB1C55U9kMiw64sN&confirm=t';
-    
-    // 出力ファイル名を指定
-    const outFile = originalfs.createWriteStream(app.getPath('userData') + '/render.asar');
-    // const outFile = fs.createWriteStream('./rendertest.asar');
-
-    // ファイルをダウンロードする//未パッケージ環境なら上手く動作した
-    request
-    .get(url)
-    .on('response', function (res) {
-        console.log('statusCode: ', res.statusCode);
-        console.log('content-length: ', res.headers['content-length']);
-    })
-    .on('complete',(d)=>{
-        // d.pipe(outFile)
-        outFile.close()
-        if (app.isPackaged) {//アプリがパッケージングされてる場合
+        // ファイルをダウンロードする//未パッケージ環境なら上手く動作した
+        request
+        .get(url)
+        .on('response', function (res) {
+            console.log('statusCode: ', res.statusCode);
+            console.log('content-length: ', res.headers['content-length']);
+        })
+        .on('complete',(d)=>{
+            // d.pipe(outFile)
+            outFile.close()
             win.loadURL(app.getPath('userData') + '/render.asar/index.html') //asarの中のアプリを開く
-        }else{
-            win.loadURL(app.getPath('userData') + '/render.asar/index.html') //asarの中のアプリを開く
-            // win.loadURL(__dirname + '/render.asar/index.html') //asarの中のアプリを開く
-        }
-    })
-    .on('error',(e)=>{
-        console.log('Error:',e); return
-    })
-    .pipe(outFile);
+        })
+        .on('error',(e)=>{
+            console.log('Error:',e); return
+        })
+        .pipe(outFile);
+    }else{
+        // win.loadURL(app.getPath('userData') + '/render.asar/index.html') //asarの中のアプリを開く
+        win.loadURL(__dirname + '/render.asar/index.html') //asarの中のアプリを開く
+    }
 }
 
 //------------------------------------
