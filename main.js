@@ -1,5 +1,6 @@
 // モジュールロード
 const { app, Menu, BrowserWindow } = require('electron')
+const https = require('https')
 const originalfs = require('original-fs');
 const request = require('request');
 
@@ -17,27 +18,55 @@ const createWindow = () =>{
         webPreferences:{
             nodeIntegration:true
         },
-        // frame: false 
+        // frame: false ,
         // titleBarStyle: 'hidden'
     })
-    if (app.isPackaged) {//アプリがパッケージングされてる場合
+    // if (app.isPackaged) {//アプリがパッケージングされてる場合
         // ここで開く前にレンダラーのasarをサーバーから差し替え
         // URLを指定 
         const url = 'https://drive.google.com/uc?id=1mHfOd4seMjFuknv6hB1C55U9kMiw64sN&confirm=t';
         
         // 出力ファイル名を指定
         const outFile = originalfs.createWriteStream(app.getPath('userData') + '/render.asar');
-        // const outFile = fs.createWriteStream('./rendertest.asar');
+        let splashWin
+        // const outFile = originalfs.createWriteStream('./rendertest.asar');
 
-        // ファイルをダウンロードする//未パッケージ環境なら上手く動作した
+        // request使わずにダウンロード
+        // const req = https.request(url, (res) => {
+        //     // res.pipe(outFile)
+        //     res.on('data', (chunk) => {
+        //         console.log(`BODY: ${chunk}`);
+        //     });
+        //     res.on('readable', () => {
+        //         req.pipe(outFile)
+        //     })
+        //     res.on('error', (e) => {
+        //         console.log(e.message);
+        //     })
+        //     res.on('end', () => {
+        //         console.log('No more data in response.');
+        //         // res.pipe(outFile)
+        //         // outFile.close()
+        //         win.loadURL(__dirname + '/rendertest.asar/index.html') //asarの中のアプリを開く
+        //     });
+        // })
+        // // エラーがあれば扱う。
+        // req.on('error', (e) => {
+        //     console.error(`problem with request: ${e.message}`);
+        // });
+        // req.end();
+        // req.pipe(outFile)
+
+        // // ファイルをダウンロードする//未パッケージ環境なら上手く動作した
         request
         .get(url)
         .on('response', function (res) {
+            splashWin = createSplash() //ローディング画面開く
             console.log('statusCode: ', res.statusCode);
             console.log('content-length: ', res.headers['content-length']);
         })
         .on('complete',(d)=>{
-            // d.pipe(outFile)
+            splashWin.close() //ローディング画面閉じる
             outFile.close()
             win.loadURL(app.getPath('userData') + '/render.asar/index.html') //asarの中のアプリを開く
         })
@@ -45,10 +74,29 @@ const createWindow = () =>{
             console.log('Error:',e); return
         })
         .pipe(outFile);
-    }else{
-        // win.loadURL(app.getPath('userData') + '/render.asar/index.html') //asarの中のアプリを開く
-        win.loadURL(__dirname + '/render.asar/index.html') //asarの中のアプリを開く
-    }
+    // }else{
+    //     // win.loadURL(app.getPath('userData') + '/render.asar/index.html') //asarの中のアプリを開く
+    //     win.loadURL(__dirname + '/render.asar/index.html') //asarの中のアプリを開く
+    // }
+}
+
+const createSplash = () => {
+    const splash = new BrowserWindow({
+        width: 1042,
+        minWidth: 1024,
+        height: 810,
+        minHeight: 768,
+        icon: __dirname + '/app.png',
+        webPreferences:{
+            nodeIntegration:true
+        },
+        frame: false ,
+        titleBarStyle: 'hidden'
+    })
+
+    splash.loadURL(__dirname + '/loading.html')
+
+    return splash
 }
 
 //------------------------------------

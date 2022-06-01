@@ -39,7 +39,8 @@
       "package.json",
       "package-lock.json",
       "main.js",
-      "app.png"
+      "app.png",
+      "loading.html"
     ],
     "mac": {
       "target": "dmg",
