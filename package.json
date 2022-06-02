@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/illionillion/dev-novelgame-test2022#readme",
   "dependencies": {
+    "node-fetch": "^3.2.5",
     "request": "^2.88.2"
   },
   "devDependencies": {
