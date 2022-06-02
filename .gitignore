@@ -2,3 +2,6 @@
 node_modules
 dist
 render.asar
+rendertest.asar
+image.png
+image.jpg
