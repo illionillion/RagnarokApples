@@ -3,7 +3,7 @@
   "productName": "RA",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "main": "src/main.js",
   "scripts": {
     "start": "electron .",
     "build-mac": "electron-builder --mac --x64",
@@ -39,17 +39,15 @@
       "node_modules/",
       "package.json",
       "package-lock.json",
-      "main.js",
-      "app.png",
-      "loading.html"
+      "src/"
     ],
     "mac": {
       "target": "dmg",
-      "icon": "app.png"
+      "icon": "src/app.png"
     },
     "win": {
       "target": "nsis",
-      "icon": "app.png"
+      "icon": "src/app.png"
     },
     "nsis": {
       "oneClick": false,
