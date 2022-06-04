@@ -19,8 +19,8 @@ const createWindow = () =>{
         webPreferences:{
             nodeIntegration:true
         },
-        // frame: false ,
-        // titleBarStyle: 'hidden'
+    })
+    win.once('ready-to-show', () => {
     })
     win.loadURL(app.getPath('userData') + '/render.asar/index.html') //asarの中のアプリを開く
 
@@ -32,10 +32,10 @@ const createWindow = () =>{
  */
 const createSplash = () => {
     const splash = new BrowserWindow({
-        width: 1042,
-        minWidth: 1024,
-        height: 810,
-        minHeight: 768,
+        width: 300,
+        minWidth: 300,
+        height: 300,
+        minHeight: 300,
         icon: __dirname + '/app.png',
         webPreferences:{
             nodeIntegration:true
@@ -43,7 +43,8 @@ const createSplash = () => {
         frame: false ,
         titleBarStyle: 'hidden'
     })
-
+    splash.once('ready-to-show', () => {
+    })
     splash.loadURL(__dirname + '/loading.html')
 
     return splash

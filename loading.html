@@ -5,8 +5,38 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Loading</title>
+    <style>
+        *{
+            margin: 0 auto;
+            user-select: none !important;
+            -moz-user-select: none !important;
+            -webkit-user-select: none !important;
+        }
+        body{
+            background-color: #000;
+        }
+        .container{
+            text-align: center;
+            margin: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            color: #fff;
+        }
+    </style>
+    <script>
+        window.onload = () => {
+            document.body.oncontextmenu = () => {return false}
+        } 
+    </script>
 </head>
 <body>
-    <h1>Loading</h1>
+    <div class="container">
+        <label for="loading">
+            <h1>Loading</h1>
+        </label>
+        <progress id="loading">Loading</progress>
+    </div>
 </body>
 </html>
