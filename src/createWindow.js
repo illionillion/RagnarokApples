@@ -22,7 +22,7 @@ const { app, BrowserWindow } = require('electron')
             win.show()
         }, 2000);
     })
-    win.loadURL(app.getPath('userData') + '/render.asar/index.html') //asarの中のアプリを開く
+    win.loadURL('file://' + app.getPath('userData') + '/render.asar/index.html') //asarの中のアプリを開く
 
 }
 
@@ -46,7 +46,7 @@ const createSplash = () => {
     splash.once('ready-to-show', () => {
         splash.show()
     })
-    splash.loadURL(__dirname + '/loading.html')
+    splash.loadURL('file://' + __dirname + '/loading.html')
         
     return splash
 }

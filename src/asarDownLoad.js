@@ -70,6 +70,7 @@ const asarDownLoad = () => {
         })
         .on('complete',(d)=>{
             outFile.close()
+            console.log('ended');
             createWindow()
             setTimeout(() => {
                 splashWin.close() //ローディング画面閉じる
