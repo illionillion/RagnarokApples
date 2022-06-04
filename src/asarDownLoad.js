@@ -69,9 +69,11 @@ const asarDownLoad = () => {
             console.log('content-length: ', res.headers['content-length']);
         })
         .on('complete',(d)=>{
-            splashWin.close() //ローディング画面閉じる
             outFile.close()
-            createWindow() 
+            createWindow()
+            setTimeout(() => {
+                splashWin.close() //ローディング画面閉じる
+            }, 2000);
         })
         .on('error',(e)=>{
             console.log('Error:',e); return
