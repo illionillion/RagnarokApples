@@ -9,6 +9,7 @@
     "build-mac": "electron-builder --mac --x64",
     "build-win": "electron-builder --win --x64",
     "server": "http-server -o",
+    "length-check": "node TextLengthCount.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
