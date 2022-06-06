@@ -50,6 +50,7 @@ app.on('window-all-closed', () => {
 app.on('activate', () => {
     // ウィンドウがすべて閉じられている場合は新しく開く
     if (BrowserWindow.getAllWindows().length === 0) {
-        createWindow()
+        // Macにて信号赤が押されてからアイコンクリックされた時にダウンロードから始める
+        asarDownLoad()
     }
 })
