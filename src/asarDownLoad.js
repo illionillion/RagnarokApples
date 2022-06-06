@@ -17,99 +17,27 @@ const asarDownLoad = () => {
         // 出力ファイル名を指定
         const outFile = originalfs.createWriteStream(app.getPath('userData') + '/render.asar');
         let splashWin
-        const outTestFile = originalfs.createWriteStream('./rendertest.asar');
-        const outImageFile = originalfs.createWriteStream('./image.jpg');
+        // const outTestFile = originalfs.createWriteStream('./rendertest.asar');
+        // const outImageFile = originalfs.createWriteStream('./image.jpg');
 
         // request使わずにダウンロード
 
-        // const download = (uri, filename) => {
-        //     return new Promise((resolve, reject) =>
-        //       https
-        //         .request(uri, (res) => {
-        //           res
-        //             .pipe(filename)
-        //             .on("close", resolve)
-        //             .on("error", reject);
-        //         })
-        //         .end()
-        //     );
-        //   };
-          
-        //   download(
-        //     url,
-        //     outFile
-        //   ).then(() => {
-        //       console.log("done")
-        //       win.loadURL(app.getPath('userData') + '/render.asar/index.html') //asarの中のアプリを開く
+        // var downloadFile = function (url, dest, cb) {
+        //     var file = originalfs.createWriteStream(dest);
+        //     https.get(url, function (res) {
+        //         //res.setEncoding('binary');
+        //         res.pipe(file);
+        //         file.on('finish', function () {
+        //             res.pipe(file);
+        //             console.log('finish');
+        //             file.close(cb);
+        //         });
         //     });
-
-        // リンク先は .mp3 ファイル
-        var options = {
-            // method : 'GET',
-            // host   : 'm.friendfeed-media.com',
-            // port   : '80',
-            path   : url
-        };
-
-
-        var req = https.request(options);
-        req.end();
-
-        req.on('response', function (res) {
-            onResponseCallback(res, options);
-        });
-        req.on('error', showError);
-
-
-        function onResponseCallback (res, opts) {
-            var ext    = (res.headers['content-type'].split(/\//))[1];
-            var target = [ (opts['path'].split(/\?/))[0].replace(/^\//,''), ext ].join('.');
-            var writeStream = fs.createWriteStream(target);
-            writeStream.on('error', function (exception) {
-                throw exception;
-            });
-            writeStream.on('close', function () {
-                console.log('! Called "close" on writeStream');
-            });
-
-            //res.setEncoding('utf-8'); バイナリを扱うので指定しないと、 Buffer に
-            res.on('data', function (chunk) {
-                writeStream.write(chunk); 
-            });
-            res.on('close', showError);
-            res.on('end', function () {
-                writeStream.end();
-                console.log(target);
-            });
-        }
-
-
-        function showError (e) {
-            console.log([ e.name, e.messsage ].join(': '));
-            return undefined;
-        }
-
-          
-        // ダウンロード開始
-        // var req = https.get(url, function (res) {
-        // var req = https.get(imageUrl, function (res) {
-        //     res.on('data', data => {
-        //         // 画像の場合は実行される
-        //         // console.log(data);
-        //     } )
-        //     // ダウンロードした内容をそのまま、ファイル書き出し。
-        //     // res.pipe(outTestFile);
-        //     res.pipe(outImageFile);
-
-        //     // 終わったらファイルストリームをクローズ。
-        //     res.on('end', function () {
-        //         // outTestFile.close();
-        //         outImageFile.close();
-        //     }); 
-        // });
-        // // エラーがあれば扱う。
-        // req.on('error', function (err) {
-        //     console.log('Error: ', err); return;
+        // };
+        
+        // downloadFile(url, 'rendertest.asar', function (err) {
+        //     console.log('end');
+        //     console.log(err);
         // });
 
         // // ファイルをダウンロードする//未パッケージ環境なら上手く動作した
