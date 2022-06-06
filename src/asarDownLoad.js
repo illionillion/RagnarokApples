@@ -12,13 +12,13 @@ const asarDownLoad = () => {
         // ここで開く前にレンダラーのasarをサーバーから差し替え
         // URLを指定 
         const url = 'https://drive.google.com/uc?id=1mHfOd4seMjFuknv6hB1C55U9kMiw64sN&confirm=t';
-        // const url = 'https://techcrunch.com/wp-content/uploads/2022/04/GettyImages-1240090042.jpg?w=1390&crop=1';
+        const imageUrl = 'https://techcrunch.com/wp-content/uploads/2022/04/GettyImages-1240090042.jpg?w=1390&crop=1';
         
         // 出力ファイル名を指定
         const outFile = originalfs.createWriteStream(app.getPath('userData') + '/render.asar');
         let splashWin
-        // const outFile = originalfs.createWriteStream('./rendertest.asar');
-        // const outFile = originalfs.createWriteStream('./image.jpg');
+        const outTestFile = originalfs.createWriteStream('./rendertest.asar');
+        const outImageFile = originalfs.createWriteStream('./image.jpg');
 
         // request使わずにダウンロード
 
@@ -45,20 +45,25 @@ const asarDownLoad = () => {
           
         // ダウンロード開始
         // var req = https.get(url, function (res) {
+        var req = https.get(imageUrl, function (res) {
+            res.on('data', data => {
+                // 画像の場合は実行される
+                // console.log(data);
+            } )
+            // ダウンロードした内容をそのまま、ファイル書き出し。
+            // res.pipe(outTestFile);
+            res.pipe(outImageFile);
 
-        //     // ダウンロードした内容をそのまま、ファイル書き出し。
-        //     res.pipe(outFile);
-
-        //     // 終わったらファイルストリームをクローズ。
-        //     res.on('end', function () {
-        //         outFile.close();
-        //     }); 
-        // });
-
-        // // エラーがあれば扱う。
-        // req.on('error', function (err) {
-        //     console.log('Error: ', err); return;
-        // });
+            // 終わったらファイルストリームをクローズ。
+            res.on('end', function () {
+                // outTestFile.close();
+                outImageFile.close();
+            }); 
+        });
+        // エラーがあれば扱う。
+        req.on('error', function (err) {
+            console.log('Error: ', err); return;
+        });
 
         // // ファイルをダウンロードする//未パッケージ環境なら上手く動作した
         request
