@@ -48,7 +48,7 @@ const createSplash = () => {
     })
     splash.loadURL('file://' + __dirname + '/loading.html')
     // Mac 信号機ボタンを非表示
-    splash.setWindowButtonVisibility(false)
+    if (process.platform === 'darwin') splash.setWindowButtonVisibility(false)
         
     return splash
 }
