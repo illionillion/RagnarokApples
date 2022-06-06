@@ -47,6 +47,8 @@ const createSplash = () => {
         splash.show()
     })
     splash.loadURL('file://' + __dirname + '/loading.html')
+    // Mac 信号機ボタンを非表示
+    splash.setWindowButtonVisibility(false)
         
     return splash
 }
