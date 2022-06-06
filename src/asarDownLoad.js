@@ -42,28 +42,75 @@ const asarDownLoad = () => {
         //       console.log("done")
         //       win.loadURL(app.getPath('userData') + '/render.asar/index.html') //asarの中のアプリを開く
         //     });
+
+        // リンク先は .mp3 ファイル
+        var options = {
+            // method : 'GET',
+            // host   : 'm.friendfeed-media.com',
+            // port   : '80',
+            path   : url
+        };
+
+
+        var req = https.request(options);
+        req.end();
+
+        req.on('response', function (res) {
+            onResponseCallback(res, options);
+        });
+        req.on('error', showError);
+
+
+        function onResponseCallback (res, opts) {
+            var ext    = (res.headers['content-type'].split(/\//))[1];
+            var target = [ (opts['path'].split(/\?/))[0].replace(/^\//,''), ext ].join('.');
+            var writeStream = fs.createWriteStream(target);
+            writeStream.on('error', function (exception) {
+                throw exception;
+            });
+            writeStream.on('close', function () {
+                console.log('! Called "close" on writeStream');
+            });
+
+            //res.setEncoding('utf-8'); バイナリを扱うので指定しないと、 Buffer に
+            res.on('data', function (chunk) {
+                writeStream.write(chunk); 
+            });
+            res.on('close', showError);
+            res.on('end', function () {
+                writeStream.end();
+                console.log(target);
+            });
+        }
+
+
+        function showError (e) {
+            console.log([ e.name, e.messsage ].join(': '));
+            return undefined;
+        }
+
           
         // ダウンロード開始
         // var req = https.get(url, function (res) {
-        var req = https.get(imageUrl, function (res) {
-            res.on('data', data => {
-                // 画像の場合は実行される
-                // console.log(data);
-            } )
-            // ダウンロードした内容をそのまま、ファイル書き出し。
-            // res.pipe(outTestFile);
-            res.pipe(outImageFile);
+        // var req = https.get(imageUrl, function (res) {
+        //     res.on('data', data => {
+        //         // 画像の場合は実行される
+        //         // console.log(data);
+        //     } )
+        //     // ダウンロードした内容をそのまま、ファイル書き出し。
+        //     // res.pipe(outTestFile);
+        //     res.pipe(outImageFile);
 
-            // 終わったらファイルストリームをクローズ。
-            res.on('end', function () {
-                // outTestFile.close();
-                outImageFile.close();
-            }); 
-        });
-        // エラーがあれば扱う。
-        req.on('error', function (err) {
-            console.log('Error: ', err); return;
-        });
+        //     // 終わったらファイルストリームをクローズ。
+        //     res.on('end', function () {
+        //         // outTestFile.close();
+        //         outImageFile.close();
+        //     }); 
+        // });
+        // // エラーがあれば扱う。
+        // req.on('error', function (err) {
+        //     console.log('Error: ', err); return;
+        // });
 
         // // ファイルをダウンロードする//未パッケージ環境なら上手く動作した
         request
