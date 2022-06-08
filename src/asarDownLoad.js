@@ -4,6 +4,7 @@ const https = require('https')
 const originalfs = require('original-fs');
 const request = require('request');
 const { createWindow, createSplash } = require('./createWindow.js');
+const google = require('googleapis')
 // const fetch = require('node-fetch');
 
 /**
@@ -21,38 +22,18 @@ const asarDownLoad = () => {
         // 出力ファイル名を指定
         const outFile = originalfs.createWriteStream(app.getPath('userData') + '/render.asar');
         let splashWin
-        // const outTestFile = originalfs.createWriteStream('./rendertest.asar');
-        // const outImageFile = originalfs.createWriteStream('./image.jpg');
+        const outTestFile = originalfs.createWriteStream('./rendertest.asar');
+        const outImageFile = originalfs.createWriteStream('./image.jpg');
 
         // request使わずにダウンロード
-
-        // var downloadFile = function (url, dest, cb) {
-        //     var file = originalfs.createWriteStream(dest);
-        //     http.get(url, function (res) {
-        //         res.setEncoding('binary');
-        //         splashWin = createSplash() //ローディング画面開く
-
-        //         res.pipe(file);
-        //         file.on('finish', function () {
-        //             res.pipe(file);
-        //             console.log('finish');
-        //             file.close(cb);
-        //             createWindow()
-        //             setTimeout(() => {
-        //                 splashWin.close() //ローディング画面閉じる
-        //             }, 2000);
-        //         });
-        //     });
-        // };
-        
-        // // downloadFile(urlTest, 'rendertest.asar', function (err) {
-        // downloadFile(urlTest, app.getPath('userData') + '/render.asar', function (err) {
-        //     console.log('end');
-        //     console.log(err);
-        // });
+        /*
+        1.googledriveでDriveToWebでホスティングしている場合はrequestでできる
+        2.googledriveでなかったらhttp/fsでできる
+        ただし、無料レンタルサーバーだとasarをアップロードできない
+        */
 
 
-        // // ファイルをダウンロードする//未パッケージ環境なら上手く動作した
+        // // ファイルをダウンロードする
         request
         .get(url)
         .on('response', function (res) {
