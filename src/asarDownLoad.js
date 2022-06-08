@@ -4,7 +4,6 @@ const https = require('https')
 const originalfs = require('original-fs');
 const request = require('request');
 const { createWindow, createSplash } = require('./createWindow.js');
-const google = require('googleapis')
 // const fetch = require('node-fetch');
 
 /**
