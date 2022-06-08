@@ -1,8 +1,10 @@
 const { app } = require('electron')
+const http = require('http')
 const https = require('https')
 const originalfs = require('original-fs');
 const request = require('request');
 const { createWindow, createSplash } = require('./createWindow.js');
+// const fetch = require('node-fetch');
 
 /**
  * asarのダウンロード・置き換え
@@ -12,6 +14,7 @@ const asarDownLoad = () => {
         // ここで開く前にレンダラーのasarをサーバーから差し替え
         // URLを指定 
         const url = 'https://drive.google.com/uc?id=1mHfOd4seMjFuknv6hB1C55U9kMiw64sN&confirm=t';
+        const urlLocal = 'http://127.0.0.1:8080/render.asar'; //こっちならhttp行ける
         const imageUrl = 'https://techcrunch.com/wp-content/uploads/2022/04/GettyImages-1240090042.jpg?w=1390&crop=1';
         
         // 出力ファイル名を指定
@@ -24,8 +27,8 @@ const asarDownLoad = () => {
 
         // var downloadFile = function (url, dest, cb) {
         //     var file = originalfs.createWriteStream(dest);
-        //     https.get(url, function (res) {
-        //         //res.setEncoding('binary');
+        //     http.get(url, function (res) {
+        //         res.setEncoding('binary');
         //         res.pipe(file);
         //         file.on('finish', function () {
         //             res.pipe(file);
@@ -35,10 +38,11 @@ const asarDownLoad = () => {
         //     });
         // };
         
-        // downloadFile(url, 'rendertest.asar', function (err) {
+        // downloadFile(urlLocal, 'rendertest.asar', function (err) {
         //     console.log('end');
         //     console.log(err);
         // });
+
 
         // // ファイルをダウンロードする//未パッケージ環境なら上手く動作した
         request
