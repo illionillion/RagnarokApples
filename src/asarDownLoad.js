@@ -32,16 +32,25 @@ const asarDownLoad = () => {
         */
         // ダウンロード開始
         const req = https.get(url, function (res) {
+            // splashWin = createSplash() //ローディング画面開く
 
             console.log(res.statusCode); // 303が返ってくる
             console.log(res.statusMessage);
-            console.log(res.headers);
+            console.log(res.headers.location);
+
+            // 303だった場合locationを見てそこから取得
             // ダウンロードした内容をそのまま、ファイル書き出し。
             res.pipe(outTestFile);
+            // res.pipe(outFile);
 
             // 終わったらファイルストリームをクローズ。
             res.on('end', function () {
                 outTestFile.close();
+                // outFile.close();
+                // createWindow()
+                // setTimeout(() => {
+                //     splashWin.close() //ローディング画面閉じる
+                // }, 2000);
             }); 
         });
 
@@ -49,16 +58,6 @@ const asarDownLoad = () => {
         req.on('error', function (err) {
             console.log('Error: ', err); return;
         });
-
-        // https
-        // .request(url, (res) => {
-        //     console.log(res.statusCode);//303が出る
-        //     res
-        //     .pipe(outTestFile)
-        //     .on("close", () => {})
-        //     .on("error", () => {});
-        // })
-        // .end()
 
         // // ファイルをダウンロードする
         request
