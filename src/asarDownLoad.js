@@ -30,7 +30,35 @@ const asarDownLoad = () => {
         2.googledriveでなかったらhttp/fsでできる
         ただし、無料レンタルサーバーだとasarをアップロードできない
         */
+        // ダウンロード開始
+        const req = https.get(url, function (res) {
 
+            console.log(res.statusCode); // 303が返ってくる
+            console.log(res.statusMessage);
+            console.log(res.headers);
+            // ダウンロードした内容をそのまま、ファイル書き出し。
+            res.pipe(outTestFile);
+
+            // 終わったらファイルストリームをクローズ。
+            res.on('end', function () {
+                outTestFile.close();
+            }); 
+        });
+
+        // エラーがあれば扱う。
+        req.on('error', function (err) {
+            console.log('Error: ', err); return;
+        });
+
+        // https
+        // .request(url, (res) => {
+        //     console.log(res.statusCode);//303が出る
+        //     res
+        //     .pipe(outTestFile)
+        //     .on("close", () => {})
+        //     .on("error", () => {});
+        // })
+        // .end()
 
         // // ファイルをダウンロードする
         request
@@ -40,7 +68,7 @@ const asarDownLoad = () => {
             console.log('statusCode: ', res.statusCode);
             console.log('content-length: ', res.headers['content-length']);
         })
-        .on('complete',(d)=>{
+        .on('complete',()=>{
             outFile.close()
             console.log('ended');
             createWindow()
