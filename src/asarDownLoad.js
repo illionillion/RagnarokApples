@@ -18,7 +18,6 @@ const asarDownLoad = () => {
         // request使わずにダウンロード
        
         // // ダウンロード開始
-
         get(url, outURL)
 
     // }else{
@@ -32,13 +31,15 @@ const asarDownLoad = () => {
  * @param {*} url ダウンロードするファイルのURL
  * @param {*} outURL 出力するファイルのURL
  */
+// const get = (url, outURL, splashWin) => {
+let splashWin
 const get = (url, outURL) => {
     const req = https.get(url, (res) => {
-        let splashWin = createSplash() //ローディング画面開く
-
+        
+        splashWin = !splashWin || createSplash() //ローディング画面開く
         console.log(res.statusCode); // 303が返ってくる
         console.log(res.statusMessage);
-
+        
         // 303だった場合locationを見てそこから取得
         if (res.statusCode === 303) {
             get(res.headers.location, outURL) // 再帰
