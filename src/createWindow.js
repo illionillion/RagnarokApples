@@ -18,13 +18,13 @@ const { app, BrowserWindow } = require('electron')
             show: false
         })
         win.once('ready-to-show', () => {
-            //アスペクト比修正の挙動を隠すために遅延させる
+            // アスペクト比修正の挙動を隠すために遅延させる
             setTimeout(() => {
                 win.show()
                 resolve(win)
             }, 2000);
         })
-        win.loadURL('file://' + app.getPath('userData') + '/render.asar/index.html') //asarの中のアプリを開く
+        win.loadURL('file://' + app.getPath('userData') + '/render.asar/index.html') // asarの中のアプリを開く
     })
 
 }
@@ -54,8 +54,6 @@ const createSplash = () => {
         splash.loadURL('file://' + __dirname + '/loading.html')
         // Mac 信号機ボタンを非表示
         if (process.platform === 'darwin') splash.setWindowButtonVisibility(false)
-            
-        return splash
     })
 }
 
