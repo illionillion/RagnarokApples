@@ -12,13 +12,10 @@ const mainProcess = async () => {
     // 出力ファイル名を指定
     const outURL = app.getPath('userData') + '/render.asar'
 
-    // request使わずにダウンロード
-    let splashWin = createSplash()
-    await asarDownLoad(url, outURL)
-    createWindow()
-    setTimeout(() => {
-        splashWin.close() //ローディング画面閉じる
-    }, 2000);
+    const splashWin = await createSplash() // ローディング画面起動
+    await asarDownLoad(url, outURL) // ダウンロード開始
+    const mainWin = await createWindow() // メインウィンドウ起動
+    splashWin.close() //ローディング画面閉じる
 }
 
 //------------------------------------
