@@ -28,7 +28,7 @@ const asarDownLoad = async (url, outURL) => {
                 res.pipe(outFile);
 
                 // 終わったらファイルストリームをクローズ。
-                res.on('end', function () {
+                res.on('end', () => {
                     console.log('end');
                     outFile.close();
                     resolve(true);
@@ -36,7 +36,7 @@ const asarDownLoad = async (url, outURL) => {
             });
 
             // エラーがあれば扱う。
-            req.on('error', function (err) {
+            req.on('error', (err) => {
                 console.log('Error: ', err);
                 reject(false);
             });
