@@ -24,9 +24,20 @@ const asarDownLoad = async (url, outURL) => {
                     return
                 }
                 // ダウンロードした内容をそのまま、ファイル書き出し。
+                let total = 0 // 合計byte数
+                let percent = 0 // %
+                // データを取得する度に実行される
+                res.on("data", (chunk) => {
+                    total += chunk.length // これまで読み取ったbyte数
+                    const length = res.headers['content-length']
+                    if (percent !== parseInt(total / length * 100)) {
+                        percent = parseInt(total / length * 100)
+                        console.log(`${percent} %`)
+                    }
+                });
                 const outFile = originalfs.createWriteStream(outURL)
                 res.pipe(outFile)
-
+                
                 // 終わったらファイルストリームをクローズ。
                 res.on('end', () => {
                     console.log('end')
