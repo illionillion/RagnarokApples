@@ -24,21 +24,18 @@
             transform: translate(-50%,-50%);
             color: #fff;
         }
+        #percent{
+            color: #fff;
+        }
     </style>
-    <script src="./ipcRender.js" type="module"></script>
-    <script>
-        window.onload = () => {
-            document.body.oncontextmenu = () => {return false}
-        } 
-    </script>
 </head>
 <body>
     <div class="container">
         <label for="loading">
             <h1>Loading</h1>
         </label>
-        <!-- <progress id="loading" value="" max="100">Loading</progress> -->
-        <progress id="loading">Loading</progress>
+        <progress id="loading" value="0" max="100">Loading</progress>
+        <div id="percent">0 %</div>
     </div>
 </body>
 </html>

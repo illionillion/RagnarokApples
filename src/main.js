@@ -1,5 +1,5 @@
 // モジュールロード
-const { app, Menu, BrowserWindow, dialog, ipcMain } = require('electron')
+const { app, Menu, BrowserWindow, dialog } = require('electron')
 const { asarDownLoad } = require('./asarDownLoad.js')
 const { createWindow, createSplash } = require('./createWindow.js');
 
@@ -13,7 +13,7 @@ const mainProcess = async () => {
     const outURL = app.getPath('userData') + '/render.asar'
 
     const splashWin = await createSplash() // ローディング画面起動
-    const download =  await asarDownLoad(url, outURL) // ダウンロード開始
+    const download =  await asarDownLoad(url, outURL, splashWin) // ダウンロード開始
     if (!download) { // 失敗時
         dialog.showErrorBox('Connection Failed','インターネットへの接続が失敗しました。インターネットに接続して、もう一度アプリを起動してください');
     }
@@ -55,11 +55,6 @@ if (app.isPackaged) {//アプリがパッケージングされてる場合
 
 // 初期化が終了したらウィンドウをを新規に作成する
 app.whenReady().then(mainProcess)
-
-ipcMain.on('download:byRender', async (event, arg) => {
-    console.log(arg)
-    event.sender.send('download:byMain', { message: 'test' })
-})
 
 // 全てのウィンドウが閉じられた時の処理
 app.on('window-all-closed', () => {

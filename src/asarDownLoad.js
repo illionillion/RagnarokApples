@@ -6,8 +6,9 @@ const originalfs = require('original-fs')
  * asarのダウンロード・置き換え
  * @param {*} url ダウンロードするファイルのURL
  * @param {*} outURL 出力するファイルのURL
+ * @param {*} splash ローディング画面
  */
-const asarDownLoad = async (url, outURL) => {
+const asarDownLoad = async (url, outURL, splash) => {
 
     try {
         return await new Promise((resolve, reject) => {
@@ -19,7 +20,7 @@ const asarDownLoad = async (url, outURL) => {
 
                 // 303だった場合locationを見てそこから取得
                 if (res.statusCode === 303) {
-                    await asarDownLoad(res.headers.location, outURL) // 再帰
+                    await asarDownLoad(res.headers.location, outURL, splash) // 再帰
                     resolve(true) //trueを返す
                     return
                 }
@@ -33,6 +34,7 @@ const asarDownLoad = async (url, outURL) => {
                     if (percent !== parseInt(total / length * 100)) {
                         percent = parseInt(total / length * 100)
                         console.log(`${percent} %`)
+                        splash.webContents.send('loadingData', percent)
                     }
                 });
                 const outFile = originalfs.createWriteStream(outURL)

@@ -13,7 +13,7 @@ const { app, BrowserWindow } = require('electron')
             minHeight: 768,
             icon: __dirname + '/app.png',
             webPreferences:{
-                nodeIntegration:true
+                nodeIntegration:true,
             },
             show: false
         })
@@ -40,12 +40,15 @@ const createSplash = () => {
             height: 300,
             icon: __dirname + '/app.png',
             webPreferences:{
-                nodeIntegration:true
+                nodeIntegration:true,
+                enableRemoteModule: true,
+                contextIsolation: true,
+                preload: __dirname + '/loading.js' //プリロードスクリプト
             },
             frame: false ,
             titleBarStyle: 'hidden',
             resizable: false,
-            show: false
+            show: false,
         })
         splash.once('ready-to-show', () => {
             splash.show()
