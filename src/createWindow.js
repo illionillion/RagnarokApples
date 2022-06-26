@@ -49,6 +49,7 @@ const createSplash = () => {
             titleBarStyle: 'hidden',
             resizable: false,
             show: false,
+            fullscreen: false, // fn + F で拡大させない
         })
         splash.once('ready-to-show', () => {
             splash.show()
