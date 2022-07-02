@@ -6,7 +6,7 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
             "characterList":{//各キャラの設定
                 "left":{//左
                     "name":"キャラ(左)",
-                    "src":"bengal.png",
+                    "src":"tau-test.png",
                     "status":{
                         "brightnessDown":false//明度(true)の時は落とす
                     }
@@ -181,7 +181,7 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
             "characterList":{//各キャラの設定
                 "left":{//左
                     "name":"キャラ(左)",
-                    "src":"bengal.png",
+                    "src":"tau-test.png",
                     "status":{
                         "brightnessDown":true//明度(true)の時は落とす
                     }
