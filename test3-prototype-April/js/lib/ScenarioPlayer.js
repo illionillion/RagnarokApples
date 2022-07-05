@@ -671,11 +671,23 @@ export default class ScenarioPlayer {
      * 音声再生
      */
     AudioPlaying = () => {
+        console.log('AudioPlaying');
         if (this.msgindex === this.audioStart) {
 
             if (this.audioList[this.audioNum].audioLoad) {
-                console.log('play');
-                this.audioObj.play()
+                
+                console.log('play!!');
+                const obj = this.audioObj.play()
+                console.log(obj);
+                if (obj !== undefined) {
+                    obj.then(e => {
+                        console.log('再生OK');
+                    })
+                    .catch(error => {
+                        console.log('エラー', error);
+                    })
+                }
+
             }else{
                 console.log('読み込めていない');
                 // 再帰で再実行
