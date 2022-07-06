@@ -479,8 +479,7 @@ export default class ScenarioPlayer {
         // 暗転
         this.screenDarking = true
         document.getElementById('darkening-floor').classList.remove('op0')
-        // タイマー
-        await this.timer(1000);
+        await this.toDarking(e => {
             // シナリオ画面へ遷移
             document.getElementById('textScreen').classList.add('none')
             document.getElementById('mapScreen').classList.remove('none')
@@ -489,8 +488,7 @@ export default class ScenarioPlayer {
             document.querySelector('#character-left img').src='images/character/transparent_background.png'
             document.querySelector('#character-center img').src='images/character/transparent_background.png'
             document.querySelector('#character-right img').src='images/character/transparent_background.png'
-        // タイマー
-        await this.timer(1000);
+        })
         // 暗転解除
         document.getElementById('darkening-floor').classList.add('op0')
         this.screenDarking = false
@@ -533,20 +531,17 @@ export default class ScenarioPlayer {
      * 暗転処理
      * @param {function} func 関数(暗転中にさせたい処理) 
      */
-    toDarking = (func) => {
-        return new Promise( async(res,rej)=>{
-            //暗転
-            this.screenDarking = true
-            document.getElementById('darkening-floor').classList.remove('op0');//暗転
-            await this.timer(1000)
-            if(func) func()
-            console.log('func');
-            await this.timer(1000);
-            document.getElementById('darkening-floor').classList.add('op0');//暗転解除
-            this.screenDarking = false
-            await this.timer(1000);
-            res()
-        })
+    toDarking = async(func) => {
+        //暗転
+        this.screenDarking = true
+        document.getElementById('darkening-floor').classList.remove('op0');//暗転
+        await this.timer(1000)
+        if(func) func()
+        console.log('func');
+        await this.timer(1000);
+        document.getElementById('darkening-floor').classList.add('op0');//暗転解除
+        this.screenDarking = false
+        await this.timer(1000);
     }
 
     /**
