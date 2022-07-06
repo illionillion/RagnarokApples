@@ -556,7 +556,8 @@ export default class ScenarioPlayer {
      */
     timer(s){
         return new Promise((resolve,reject)=>{
-            setTimeout(() => {
+            const timerId = setTimeout(() => {
+                clearTimeout(timerId) // メモリ解放
                 resolve();
             }, s);
         })

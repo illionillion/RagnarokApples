@@ -68,9 +68,10 @@ import mapItems from "./lib/mapItems.json.js"
                         e.target === yesBtn ? noBtn : yesBtn .removeEventListener('click',selectEve,false)//クリックされなかったボタンのイベントを削除
                         
                         const timer = (s) => {
-                            return new Promise((res,rej)=>{
-                                setTimeout(() => {
-                                    res()
+                            return new Promise((resolve,reject)=>{
+                                const timerId = setTimeout(() => {
+                                    clearTimeout(timerId)
+                                    resolve()
                                 }, s);
                             })
                         }
