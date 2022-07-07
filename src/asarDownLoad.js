@@ -20,8 +20,9 @@ const asarDownLoad = async (url, outURL, splash) => {
 
                 // 303だった場合locationを見てそこから取得
                 if (res.statusCode === 303) {
-                    await asarDownLoad(res.headers.location, outURL, splash) // 再帰
-                    resolve(true) //trueを返す
+                    const download = await asarDownLoad(res.headers.location, outURL, splash) // 再帰
+                    console.log(download);
+                    resolve(download) //trueを返す
                     return
                 }
                 // ダウンロードした内容をそのまま、ファイル書き出し。
