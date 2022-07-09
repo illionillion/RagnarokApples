@@ -552,7 +552,7 @@ export default class ScenarioPlayer {
     timer(s){
         return new Promise((resolve,reject)=>{
             const timerId = setTimeout(() => {
-                clearTimeout(timerId) // メモリ解放
+                // clearTimeout(timerId) // メモリ解放 // 実行されたらGCされるので必要ない
                 resolve();
             }, s);
         })

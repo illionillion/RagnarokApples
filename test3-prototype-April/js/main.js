@@ -70,7 +70,7 @@ import mapItems from "./lib/mapItems.json.js"
                         const timer = (s) => {
                             return new Promise((resolve,reject)=>{
                                 const timerId = setTimeout(() => {
-                                    clearTimeout(timerId)
+                                    // clearTimeout(timerId)
                                     resolve()
                                 }, s);
                             })
