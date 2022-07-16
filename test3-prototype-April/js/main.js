@@ -1,6 +1,6 @@
 "use strict"
 import ScenarioPlayer from './lib/ScenarioPlayer.js';
-// import TextDataA from './lib/TextDataA.json.js';
+// import TextData from './lib/TextDataA.json.js';
 import TextData from './lib/TextDataZeroDay.json.js';
 import FrameSizing from "./lib/FrameSizing.js"
 import mapItems from "./lib/mapItems.json.js"
