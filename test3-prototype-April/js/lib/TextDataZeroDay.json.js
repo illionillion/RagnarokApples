@@ -2065,5 +2065,2023 @@ export default { //JSONファイルとしてでなくJSのオブジェクトと�
             },
             "backgroundImage":"city01.jpeg"
         },
+    ],
+    "A2": [
+        {
+            "textId": 0,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（私服）",
+                    "src": "tau-test.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "キャラ(右)",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                }
+            },
+            "characterText": {
+                "name": "タウ",
+                "text": "目が覚めると、そこには明るい天井があって。 $その真下には、僕と。 "
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 1,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（私服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "キャラ(右)",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                }
+            },
+            "characterText": {
+                "name": "タウ",
+                "text": "「咲宮、さん...？」"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 2,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（私服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "咲宮アヤカ（軍服）",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                }
+            },
+            "characterText": {
+                "name": "咲宮アヤカ",
+                "text": "「おはようございます。タウさん。」 "
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 3,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（私服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "咲宮アヤカ（軍服）",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                }
+            },
+            "characterText": {
+                "name": "タウ",
+                "text": "「...ちょっと待って！今の時間は？」 "
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 4,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（私服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "咲宮アヤカ（軍服）",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                }
+            },
+            "characterText": {
+                "name": "咲宮アヤカ",
+                "text": "「11時46分。 $朝...というには少し遅いですね。」 "
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 5,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（私服）",
+                    "src": "tau-test.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "咲宮アヤカ（軍服）",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                }
+            },
+            "characterText": {
+                "name": "タウ",
+                "text": "「...どうしよう。あれから夜更かししちゃったから...。$...こんな事になるなら最初から来るんじゃなかった」 "
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 6,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（私服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "咲宮アヤカ（軍服）",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                }
+            },
+            "characterText": {
+                "name": "咲宮アヤカ",
+                "text": "「そんなに焦らなくても大丈夫ですよ。$あくまでここはWoodですから。」 "
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 7,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（私服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "咲宮アヤカ（軍服）",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                }
+            },
+            "characterText": {
+                "name": "タウ",
+                "text": "「怒らないの？」"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 8,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（私服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "咲宮アヤカ（軍服）",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                }
+            },
+            "characterText": {
+                "name": "咲宮アヤカ",
+                "text": "「はい。」"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 9,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（私服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "咲宮アヤカ（軍服）",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                }
+            },
+            "characterText": {
+                "name": "タウ",
+                "text": "「それは、僕が期待されていないから？」 "
+            },
+            "backgroundImage": "city02.jpeg"
+        },
+        {
+            "textId": 10,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（私服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "咲宮アヤカ（軍服）",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                }
+            },
+            "characterText": {
+                "name": "咲宮アヤカ",
+                "text": "「むしろ、その逆です。$私たちはタウさんを高く評価しているんです」 "
+            },
+            "backgroundImage": "city02.jpeg"
+        },
+        {
+            "textId": 11,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（私服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "咲宮アヤカ（軍服）",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                }
+            },
+            "characterText": {
+                "name": "タウ",
+                "text": "「僕を...。」"
+            },
+            "backgroundImage": "city02.jpeg"
+        },
+        {
+            "textId": 12,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（私服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "咲宮アヤカ（軍服）",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                }
+            },
+            "characterText": {
+                "name": "咲宮アヤカ",
+                "text": "「はい。タウさんの功績は計り知れませんから。$...これまでの事、あまり気に病まないでくださいね。$タウさんはヨーゲ政府の命令に従っていただけなんですから。」"
+            },
+            "backgroundImage": "city02.jpeg"
+        },
+        {
+            "textId": 13,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（私服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "咲宮アヤカ（軍服）",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                }
+            },
+            "characterText": {
+                "name": "タウ",
+                "text": "「…そうだね。$...ありがとう、咲宮さん。」 "
+            },
+            "backgroundImage": "city02.jpeg"
+        },
+        {
+            "textId": 14,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（私服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "咲宮アヤカ（軍服）",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                }
+            },
+            "characterText": {
+                "name": "咲宮アヤカ",
+                "text": "「...いえ。お役に立てたようで何よりです。」"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 15,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（私服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "咲宮アヤカ（軍服）",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                }
+            },
+            "characterText": {
+                "name": "咲宮アヤカ",
+                "text": "「今日も引き続き、Woodを周りましょう」 "
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 16,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（私服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "咲宮アヤカ（軍服）",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                }
+            },
+            "characterText": {
+                "name": "タウ",
+                "text": "「僕たちばっかり、ふらふらしてていいのかな...」"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 17,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（私服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "咲宮アヤカ（軍服）",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                }
+            },
+            "characterText": {
+                "name": "咲宮アヤカ",
+                "text": "「...これもタウさんに与えられた仕事の一環です。$さあ、早くこれに着替えて行きましょう」 "
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 18,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（私服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "咲宮アヤカ（軍服）",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                }
+            },
+            "characterText": {
+                "name": "タウ",
+                "text": "そういって、咲宮さんが僕に差し出したのは。 "
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 19,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（私服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "咲宮アヤカ（軍服）",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                }
+            },
+            "characterText": {
+                "name": "タウ",
+                "text": "「軍服...？」"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 20,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（私服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "咲宮アヤカ（軍服）",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                }
+            },
+            "characterText": {
+                "name": "咲宮アヤカ",
+                "text": "「はい。$タウさんもこれで正式にWoodの一員ですね！$改めて、よろしくお願いします！」"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 21,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（私服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "咲宮アヤカ（軍服）",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                }
+            },
+            "characterText": {
+                "name": "タウ",
+                "text": "「一員って...。$まだそんな覚悟、出来てないんだけど。」"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 22,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（私服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "咲宮アヤカ（軍服）",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                }
+            },
+            "characterText": {
+                "name": "咲宮アヤカ",
+                "text": "「...着てくれないんですか？」"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 23,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（私服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "咲宮アヤカ（軍服）",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                }
+            },
+            "characterText": {
+                "name": "タウ",
+                "text": "「うっ...。」"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 23,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（私服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "咲宮アヤカ（軍服）",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                }
+            },
+            "characterText": {
+                "name": "タウ",
+                "text": "そんな目で見られたら、断りづらい。$でも、制服を着たらもう後戻りは出来ないだろうし...。"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 23,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（私服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "咲宮アヤカ（軍服）",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                }
+            },
+            "characterText": {
+                "name": "タウ",
+                "text": "「あの、どうしてもこれを着ないとダメですか？$こういうの、ちょっと苦手で...。」"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 24,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（私服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "咲宮アヤカ（軍服）",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                }
+            },
+            "characterText": {
+                "name": "咲宮アヤカ",
+                "text": "「でもせっかく用意しましたから...。」"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 25,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（私服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "咲宮アヤカ（軍服）",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                }
+            },
+            "characterText": {
+                "name": "タウ",
+                "text": "「やっぱり、そうだよね...。」"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 26,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（私服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "咲宮アヤカ（軍服）",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                }
+            },
+            "characterText": {
+                "name": "タウ",
+                "text": "ここに来ちゃった僕が悪いんだし、着替えるくらいなら...。"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 27,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（私服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "咲宮アヤカ（軍服）",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                }
+            },
+            "characterText": {
+                "name": "タウ",
+                "text": "「分かった...。」"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 28,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（私服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "咲宮アヤカ（軍服）",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                }
+            },
+            "characterText": {
+                "name": "咲宮アヤカ",
+                "text": "「じゃあ、着替え終わったら呼んでください」"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 29,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "center": {
+                    "name": "タウ（私服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                },
+                "right": {
+                    "name": "なし",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                }
+            },
+            "characterText": {
+                "name": "タウ",
+                "text": "そう言って、咲宮さんは部屋を出た。"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 30,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "center": {
+                    "name": "タウ（私服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                },
+                "right": {
+                    "name": "なし",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                }
+            },
+            "characterText": {
+                "name": "タウ",
+                "text": "…これを着てしまったら以前のように、戦うだけの日々を送る事になるのかもしれない。$...でもここ以外に僕の居場所なんて、あるのだろうか。"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 31,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "center": {
+                    "name": "タウ（私服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                },
+                "right": {
+                    "name": "なし",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                }
+            },
+            "characterText": {
+                "name": "タウ",
+                "text": "どうせ家に帰っても、誰もいない。$それなら、ここにいた方がいくらかマシなんじゃないのか。"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 32,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "center": {
+                    "name": "タウ（私服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                },
+                "right": {
+                    "name": "なし",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                }
+            },
+            "characterText": {
+                "name": "タウ",
+                "text": "誰かと一緒にいるのが好きなのか、嫌いなのか。"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 33,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "center": {
+                    "name": "タウ（私服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                },
+                "right": {
+                    "name": "なし",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                }
+            },
+            "characterText": {
+                "name": "タウ",
+                "text": "「...分からないや。」"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 34,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "center": {
+                    "name": "タウ（私服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "なし",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                }
+            },
+            "characterText": {
+                "name": "タウ",
+                "text": "諦めて、軍服に着替えよう。"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 35,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "center": {
+                    "name": "タウ（私服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "なし",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                }
+            },
+            "characterText": {
+                "name": "タウ",
+                "text": "...まさか、軍服を再び着る日が来るなんて。"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 36,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "center": {
+                    "name": "タウ（私服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                },
+                "right": {
+                    "name": "なし",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                }
+            },
+            "characterText": {
+                "name": "タウ",
+                "text": "「ていうかやっぱり、重いな...。$これ...。」"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 37,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "center": {
+                    "name": "タウ（私服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                },
+                "right": {
+                    "name": "なし",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                }
+            },
+            "characterText": {
+                "name": "タウ",
+                "text": "組織が変わっても、制服のデザインが変わっても。$ これだけは変わらないらしい。"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 38,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "center": {
+                    "name": "タウ（私服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                },
+                "right": {
+                    "name": "なし",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                }
+            },
+            "characterText": {
+                "name": "タウ",
+                "text": "やっぱり、帰ろうかな...。"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 39,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "center": {
+                    "name": "タウ（私服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                },
+                "right": {
+                    "name": "なし",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                }
+            },
+            "characterText": {
+                "name": "咲宮アヤカ",
+                "text": "「タウさん、着替えましたか？」"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 40,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "center": {
+                    "name": "タウ（私服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                },
+                "right": {
+                    "name": "なし",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                }
+            },
+            "characterText": {
+                "name": "タウ",
+                "text": "...心の中でも読まれたのかな。"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 41,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "center": {
+                    "name": "タウ（私服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                },
+                "right": {
+                    "name": "なし",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                }
+            },
+            "characterText": {
+                "name": "タウ",
+                "text": "「あ、いや...。$もうちょっと待って！」"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 42,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "center": {
+                    "name": "タウ（私服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "なし",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                }
+            },
+            "characterText": {
+                "name": "咲宮アヤカ",
+                "text": "「分かりました。$じゃあ待ってますから、ちゃんと着替えてくださいね。」"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 43,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "center": {
+                    "name": "タウ（私服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                },
+                "right": {
+                    "name": "なし",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                }
+            },
+            "characterText": {
+                "name": "タウ",
+                "text": "「あ、はい...。」"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 44,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "center": {
+                    "name": "タウ（私服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                },
+                "right": {
+                    "name": "なし",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                }
+            },
+            "characterText": {
+                "name": "タウ",
+                "text": "待たせるのも悪いし、着替えよう。$それに、なんか怖いし...。"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 45,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（私服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "なし",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                }
+            },
+            "characterText": {
+                "name": "",
+                "text": ""
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 46,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（軍服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "なし",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                }
+            },
+            "characterText": {
+                "name": "タウ",
+                "text": "「着替えたよ、咲宮さん。」"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 47,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（軍服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "なし",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                }
+            },
+            "characterText": {
+                "name": "咲宮アヤカ",
+                "text": "「じゃあ、入りますね。」"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 48,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（軍服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "咲宮アヤカ",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                }
+            },
+            "characterText": {
+                "name": "タウ",
+                "text": "「どう、かな...。」"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 49,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（軍服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "咲宮アヤカ",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                }
+            },
+            "characterText": {
+                "name": "咲宮アヤカ",
+                "text": "「似合いますね、タウさん。$…私なんかよりもずっと。」"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 50,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（軍服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "咲宮アヤカ",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                }
+            },
+            "characterText": {
+                "name": "タウ",
+                "text": "「咲宮さん？」"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 51,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（軍服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "咲宮アヤカ",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                }
+            },
+            "characterText": {
+                "name": "咲宮アヤカ",
+                "text": "「...すみません。」"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 52,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（軍服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "咲宮アヤカ",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                }
+            },
+            "characterText": {
+                "name": "タウ",
+                "text": "「いや、何もされてないし。$謝らなくたって...。」"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 53,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（軍服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "咲宮アヤカ",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                }
+            },
+            "characterText": {
+                "name": "タウ",
+                "text": "...何か悪い事でもしたかな？$でも、なんだか気まずいし...。"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 54,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（軍服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "咲宮アヤカ",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                }
+            },
+            "characterText": {
+                "name": "タウ",
+                "text": "...適当に、お茶を濁そう。"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 55,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（軍服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "咲宮アヤカ",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                }
+            },
+            "characterText": {
+                "name": "タウ",
+                "text": "「そういえばこれ、サイズぴったりだったんだけど。$いつの間に作ったの？$それとも予備とか？」"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 56,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（軍服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "咲宮アヤカ",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                }
+            },
+            "characterText": {
+                "name": "咲宮アヤカ",
+                "text": "「もちろん、ちゃんとタウさんのために作ったものですよ」"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 57,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（軍服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "咲宮アヤカ",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                }
+            },
+            "characterText": {
+                "name": "タウ",
+                "text": "「そうなんだ...。$でも、昨日の今日で出来るものなの？」"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 58,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（軍服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "咲宮アヤカ",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                }
+            },
+            "characterText": {
+                "name": "咲宮アヤカ",
+                "text": "「あ〜、え〜と...。$なんででしょう？」"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 59,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（軍服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "咲宮アヤカ",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                }
+            },
+            "characterText": {
+                "name": "タウ",
+                "text": "「咲宮さんも分からないんだ...。」"
+            },
+            "backgroundImage": "city01.jpeg"
+        },
+        {
+            "textId": 60,
+            "onePicture": false,
+            "characterList": {
+                "left": {
+                    "name": "タウ（軍服）",
+                    "src": "bengal.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "center": {
+                    "name": "なし",
+                    "src": "transparent_background.png",
+                    "status": {
+                        "brightnessDown": false
+                    }
+                },
+                "right": {
+                    "name": "咲宮アヤカ",
+                    "src": "bibian.png",
+                    "status": {
+                        "brightnessDown": true
+                    }
+                }
+            },
+            "characterText": {
+                "name": "咲宮アヤカ",
+                "text": "「...まぁ、良いじゃないですか！$それより、タウさん。$今日はどこに行きますか？」"
+            },
+            "backgroundImage": "city01.jpeg"
+        }
     ]
 }
