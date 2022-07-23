@@ -7,12 +7,12 @@ import mapItems from "./lib/mapItems.json.js"
 
 (function(){
     const gameState = {
-        textEventId: -1,
+        textEventId: -1, // いらない
         nowPart: null,
         FloatCheck: true,
         nowDate: 0,
         eventState: 'title',
-        autoPlayingFlag: false,
+        autoPlayingFlag: false, // いらない
     }
     let TextPlayer
     const TextPlayerList = []
@@ -45,7 +45,7 @@ import mapItems from "./lib/mapItems.json.js"
                 itemEle.dataset.place = item.place
 
                 // イベント付与
-                itemEle.addEventListener('click',(e)=>{
+                itemEle.addEventListener('click',(e) => {
                 
                     const float = document.getElementById('mapWrapper')
                     float.classList.remove('none')
