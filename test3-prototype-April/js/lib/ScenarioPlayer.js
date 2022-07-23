@@ -359,6 +359,8 @@ export default class ScenarioPlayer {
             return
         }
         
+        if(false) this.toDarking(()=>{}) // ここで暗転のみを実行させたい
+
         // 画像の変更
         await this.changeImage()
 
