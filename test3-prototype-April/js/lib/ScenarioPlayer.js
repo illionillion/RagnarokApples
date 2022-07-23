@@ -342,7 +342,7 @@ export default class ScenarioPlayer {
             return
         }
         
-        if (document.getElementById('textBackground').src.indexOf(this.TextList[this.msgindex - 1]['backgroundImage']) === -1) { //画像の変更がある時のみ暗転
+        if (document.getElementById('textBackground').src.indexOf(this.TextList[this.msgindex - 1]['backgroundImage']['fileName']) === -1) { //画像の変更がある時のみ暗転
             //暗転
             this.screenDarking = true
             document.getElementById('darkening-floor').classList.remove('op0');//暗転
@@ -560,7 +560,7 @@ export default class ScenarioPlayer {
 
     /**
      * キャラを設定する
-     * @param {*} props 
+     * @param {*} props キャラのオブジェクト
      */
     characterSetting (props){
         // console.log(props);
@@ -581,13 +581,14 @@ export default class ScenarioPlayer {
 
     /**
      * 背景画像設定
-     * @param {*} url 
+     * @param {*} imageObj 画像オブジェクト
      */
-    backgroundSetting (url) {
+    backgroundSetting (imageObj) {
 
         // srcを変えるだけだが、切り替えに時間がかかってしまう
-        const src = `images/background/${url}`
+        const src = `images/background/${imageObj['fileName']}`
         document.getElementById('textBackground').src = src
+        document.getElementById('textBackground').setAttribute('alt', imageObj['name'])
 
     }
 
