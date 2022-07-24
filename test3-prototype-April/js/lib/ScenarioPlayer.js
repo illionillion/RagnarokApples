@@ -359,7 +359,9 @@ export default class ScenarioPlayer {
             return
         }
         
-        if(false) this.toDarking(()=>{}) // ここで暗転のみを実行させたい
+        if(this.TextList[this.msgindex - 1]['characterText']['effect']['darkening']) {
+            await this.toDarking() // ここで暗転のみを実行させたい
+        }
 
         // 画像の変更
         await this.changeImage()
