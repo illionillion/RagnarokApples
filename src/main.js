@@ -7,6 +7,22 @@ const { createWindow, createSplash } = require('./createWindow.js');
  * メインプロセス
  */
 const mainProcess = async () => {
+
+    // ダウンロードするかの確認
+    const question = dialog.showMessageBoxSync({
+        type: 'question',  // none/info/error/question/warning
+        title: '確認',
+        message: 'ゲームデータをダウンロードしますか？',
+        detail: '最新版でプレイすることができます。\n(初回起動時はダウンロードしてください)',
+        buttons: ['する', 'しない'],
+        cancelId: -1  // Esc で閉じられたときの戻り値
+    });
+    
+    if (question !== 0) { // 0(する)以外ならそのまま画面開く
+        const mainWin = await createWindow() // メインウィンドウ起動
+        return // 処理終了
+    }
+
     // URLを指定 
     const url = 'https://drive.google.com/uc?id=1mHfOd4seMjFuknv6hB1C55U9kMiw64sN&confirm=t';
     // 出力ファイル名を指定
@@ -19,6 +35,7 @@ const mainProcess = async () => {
     }
     const mainWin = await createWindow() // メインウィンドウ起動
     splashWin.close() //ローディング画面閉じる
+
 }
 
 //------------------------------------
