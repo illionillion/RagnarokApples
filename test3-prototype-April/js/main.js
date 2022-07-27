@@ -1,7 +1,8 @@
 "use strict"
 import ScenarioPlayer from './lib/ScenarioPlayer.js';
 // import TextData from './lib/TextDataA.json.js';
-import TextData from './lib/TextDataZeroDay.json.js';
+// import TextData from './lib/TextDataZeroDay.json.js';
+import TextData from './lib/scenario_data.json' assert { type: "json" };
 import FrameSizing from "./lib/FrameSizing.js"
 import mapItems from "./lib/mapItems.json.js"
 

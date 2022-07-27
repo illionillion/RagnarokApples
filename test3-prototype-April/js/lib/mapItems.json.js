@@ -11,7 +11,7 @@ export default {
     },
     point2:{
         place:'場所2',
-        partKey:"A2",
+        partKey:"A2-1",
         style:{
             width:'16%',
             height:'25%',
