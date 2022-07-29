@@ -22,7 +22,7 @@ import mapItems from "./lib/mapItems.json.js"
 
     window.addEventListener('load',(e)=>{
 
-        document.body.oncontextmenu = () => {return false}
+        document.oncontextmenu = () => {return false}
 
         FrameSizing()
 
