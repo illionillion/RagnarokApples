@@ -1,3 +1,6 @@
+/**
+ * 画面サイズを16:9にフィットさせる関数
+ */
 export default function FrameSizing(){
     // console.log('size');
 
