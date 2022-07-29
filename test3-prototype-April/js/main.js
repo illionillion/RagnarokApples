@@ -18,9 +18,8 @@ import mapItems from "./lib/mapItems.json.js"
     let TextPlayer
     const TextPlayerList = []
     
-    window.addEventListener('resize',(e)=>{
-        FrameSizing()
-    })
+    window.addEventListener('resize', FrameSizing)
+
     window.addEventListener('load',(e)=>{
 
         document.body.oncontextmenu = () => {return false}
