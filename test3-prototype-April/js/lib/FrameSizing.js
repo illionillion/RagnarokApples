@@ -1,5 +1,8 @@
-export default function FrameSizing() {
-  // console.log('size');
+/**
+ * 画面サイズを16:9にフィットさせる関数
+ */
+export default function FrameSizing(){
+    // console.log('size');
 
   //PC画面の幅を取得してから16:9で計算
   //縦のサイズを割り当てる
