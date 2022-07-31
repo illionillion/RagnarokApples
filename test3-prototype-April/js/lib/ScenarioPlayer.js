@@ -567,19 +567,11 @@ export default class ScenarioPlayer {
 
         const fileName = this.TextList[this.msgindex - 1]['backgroundImage']['fileName']
         if (document.getElementById('textBackground').src.indexOf(fileName) === -1) { //画像の変更がある時のみ暗転
-            //暗転
-            this.screenDarking = true
-            document.getElementById('darkening-floor').classList.remove('op0');//暗転
-            await this.timer(1000);
-            document.getElementById('dialogue-name-area').classList.remove('op0');//名前表示
-            this.characterSetting(this.TextList[this.msgindex - 1]['characterList']);//キャラ画像反映
-            this.backgroundSetting(this.TextList[this.msgindex - 1]['backgroundImage'])//読み込み終了=>画面反映まで暗転させたい
-            // 2秒間暗転させる処理書きたい
-            await this.timer(1000);
-            document.getElementById('darkening-floor').classList.add('op0');//暗転解除
-            this.screenDarking = false
-            await this.timer(1000);
-
+            await this.toDarking(e => {
+                document.getElementById('dialogue-name-area').classList.remove('op0');//名前表示
+                this.characterSetting(this.TextList[this.msgindex - 1]['characterList']);//キャラ画像反映
+                this.backgroundSetting(this.TextList[this.msgindex - 1]['backgroundImage'])//読み込み終了=>画面反映まで暗転させたい    
+            })
         }else{
             //画像が同じ=>暗転しない場合
             document.getElementById('dialogue-name-area').classList.remove('op0');//名前表示
