@@ -5,4 +5,5 @@
 - `npm run start`でElectronアプリ起動
 - `npm run build-win`でElectronアプリインストーラー作成
   - Macの場合は`npm run build-mac`
+- `npm run asar-pack 対象ディレクトリ名 render.asar`でasarファイル作成
 - 詳しくは[package.json](./package.json)を参照
