@@ -1,3 +1,4 @@
+import { CreateMap } from "./map.js";
 import TextAudio from "./TextAudio.json.js";
 export default class ScenarioPlayer {
 
@@ -504,6 +505,10 @@ export default class ScenarioPlayer {
             this.TextCover.classList.remove('none')
             this.FloatCheck.classList.add('op0')
             this.TextFloat.classList.add('op0')
+
+            // ここに新マップ描画処理
+            CreateMap(this.state)
+
         })
 
     }
@@ -699,6 +704,7 @@ export default class ScenarioPlayer {
      */
     AudioPlaying = () => {
         console.log('AudioPlaying');
+        console.log(this.audios);
         if (this.msgindex === this.audioStart) {
 
             if (this.audioList[this.audioNum].audioLoad) {

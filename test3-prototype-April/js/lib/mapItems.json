@@ -1,0 +1,38 @@
+{
+    "A0" : {
+        "point1":{
+            "place" : "場所1",
+            "partKey" : "A1",
+            "style" : {
+                "width" : "13%",
+                "height" : "18%",
+                "top" : "7%",
+                "left" : "17%"
+            }
+        }
+    },
+    "A1" : {
+        "point1":{
+            "place" : "場所2",
+            "partKey" : "A2-1",
+            "style" : {
+                "width" : "16%",
+                "height" : "25%",
+                "top" : "53%",
+                "left" : "13%"
+            }
+        }
+    },
+    "A2-1" : {
+        "point1":{
+            "place" : "場所3",
+            "partKey" : "A2-2",
+            "style" : {
+                "width" : "19%",
+                "height" : "28%",
+                "top" : "46%",
+                "left" : "45%"
+            }
+        }
+    }
+}
