@@ -137,7 +137,6 @@ import { CreateMap } from './lib/map.js'
         // document.getElementById('mapItems').appendChild(eleFragment)
 
         // マップ画面遷移系
-        const spb = document.getElementById('speechBubble')
         const FloatCheck = document.getElementById('FloatCheck')
         const TextFloat = document.getElementById('mapTextFloat')
         const TextCover = document.getElementById('mapTextCover')

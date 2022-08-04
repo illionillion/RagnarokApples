@@ -105,6 +105,10 @@ export function CreateMap(gameState) {
     document.getElementById('mapItems').innerHTML = ''
     document.getElementById('mapItems').appendChild(eleFragment)
 
+    const spb = document.querySelector('#speechBubble .textarea')
+    const msg = '画面をクリック'
+    spb.textContent = msg
+
     if( !mapItems ) alert("ゲーム終了")
 
 }
