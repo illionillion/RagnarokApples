@@ -140,6 +140,11 @@ export function CreateMap(gameState) {
         }
     }()))
 
+    const mapImg = document.getElementById('mapBackground')
+    const imgSrc = data ? `images/background/${data['backgroundImage']}` : 'images/background/map.png'
+    // console.log(imgSrc);
+    mapImg.setAttribute('src', imgSrc)
+
     if( !mapItems ) alert("ゲーム終了")
 
 }

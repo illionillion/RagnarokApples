@@ -202,13 +202,16 @@ export default class ScenarioPlayer {
      * @param {*} e
      */
     toSkip = e => {
+
+        e.stopPropagation()
         
+        // console.log(e.target);
+
         if (ScenarioPlayer.eventId != this.nowEveId) {
             this.skipButton.removeEventListener('click',this.toSkip)
             return
         }
 
-        e.stopPropagation()
         console.log('skip');
         this.msgindex = Object.keys(this.TextList).length - 1
 
