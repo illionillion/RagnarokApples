@@ -11,7 +11,7 @@ import { CreateMap } from './lib/map.js'
 (function(){
     const gameState = {
         textEventId: -1, // いらない
-        nowPart: undefined,
+        nowPart: 'A0',
         FloatCheck: true,
         nowDate: 0,
         eventState: 'title',
@@ -161,24 +161,24 @@ import { CreateMap } from './lib/map.js'
             // console.log(gameState.FloatCheck)
         })
 
-        let floatSpbTextList = [
-            'Tips:黒い四角の範囲が選択できます',
-            'どこへ行こう？',
-            '上の方かな？',
-            '下でもあり',
-        ]
-        let floatSpbTextCount = 0
-        // マップ②の画面下のテキスト処理
-        const floatSpb = document.getElementById('FloatSpeechBubble')
-        const floatSpbText = document.querySelector('#FloatSpeechBubble .textarea')
-        // console.log(floatSpbText);
-        floatSpbText.innerHTML = floatSpbTextList[floatSpbTextCount]
-        floatSpbText.addEventListener('click', e => {
-            // console.log(e.target.innerHTML);
-            floatSpbTextCount++
-            if (floatSpbTextCount >= floatSpbTextList.length) floatSpbTextCount = 0
-            e.target.innerHTML = floatSpbTextList[floatSpbTextCount]
-        })
+        // let floatSpbTextList = [
+        //     'Tips:黒い四角の範囲が選択できます',
+        //     'どこへ行こう？',
+        //     '上の方かな？',
+        //     '下でもあり',
+        // ]
+        // let floatSpbTextCount = 0
+        // // マップ②の画面下のテキスト処理
+        // const floatSpb = document.getElementById('FloatSpeechBubble')
+        // const floatSpbText = document.querySelector('#FloatSpeechBubble .textarea')
+        // // console.log(floatSpbText);
+        // floatSpbText.innerHTML = floatSpbTextList[floatSpbTextCount]
+        // floatSpbText.addEventListener('click', e => {
+        //     // console.log(e.target.innerHTML);
+        //     floatSpbTextCount++
+        //     if (floatSpbTextCount >= floatSpbTextList.length) floatSpbTextCount = 0
+        //     e.target.innerHTML = floatSpbTextList[floatSpbTextCount]
+        // })
 
 
         /**

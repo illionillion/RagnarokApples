@@ -1,16 +1,21 @@
 import mapItemsJson from "./mapItems.json" assert { type: "json" }
 import TextData from './scenario_data.json' assert { type: "json" }
+import MapTextData from './mapText.json' assert { type: "json" }
 import ScenarioPlayer from './ScenarioPlayer.js'
 
+let CreateMapCount = 0
+
 export function CreateMap(gameState) {
+
+    const NowCreateMapCount = ++CreateMapCount
 
     // マップアイテムの生成
     gameState.eventState = 'map'
     const eleFragment = document.createDocumentFragment()
     // シナリオ格納
-    const mapItems = mapItemsJson[gameState.nowPart ?? 'A0']
+    const mapItems = mapItemsJson[gameState.nowPart]
     // console.log(gameState.nowPart);
-    console.log(mapItems);
+    // console.log(mapItems);
     for (const itemId in mapItems) {
         if (Object.hasOwnProperty.call(mapItems, itemId)) {
             const item = mapItems[itemId]
@@ -106,8 +111,34 @@ export function CreateMap(gameState) {
     document.getElementById('mapItems').appendChild(eleFragment)
 
     const spb = document.querySelector('#speechBubble .textarea')
-    const msg = '画面をクリック'
+    const data = MapTextData[gameState.nowPart] 
+    const msg = data ? data['mapMessageText'] : 'テキスト切れ'
     spb.textContent = msg
+
+    const floatSpbTextList = data ? data['tipsMessage'] : 
+        [
+            'Tips:黒い四角の範囲が選択できます',
+            'どこへ行こう？',
+            '上の方かな？',
+            '下でもあり',
+        ]
+    let floatSpbTextCount = 0
+    // マップ②の画面下のテキスト処理
+    const floatSpbText = document.querySelector('#FloatSpeechBubble .textarea')
+    // console.log(floatSpbText);
+    floatSpbText.innerHTML = floatSpbTextList[floatSpbTextCount]
+    floatSpbText.addEventListener('click', (function() {
+        return function f(e) {
+            if (CreateMapCount !== NowCreateMapCount) {
+                floatSpbText.removeEventListener('click', f)
+            }
+    
+            // console.log(e.target.innerHTML);
+            floatSpbTextCount++
+            if (floatSpbTextCount >= floatSpbTextList.length) floatSpbTextCount = 0
+            e.target.innerHTML = floatSpbTextList[floatSpbTextCount]
+        }
+    }()))
 
     if( !mapItems ) alert("ゲーム終了")
 
