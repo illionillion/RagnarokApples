@@ -1,3 +1,4 @@
+import { CreateMap } from "./map.js";
 import TextAudio from "./TextAudio.json.js";
 export default class ScenarioPlayer {
 
@@ -18,6 +19,9 @@ export default class ScenarioPlayer {
     darkeningFloor = document.getElementById('darkening-floor')
     onePicture = document.getElementById('one-picture')
     skipButton = document.getElementById('skipButton')
+    FloatCheck = document.getElementById('FloatCheck')
+    TextFloat = document.getElementById('mapTextFloat')
+    TextCover = document.getElementById('mapTextCover')
 
     /**
      * 1パートのテキストのデータを格納する
@@ -195,11 +199,23 @@ export default class ScenarioPlayer {
 
     /**
      * デバッグ用のスキップ機能（開発中）
-     * @param {*} e event
+     * @param {*} e
      */
     toSkip = e => {
-        // this.msgindex = Object.keys(this.TextList).length
+
         e.stopPropagation()
+        
+        // console.log(e.target);
+
+        if (ScenarioPlayer.eventId != this.nowEveId) {
+            this.skipButton.removeEventListener('click',this.toSkip)
+            return
+        }
+
+        console.log('skip');
+        this.msgindex = Object.keys(this.TextList).length - 1
+
+        this.next()
     }
     
     /**
@@ -480,9 +496,6 @@ export default class ScenarioPlayer {
         console.log("end");
         this.state.eventState = 'map'
 
-        // 暗転
-        this.screenDarking = true
-        document.getElementById('darkening-floor').classList.remove('op0')
         await this.toDarking(e => {
             // シナリオ画面へ遷移
             document.getElementById('textScreen').classList.add('none')
@@ -492,11 +505,14 @@ export default class ScenarioPlayer {
             document.querySelector('#character-left img').src='images/character/transparent_background.png'
             document.querySelector('#character-center img').src='images/character/transparent_background.png'
             document.querySelector('#character-right img').src='images/character/transparent_background.png'
+            this.TextCover.classList.remove('none')
+            this.FloatCheck.classList.add('op0')
+            this.TextFloat.classList.add('op0')
+
+            // ここに新マップ描画処理
+            CreateMap(this.state)
+
         })
-        // 暗転解除
-        document.getElementById('darkening-floor').classList.add('op0')
-        this.screenDarking = false
-        await this.timer(1000);
 
     }
 
@@ -567,19 +583,11 @@ export default class ScenarioPlayer {
 
         const fileName = this.TextList[this.msgindex - 1]['backgroundImage']['fileName']
         if (document.getElementById('textBackground').src.indexOf(fileName) === -1) { //画像の変更がある時のみ暗転
-            //暗転
-            this.screenDarking = true
-            document.getElementById('darkening-floor').classList.remove('op0');//暗転
-            await this.timer(1000);
-            document.getElementById('dialogue-name-area').classList.remove('op0');//名前表示
-            this.characterSetting(this.TextList[this.msgindex - 1]['characterList']);//キャラ画像反映
-            this.backgroundSetting(this.TextList[this.msgindex - 1]['backgroundImage'])//読み込み終了=>画面反映まで暗転させたい
-            // 2秒間暗転させる処理書きたい
-            await this.timer(1000);
-            document.getElementById('darkening-floor').classList.add('op0');//暗転解除
-            this.screenDarking = false
-            await this.timer(1000);
-
+            await this.toDarking(e => {
+                document.getElementById('dialogue-name-area').classList.remove('op0');//名前表示
+                this.characterSetting(this.TextList[this.msgindex - 1]['characterList']);//キャラ画像反映
+                this.backgroundSetting(this.TextList[this.msgindex - 1]['backgroundImage'])//読み込み終了=>画面反映まで暗転させたい    
+            })
         }else{
             //画像が同じ=>暗転しない場合
             document.getElementById('dialogue-name-area').classList.remove('op0');//名前表示
@@ -699,6 +707,7 @@ export default class ScenarioPlayer {
      */
     AudioPlaying = () => {
         console.log('AudioPlaying');
+        console.log(this.audios);
         if (this.msgindex === this.audioStart) {
 
             if (this.audioList[this.audioNum].audioLoad) {
@@ -728,7 +737,7 @@ export default class ScenarioPlayer {
      * 音性終了
      */
     AudioStop = () => {
-        if (this.msgindex === this.audioEnd + 1) {
+        if (this.msgindex >= this.audioEnd + 1) {
             console.log('pause');
             this.audioObj.pause()
             this.audioNum++
