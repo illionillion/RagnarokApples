@@ -94,7 +94,8 @@
     margin: auto;
     /* font-weight: bold; */
     font-weight: normal;
-    font-size: 1.4vw;
+    font-size: 1.55vw;
+    padding: 0vw 1.4vw;
 }
 #dialogue-text-area span{
     transition: 250ms;
