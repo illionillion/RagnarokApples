@@ -95,12 +95,12 @@ export default class ScenarioPlayer {
      * @returns キャンセルする
      */
     ScenarioClick = () => {
-        let text = document.querySelectorAll(`#${this.onePictureSwitch ? 'one-picture-text' : 'dialogue-text-area'} .op0`)
+        let text = this.GetText()
 
         if (text.length === 0 && !ScenarioPlayer.autoPlayingFlag) {
             this.Loading()
             // console.log(text)
-            text = document.querySelectorAll(`#${this.onePictureSwitch ? 'one-picture-text' : 'dialogue-text-area'} .op0`)
+            text = this.GetText()
         }
         if (!this.movingFlag) {
             // this.autoPlayingCheckでautoの待機中にイベントが発生するのを防ぐ
@@ -215,7 +215,9 @@ export default class ScenarioPlayer {
         console.log('skip');
         this.msgindex = Object.keys(this.TextList).length - 1
 
-        this.next()
+        const text = this.GetText()
+        this.AnimationForcedEnd(text)
+
     }
     
     /**
@@ -364,6 +366,14 @@ export default class ScenarioPlayer {
     }
 
     /**
+     * `.op0`がかかっている`span`のリストを取得する
+     * @returns NodeListOf<Element>
+     */
+    GetText = () => {
+        return document.querySelectorAll(`#${this.onePictureSwitch ? 'one-picture-text' : 'dialogue-text-area'} .op0`)
+    }
+
+    /**
      * アニメーション再生
      * @param {*} text cp0クラスがついているspanタグ
      */
@@ -470,7 +480,7 @@ export default class ScenarioPlayer {
                 return;
             }
             this.Loading();
-            const nexttext = document.querySelectorAll(`#${this.onePictureSwitch ? 'one-picture-text' : 'dialogue-text-area'} .op0`)
+            const nexttext = this.GetText()
             if(!nextFlag) {
                 this.AnimationStart(nexttext);
             }else{
