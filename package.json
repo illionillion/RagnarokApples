@@ -36,7 +36,8 @@
       "node_modules/",
       "package.json",
       "package-lock.json",
-      "src/"
+      "src/",
+      ".env"
     ],
     "mac": {
       "target": "dmg",
@@ -50,5 +51,8 @@
       "oneClick": false,
       "allowToChangeInstallationDirectory": true
     }
+  },
+  "dependencies": {
+    "dotenv": "^9.0.2"
   }
 }
