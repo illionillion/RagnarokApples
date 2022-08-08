@@ -94,8 +94,9 @@
     margin: auto;
     /* font-weight: bold; */
     font-weight: normal;
-    font-size: 1.6vw;
+    font-size: 2vw;
     padding: 0vw 1.4vw;
+    letter-spacing: 0.1rem;
 }
 
 #dialogue-text-area p {
