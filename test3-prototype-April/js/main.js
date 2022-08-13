@@ -23,7 +23,7 @@ import { CreateMap } from './lib/map.js'
     
     window.addEventListener('resize', FrameSizing)
 
-    window.addEventListener('load',(e)=>{
+    window.addEventListener('load',async (e)=>{
 
         document.oncontextmenu = () => {return false}
 
@@ -36,7 +36,7 @@ import { CreateMap } from './lib/map.js'
         //     })
         // });
 
-        CreateMap(gameState)
+        await CreateMap(gameState)
 
         // // マップアイテムの生成
         // gameState.eventState = 'map'
