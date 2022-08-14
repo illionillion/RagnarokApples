@@ -1,4 +1,5 @@
 const { app, BrowserWindow } = require('electron')
+require('dotenv').config({ path: __dirname + '/../.env' }) // .env読み込み
 
 /**
  * ウィンドウを作成する
@@ -24,7 +25,14 @@ const { app, BrowserWindow } = require('electron')
                 resolve(win)
             }, 2000);
         })
-        win.loadURL('file://' + app.getPath('userData') + '/render.asar/index.html') // asarの中のアプリを開く
+        // 非パッケージ状態はローカルのフォルダを開く
+        // win.loadURL('file://' + app.getPath('userData') + '/render.asar/index.html') // asarの中のアプリを開く // asarを開きたいときはこれ
+        if (app.isPackaged) {
+            win.loadURL('file://' + app.getPath('userData') + '/render.asar/index.html') // asarの中のアプリを開く
+        } else {
+            // console.log(__dirname + '/../' + process.env.LOCAL_BUILD_DIR + '/index.html');
+            win.loadURL('file://' + __dirname + '/../' + process.env.LOCAL_BUILD_DIR + '/index.html') // LOCAL_BUILD_DIRフォルダ内のindex.htmlを開く
+        }
     })
 
 }
