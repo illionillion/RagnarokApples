@@ -506,7 +506,7 @@ export default class ScenarioPlayer {
         console.log("end");
         this.state.eventState = 'map'
 
-        await this.toDarking(e => {
+        await this.toDarking(async e => {
             // シナリオ画面へ遷移
             document.getElementById('textScreen').classList.add('none')
             document.getElementById('mapScreen').classList.remove('none')
@@ -520,7 +520,7 @@ export default class ScenarioPlayer {
             this.TextFloat.classList.add('op0')
 
             // ここに新マップ描画処理
-            CreateMap(this.state)
+            await CreateMap(this.state)
 
         })
 

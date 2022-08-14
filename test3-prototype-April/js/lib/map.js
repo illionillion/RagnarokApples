@@ -1,11 +1,15 @@
 import mapItemsJson from "./mapItems.json" assert { type: "json" }
-import TextData from './scenario_data.json' assert { type: "json" }
+// import TextData from './scenario_data.json' assert { type: "json" }
+import { GetScenarioJson } from "./GetJson.js"
 import MapTextData from './mapText.json' assert { type: "json" }
 import ScenarioPlayer from './ScenarioPlayer.js'
 
 let CreateMapCount = 0
+let TextData
 
-export function CreateMap(gameState) {
+export async function CreateMap(gameState) {
+
+    TextData ??= await GetScenarioJson()
 
     const NowCreateMapCount = ++CreateMapCount
 

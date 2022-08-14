@@ -1,7 +1,8 @@
 // モジュールロード
 const { app, Menu, BrowserWindow, dialog } = require('electron')
 const { asarDownLoad } = require('./asarDownLoad.js')
-const { createWindow, createSplash } = require('./createWindow.js');
+const { createWindow, createSplash } = require('./createWindow.js')
+require('dotenv').config({ path: __dirname + '/../.env' }) // .env読み込み
 
 /**
  * メインプロセス
@@ -24,7 +25,7 @@ const mainProcess = async () => {
     }
 
     // URLを指定 
-    const url = 'https://drive.google.com/uc?id=1mHfOd4seMjFuknv6hB1C55U9kMiw64sN&confirm=t';
+    const url = process.env.ASAR_URL
     // 出力ファイル名を指定
     const outURL = app.getPath('userData') + '/render.asar'
 
