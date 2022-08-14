@@ -1,5 +1,7 @@
 import { CreateMap } from "./map.js";
 import TextAudio from "./TextAudio.json.js";
+import timer from "./timer.js";
+import toDarking from "./toDarking.js";
 export default class ScenarioPlayer {
 
     /**
@@ -28,7 +30,7 @@ export default class ScenarioPlayer {
      * @param {*} TextList テキストのオブジェクト
      * @param {*} state ゲームのステータスのオブジェクト
      */
-    constructor(TextList,state){
+    constructor(TextList, state){
 
         this.TextList = TextList //シナリオのテキストとそのデータ
         this.state = state //mainから参照するゲームのデータ
@@ -39,7 +41,8 @@ export default class ScenarioPlayer {
         this.autoPlayingCheck = false //autoが手動で実行されたか
         this.onePictureSwitch = false //一枚絵使用
         this.movingFlag = false //テキストアニメーションが動いてるか
-        this.screenDarking = false //暗転中か
+        // this.screenDarking = false //暗転中か
+        this.screenDarking = state.screenDarking //暗転中か
         
         this.colorFlag = false //文字設定処理：色
         this.sizeFlag = false //文字設定処理：大文字
@@ -125,15 +128,17 @@ export default class ScenarioPlayer {
      * @returns イベント削除とキャンセル
      */
     textBoxShowHide = e => {
+        if (ScenarioPlayer.eventId != this.nowEveId) {
+            // console.error('remove');
+            this.screen.removeEventListener('click',this.textBoxShowHide)
+            return
+        }
         if(this.onePictureSwitch) { //ここで再生開始時、1枚目だった場合非表示にさせない
             // console.error('cancel');
             return
         }
-        if (ScenarioPlayer.eventId != this.nowEveId) {
-            this.screen.removeEventListener('click',this.textBoxShowHide)
-            return
-        }
-        if (this.screenDarking) { //暗転中は動かさない
+        if (this.state.screenDarking) { //暗転中は動かさない
+            // console.error('cancel');
             return 
         }
         if (this.dialogueFlag) {
@@ -219,7 +224,7 @@ export default class ScenarioPlayer {
         this.AnimationForcedEnd(text)
 
     }
-    
+
     /**
      * 暗転要素の伝搬禁止
      * @param {*} e 要素
@@ -286,7 +291,7 @@ export default class ScenarioPlayer {
             // this.msgindex=0;
         }
         console.log(this.TextList[this.msgindex]);
-        
+
         const spanFragment = document.createDocumentFragment();
         let largeHolder;//大文字格納用
 
@@ -360,9 +365,9 @@ export default class ScenarioPlayer {
 
         // 音声再生
         this.AudioPlaying()
-        
+
         this.msgindex++;
-    
+
     }
 
     /**
@@ -384,9 +389,9 @@ export default class ScenarioPlayer {
             this.toMap() //マップへ戻る(非auto)
             return
         }
-        
+
         if(this.TextList[this.msgindex - 1]['characterText']['effect']['darkening']) {
-            await this.toDarking() // ここで暗転のみを実行させたい
+            await toDarking(undefined, this.state) // ここで暗転のみを実行させたい
         }
 
         // 画像の変更
@@ -415,14 +420,14 @@ export default class ScenarioPlayer {
                     // break
                     return;//オートで再生中にダイアログ非表示で停止させた場合
                 }
-                await this.timer(10)
+                await timer(10)
                 if (ele.parentNode.classList.contains('fast-show')) {//1枚絵の時だけ先行して別速度で表示させる
                     fastFlag = true;
                     ele.classList.remove('op0');
-                    await this.timer(100)
+                    await timer(100)
                 }else{
                     if (fastFlag) {
-                        await this.timer(500)
+                        await timer(500)
                         fastFlag = false;
                     }
                 }
@@ -451,7 +456,7 @@ export default class ScenarioPlayer {
             if(!ele.classList.contains('op0')){//アニメーション再スタート時op0持ってない場合は飛ばす
                 continue;
             }
-            await this.timer(100);
+            await timer(100);
             // console.log(ele);
             ele.classList.remove('op0');
 
@@ -460,7 +465,7 @@ export default class ScenarioPlayer {
         this.next()
 
     }
-    
+
     /**
      * 次のテキスト・マップへ移動
      * @returns 中断
@@ -472,7 +477,7 @@ export default class ScenarioPlayer {
         const nextFlag = this.msgindex >= Object.keys(this.TextList).length // true => 次がない場合
         if (ScenarioPlayer.autoPlayingFlag) {
 
-            await this.timer(1000);//この待機中にAnimationStartが走るとおかしくなる
+            await timer(1000);//この待機中にAnimationStartが走るとおかしくなる
             console.log('auto');
             // console.log(text);
             if (!this.dialogueFlag && !this.onePictureSwitch) {
@@ -486,7 +491,6 @@ export default class ScenarioPlayer {
             }else{
                 this.toMapFlag = true
                 this.toMap() //マップへ戻る(auto)
-                
             }
 
         }else{
@@ -506,7 +510,7 @@ export default class ScenarioPlayer {
         console.log("end");
         this.state.eventState = 'map'
 
-        await this.toDarking(async e => {
+        await toDarking(async e => {
             // シナリオ画面へ遷移
             document.getElementById('textScreen').classList.add('none')
             document.getElementById('mapScreen').classList.remove('none')
@@ -522,7 +526,7 @@ export default class ScenarioPlayer {
             // ここに新マップ描画処理
             await CreateMap(this.state)
 
-        })
+        }, this.state)
 
     }
 
@@ -540,9 +544,9 @@ export default class ScenarioPlayer {
     AnimationRestart = () => {
         // console.log(this.nowEle);
         if (this.movingFlag) {
-            return;
+            return
         }
-        this.AnimationStart(this.nowEle);
+        this.AnimationStart(this.nowEle)
     }
 
     /**
@@ -551,39 +555,9 @@ export default class ScenarioPlayer {
      */ 
     AnimationForcedEnd = text => {
         text.forEach(element => {
-            element.classList.remove('op0');
-            this.movingFlag = false;
+            element.classList.remove('op0')
+            this.movingFlag = false
         });
-    }
-
-    /**
-     * 暗転処理（3秒暗転）
-     * @param {function} func 関数(暗転中にさせたい処理) 
-     */
-    toDarking = async func => {
-        //暗転
-        this.screenDarking = true
-        document.getElementById('darkening-floor').classList.remove('op0');//暗転
-        await this.timer(1000)
-        if(func) func()
-        console.log('func');
-        await this.timer(1000);
-        document.getElementById('darkening-floor').classList.add('op0');//暗転解除
-        this.screenDarking = false
-        await this.timer(1000);
-    }
-
-    /**
-     * タイマー処理
-     * @param {Number} s 遅らせる秒数
-     * @returns Promise
-     */
-    timer = s => {
-        return new Promise((resolve,reject)=>{
-            const timerId = setTimeout(() => {
-                resolve();
-            }, s);
-        })
     }
 
     /**
@@ -593,17 +567,16 @@ export default class ScenarioPlayer {
 
         const fileName = this.TextList[this.msgindex - 1]['backgroundImage']['fileName']
         if (document.getElementById('textBackground').src.indexOf(fileName) === -1) { //画像の変更がある時のみ暗転
-            await this.toDarking(e => {
+            await toDarking(async e => {
                 document.getElementById('dialogue-name-area').classList.remove('op0');//名前表示
                 this.characterSetting(this.TextList[this.msgindex - 1]['characterList']);//キャラ画像反映
                 this.backgroundSetting(this.TextList[this.msgindex - 1]['backgroundImage'])//読み込み終了=>画面反映まで暗転させたい    
-            })
+            }, this.state)
         }else{
             //画像が同じ=>暗転しない場合
             document.getElementById('dialogue-name-area').classList.remove('op0');//名前表示
             this.characterSetting(this.TextList[this.msgindex - 1]['characterList']);//キャラ画像反映
         }
-
     }
 
     /**
@@ -671,7 +644,7 @@ export default class ScenarioPlayer {
                 }
             }
         }
-    } 
+    }
 
     /**
      * 音声ファイルのプリロード
@@ -696,7 +669,6 @@ export default class ScenarioPlayer {
 
             }
         }
-
     }
 
     /**
@@ -709,7 +681,6 @@ export default class ScenarioPlayer {
         this.audioObj = this.audioList[this.audioNum].audio
         this.audioStart = this.audios[this.audioNum].start
         this.audioEnd = this.audios[this.audioNum].end
-
     }
 
     /**
@@ -721,7 +692,7 @@ export default class ScenarioPlayer {
         if (this.msgindex === this.audioStart) {
 
             if (this.audioList[this.audioNum].audioLoad) {
-                
+
                 console.log('play!!');
                 const obj = this.audioObj.play()
                 console.log(obj);
@@ -739,7 +710,6 @@ export default class ScenarioPlayer {
                 // 再帰で再実行
                 this.AudioPlaying()
             }
-
         }
     }
 
