@@ -1,3 +1,4 @@
+import { GetScenarioAudioJson } from "./GetJson.js";
 import { CreateMap } from "./map.js";
 import TextAudio from "./TextAudio.json.js";
 import timer from "./timer.js";
@@ -30,7 +31,7 @@ export default class ScenarioPlayer {
      * @param {*} TextList テキストのオブジェクト
      * @param {*} state ゲームのステータスのオブジェクト
      */
-    constructor(TextList, state){
+    constructor(TextList, TextAudio, state){
 
         this.TextList = TextList //シナリオのテキストとそのデータ
         this.state = state //mainから参照するゲームのデータ
@@ -49,7 +50,8 @@ export default class ScenarioPlayer {
         
         this.nowEveId  =  ++ScenarioPlayer.eventId //ScenarioPlayerの世代、これは違えばイベント削除
 
-        this.audios = TextAudio[state.nowPart] //読み込んだaudioのデータ全体
+        this.audios = []
+        this.audios = TextAudio ?? []//読み込んだaudioのデータ全体
         this.audioNum = 0 //audioの番号
         this.audioStart = 0 //次の音声の再生開始させる番号
         this.audioEnd = 0 //次の音声の再生終了させる番号
@@ -68,6 +70,9 @@ export default class ScenarioPlayer {
      * シナリオ画面遷移とイベントの設定
      */
     init(){
+
+        // this.audios = await GetScenarioAudioJson()[this.state.nowPart] //読み込んだaudioのデータ全体
+        // console.log(this.audios);
         
         this.state.eventState = 'ScenarioPlayer'
 
@@ -689,6 +694,9 @@ export default class ScenarioPlayer {
     AudioPlaying = () => {
         console.log('AudioPlaying');
         console.log(this.audios);
+        if (this.audioNum >= this.audios.length) {
+            return
+        }
         if (this.msgindex === this.audioStart) {
 
             if (this.audioList[this.audioNum].audioLoad) {
@@ -717,6 +725,9 @@ export default class ScenarioPlayer {
      * 音性終了
      */
     AudioStop = () => {
+        if (this.audioNum >= this.audios.length) {
+            return
+        }
         if (this.msgindex >= this.audioEnd + 1) {
             console.log('pause');
             this.audioObj.pause()
