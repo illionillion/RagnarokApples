@@ -521,8 +521,10 @@ export default class ScenarioPlayer {
             // いろいろ初期化
             document.getElementById('textBackground').src='images/background/concept.png'
             document.querySelector('#character-left img').src='images/character/transparent_background.png'
+            document.querySelector('#character-left-center img').src='images/character/transparent_background.png'
             document.querySelector('#character-center img').src='images/character/transparent_background.png'
             document.querySelector('#character-right img').src='images/character/transparent_background.png'
+            document.querySelector('#character-right-center img').src='images/character/transparent_background.png'
             this.TextCover.classList.remove('none')
             this.FloatCheck.classList.add('op0')
             this.TextFloat.classList.add('op0')
