@@ -10,12 +10,22 @@ const rnd = () => {return Math.floor(Math.random() * 100)}
  * @returns 
  */
 export default async function GetJson(url) {
-
-    const random = rnd()
-
-    const res = await fetch(url + '?id=' + random)
+    try {
+        
+        const random = rnd()
     
-    console.log('Get JSON !');
-    return await res.json()
+        const res = await fetch(url + '?id=' + random)
+        
+        console.log(`Get JSON : ${url}`);
+        return await res.json()
+
+    } catch (error) {
+        
+        // console.log(error);
+        console.log(`再取得 : ${url}`);
+        return await GetJson (url) // 403エラーで失敗する時があるのでその時は再帰で再送信
+
+    }
+
 
 }
