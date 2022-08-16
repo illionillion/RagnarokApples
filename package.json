@@ -8,7 +8,7 @@
     "start": "electron .",
     "build-mac": "electron-builder --mac --x64",
     "build-win": "electron-builder --win --x64",
-    "asar-pack": "asar pack"
+    "asar-pack": "asar pack local_build renderer.asar"
   },
   "repository": {
     "type": "git",
