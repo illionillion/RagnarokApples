@@ -8,10 +8,7 @@
     "start": "electron .",
     "build-mac": "electron-builder --mac --x64",
     "build-win": "electron-builder --win --x64",
-    "server": "http-server -o",
-    "length-check": "node TextLengthCount.js",
-    "asar-pack": "asar pack",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "asar-pack": "asar pack"
   },
   "repository": {
     "type": "git",
@@ -27,8 +24,7 @@
     "asar": "^3.1.0",
     "electron": "^17.1.0",
     "electron-builder": "^23.0.3",
-    "eslint": "^8.12.0",
-    "http-server": "^14.1.0"
+    "eslint": "^8.12.0"
   },
   "build": {
     "appId": "net.makitokatsube.app.1st",

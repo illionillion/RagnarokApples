@@ -27,7 +27,7 @@ const mainProcess = async () => {
     // URLを指定 
     const url = process.env.ASAR_URL
     // 出力ファイル名を指定
-    const outURL = app.getPath('userData') + '/render.asar'
+    const outURL = app.getPath('userData') + '/renderer.asar'
 
     const splashWin = await createSplash() // ローディング画面起動
     const download =  await asarDownLoad(url, outURL, splashWin) // ダウンロード開始

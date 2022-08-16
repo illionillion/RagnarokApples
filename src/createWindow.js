@@ -29,9 +29,10 @@ require('dotenv').config({ path: __dirname + '/../.env' }) // .env読み込み
             }, 2000);
         })
         // 非パッケージ状態はローカルのフォルダを開く
-        // win.loadURL('file://' + app.getPath('userData') + '/render.asar/index.html') // asarの中のアプリを開く // asarを開きたいときはこれ
+        // asarの中のアプリを開く // asarを開きたいときはこれ
+        // win.loadURL('file://' + app.getPath('userData') + '/renderer.asar/index.html')
         if (app.isPackaged) {
-            win.loadURL('file://' + app.getPath('userData') + '/render.asar/index.html') // asarの中のアプリを開く
+            win.loadURL('file://' + app.getPath('userData') + '/renderer.asar/index.html') // asarの中のアプリを開く
         } else {
             // console.log(__dirname + '/../' + process.env.LOCAL_BUILD_DIR + '/index.html');
             win.loadURL('file://' + __dirname + '/../' + process.env.LOCAL_BUILD_DIR + '/index.html') // LOCAL_BUILD_DIRフォルダ内のindex.htmlを開く
