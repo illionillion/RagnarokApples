@@ -571,7 +571,7 @@ export default class ScenarioPlayer {
 
         const fileName = this.TextList[this.msgindex - 1]['backgroundImage']['fileName']
         if (document.getElementById('textBackground').src.indexOf(fileName) === -1) { //画像の変更がある時のみ暗転
-            await toDarking(async e => {
+            await toDarking( e => {
                 document.getElementById('dialogue-name-area').classList.remove('op0');//名前表示
                 this.characterSetting(this.TextList[this.msgindex - 1]['characterList']);//キャラ画像反映
                 this.backgroundSetting(this.TextList[this.msgindex - 1]['backgroundImage'])//読み込み終了=>画面反映まで暗転させたい    

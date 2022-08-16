@@ -4,7 +4,6 @@ import GetJson from "./GetJson.js"
 import MapTextData from './mapText.json' assert { type: "json" }
 import ScenarioPlayer from './ScenarioPlayer.js'
 import toDarking from "./toDarking.js"
-import timer from "./timer.js"
 
 let CreateMapCount = 0
 let TextData
@@ -16,18 +15,13 @@ let TextAudio
  */
 export async function CreateMap(gameState) {
 
-    // .envから読み込んできたURL
-    console.log(window?.myAPI?.URLS?.SCENARIO_DATA_JSON);
-    console.log(window?.myAPI?.URLS?.SCENARIO_AUDIO_DATA_JSON);
-
     /*
         データ取得
         ここのURLを.envで隠したい
         GetJson以外の方法（Electronのメインプロセス）でhttpリクエストでJSONファイルをダウンロードするやつも作るか要検討
     */
-    TextData ??= await GetJson(window?.myAPI?.URLS?.SCENARIO_DATA_JSON)
-    await timer(1000)
-    TextAudio ??= await GetJson(window?.myAPI?.URLS?.SCENARIO_AUDIO_DATA_JSON)
+    TextData ??= await GetJson(window?.myAPI?.URLS?.SCENARIO_DATA_JSON) // .envから読み込んできたURL
+    TextAudio ??= await GetJson(window?.myAPI?.URLS?.SCENARIO_AUDIO_DATA_JSON) // .envから読み込んできたURL
 
     const NowCreateMapCount = ++CreateMapCount
 
@@ -72,7 +66,7 @@ export async function CreateMap(gameState) {
                     if( e.target === yesBtn ) { // yesが押された
 
                         // 暗転
-                        await toDarking(async e => {
+                        await toDarking( e => {
                             // シナリオ画面へ遷移
                             document.getElementById('textScreen').classList.remove('none')
                             document.getElementById('mapScreen').classList.add('none')
