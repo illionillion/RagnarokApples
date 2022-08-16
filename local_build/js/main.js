@@ -23,9 +23,9 @@ import toDarking from './lib/toDarking.js'
 
     window.addEventListener('resize', FrameSizing)
 
-    window.addEventListener('load',async (e)=>{
+    window.addEventListener('load', async (e)=>{
 
-        document.oncontextmenu = () => {return false}
+        document.addEventListener('contextmenu', () => {return false})
 
         FrameSizing()
 
