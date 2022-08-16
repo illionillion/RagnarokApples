@@ -14,7 +14,10 @@ require('dotenv').config({ path: __dirname + '/../.env' }) // .env読み込み
             minHeight: 768,
             icon: __dirname + '/app.png',
             webPreferences:{
-                nodeIntegration:true,
+                // nodeIntegration:true,
+                // enableRemoteModule: true,
+                contextIsolation: true,
+                preload: __dirname + '/preload.js' //プリロードスクリプト
             },
             show: false
         })
