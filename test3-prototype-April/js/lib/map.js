@@ -1,6 +1,6 @@
 import mapItemsJson from "./mapItems.json" assert { type: "json" }
 // import TextData from './scenario_data.json' assert { type: "json" }
-import { GetScenarioAudioJson, GetScenarioJson } from "./GetJson.js"
+import GetJson from "./GetJson.js"
 import MapTextData from './mapText.json' assert { type: "json" }
 import ScenarioPlayer from './ScenarioPlayer.js'
 import toDarking from "./toDarking.js"
@@ -16,10 +16,18 @@ let TextAudio
  */
 export async function CreateMap(gameState) {
 
-    // データ取得
-    TextData ??= await GetScenarioJson()
+    // .envから読み込んできたURL
+    console.log(window?.myAPI?.URLS?.SCENARIO_DATA_JSON);
+    console.log(window?.myAPI?.URLS?.SCENARIO_AUDIO_DATA_JSON);
+
+    /*
+        データ取得
+        ここのURLを.envで隠したい
+        GetJson以外の方法（Electronのメインプロセス）でhttpリクエストでJSONファイルをダウンロードするやつも作るか要検討
+    */
+    TextData ??= await GetJson('https://ji9xputuw8gwgczk2gnxzg.on.drv.tw/www.render.asar.server.com/scenario_data.json')
     await timer(1000)
-    TextAudio ??= await GetScenarioAudioJson()
+    TextAudio ??= await GetJson('https://ji9xputuw8gwgczk2gnxzg.on.drv.tw/www.render.asar.server.com/scenario_audio_data.json')
 
     const NowCreateMapCount = ++CreateMapCount
 
