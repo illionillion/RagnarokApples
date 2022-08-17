@@ -2,7 +2,7 @@ import timer from "./timer.js";
 
 /**
  * 暗転処理（3秒暗転）
- * @param {function} func 関数(暗転中にさせたい処理)
+ * @param {function} func コールバック関数(暗転中にさせたい処理)
  * @param {object} state 
  */
 const toDarking = async (func, state) => {
@@ -12,17 +12,7 @@ const toDarking = async (func, state) => {
     await timer(1000)
     // funcがfunctionでない可能性もあるのでそれの処理
     if(func && typeof func === 'function') {
-        // 非同期かどうか
-        switch (func.constructor.name) {
-            case 'Function':
-                func()
-                break;
-            case 'AsyncFunction':
-                await func() // 非同期の場合はawaitをつけて実行
-                break;
-            default:
-                break;
-        }
+        await func() // コールバック実行
         console.log(func.constructor.name);
     } else {
         console.log('not function');
