@@ -1,0 +1,32 @@
+{
+    "A0": {
+        "mapMessageText": "さぁ、どこへ行こう？",
+        "tipsMessage": [
+            "アイウエオ",
+            "カキクケコ",
+            "サシスセソ",
+            "タチツテト"
+        ],
+        "backgroundImage": "map.png"
+    },
+    "A1": {
+        "mapMessageText": "さて、どこへ行こうか？",
+        "tipsMessage": [
+            "サシスセソ",
+            "アイウエオ",
+            "カキクケコ",
+            "タチツテト"
+        ],
+        "backgroundImage": "map.png"
+    },
+    "A2-1": {
+        "mapMessageText": "さてと、どこへ行こうかな？",
+        "tipsMessage": [
+            "カキクケコ",
+            "サシスセソ",
+            "アイウエオ",
+            "タチツテト"
+        ],
+        "backgroundImage": "map.png"
+    }
+}
