@@ -1,7 +1,5 @@
-import mapItemsJson from "./mapItems.json" assert { type: "json" }
-// import TextData from './scenario_data.json' assert { type: "json" }
+import mapItemsJson from "./json/mapItems.json" assert { type: "json" }
 import GetJson from "./GetJson.js"
-import MapTextData from './mapText.json' assert { type: "json" }
 import ScenarioPlayer from './ScenarioPlayer.js'
 import toDarking from "./toDarking.js"
 
@@ -37,8 +35,9 @@ export async function CreateMap(gameState) {
     // マップアイテムの生成
     gameState.eventState = 'map'
     const eleFragment = document.createDocumentFragment()
+    const mapData = mapItemsJson[gameState.nowPart]
     // シナリオ格納
-    const mapItems = mapItemsJson[gameState.nowPart]
+    const mapItems = mapData && mapData["items"]
     // console.log(gameState.nowPart);
     // console.log(mapItems);
     for (const itemId in mapItems) {
@@ -48,6 +47,7 @@ export async function CreateMap(gameState) {
             itemEle.id = itemId
             itemEle.className = 'map-touch'
             itemEle.dataset.place = item.place
+            // itemEle.style.backgroundImage = `url("images/mapicon/${item["iconImage"]}")` // cssでは却下、imgタグ作る
 
             // イベント付与
             itemEle.addEventListener('click',(e) => {
@@ -114,17 +114,16 @@ export async function CreateMap(gameState) {
     document.getElementById('mapItems').appendChild(eleFragment)
 
     const spb = document.querySelector('#speechBubble .textarea')
-    const data = MapTextData[gameState.nowPart] 
-    const msg = data ? data['mapMessageText'] : 'テキスト切れ'
+    const msg = mapData ? mapData['mapMessageText'] : 'テキスト切れ'
     spb.textContent = msg
 
-    const floatSpbTextList = data ? data['tipsMessage'] : 
-        [
-            'Tips:黒い四角の範囲が選択できます',
-            'どこへ行こう？',
-            '上の方かな？',
-            '下でもあり',
-        ]
+    const floatSpbTextList = mapData ? mapData['tipsMessage'] : 
+        {
+            0 : 'Tips:黒い四角の範囲が選択できます',
+            1 : 'どこへ行こう？',
+            2 : '上の方かな？',
+            3 : '下でもあり',
+        }
     let floatSpbTextCount = 0
     // マップ②の画面下のテキスト処理
     const floatSpbText = document.querySelector('#FloatSpeechBubble .textarea')
@@ -138,16 +137,16 @@ export async function CreateMap(gameState) {
 
             // console.log(e.target.innerHTML);
             floatSpbTextCount++
-            if (floatSpbTextCount >= floatSpbTextList.length) floatSpbTextCount = 0
+            if (floatSpbTextCount >= Object.keys(floatSpbTextList).length) floatSpbTextCount = 0
             e.target.innerHTML = floatSpbTextList[floatSpbTextCount]
         }
     }()))
 
     const mapImg = document.getElementById('mapBackground')
-    const imgSrc = data ? `images/background/${data['backgroundImage']}` : 'images/background/map.png'
+    const imgSrc = mapData ? `images/background/${mapData['backgroundImage']}` : 'images/background/map.png'
     // console.log(imgSrc);
     mapImg.setAttribute('src', imgSrc)
 
-    if( !mapItems ) alert("ゲーム終了")
+    if( !mapData ) alert("ゲーム終了")
 
 }

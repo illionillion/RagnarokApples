@@ -1,5 +1,5 @@
 import timer from "./timer.js"
-import localTextData from './scenario_data.json' assert { type: "json" }
+// import localTextData from './json/scenario_data.json' assert { type: "json" }
 
 /**
  * 乱数生成
@@ -20,7 +20,7 @@ let retryTime = 0
 export default async function GetJson(url) {
 
     // 10回超えたらローカルのデータを渡す // これは最悪の場合
-    if(retryTime > 10) return localTextData
+    if(retryTime > 10) return // localTextData // シナリオとオーディオでわけれるようにしたい
 
     const random = rnd()
 

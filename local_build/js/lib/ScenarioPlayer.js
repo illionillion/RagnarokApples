@@ -1,5 +1,4 @@
 import { CreateMap } from "./map.js";
-import TextAudio from "./TextAudio.json.js";
 import timer from "./timer.js";
 import toDarking from "./toDarking.js";
 export default class ScenarioPlayer {

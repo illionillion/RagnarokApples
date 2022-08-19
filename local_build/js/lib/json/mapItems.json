@@ -1,0 +1,82 @@
+{
+    "A0" : {
+        "items": {
+            "point1":{
+                "place" : "場所1",
+                "partKey" : "A1",
+                "style" : {
+                    "width" : "13%",
+                    "height" : "18%",
+                    "top" : "7%",
+                    "left" : "17%"
+                },
+                "iconImage": "app.png"
+            }
+        },
+        "mapMessageText": "さぁ、どこへ行こう？",
+        "tipsMessage": {
+            "0": "アイウエオ",
+            "1": "カキクケコ",
+            "2": "サシスセソ",
+            "3": "タチツテト"
+        },
+        "backgroundImage": "map.png"
+    },
+    "A1" : {
+        "items": {
+            "point1":{
+                "place" : "場所1",
+                "partKey" : "A1",
+                "style" : {
+                    "width" : "13%",
+                    "height" : "18%",
+                    "top" : "7%",
+                    "left" : "17%"
+                },
+                "iconImage": "app.png"
+            },
+            "point2":{
+                "place" : "場所2",
+                "partKey" : "A2-1",
+                "style" : {
+                    "width" : "16%",
+                    "height" : "25%",
+                    "top" : "53%",
+                    "left" : "13%"
+                },
+                "iconImage": "app.png"
+            }
+        },
+        "mapMessageText": "さて、どこへ行こうか？",
+        "tipsMessage": {
+            "0": "サシスセソ",
+            "1": "アイウエオ",
+            "2": "カキクケコ",
+            "3": "タチツテト"
+        },
+        "backgroundImage": "map.png"
+    },
+    "A2-1" : {
+        "items": {
+            "point1":{
+                "place" : "場所3",
+                "partKey" : "A2-2",
+                "style" : {
+                    "width" : "19%",
+                    "height" : "28%",
+                    "top" : "46%",
+                    "left" : "45%"
+                },
+                "iconImage": "app.png"
+            }
+        },
+        "mapMessageText": "さてと、どこへ行こうかな？",
+        "tipsMessage": {
+            "0": "カキクケコ",
+            "1": "サシスセソ",
+            "2": "アイウエオ",
+            "3": "タチツテト"
+        },
+        "backgroundImage": "map.png"
+    }
+}
