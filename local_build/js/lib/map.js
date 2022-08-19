@@ -5,8 +5,17 @@ import MapTextData from './mapText.json' assert { type: "json" }
 import ScenarioPlayer from './ScenarioPlayer.js'
 import toDarking from "./toDarking.js"
 
+/**
+ * マップ作成の世代ID
+ */
 let CreateMapCount = 0
+/**
+ * テキストのデータ
+ */
 let TextData
+/**
+ * オーディオのデータ
+ */
 let TextAudio
 
 /**

@@ -15,7 +15,7 @@ let retryTime = 0
 /**
  * DriveToWebからシナリオデータのJSONを取得
  * @param {string} url 
- * @returns 
+ * @returns {object} JSON
  */
 export default async function GetJson(url) {
 
