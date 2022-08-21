@@ -47,15 +47,17 @@ export async function CreateMap(gameState) {
             itemEle.id = itemId
             itemEle.className = 'map-touch'
             itemEle.dataset.place = item.place
-            // itemEle.style.backgroundImage = `url("images/mapicon/${item["iconImage"]}")` // cssでは却下、imgタグ作る
+            const imgEle = document.createElement('img')
+            imgEle.src = `images/mapicon/${item["iconImage"]}`
+            itemEle.appendChild(imgEle)
 
-            // イベント付与
-            itemEle.addEventListener('click',(e) => {
+            // アイコンタッチ時のイベント付与
+            imgEle.addEventListener('click',(e) => {
 
                 const float = document.getElementById('mapWrapper')
                 float.classList.remove('none')
                 const pname = document.getElementById('placeName')
-                const placeName = e.target.dataset.place
+                const placeName = e.target.parentElement.dataset.place
                 pname.innerHTML = placeName
 
                 const partKey = item.partKey

@@ -13,6 +13,7 @@
                 "iconImage": "app.png"
             }
         },
+        "mapMessageCharacter": "bengal.png",
         "mapMessageText": "さぁ、どこへ行こう？",
         "tipsMessage": {
             "0": "アイウエオ",
@@ -47,6 +48,7 @@
                 "iconImage": "app.png"
             }
         },
+        "mapMessageCharacter": "bibian.png",
         "mapMessageText": "さて、どこへ行こうか？",
         "tipsMessage": {
             "0": "サシスセソ",
@@ -70,6 +72,7 @@
                 "iconImage": "app.png"
             }
         },
+        "mapMessageCharacter": "tau-test.png",
         "mapMessageText": "さてと、どこへ行こうかな？",
         "tipsMessage": {
             "0": "カキクケコ",
