@@ -54,6 +54,9 @@
     background-color: rgba(0, 0, 0, 0.699);
     animation: flash 4.5s linear infinite;
 }
+.map-touch img{
+    width: 100%;
+}
 /* 点滅アニメーション */
 @keyframes flash {
     0%,100% {

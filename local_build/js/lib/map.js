@@ -47,16 +47,27 @@ export async function CreateMap(gameState) {
             itemEle.id = itemId
             itemEle.className = 'map-touch'
             itemEle.dataset.place = item.place
-            // itemEle.style.backgroundImage = `url("images/mapicon/${item["iconImage"]}")` // cssでは却下、imgタグ作る
+            const imgEle = document.createElement('img')
+            imgEle.src = `images/mapicon/${item["iconImage"]}`
+            itemEle.appendChild(imgEle)
 
-            // イベント付与
-            itemEle.addEventListener('click',(e) => {
+            // アイコンタッチ時のイベント付与
+            imgEle.addEventListener('click',(e) => {
 
                 const float = document.getElementById('mapWrapper')
                 float.classList.remove('none')
                 const pname = document.getElementById('placeName')
-                const placeName = e.target.dataset.place
+                const placeName = e.target.parentElement.dataset.place
                 pname.innerHTML = placeName
+
+                // 登場キャラアイコン変更
+                const mapCharacterListImgs = document.querySelectorAll('#mapCharacterList ul li img')
+                for (const i in mapCharacterListImgs) {
+                    if (Object.hasOwnProperty.call(mapCharacterListImgs, i)) {
+                        const ele = mapCharacterListImgs[i];
+                        ele.src = `images/character/icon/${item["characterIcons"][i]}`
+                    }
+                }
 
                 const partKey = item.partKey
 
@@ -113,9 +124,17 @@ export async function CreateMap(gameState) {
     document.getElementById('mapItems').innerHTML = ''
     document.getElementById('mapItems').appendChild(eleFragment)
 
+    // 立ち絵変更
+    const mapTextCharacter = document.querySelector('#mapTextCharacter img')
+    mapTextCharacter.src = mapData ? `images/character/${mapData["mapMessageCharacter"]}` : `images/character/bengal.png`
+    
     const spb = document.querySelector('#speechBubble .textarea')
     const msg = mapData ? mapData['mapMessageText'] : 'テキスト切れ'
     spb.textContent = msg
+    
+    // tipsのアイコン変更
+    const mapTextIcon = document.querySelector('#mapTextIcon img')
+    mapTextIcon.src = mapData ? `images/character/icon/${mapData["mapTextIcon"]}` : `images/character/icon/app.png`
 
     const floatSpbTextList = mapData ? mapData['tipsMessage'] : 
         {
@@ -146,6 +165,9 @@ export async function CreateMap(gameState) {
     const imgSrc = mapData ? `images/background/${mapData['backgroundImage']}` : 'images/background/map.png'
     // console.log(imgSrc);
     mapImg.setAttribute('src', imgSrc)
+
+    // 日付
+    document.querySelector('#date > p').innerHTML = mapData ? mapData["day"] : '0日目'
 
     if( !mapData ) alert("ゲーム終了")
 

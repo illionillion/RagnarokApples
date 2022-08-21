@@ -58,15 +58,15 @@ import toDarking from './lib/toDarking.js'
                 // console.log(gameState.FloatCheck)
             })
 
-            /**
-             * 日付の設定
-             */
-            const setDate = () => {
-                // 日付の設定
-                document.querySelector('#date > p').innerHTML = `${gameState.nowDate}日目`
-            }
+            // /**
+            //  * 日付の設定
+            //  */
+            // const setDate = () => {
+            //     // 日付の設定
+            //     document.querySelector('#date > p').innerHTML = `${gameState.nowDate}日目`
+            // }
 
-            setDate()
+            // setDate()
 
         }, gameState)
 
