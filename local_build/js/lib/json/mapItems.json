@@ -10,11 +10,17 @@
                     "top" : "7%",
                     "left" : "17%"
                 },
-                "iconImage": "app.png"
+                "iconImage": "app.png",
+                "characterIcons": {
+                    "0": "tau-sample.jpg",
+                    "1": "app.png",
+                    "2": "tau-sample.jpg"
+                }
             }
         },
         "mapMessageCharacter": "bengal.png",
         "mapMessageText": "さぁ、どこへ行こう？",
+        "mapTextIcon": "tau-sample.jpg",
         "tipsMessage": {
             "0": "アイウエオ",
             "1": "カキクケコ",
@@ -34,7 +40,12 @@
                     "top" : "7%",
                     "left" : "17%"
                 },
-                "iconImage": "app.png"
+                "iconImage": "app.png",
+                "characterIcons": {
+                    "0": "tau-sample.jpg",
+                    "1": "tau-sample.jpg",
+                    "2": "tau-sample.jpg"
+                }
             },
             "point2":{
                 "place" : "場所2",
@@ -45,11 +56,17 @@
                     "top" : "53%",
                     "left" : "13%"
                 },
-                "iconImage": "app.png"
+                "iconImage": "app.png",
+                "characterIcons": {
+                    "0": "tau-sample.jpg",
+                    "1": "tau-sample.jpg",
+                    "2": "tau-sample.jpg"
+                }
             }
         },
         "mapMessageCharacter": "bibian.png",
         "mapMessageText": "さて、どこへ行こうか？",
+        "mapTextIcon": "tau-sample.jpg",
         "tipsMessage": {
             "0": "サシスセソ",
             "1": "アイウエオ",
@@ -69,11 +86,17 @@
                     "top" : "46%",
                     "left" : "45%"
                 },
-                "iconImage": "app.png"
+                "iconImage": "app.png",
+                "characterIcons": {
+                    "0": "tau-sample.jpg",
+                    "1": "tau-sample.jpg",
+                    "2": "tau-sample.jpg"
+                }
             }
         },
         "mapMessageCharacter": "tau-test.png",
         "mapMessageText": "さてと、どこへ行こうかな？",
+        "mapTextIcon": "tau-sample.jpg",
         "tipsMessage": {
             "0": "カキクケコ",
             "1": "サシスセソ",

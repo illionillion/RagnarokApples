@@ -60,6 +60,15 @@ export async function CreateMap(gameState) {
                 const placeName = e.target.parentElement.dataset.place
                 pname.innerHTML = placeName
 
+                // 登場キャラアイコン変更
+                const mapCharacterListImgs = document.querySelectorAll('#mapCharacterList ul li img')
+                for (const i in mapCharacterListImgs) {
+                    if (Object.hasOwnProperty.call(mapCharacterListImgs, i)) {
+                        const ele = mapCharacterListImgs[i];
+                        ele.src = `images/character/icon/${item["characterIcons"][i]}`
+                    }
+                }
+
                 const partKey = item.partKey
 
                 const yesBtn = document.getElementById('mapSelectYes')
@@ -115,9 +124,17 @@ export async function CreateMap(gameState) {
     document.getElementById('mapItems').innerHTML = ''
     document.getElementById('mapItems').appendChild(eleFragment)
 
+    // 立ち絵変更
+    const mapTextCharacter = document.querySelector('#mapTextCharacter img')
+    mapTextCharacter.src = mapData ? `images/character/${mapData["mapMessageCharacter"]}` : `images/character/bengal.png`
+    
     const spb = document.querySelector('#speechBubble .textarea')
     const msg = mapData ? mapData['mapMessageText'] : 'テキスト切れ'
     spb.textContent = msg
+    
+    // tipsのアイコン変更
+    const mapTextIcon = document.querySelector('#mapTextIcon img')
+    mapTextIcon.src = mapData ? `images/character/icon/${mapData["mapTextIcon"]}` : `images/character/icon/app.png`
 
     const floatSpbTextList = mapData ? mapData['tipsMessage'] : 
         {
