@@ -108,7 +108,7 @@
 /* キャラクター */
 #character-area{
     position: absolute;
-    /* top: 7%; */
+    top: 7%;
     bottom: 0%;
     display: flex;
     width: 100%;
@@ -120,4 +120,14 @@
 #character-area div img{
     width: 100%;
     object-fit: fill;
+}
+
+#character-left {
+    position: relative;
+    left: 5%;
+}
+
+#character-right {
+    position: relative;
+    right: 5%;
 }

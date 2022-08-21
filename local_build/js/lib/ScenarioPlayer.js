@@ -1,5 +1,4 @@
 import { CreateMap } from "./map.js";
-import TextAudio from "./TextAudio.json.js";
 import timer from "./timer.js";
 import toDarking from "./toDarking.js";
 export default class ScenarioPlayer {
@@ -297,14 +296,27 @@ export default class ScenarioPlayer {
         console.log(this.TextList[this.msgindex]);
 
         const spanFragment = document.createDocumentFragment();
-        let largeHolder;//大文字格納用
+        /**
+         * 大文字格納用
+         */
+        let largeHolder
 
         const pFragment = document.createDocumentFragment();
         let pEle = document.createElement('p')
-        let pCount = 0 //行カウント
 
-        let speakerName = this.TextList[this.msgindex]['characterText']['name'];//名前
+        /**
+         * 行カウント
+         */
+        let pCount = 0
+
+        /**
+         * 名前取得
+         */
+        let speakerName = this.TextList[this.msgindex]['characterText']['name']
         for (let i = 0; i < this.TextList[this.msgindex]['characterText']['text'].length; i++) {
+            /**
+             * 取得した文字が記号だった場合は文字演出の終始なのでフラグを反転させてcontinueする
+             */
             const element = this.TextList[this.msgindex]['characterText']['text'][i];
             if (element === '/') {//赤文字
                 // console.log(element);
@@ -326,7 +338,7 @@ export default class ScenarioPlayer {
             }
             if (element === '$') {// 改行
                 pEle.appendChild(spanFragment)
-                pEle.dataset.pcount=pCount
+                pEle.dataset.pcount = pCount
                 pFragment.appendChild(pEle)
                 pEle = document.createElement('p')//初期化
                 this.colorFlag = false
@@ -336,11 +348,12 @@ export default class ScenarioPlayer {
             }
             const span = document.createElement('span');//1文字格納
             span.textContent = element;
-            span.className = 'op0';
-            if (this.colorFlag) {
+            span.className = 'op0'; // 透明クラス
+            // 上の処理でフラグがtrueになっていたら対応するクラスをspanタグに付与する
+            if (this.colorFlag) { // 赤文字
                 span.classList.add('red');
             }
-            if (this.sizeFlag) {
+            if (this.sizeFlag) { // 大文字
                 span.classList.add('large');
                 if (!largeHolder) {
                     largeHolder = document.createElement('span');
@@ -403,6 +416,10 @@ export default class ScenarioPlayer {
 
         // テキスト1文字ずつ描画
         this.movingFlag=true;
+
+        /**
+         * 1枚絵の時だけ先行して別速度で表示させるループ
+         */
         const p = new Promise( async (resolve,reject)=>{
             let fastFlag = false;
             for (const ele of text) {
@@ -438,6 +455,7 @@ export default class ScenarioPlayer {
             }
             resolve();
         })
+        // 通常時のループ
         for (const ele of text) {
             if (!this.movingFlag) {
                 // console.log("stop");
@@ -573,7 +591,7 @@ export default class ScenarioPlayer {
 
         const fileName = this.TextList[this.msgindex - 1]['backgroundImage']['fileName']
         if (document.getElementById('textBackground').src.indexOf(fileName) === -1) { //画像の変更がある時のみ暗転
-            await toDarking(async e => {
+            await toDarking( e => {
                 document.getElementById('dialogue-name-area').classList.remove('op0');//名前表示
                 this.characterSetting(this.TextList[this.msgindex - 1]['characterList']);//キャラ画像反映
                 this.backgroundSetting(this.TextList[this.msgindex - 1]['backgroundImage'])//読み込み終了=>画面反映まで暗転させたい    

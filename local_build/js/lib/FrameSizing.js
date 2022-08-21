@@ -21,9 +21,9 @@ export default function FrameSizing(){
 
     /**
      * 最大公約数を求める
-     * @param {*} w 横幅
-     * @param {*} h 高さ
-     * @returns 
+     * @param {number} w 横幅
+     * @param {number} h 高さ
+     * @returns {number}
      */
     function gcd(w, h) {
         if (h === 0) {

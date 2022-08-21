@@ -1,11 +1,5 @@
 "use strict"
-import ScenarioPlayer from './lib/ScenarioPlayer.js'
-// import TextData from './lib/TextDataA.json.js'
-// import TextData from './lib/TextDataZeroDay.json.js'
-import TextData from './lib/scenario_data.json' assert { type: "json" }
 import FrameSizing from "./lib/FrameSizing.js"
-// import mapItems from "./lib/mapItems.json.js" 
-import mapItemsJson from "./lib/mapItems.json" assert { type: "json" }
 import { CreateMap } from './lib/map.js'
 import toDarking from './lib/toDarking.js'
 
@@ -23,9 +17,9 @@ import toDarking from './lib/toDarking.js'
 
     window.addEventListener('resize', FrameSizing)
 
-    window.addEventListener('load',async (e)=>{
+    window.addEventListener('load', async (e)=>{
 
-        document.oncontextmenu = () => {return false}
+        document.addEventListener('contextmenu', () => {return false})
 
         FrameSizing()
 
@@ -64,15 +58,15 @@ import toDarking from './lib/toDarking.js'
                 // console.log(gameState.FloatCheck)
             })
 
-            /**
-             * 日付の設定
-             */
-            const setDate = () => {
-                // 日付の設定
-                document.querySelector('#date > p').innerHTML = `${gameState.nowDate}日目`
-            }
+            // /**
+            //  * 日付の設定
+            //  */
+            // const setDate = () => {
+            //     // 日付の設定
+            //     document.querySelector('#date > p').innerHTML = `${gameState.nowDate}日目`
+            // }
 
-            setDate()
+            // setDate()
 
         }, gameState)
 

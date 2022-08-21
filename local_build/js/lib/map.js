@@ -1,13 +1,19 @@
-import mapItemsJson from "./mapItems.json" assert { type: "json" }
-// import TextData from './scenario_data.json' assert { type: "json" }
+import mapItemsJson from "./json/mapItems.json" assert { type: "json" }
 import GetJson from "./GetJson.js"
-import MapTextData from './mapText.json' assert { type: "json" }
 import ScenarioPlayer from './ScenarioPlayer.js'
 import toDarking from "./toDarking.js"
-import timer from "./timer.js"
 
+/**
+ * マップ作成の世代ID
+ */
 let CreateMapCount = 0
+/**
+ * テキストのデータ
+ */
 let TextData
+/**
+ * オーディオのデータ
+ */
 let TextAudio
 
 /**
@@ -16,26 +22,22 @@ let TextAudio
  */
 export async function CreateMap(gameState) {
 
-    // .envから読み込んできたURL
-    console.log(window?.myAPI?.URLS?.SCENARIO_DATA_JSON);
-    console.log(window?.myAPI?.URLS?.SCENARIO_AUDIO_DATA_JSON);
-
     /*
         データ取得
         ここのURLを.envで隠したい
         GetJson以外の方法（Electronのメインプロセス）でhttpリクエストでJSONファイルをダウンロードするやつも作るか要検討
     */
-    TextData ??= await GetJson(window?.myAPI?.URLS?.SCENARIO_DATA_JSON)
-    await timer(1000)
-    TextAudio ??= await GetJson(window?.myAPI?.URLS?.SCENARIO_AUDIO_DATA_JSON)
+    TextData ??= await GetJson(window?.myAPI?.URLS?.SCENARIO_DATA_JSON) // .envから読み込んできたURL
+    TextAudio ??= await GetJson(window?.myAPI?.URLS?.SCENARIO_AUDIO_DATA_JSON) // .envから読み込んできたURL
 
     const NowCreateMapCount = ++CreateMapCount
 
     // マップアイテムの生成
     gameState.eventState = 'map'
     const eleFragment = document.createDocumentFragment()
+    const mapData = mapItemsJson[gameState.nowPart]
     // シナリオ格納
-    const mapItems = mapItemsJson[gameState.nowPart]
+    const mapItems = mapData && mapData["items"]
     // console.log(gameState.nowPart);
     // console.log(mapItems);
     for (const itemId in mapItems) {
@@ -45,15 +47,27 @@ export async function CreateMap(gameState) {
             itemEle.id = itemId
             itemEle.className = 'map-touch'
             itemEle.dataset.place = item.place
+            const imgEle = document.createElement('img')
+            imgEle.src = `images/mapicon/${item["iconImage"]}`
+            itemEle.appendChild(imgEle)
 
-            // イベント付与
-            itemEle.addEventListener('click',(e) => {
+            // アイコンタッチ時のイベント付与
+            imgEle.addEventListener('click',(e) => {
 
                 const float = document.getElementById('mapWrapper')
                 float.classList.remove('none')
                 const pname = document.getElementById('placeName')
-                const placeName = e.target.dataset.place
+                const placeName = e.target.parentElement.dataset.place
                 pname.innerHTML = placeName
+
+                // 登場キャラアイコン変更
+                const mapCharacterListImgs = document.querySelectorAll('#mapCharacterList ul li img')
+                for (const i in mapCharacterListImgs) {
+                    if (Object.hasOwnProperty.call(mapCharacterListImgs, i)) {
+                        const ele = mapCharacterListImgs[i];
+                        ele.src = `images/character/icon/${item["characterIcons"][i]}`
+                    }
+                }
 
                 const partKey = item.partKey
 
@@ -72,7 +86,7 @@ export async function CreateMap(gameState) {
                     if( e.target === yesBtn ) { // yesが押された
 
                         // 暗転
-                        await toDarking(async e => {
+                        await toDarking( e => {
                             // シナリオ画面へ遷移
                             document.getElementById('textScreen').classList.remove('none')
                             document.getElementById('mapScreen').classList.add('none')
@@ -110,18 +124,25 @@ export async function CreateMap(gameState) {
     document.getElementById('mapItems').innerHTML = ''
     document.getElementById('mapItems').appendChild(eleFragment)
 
+    // 立ち絵変更
+    const mapTextCharacter = document.querySelector('#mapTextCharacter img')
+    mapTextCharacter.src = mapData ? `images/character/${mapData["mapMessageCharacter"]}` : `images/character/bengal.png`
+    
     const spb = document.querySelector('#speechBubble .textarea')
-    const data = MapTextData[gameState.nowPart] 
-    const msg = data ? data['mapMessageText'] : 'テキスト切れ'
+    const msg = mapData ? mapData['mapMessageText'] : 'テキスト切れ'
     spb.textContent = msg
+    
+    // tipsのアイコン変更
+    const mapTextIcon = document.querySelector('#mapTextIcon img')
+    mapTextIcon.src = mapData ? `images/character/icon/${mapData["mapTextIcon"]}` : `images/character/icon/app.png`
 
-    const floatSpbTextList = data ? data['tipsMessage'] : 
-        [
-            'Tips:黒い四角の範囲が選択できます',
-            'どこへ行こう？',
-            '上の方かな？',
-            '下でもあり',
-        ]
+    const floatSpbTextList = mapData ? mapData['tipsMessage'] : 
+        {
+            0 : 'Tips:黒い四角の範囲が選択できます',
+            1 : 'どこへ行こう？',
+            2 : '上の方かな？',
+            3 : '下でもあり',
+        }
     let floatSpbTextCount = 0
     // マップ②の画面下のテキスト処理
     const floatSpbText = document.querySelector('#FloatSpeechBubble .textarea')
@@ -135,16 +156,19 @@ export async function CreateMap(gameState) {
 
             // console.log(e.target.innerHTML);
             floatSpbTextCount++
-            if (floatSpbTextCount >= floatSpbTextList.length) floatSpbTextCount = 0
+            if (floatSpbTextCount >= Object.keys(floatSpbTextList).length) floatSpbTextCount = 0
             e.target.innerHTML = floatSpbTextList[floatSpbTextCount]
         }
     }()))
 
     const mapImg = document.getElementById('mapBackground')
-    const imgSrc = data ? `images/background/${data['backgroundImage']}` : 'images/background/map.png'
+    const imgSrc = mapData ? `images/background/${mapData['backgroundImage']}` : 'images/background/map.png'
     // console.log(imgSrc);
     mapImg.setAttribute('src', imgSrc)
 
-    if( !mapItems ) alert("ゲーム終了")
+    // 日付
+    document.querySelector('#date > p').innerHTML = mapData ? mapData["day"] : '0日目'
+
+    if( !mapData ) alert("ゲーム終了")
 
 }
