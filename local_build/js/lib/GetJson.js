@@ -19,12 +19,19 @@ let retryTime = 0
  */
 export default async function GetJson(url) {
 
+    // ファイル名切り出し
+    const filename = url.split('/').pop()
+
     // 10回超えたらローカルのデータを渡す // これは最悪の場合
-    if(retryTime > 10) return // localTextData // シナリオとオーディオでわけれるようにしたい
+    if(retryTime > 10) {
+        const res = await fetch(`./js/lib/json/${filename}`) // シナリオとオーディオでわけれるようにしたい
+        return await res.json()
+    }
 
     const random = rnd()
 
     const res = await fetch(url + '?id=' + random)
+    // const res = await fetch(`./js/lib/json/${filename}`)
     
     if (res.status === 403) {
         console.log(`再取得 : ${url}`)
