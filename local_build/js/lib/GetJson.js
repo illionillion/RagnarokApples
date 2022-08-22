@@ -41,6 +41,12 @@ export default async function GetJson(url) {
     }
 
     console.log(`Get JSON : ${url}`);
-    return await res.json()
+
+    const result = await res.json()
+
+    // 成功した場合jsonフォルダに書き出し
+    window?.myAPI?.writeJson(filename, result)
+
+    return result
 
 }
