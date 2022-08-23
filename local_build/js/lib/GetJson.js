@@ -19,6 +19,8 @@ let retryTime = 0
  */
 export default async function GetJson(url) {
 
+    const myAPI = window?.myAPI
+
     // ファイル名切り出し
     const filename = url.split('/').pop()
 
@@ -44,8 +46,22 @@ export default async function GetJson(url) {
 
     const result = await res.json()
 
-    // 成功した場合jsonフォルダに書き出し
-    window?.myAPI?.writeJson(filename, result)
+    console.log('isPackaged ' + await myAPI.isPackaged());
+    
+    // 同じasar階層内のを書き換えるのは不可能
+    // アセットのみをasar外にダウンロードして読み込むことも考えたが作り替えの手間がかる
+        // jsonフォルダのみを外部にすることで可能？？
+    // なので最新jsonファイルのダウンロードをメインプロセスにて行う
+    // このファイルのではローカルのもののみをfetchさせる
+
+    // await myAPI?.writeJson({filename: filename, json: result})
+    // if (myAPI?.isPackaged) {        
+    //     // 成功した場合jsonフォルダに書き出し
+    //     myAPI?.writeJson(myAPI?.getPath_userData + '/js/lib/json/' + filename, result)
+    // } else {
+    //     // myAPI?.writeJson(myAPI?.getPath_userData + '/js/lib/json/' + filename, result)
+    //     myAPI?.writeJson(myAPI?.__dirname + '/../' + myAPI?.LOCAL_BUILD_DIR + '/js/lib/json/' +filename, result)
+    // }
 
     return result
 

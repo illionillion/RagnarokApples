@@ -1,7 +1,8 @@
 // モジュールロード
-const { app, Menu, BrowserWindow, dialog } = require('electron')
+const { app, Menu, BrowserWindow, dialog, ipcMain } = require('electron')
 const { asarDownLoad } = require('./asarDownLoad.js')
 const { createWindow, createSplash } = require('./createWindow.js')
+const { writeJson } = require('./writeFile.js')
 require('dotenv').config({ path: __dirname + '/../.env' }) // .env読み込み
 
 /**
@@ -91,3 +92,10 @@ app.on('activate', () => {
         createWindow()
     }
 })
+
+ipcMain.handle('isPackaged', (event, data) => {
+   return app.isPackaged
+})
+// ipcMain.handle('writeJson', (event, data) => {
+//    return writeJson(data.filename, data.json)
+// })

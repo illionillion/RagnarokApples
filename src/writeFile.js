@@ -1,5 +1,6 @@
 require('dotenv').config({ path: __dirname + '/../.env' }) // .env読み込み
-const fs = require('fs')
+const { app } = require('electron');
+const fs = require('fs');
 
 /**
  * ファイル書き出し
@@ -18,7 +19,19 @@ const writeFile = (path, txt) => {
  */
 const writeJson = (fn, json) => {
     // fs.writeFileSync(`${__dirname}/../${process.env.LOCAL_BUILD_DIR}/js/lib/json/${fn}`, JSON.stringify(json))
-    fs.writeFileSync(__dirname + '/../' + process.env.LOCAL_BUILD_DIR + '/js/lib/json/' + fn, JSON.stringify(json))
+
+    const build_path = app.getPath('userData') + '/renderer.asar'
+    // const build_path = app.getPath('userData') + '/json'
+    console.log(build_path);
+    console.log(__dirname);
+
+    if (app.isPackaged) {
+        fs.writeFileSync(build_path + '/js/lib/json/' + fn, JSON.stringify(json)) // asar内の書き換えはできない？？
+    } else {
+        fs.writeFileSync(build_path + '/js/lib/json/' + fn, JSON.stringify(json))
+        // fs.writeFileSync(__dirname + '/../' + process.env.LOCAL_BUILD_DIR + '/js/lib/json/' + fn, JSON.stringify(json))
+    }
+    // fs.writeFileSync(__dirname + '/../' + process.env.LOCAL_BUILD_DIR + '/js/lib/json/' + fn, JSON.stringify(json))
     console.log('書き出し完了');
 }
 
