@@ -48,20 +48,10 @@ export default async function GetJson(url) {
 
     console.log('isPackaged ' + await myAPI.isPackaged());
     
-    // 同じasar階層内のを書き換えるのは不可能
-    // アセットのみをasar外にダウンロードして読み込むことも考えたが作り替えの手間がかる
-        // jsonフォルダのみを外部にすることで可能？？
-    // なので最新jsonファイルのダウンロードをメインプロセスにて行う
-    // このファイルのではローカルのもののみをfetchさせる
-
-    // await myAPI?.writeJson({filename: filename, json: result})
-    // if (myAPI?.isPackaged) {        
-    //     // 成功した場合jsonフォルダに書き出し
-    //     myAPI?.writeJson(myAPI?.getPath_userData + '/js/lib/json/' + filename, result)
-    // } else {
-    //     // myAPI?.writeJson(myAPI?.getPath_userData + '/js/lib/json/' + filename, result)
-    //     myAPI?.writeJson(myAPI?.__dirname + '/../' + myAPI?.LOCAL_BUILD_DIR + '/js/lib/json/' +filename, result)
-    // }
+    // 非パッケージ状態（開発環境）の時のみ書き出し
+    if (!await myAPI.isPackaged()) {
+        await myAPI.writeJson({filename: filename, json: result})
+    }
 
     return result
 

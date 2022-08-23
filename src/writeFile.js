@@ -25,13 +25,13 @@ const writeJson = (fn, json) => {
     console.log(build_path);
     console.log(__dirname);
 
-    if (app.isPackaged) {
-        fs.writeFileSync(build_path + '/js/lib/json/' + fn, JSON.stringify(json)) // asar内の書き換えはできない？？
-    } else {
-        fs.writeFileSync(build_path + '/js/lib/json/' + fn, JSON.stringify(json))
-        // fs.writeFileSync(__dirname + '/../' + process.env.LOCAL_BUILD_DIR + '/js/lib/json/' + fn, JSON.stringify(json))
-    }
-    // fs.writeFileSync(__dirname + '/../' + process.env.LOCAL_BUILD_DIR + '/js/lib/json/' + fn, JSON.stringify(json))
+    // if (app.isPackaged) {
+    //     fs.writeFileSync(build_path + '/js/lib/json/' + fn, JSON.stringify(json)) // asar内の書き換えはできない？？
+    // } else {
+    //     fs.writeFileSync(build_path + '/js/lib/json/' + fn, JSON.stringify(json))
+    //     fs.writeFileSync(__dirname + '/../' + process.env.LOCAL_BUILD_DIR + '/js/lib/json/' + fn, JSON.stringify(json))
+    // }
+    fs.writeFileSync(__dirname + '/../' + process.env.LOCAL_BUILD_DIR + '/js/lib/json/' + fn, JSON.stringify(json))
     console.log('書き出し完了');
 }
 
