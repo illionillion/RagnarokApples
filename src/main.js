@@ -25,12 +25,13 @@ const mainProcess = async () => {
         return // 処理終了
     }
 
+    const splashWin = await createSplash() // ローディング画面起動
+    
     // URLを指定 
     const url = process.env.ASAR_URL
     // 出力ファイル名を指定
     const outURL = app.getPath('userData') + '/renderer.asar'
 
-    const splashWin = await createSplash() // ローディング画面起動
     const download =  await asarDownLoad(url, outURL, splashWin) // ダウンロード開始
     if (!download) { // 失敗時
         dialog.showErrorBox('Connection Failed','インターネットへの接続が失敗しました。インターネットに接続して、もう一度アプリを起動してください');
@@ -93,9 +94,11 @@ app.on('activate', () => {
     }
 })
 
-ipcMain.handle('isPackaged', (event, data) => {
+// レンダラーにapp.isPackagedを渡す
+ipcMain.handle('isPackaged', () => {
    return app.isPackaged
 })
-// ipcMain.handle('writeJson', (event, data) => {
-//    return writeJson(data.filename, data.json)
-// })
+// レンダラーからfetchで取得したJSONをファイルに書き出させる（開発環境のみ）
+ipcMain.handle('writeJson', (event, data) => {
+   return writeJson(data.filename, data.json)
+})
