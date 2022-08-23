@@ -8,6 +8,7 @@ const fs = require('fs')
  */
 const writeFile = (path, txt) => {
     fs.writeFileSync(path, txt)
+    console.log('書き出し完了');
 }
 
 /**
@@ -16,7 +17,9 @@ const writeFile = (path, txt) => {
  * @param {object} json JSON
  */
 const writeJson = (fn, json) => {
-    fs.writeFileSync(`${__dirname}/../${process.env.LOCAL_BUILD_DIR}/js/lib/json/${fn}`, JSON.stringify(json))
+    // fs.writeFileSync(`${__dirname}/../${process.env.LOCAL_BUILD_DIR}/js/lib/json/${fn}`, JSON.stringify(json))
+    fs.writeFileSync(__dirname + '/../' + process.env.LOCAL_BUILD_DIR + '/js/lib/json/' + fn, JSON.stringify(json))
+    console.log('書き出し完了');
 }
 
 exports.writeFile = writeFile
