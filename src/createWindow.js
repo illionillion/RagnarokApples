@@ -3,6 +3,7 @@ require('dotenv').config({ path: __dirname + '/../.env' }) // .env読み込み
 
 /**
  * ウィンドウを作成する
+ * @returns {Promise <BrowserWindow>}
  */
  const createWindow = () => {
     return new Promise( async (resolve, reject) => {
@@ -43,7 +44,7 @@ require('dotenv').config({ path: __dirname + '/../.env' }) // .env読み込み
 
 /**
  * ダウンロード中のスカッシュウィンドウ表示
- * @returns window
+ * @returns {Promise <BrowserWindow>}
  */
 const createSplash = () => {
     return new Promise( async (resolve, reject) => {
@@ -55,7 +56,7 @@ const createSplash = () => {
                 nodeIntegration:true,
                 enableRemoteModule: true,
                 contextIsolation: true,
-                preload: __dirname + '/loading.js' //プリロードスクリプト
+                preload: __dirname + '/preload.js' //プリロードスクリプト
             },
             frame: false ,
             titleBarStyle: 'hidden',
