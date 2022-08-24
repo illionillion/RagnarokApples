@@ -1,4 +1,4 @@
-import mapItemsJson from "./json/mapItems.json" assert { type: "json" }
+// import mapItemsJson from "./json/mapItems.json" assert { type: "json" }
 import GetJson from "./GetJson.js"
 import ScenarioPlayer from './ScenarioPlayer.js'
 import toDarking from "./toDarking.js"
@@ -15,6 +15,10 @@ let TextData
  * オーディオのデータ
  */
 let TextAudio
+/**
+ * マップのデータ
+ */
+let mapItemsJson
 
 /**
  * マップ作成
@@ -29,6 +33,7 @@ export async function CreateMap(gameState) {
     */
     TextData ??= await GetJson(window?.myAPI?.URLS?.SCENARIO_DATA_JSON) // .envから読み込んできたURL
     TextAudio ??= await GetJson(window?.myAPI?.URLS?.SCENARIO_AUDIO_DATA_JSON) // .envから読み込んできたURL
+    mapItemsJson ??= await GetJson(window?.myAPI?.URLS?.SCENARIO_MAP_DATA_JSON) // .envから読み込んできたURL
 
     const NowCreateMapCount = ++CreateMapCount
 
