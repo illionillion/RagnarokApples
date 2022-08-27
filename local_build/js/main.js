@@ -13,6 +13,7 @@ import toDarking from './lib/toDarking.js'
         autoPlayingFlag: false, // いらない
         TextPlayer: undefined,
         screenDarking: false, //暗転中か
+        menuFlag: false,
     }
 
     window.addEventListener('resize', FrameSizing)
@@ -54,19 +55,24 @@ import toDarking from './lib/toDarking.js'
                     FloatCheck.children[0].innerHTML = 'ON'
                     TextFloat.classList.remove('op0')
                 }
-                // console.log(FloatCheck);
-                // console.log(gameState.FloatCheck)
             })
 
-            // /**
-            //  * 日付の設定
-            //  */
-            // const setDate = () => {
-            //     // 日付の設定
-            //     document.querySelector('#date > p').innerHTML = `${gameState.nowDate}日目`
-            // }
-
-            // setDate()
+            const toggleMenu = e => {
+                // console.log('click!');
+                e.stopPropagation()
+                gameState.menuFlag = !gameState.menuFlag // 反転
+                if (gameState.menuFlag) {
+                    document.getElementById('setting-menu').classList.remove('hide')
+                } else {
+                    document.getElementById('setting-menu').classList.add('hide')
+                }
+            }
+            document.getElementById('setting-menu').addEventListener('click', e => {
+                // console.log('click!');
+                e.stopPropagation()
+            })
+            document.getElementById('setting-menu-button').addEventListener('click', toggleMenu)
+            document.getElementById('setting-close').addEventListener('click', toggleMenu)
 
         }, gameState)
 
