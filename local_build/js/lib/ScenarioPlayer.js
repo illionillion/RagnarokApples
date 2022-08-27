@@ -40,9 +40,11 @@ export default class ScenarioPlayer {
         this.autoPlayingCheck = false //autoが手動で実行されたか
         this.onePictureSwitch = false //一枚絵使用
         this.movingFlag = false //テキストアニメーションが動いてるか
+        this.pauseFlag = false // pauseで停止されたかどうか
         // this.screenDarking = false //暗転中か
         this.screenDarking = state.screenDarking //暗転中か
         
+        this.nowEle = [] // 文字列格納
         this.colorFlag = false //文字設定処理：色
         this.sizeFlag = false //文字設定処理：大文字
         
@@ -117,6 +119,10 @@ export default class ScenarioPlayer {
                 return
             }else if(ScenarioPlayer.autoPlayingFlag && !this.autoPlayingCheck){
                 this.autoPlayingCheck = true//auto初回のみ通る
+            }
+            if (this.pauseFlag) {
+                this.AnimationRestart()
+                return
             }
             this.AnimationStart(text)
         }else{
@@ -398,16 +404,21 @@ export default class ScenarioPlayer {
     /**
      * アニメーション再生
      * @param {*} text cp0クラスがついているspanタグ
+     * @param {boolean} restartFlag cp0クラスがついているspanタグ
      */
-    AnimationStart = async (text) => {
+    AnimationStart = async (text, restartFlag) => {
         this.nowEle = text;
+        this.pauseFlag = false
+
         // console.log(text);
         if (this.toMapFlag) {
             this.toMap() //マップへ戻る(非auto)
             return
         }
 
-        if(this.TextList[this.msgindex - 1]['characterText']['effect']['darkening']) {
+        // リスタート時は暗転をさせない
+        if(this.TextList[this.msgindex - 1]['characterText']['effect']['darkening'] && !restartFlag) {
+            console.log('restartFlag is ' + restartFlag);
             await toDarking(undefined, this.state) // ここで暗転のみを実行させたい
         }
 
@@ -433,6 +444,10 @@ export default class ScenarioPlayer {
                     }else{
                         break;//テキスト強制終了でautoで次へい行かせる
                     }
+                    // if (ScenarioPlayer.autoPlayingFlag) {
+                    //     break; //テキスト強制終了でautoがtrueならで次へい行かせる
+                    // }
+                    // return // 
                 }
                 if (!this.dialogueFlag && !this.onePictureSwitch) {
                     this.autoPlayingCheck = false;
@@ -467,6 +482,11 @@ export default class ScenarioPlayer {
                 }else{
                     break;//テキスト強制終了でautoで次へい行かせる
                 }
+                // この下の処理を考える
+                // if (ScenarioPlayer.autoPlayingFlag) {
+                //     break; //テキスト強制終了でautoがtrueならで次へい行かせる
+                // }
+                // return // 
             }
             if (!this.dialogueFlag && !this.onePictureSwitch) {
                 this.autoPlayingCheck = false;
@@ -559,6 +579,7 @@ export default class ScenarioPlayer {
      */
     AnimationPause = () => {
         this.movingFlag = false;
+        this.pauseFlag = true
     }
 
     /**
@@ -570,7 +591,7 @@ export default class ScenarioPlayer {
         if (this.movingFlag) {
             return
         }
-        this.AnimationStart(this.nowEle)
+        this.AnimationStart(this.nowEle ,true)
     }
 
     /**
