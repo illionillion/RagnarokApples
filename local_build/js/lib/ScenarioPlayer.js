@@ -11,6 +11,10 @@ export default class ScenarioPlayer {
      * auto機能がオンになっているか
      */
     static autoPlayingFlag = false
+    /**
+     * メニューフラグ
+     */
+    static menuFlag = false
 
     // テキストのパーツ
     screen = document.getElementById('textScreen')
@@ -23,7 +27,8 @@ export default class ScenarioPlayer {
     FloatCheck = document.getElementById('FloatCheck')
     TextFloat = document.getElementById('mapTextFloat')
     TextCover = document.getElementById('mapTextCover')
-
+    settingMenuButton = document.getElementById('setting-menu-button')
+    settingCloseButton = document.getElementById('setting-close')
     /**
      * 1パートのテキストのデータを格納する
      * @param {*} TextList テキストのオブジェクト
@@ -91,6 +96,8 @@ export default class ScenarioPlayer {
         this.darkeningFloor.addEventListener('click', this.darkeningElePrev, false)
         this.onePicture.addEventListener('click', this.onePictureClick, false)
         this.skipButton.addEventListener('click', this.toSkip, false)
+        this.settingMenuButton.addEventListener('click', this.toggleMenu)
+        this.settingCloseButton.addEventListener('click', this.toggleMenu)
 
         // プリロード
         this.AudioPreload()
@@ -773,6 +780,29 @@ export default class ScenarioPlayer {
             this.audioObj.pause()
             this.audioNum++
             this.AudioLoading()
+        }
+    }
+
+    /**
+     * メニューの表示・非表示
+     * @param {Event} e 
+     */
+    toggleMenu = e => {
+        // console.log('click!');
+        e.stopPropagation()
+        if (ScenarioPlayer.eventId != this.nowEveId) {
+            this.settingMenuButton.removeEventListener('click', this.toggleMenu)
+            this.settingCloseButton.removeEventListener('click', this.toggleMenu)
+            return
+        }
+        ScenarioPlayer.menuFlag = !ScenarioPlayer.menuFlag // 反転
+        if (ScenarioPlayer.menuFlag) {
+            // メニュー起動
+            document.getElementById('setting-menu').classList.remove('hide')
+            // ここでアニメーションを停止させたい
+        } else {
+            // メニューclose
+            document.getElementById('setting-menu').classList.add('hide')
         }
     }
 }
