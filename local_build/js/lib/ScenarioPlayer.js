@@ -448,13 +448,12 @@ export default class ScenarioPlayer {
                         // console.log('');
                         // break
                         return;//オートで再生中にダイアログ非表示で停止させた場合
-                    }else{
-                        break;//テキスト強制終了でautoで次へい行かせる
                     }
-                    // if (ScenarioPlayer.autoPlayingFlag) {
-                    //     break; //テキスト強制終了でautoがtrueならで次へい行かせる
-                    // }
-                    // return // 
+                    if (ScenarioPlayer.menuFlag) {
+                        this.autoPlayingCheck=false;
+                        return // メニューが起動したら普通に停止
+                    }
+                    break; //テキスト強制終了でautoがtrueならで次へい行かせる
                 }
                 if (!this.dialogueFlag && !this.onePictureSwitch) {
                     this.autoPlayingCheck = false;
@@ -486,14 +485,12 @@ export default class ScenarioPlayer {
                     // console.log('');
                     // break
                     return;//オートで再生中にダイアログ非表示で停止させた場合
-                }else{
-                    break;//テキスト強制終了でautoで次へい行かせる
                 }
-                // この下の処理を考える
-                // if (ScenarioPlayer.autoPlayingFlag) {
-                //     break; //テキスト強制終了でautoがtrueならで次へい行かせる
-                // }
-                // return // 
+                if (ScenarioPlayer.menuFlag) {
+                    this.autoPlayingCheck=false;
+                    return // メニューが起動したら普通に停止
+                }
+                break; //テキスト強制終了でautoがtrueならで次へい行かせる
             }
             if (!this.dialogueFlag && !this.onePictureSwitch) {
                 this.autoPlayingCheck = false;
@@ -608,8 +605,8 @@ export default class ScenarioPlayer {
     AnimationForcedEnd = text => {
         text.forEach(element => {
             element.classList.remove('op0')
-            this.movingFlag = false
         });
+        this.movingFlag = false
     }
 
     /**
@@ -800,6 +797,7 @@ export default class ScenarioPlayer {
             // メニュー起動
             document.getElementById('setting-menu').classList.remove('hide')
             // ここでアニメーションを停止させたい
+            this.movingFlag = false
         } else {
             // メニューclose
             document.getElementById('setting-menu').classList.add('hide')
