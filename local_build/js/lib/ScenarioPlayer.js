@@ -96,8 +96,8 @@ export default class ScenarioPlayer {
         this.darkeningFloor.addEventListener('click', this.darkeningElePrev, false)
         this.onePicture.addEventListener('click', this.onePictureClick, false)
         this.skipButton.addEventListener('click', this.toSkip, false)
-        this.settingMenuButton.addEventListener('click', this.toggleMenu)
-        this.settingCloseButton.addEventListener('click', this.toggleMenu)
+        this.settingMenuButton.addEventListener('click', this.openMenu)
+        this.settingCloseButton.addEventListener('click', this.closeMenu)
 
         // プリロード
         this.AudioPreload()
@@ -163,7 +163,7 @@ export default class ScenarioPlayer {
             this.autocheck.classList.add('none')
             this.skipButton.classList.add('none')
             this.dialogueFlag = false
-            this.AnimationPause()
+            if (this.movingFlag) this.AnimationPause()
         }else{
             // 表示
             this.dialogueEle.classList.remove('none')
@@ -182,6 +182,9 @@ export default class ScenarioPlayer {
     clickDialogue = e => {
         if (ScenarioPlayer.eventId != this.nowEveId) {
             this.dialogueEle.removeEventListener('click',this.clickDialogue)
+            return
+        }
+        if (this.onePictureSwitch) { // 1枚絵使用時はクリック無視
             return
         }
         e.stopPropagation();//イベントの伝搬を防止
@@ -260,8 +263,12 @@ export default class ScenarioPlayer {
      * @returns イベント削除とキャンセル
      */
     onePictureClick = e => {
+        // console.log(e.target);
         if (ScenarioPlayer.eventId != this.nowEveId) {
             this.onePicture.removeEventListener('click',this.onePictureClick)
+            return
+        }
+        if (!this.onePictureSwitch) { // 1枚絵非使用時はクリック無視
             return
         }
         e.stopPropagation();
@@ -429,6 +436,11 @@ export default class ScenarioPlayer {
             await toDarking(undefined, this.state) // ここで暗転のみを実行させたい
         }
 
+        if (ScenarioPlayer.menuFlag) {
+            this.autoPlayingCheck = false
+            return
+        }
+
         // 画像の変更
         await this.changeImage()
 
@@ -442,25 +454,7 @@ export default class ScenarioPlayer {
             let fastFlag = false;
             for (const ele of text) {
                 if (!this.movingFlag) {
-                    // console.log("stop");
-                    if (!this.dialogueFlag) {
-                        this.autoPlayingCheck=false;
-                        // console.log('');
-                        // break
-                        return;//オートで再生中にダイアログ非表示で停止させた場合
-                    }
-                    if (ScenarioPlayer.menuFlag) {
-                        this.autoPlayingCheck=false;
-                        return // メニューが起動したら普通に停止
-                    }
-                    break; //テキスト強制終了でautoがtrueならで次へい行かせる
-                }
-                if (!this.dialogueFlag && !this.onePictureSwitch) {
-                    this.autoPlayingCheck = false;
-                    this.movingFlag = false;
-                    // console.log('');
-                    // break
-                    return;//オートで再生中にダイアログ非表示で停止させた場合
+                    return
                 }
                 await timer(10)
                 if (ele.parentNode.classList.contains('fast-show')) {//1枚絵の時だけ先行して別速度で表示させる
@@ -591,7 +585,7 @@ export default class ScenarioPlayer {
      * @returns キャンセル
      */
     AnimationRestart = () => {
-        // console.log(this.nowEle);
+        console.log('restart');
         if (this.movingFlag) {
             return
         }
@@ -781,26 +775,42 @@ export default class ScenarioPlayer {
     }
 
     /**
-     * メニューの表示・非表示
+     * メニューの表示
      * @param {Event} e 
      */
-    toggleMenu = e => {
+    openMenu = e => {
         // console.log('click!');
         e.stopPropagation()
         if (ScenarioPlayer.eventId != this.nowEveId) {
-            this.settingMenuButton.removeEventListener('click', this.toggleMenu)
-            this.settingCloseButton.removeEventListener('click', this.toggleMenu)
+            this.settingMenuButton.removeEventListener('click', this.openMenu)
             return
         }
-        ScenarioPlayer.menuFlag = !ScenarioPlayer.menuFlag // 反転
-        if (ScenarioPlayer.menuFlag) {
-            // メニュー起動
-            document.getElementById('setting-menu').classList.remove('hide')
+        ScenarioPlayer.menuFlag = true 
+        // メニュー起動
+        document.getElementById('setting-menu').classList.remove('hide')
+        if (this.movingFlag) {
             // ここでアニメーションを停止させたい
-            this.movingFlag = false
-        } else {
-            // メニューclose
-            document.getElementById('setting-menu').classList.add('hide')
+            this.AnimationPause()
         }
+
+    }
+
+    /**
+     * メニュー非表示
+     * @param {Event} e 
+     */
+    closeMenu = e => {
+
+        e.stopPropagation()
+        if (ScenarioPlayer.eventId != this.nowEveId) {
+            this.settingCloseButton.removeEventListener('click', this.closeMenu)
+            return
+        }
+        ScenarioPlayer.menuFlag = false // 反転
+
+        // メニューclose
+        document.getElementById('setting-menu').classList.add('hide')
+        // this.AnimationRestart()
+        
     }
 }
