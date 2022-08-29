@@ -102,6 +102,8 @@ export default class ScenarioPlayer {
             element.addEventListener('click', this.clickMenuList)
         });
 
+        this.closeMenu()
+
         // プリロード
         this.AudioPreload()
         // 1番目に流させる音声を設定
@@ -433,22 +435,23 @@ export default class ScenarioPlayer {
             return
         }
 
+        if (ScenarioPlayer.menuFlag) {
+            this.autoPlayingCheck = false
+            console.log('return!!!');
+            return
+        }
+
+        // テキスト1文字ずつ描画
+        this.movingFlag=true; // これがtrueの時に暗転させないとアニメーションが止まらない、もしくはローディングのところでするか
+
         // リスタート時は暗転をさせない
         if(this.TextList[this.msgindex - 1]['characterText']['effect']['darkening'] && !restartFlag) {
             console.log('restartFlag is ' + restartFlag);
             await toDarking(undefined, this.state) // ここで暗転のみを実行させたい
         }
 
-        if (ScenarioPlayer.menuFlag) {
-            this.autoPlayingCheck = false
-            return
-        }
-
         // 画像の変更
         await this.changeImage()
-
-        // テキスト1文字ずつ描画
-        this.movingFlag=true;
 
         /**
          * 1枚絵の時だけ先行して別速度で表示させるループ
@@ -485,6 +488,7 @@ export default class ScenarioPlayer {
                 }
                 if (ScenarioPlayer.menuFlag) {
                     this.autoPlayingCheck=false;
+                    console.log('return');
                     return // メニューが起動したら普通に停止
                 }
                 break; //テキスト強制終了でautoがtrueならで次へい行かせる
@@ -783,7 +787,7 @@ export default class ScenarioPlayer {
      */
     openMenu = e => {
         // console.log('click!');
-        e.stopPropagation()
+        e?.stopPropagation()
         if (ScenarioPlayer.eventId != this.nowEveId) {
             this.settingMenuButton.removeEventListener('click', this.openMenu)
             return
@@ -795,6 +799,9 @@ export default class ScenarioPlayer {
             // ここでアニメーションを停止させたい
             this.AnimationPause()
         }
+        console.log('open');
+        console.log(this.movingFlag);
+        console.log(this.screenDarking);
 
     }
 
@@ -804,7 +811,7 @@ export default class ScenarioPlayer {
      */
     closeMenu = e => {
 
-        e.stopPropagation()
+        e?.stopPropagation()
         if (ScenarioPlayer.eventId != this.nowEveId) {
             this.settingCloseButton.removeEventListener('click', this.closeMenu)
             return
