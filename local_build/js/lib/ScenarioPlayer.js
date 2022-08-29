@@ -98,6 +98,9 @@ export default class ScenarioPlayer {
         this.skipButton.addEventListener('click', this.toSkip, false)
         this.settingMenuButton.addEventListener('click', this.openMenu)
         this.settingCloseButton.addEventListener('click', this.closeMenu)
+        document.querySelectorAll('#setting-menu-bar ul li').forEach(element => {
+            element.addEventListener('click', this.clickMenuList)
+        });
 
         // プリロード
         this.AudioPreload()
@@ -812,5 +815,20 @@ export default class ScenarioPlayer {
         document.getElementById('setting-menu').classList.add('hide')
         // this.AnimationRestart()
         
+    }
+
+    /**
+     * メニューリストクリック時
+     * @param {Event} e 
+     */
+    clickMenuList = e => {
+        e.stopPropagation()
+        if (ScenarioPlayer.eventId != this.nowEveId) {
+            e.target.removeEventListener('click', this.closeMenu)
+            return
+        }
+        const text = e.target.textContent
+        // console.log(text + ' click');
+        document.querySelector('#setting-screen .contents').textContent = text
     }
 }
