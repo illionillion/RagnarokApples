@@ -57,22 +57,10 @@ import toDarking from './lib/toDarking.js'
                 }
             })
 
-            const toggleMenu = e => {
-                // console.log('click!');
-                e.stopPropagation()
-                gameState.menuFlag = !gameState.menuFlag // 反転
-                if (gameState.menuFlag) {
-                    document.getElementById('setting-menu').classList.remove('hide')
-                } else {
-                    document.getElementById('setting-menu').classList.add('hide')
-                }
-            }
             document.getElementById('setting-menu').addEventListener('click', e => {
                 // console.log('click!');
                 e.stopPropagation()
             })
-            document.getElementById('setting-menu-button').addEventListener('click', toggleMenu)
-            document.getElementById('setting-close').addEventListener('click', toggleMenu)
 
         }, gameState)
 

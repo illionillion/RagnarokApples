@@ -11,6 +11,10 @@ export default class ScenarioPlayer {
      * auto機能がオンになっているか
      */
     static autoPlayingFlag = false
+    /**
+     * メニューフラグ
+     */
+    static menuFlag = false
 
     // テキストのパーツ
     screen = document.getElementById('textScreen')
@@ -23,7 +27,8 @@ export default class ScenarioPlayer {
     FloatCheck = document.getElementById('FloatCheck')
     TextFloat = document.getElementById('mapTextFloat')
     TextCover = document.getElementById('mapTextCover')
-
+    settingMenuButton = document.getElementById('setting-menu-button')
+    settingCloseButton = document.getElementById('setting-close')
     /**
      * 1パートのテキストのデータを格納する
      * @param {*} TextList テキストのオブジェクト
@@ -91,6 +96,13 @@ export default class ScenarioPlayer {
         this.darkeningFloor.addEventListener('click', this.darkeningElePrev, false)
         this.onePicture.addEventListener('click', this.onePictureClick, false)
         this.skipButton.addEventListener('click', this.toSkip, false)
+        this.settingMenuButton.addEventListener('click', this.openMenu)
+        this.settingCloseButton.addEventListener('click', this.closeMenu)
+        document.querySelectorAll('#setting-menu-bar ul li').forEach(element => {
+            element.addEventListener('click', this.clickMenuList)
+        });
+
+        this.closeMenu()
 
         // プリロード
         this.AudioPreload()
@@ -156,7 +168,7 @@ export default class ScenarioPlayer {
             this.autocheck.classList.add('none')
             this.skipButton.classList.add('none')
             this.dialogueFlag = false
-            this.AnimationPause()
+            if (this.movingFlag) this.AnimationPause()
         }else{
             // 表示
             this.dialogueEle.classList.remove('none')
@@ -175,6 +187,9 @@ export default class ScenarioPlayer {
     clickDialogue = e => {
         if (ScenarioPlayer.eventId != this.nowEveId) {
             this.dialogueEle.removeEventListener('click',this.clickDialogue)
+            return
+        }
+        if (this.onePictureSwitch) { // 1枚絵使用時はクリック無視
             return
         }
         e.stopPropagation();//イベントの伝搬を防止
@@ -253,8 +268,12 @@ export default class ScenarioPlayer {
      * @returns イベント削除とキャンセル
      */
     onePictureClick = e => {
+        // console.log(e.target);
         if (ScenarioPlayer.eventId != this.nowEveId) {
             this.onePicture.removeEventListener('click',this.onePictureClick)
+            return
+        }
+        if (!this.onePictureSwitch) { // 1枚絵非使用時はクリック無視
             return
         }
         e.stopPropagation();
@@ -416,6 +435,15 @@ export default class ScenarioPlayer {
             return
         }
 
+        if (ScenarioPlayer.menuFlag) {
+            this.autoPlayingCheck = false
+            console.log('return!!!');
+            return
+        }
+
+        // テキスト1文字ずつ描画
+        this.movingFlag=true; // これがtrueの時に暗転させないとアニメーションが止まらない、もしくはローディングのところでするか
+
         // リスタート時は暗転をさせない
         if(this.TextList[this.msgindex - 1]['characterText']['effect']['darkening'] && !restartFlag) {
             console.log('restartFlag is ' + restartFlag);
@@ -425,9 +453,6 @@ export default class ScenarioPlayer {
         // 画像の変更
         await this.changeImage()
 
-        // テキスト1文字ずつ描画
-        this.movingFlag=true;
-
         /**
          * 1枚絵の時だけ先行して別速度で表示させるループ
          */
@@ -435,26 +460,7 @@ export default class ScenarioPlayer {
             let fastFlag = false;
             for (const ele of text) {
                 if (!this.movingFlag) {
-                    // console.log("stop");
-                    if (!this.dialogueFlag) {
-                        this.autoPlayingCheck=false;
-                        // console.log('');
-                        // break
-                        return;//オートで再生中にダイアログ非表示で停止させた場合
-                    }else{
-                        break;//テキスト強制終了でautoで次へい行かせる
-                    }
-                    // if (ScenarioPlayer.autoPlayingFlag) {
-                    //     break; //テキスト強制終了でautoがtrueならで次へい行かせる
-                    // }
-                    // return // 
-                }
-                if (!this.dialogueFlag && !this.onePictureSwitch) {
-                    this.autoPlayingCheck = false;
-                    this.movingFlag = false;
-                    // console.log('');
-                    // break
-                    return;//オートで再生中にダイアログ非表示で停止させた場合
+                    return
                 }
                 await timer(10)
                 if (ele.parentNode.classList.contains('fast-show')) {//1枚絵の時だけ先行して別速度で表示させる
@@ -479,14 +485,13 @@ export default class ScenarioPlayer {
                     // console.log('');
                     // break
                     return;//オートで再生中にダイアログ非表示で停止させた場合
-                }else{
-                    break;//テキスト強制終了でautoで次へい行かせる
                 }
-                // この下の処理を考える
-                // if (ScenarioPlayer.autoPlayingFlag) {
-                //     break; //テキスト強制終了でautoがtrueならで次へい行かせる
-                // }
-                // return // 
+                if (ScenarioPlayer.menuFlag) {
+                    this.autoPlayingCheck=false;
+                    console.log('return');
+                    return // メニューが起動したら普通に停止
+                }
+                break; //テキスト強制終了でautoがtrueならで次へい行かせる
             }
             if (!this.dialogueFlag && !this.onePictureSwitch) {
                 this.autoPlayingCheck = false;
@@ -587,7 +592,7 @@ export default class ScenarioPlayer {
      * @returns キャンセル
      */
     AnimationRestart = () => {
-        // console.log(this.nowEle);
+        console.log('restart');
         if (this.movingFlag) {
             return
         }
@@ -601,8 +606,8 @@ export default class ScenarioPlayer {
     AnimationForcedEnd = text => {
         text.forEach(element => {
             element.classList.remove('op0')
-            this.movingFlag = false
         });
+        this.movingFlag = false
     }
 
     /**
@@ -774,5 +779,63 @@ export default class ScenarioPlayer {
             this.audioNum++
             this.AudioLoading()
         }
+    }
+
+    /**
+     * メニューの表示
+     * @param {Event} e 
+     */
+    openMenu = e => {
+        // console.log('click!');
+        e?.stopPropagation()
+        if (ScenarioPlayer.eventId != this.nowEveId) {
+            this.settingMenuButton.removeEventListener('click', this.openMenu)
+            return
+        }
+        ScenarioPlayer.menuFlag = true 
+        // メニュー起動
+        document.getElementById('setting-menu').classList.remove('hide')
+        if (this.movingFlag) {
+            // ここでアニメーションを停止させたい
+            this.AnimationPause()
+        }
+        console.log('open');
+        console.log(this.movingFlag);
+        console.log(this.screenDarking);
+
+    }
+
+    /**
+     * メニュー非表示
+     * @param {Event} e 
+     */
+    closeMenu = e => {
+
+        e?.stopPropagation()
+        if (ScenarioPlayer.eventId != this.nowEveId) {
+            this.settingCloseButton.removeEventListener('click', this.closeMenu)
+            return
+        }
+        ScenarioPlayer.menuFlag = false // 反転
+
+        // メニューclose
+        document.getElementById('setting-menu').classList.add('hide')
+        // this.AnimationRestart()
+        
+    }
+
+    /**
+     * メニューリストクリック時
+     * @param {Event} e 
+     */
+    clickMenuList = e => {
+        e.stopPropagation()
+        if (ScenarioPlayer.eventId != this.nowEveId) {
+            e.target.removeEventListener('click', this.closeMenu)
+            return
+        }
+        const text = e.target.textContent
+        // console.log(text + ' click');
+        document.querySelector('#setting-screen .contents').textContent = text
     }
 }
