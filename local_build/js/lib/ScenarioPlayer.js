@@ -39,6 +39,8 @@ export default class ScenarioPlayer {
         this.TextList = TextList //シナリオのテキストとそのデータ
         this.state = state //mainから参照するゲームのデータ
         this.msgindex = 0 //現在のテキストの番号
+        this.day = state.nowDate
+        this.place = state.nowPlace
         
         this.startFlag = true //スタート時のチェック
         this.dialogueFlag = true //ダイアログが表示か非表示化
@@ -85,6 +87,11 @@ export default class ScenarioPlayer {
         this.dialogueText.innerHTML = ''
         document.getElementById('one-picture-text').innerHTML = ''
         document.getElementById('dialogue-name-area').innerHTML = ''
+        document.querySelector('#setting-screen .contents').textContent = ''
+        document.querySelector('#setting-menu-bar .day').textContent = this.day
+        document.querySelector('#setting-menu-bar .day').dataset.day = this.day
+        document.querySelector('#setting-menu-bar .place').textContent = this.place
+        document.querySelector('#setting-menu-bar .place').dataset.place = this.place
         this.autoPlayingCheck = false
         this.startFlag = true
 

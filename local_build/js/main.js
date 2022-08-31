@@ -9,6 +9,7 @@ import toDarking from './lib/toDarking.js'
         nowPart: 'A0',
         FloatCheck: true,
         nowDate: 0,
+        nowPlace: undefined,
         eventState: 'title',
         autoPlayingFlag: false, // いらない
         TextPlayer: undefined,
