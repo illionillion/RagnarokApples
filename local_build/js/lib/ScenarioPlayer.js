@@ -579,6 +579,8 @@ export default class ScenarioPlayer {
             this.FloatCheck.classList.add('op0')
             this.TextFloat.classList.add('op0')
 
+            // ここにremoveEvent書く？
+
             // ここに新マップ描画処理
             await CreateMap(this.state)
 
@@ -802,6 +804,7 @@ export default class ScenarioPlayer {
         ScenarioPlayer.menuFlag = true 
         // メニュー起動
         document.getElementById('setting-menu').classList.remove('hide')
+        document.getElementById('setting-menu-button').classList.add('hide')
         if (this.movingFlag) {
             // ここでアニメーションを停止させたい
             this.AnimationPause()
@@ -827,6 +830,7 @@ export default class ScenarioPlayer {
 
         // メニューclose
         document.getElementById('setting-menu').classList.add('hide')
+        document.getElementById('setting-menu-button').classList.remove('hide')
         // this.AnimationRestart()
         
     }

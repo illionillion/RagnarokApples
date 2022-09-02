@@ -135,7 +135,8 @@
 #setting-menu-button {
     position: absolute;
     text-align: center;
-    right: 2%;
+    left: 2%;
+    /* right: 2%; */
     top: 5%;
     width: 10%;
     height: 6%;
