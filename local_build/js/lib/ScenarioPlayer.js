@@ -27,8 +27,8 @@ export default class ScenarioPlayer {
     FloatCheck = document.getElementById('FloatCheck')
     TextFloat = document.getElementById('mapTextFloat')
     TextCover = document.getElementById('mapTextCover')
-    settingMenuButton = document.getElementById('setting-menu-button')
-    settingCloseButton = document.getElementById('setting-close')
+    MenuOpenButton = document.getElementById('menu-open-button')
+    MenuCloseButton = document.getElementById('menu-close-button')
     /**
      * 1パートのテキストのデータを格納する
      * @param {*} TextList テキストのオブジェクト
@@ -87,11 +87,11 @@ export default class ScenarioPlayer {
         this.dialogueText.innerHTML = ''
         document.getElementById('one-picture-text').innerHTML = ''
         document.getElementById('dialogue-name-area').innerHTML = ''
-        document.querySelector('#setting-screen .contents').textContent = ''
-        document.querySelector('#setting-menu-bar .day').textContent = this.day
-        document.querySelector('#setting-menu-bar .day').dataset.day = this.day
-        document.querySelector('#setting-menu-bar .place').textContent = this.place
-        document.querySelector('#setting-menu-bar .place').dataset.place = this.place
+        document.querySelector('#menu-screen .contents').textContent = ''
+        document.querySelector('#menu-list .day').textContent = this.day
+        document.querySelector('#menu-list .day').dataset.day = this.day
+        document.querySelector('#menu-list .place').textContent = this.place
+        document.querySelector('#menu-list .place').dataset.place = this.place
         this.autoPlayingCheck = false
         this.startFlag = true
 
@@ -103,9 +103,9 @@ export default class ScenarioPlayer {
         this.darkeningFloor.addEventListener('click', this.darkeningElePrev, false)
         this.onePicture.addEventListener('click', this.onePictureClick, false)
         this.skipButton.addEventListener('click', this.toSkip, false)
-        this.settingMenuButton.addEventListener('click', this.openMenu)
-        this.settingCloseButton.addEventListener('click', this.closeMenu)
-        document.querySelectorAll('#setting-menu-bar ul li').forEach(element => {
+        this.MenuOpenButton.addEventListener('click', this.openMenu)
+        this.MenuCloseButton.addEventListener('click', this.closeMenu)
+        document.querySelectorAll('#menu-list ul li').forEach(element => {
             element.addEventListener('click', this.clickMenuList)
         });
 
@@ -592,9 +592,9 @@ export default class ScenarioPlayer {
             this.darkeningFloor.removeEventListener('click', this.darkeningElePrev, false)
             this.onePicture.removeEventListener('click', this.onePictureClick, false)
             this.skipButton.removeEventListener('click', this.toSkip, false)
-            this.settingMenuButton.removeEventListener('click', this.openMenu)
-            this.settingCloseButton.removeEventListener('click', this.closeMenu)
-            document.querySelectorAll('#setting-menu-bar ul li').forEach(element => {
+            this.MenuOpenButton.removeEventListener('click', this.openMenu)
+            this.MenuCloseButton.removeEventListener('click', this.closeMenu)
+            document.querySelectorAll('#menu-list ul li').forEach(element => {
                 element.removeEventListener('click', this.clickMenuList)
             });
 
@@ -816,13 +816,13 @@ export default class ScenarioPlayer {
         e?.stopPropagation()
         // if (ScenarioPlayer.eventId != this.nowEveId) {
         //     console.log('remove');
-        //     this.settingMenuButton.removeEventListener('click', this.openMenu)
+        //     this.MenuOpenButton.removeEventListener('click', this.openMenu)
         //     return
         // }
         ScenarioPlayer.menuFlag = true 
         // メニュー起動
-        document.getElementById('setting-menu').classList.remove('hide')
-        document.getElementById('setting-menu-button').classList.add('hide')
+        document.getElementById('menu-frame').classList.remove('hide')
+        this.MenuOpenButton.classList.add('hide')
         if (this.movingFlag) {
             // ここでアニメーションを停止させたい
             this.AnimationPause()
@@ -842,14 +842,14 @@ export default class ScenarioPlayer {
         e?.stopPropagation()
         // if (ScenarioPlayer.eventId != this.nowEveId) {
         //     console.log('remove');
-        //     this.settingCloseButton.removeEventListener('click', this.closeMenu)
+        //     this.MenuCloseButton.removeEventListener('click', this.closeMenu)
         //     return
         // }
         ScenarioPlayer.menuFlag = false // 反転
 
         // メニューclose
-        document.getElementById('setting-menu').classList.add('hide')
-        document.getElementById('setting-menu-button').classList.remove('hide')
+        document.getElementById('menu-frame').classList.add('hide')
+        this.MenuOpenButton.classList.remove('hide')
         // this.AnimationRestart()
         
     }
@@ -867,6 +867,6 @@ export default class ScenarioPlayer {
         // }
         const text = e.target.textContent
         // console.log(text + ' click');
-        document.querySelector('#setting-screen .contents').textContent = text
+        document.querySelector('#menu-screen .contents').textContent = text
     }
 }
