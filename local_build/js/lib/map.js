@@ -100,6 +100,8 @@ export async function CreateMap(gameState) {
     
                             gameState.textEventId++;
                             gameState.nowPart = partKey
+                            gameState.nowDate = mapData["day"]
+                            gameState.nowPlace = item.place
                             gameState.TextPlayer = new ScenarioPlayer(TextData[partKey], TextAudio[partKey], gameState)//プレイヤー生成
 
                         }, gameState)
@@ -170,7 +172,6 @@ export async function CreateMap(gameState) {
     const imgSrc = mapData ? `images/background/${mapData['backgroundImage']}` : 'images/background/map.png'
     // console.log(imgSrc);
     mapImg.setAttribute('src', imgSrc)
-
     // 日付
     document.querySelector('#date > p').innerHTML = mapData ? mapData["day"] : '0日目'
 

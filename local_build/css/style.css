@@ -68,6 +68,10 @@ body {
 .op0 {
   opacity: 0;
 }
+/* 非表示 */
+.hide {
+  visibility: hidden;
+}
 /* 赤文字 */
 .red {
   color: #f00;
