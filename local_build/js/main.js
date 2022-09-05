@@ -58,7 +58,7 @@ import toDarking from './lib/toDarking.js'
                 }
             })
 
-            document.getElementById('setting-menu').addEventListener('click', e => {
+            document.getElementById('menu-frame').addEventListener('click', e => {
                 // console.log('click!');
                 e.stopPropagation()
             })

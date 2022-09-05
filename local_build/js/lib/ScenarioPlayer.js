@@ -27,8 +27,8 @@ export default class ScenarioPlayer {
     FloatCheck = document.getElementById('FloatCheck')
     TextFloat = document.getElementById('mapTextFloat')
     TextCover = document.getElementById('mapTextCover')
-    settingMenuButton = document.getElementById('setting-menu-button')
-    settingCloseButton = document.getElementById('setting-close')
+    MenuOpenButton = document.getElementById('menu-open-button')
+    MenuCloseButton = document.getElementById('menu-close-button')
     /**
      * 1パートのテキストのデータを格納する
      * @param {*} TextList テキストのオブジェクト
@@ -87,11 +87,11 @@ export default class ScenarioPlayer {
         this.dialogueText.innerHTML = ''
         document.getElementById('one-picture-text').innerHTML = ''
         document.getElementById('dialogue-name-area').innerHTML = ''
-        document.querySelector('#setting-screen .contents').textContent = ''
-        document.querySelector('#setting-menu-bar .day').textContent = this.day
-        document.querySelector('#setting-menu-bar .day').dataset.day = this.day
-        document.querySelector('#setting-menu-bar .place').textContent = this.place
-        document.querySelector('#setting-menu-bar .place').dataset.place = this.place
+        document.querySelector('#menu-screen .contents').textContent = ''
+        document.querySelector('#menu-list .day').textContent = this.day
+        document.querySelector('#menu-list .day').dataset.day = this.day
+        document.querySelector('#menu-list .place').textContent = this.place
+        document.querySelector('#menu-list .place').dataset.place = this.place
         this.autoPlayingCheck = false
         this.startFlag = true
 
@@ -103,9 +103,9 @@ export default class ScenarioPlayer {
         this.darkeningFloor.addEventListener('click', this.darkeningElePrev, false)
         this.onePicture.addEventListener('click', this.onePictureClick, false)
         this.skipButton.addEventListener('click', this.toSkip, false)
-        this.settingMenuButton.addEventListener('click', this.openMenu)
-        this.settingCloseButton.addEventListener('click', this.closeMenu)
-        document.querySelectorAll('#setting-menu-bar ul li').forEach(element => {
+        this.MenuOpenButton.addEventListener('click', this.openMenu)
+        this.MenuCloseButton.addEventListener('click', this.closeMenu)
+        document.querySelectorAll('#menu-list ul li').forEach(element => {
             element.addEventListener('click', this.clickMenuList)
         });
 
@@ -156,11 +156,12 @@ export default class ScenarioPlayer {
      * @returns イベント削除とキャンセル
      */
     textBoxShowHide = e => {
-        if (ScenarioPlayer.eventId != this.nowEveId) {
-            // console.error('remove');
-            this.screen.removeEventListener('click',this.textBoxShowHide)
-            return
-        }
+        // if (ScenarioPlayer.eventId != this.nowEveId) {
+        //     console.log('remove');
+        //     // console.error('remove');
+        //     this.screen.removeEventListener('click',this.textBoxShowHide)
+        //     return
+        // }
         if(this.onePictureSwitch) { //ここで再生開始時、1枚目だった場合非表示にさせない
             // console.error('cancel');
             return
@@ -192,10 +193,11 @@ export default class ScenarioPlayer {
      * @returns イベント削除とキャンセル
      */
     clickDialogue = e => {
-        if (ScenarioPlayer.eventId != this.nowEveId) {
-            this.dialogueEle.removeEventListener('click',this.clickDialogue)
-            return
-        }
+        // if (ScenarioPlayer.eventId != this.nowEveId) {
+        //     console.log('remove');
+        //     this.dialogueEle.removeEventListener('click',this.clickDialogue)
+        //     return
+        // }
         if (this.onePictureSwitch) { // 1枚絵使用時はクリック無視
             return
         }
@@ -214,10 +216,11 @@ export default class ScenarioPlayer {
      * @returns イベント削除とキャンセル
      */
     autoToggle = e => {
-        if (ScenarioPlayer.eventId != this.nowEveId) {
-            this.autocheck.removeEventListener('click',this.autoToggle)
-            return
-        }
+        // if (ScenarioPlayer.eventId != this.nowEveId) {
+        //     console.log('remove');
+        //     this.autocheck.removeEventListener('click',this.autoToggle)
+        //     return
+        // }
         e.stopPropagation();
         ScenarioPlayer.autoPlayingFlag = ScenarioPlayer.autoPlayingFlag ? false : true
         this.state.autoPlayingFlag = ScenarioPlayer.autoPlayingFlag
@@ -243,10 +246,11 @@ export default class ScenarioPlayer {
         
         // console.log(e.target);
 
-        if (ScenarioPlayer.eventId != this.nowEveId) {
-            this.skipButton.removeEventListener('click',this.toSkip)
-            return
-        }
+        // if (ScenarioPlayer.eventId != this.nowEveId) {
+        //     console.log('remove');
+        //     this.skipButton.removeEventListener('click',this.toSkip)
+        //     return
+        // }
 
         console.log('skip');
         this.msgindex = Object.keys(this.TextList).length - 1
@@ -262,10 +266,11 @@ export default class ScenarioPlayer {
      * @returns イベント削除とキャンセル
      */
     darkeningElePrev = e => {
-        if (ScenarioPlayer.eventId != this.nowEveId) {
-            this.darkeningFloor.removeEventListener('click',this.darkeningElePrev)
-            return
-        }
+        // if (ScenarioPlayer.eventId != this.nowEveId) {
+        //     console.log('remove');
+        //     this.darkeningFloor.removeEventListener('click',this.darkeningElePrev)
+        //     return
+        // }
         e.stopPropagation();
     }
 
@@ -276,10 +281,11 @@ export default class ScenarioPlayer {
      */
     onePictureClick = e => {
         // console.log(e.target);
-        if (ScenarioPlayer.eventId != this.nowEveId) {
-            this.onePicture.removeEventListener('click',this.onePictureClick)
-            return
-        }
+        // if (ScenarioPlayer.eventId != this.nowEveId) {
+        //     console.log('remove');
+        //     this.onePicture.removeEventListener('click',this.onePictureClick)
+        //     return
+        // }
         if (!this.onePictureSwitch) { // 1枚絵非使用時はクリック無視
             return
         }
@@ -579,6 +585,19 @@ export default class ScenarioPlayer {
             this.FloatCheck.classList.add('op0')
             this.TextFloat.classList.add('op0')
 
+            // ここにremoveEvent書く？
+            this.screen.removeEventListener('click', this.textBoxShowHide, false)    
+            this.dialogueEle.removeEventListener('click', this.clickDialogue, false)
+            this.autocheck.removeEventListener('click', this.autoToggle, false)
+            this.darkeningFloor.removeEventListener('click', this.darkeningElePrev, false)
+            this.onePicture.removeEventListener('click', this.onePictureClick, false)
+            this.skipButton.removeEventListener('click', this.toSkip, false)
+            this.MenuOpenButton.removeEventListener('click', this.openMenu)
+            this.MenuCloseButton.removeEventListener('click', this.closeMenu)
+            document.querySelectorAll('#menu-list ul li').forEach(element => {
+                element.removeEventListener('click', this.clickMenuList)
+            });
+
             // ここに新マップ描画処理
             await CreateMap(this.state)
 
@@ -795,13 +814,15 @@ export default class ScenarioPlayer {
     openMenu = e => {
         // console.log('click!');
         e?.stopPropagation()
-        if (ScenarioPlayer.eventId != this.nowEveId) {
-            this.settingMenuButton.removeEventListener('click', this.openMenu)
-            return
-        }
+        // if (ScenarioPlayer.eventId != this.nowEveId) {
+        //     console.log('remove');
+        //     this.MenuOpenButton.removeEventListener('click', this.openMenu)
+        //     return
+        // }
         ScenarioPlayer.menuFlag = true 
         // メニュー起動
-        document.getElementById('setting-menu').classList.remove('hide')
+        document.getElementById('menu-frame').classList.remove('hide')
+        this.MenuOpenButton.classList.add('hide')
         if (this.movingFlag) {
             // ここでアニメーションを停止させたい
             this.AnimationPause()
@@ -819,14 +840,16 @@ export default class ScenarioPlayer {
     closeMenu = e => {
 
         e?.stopPropagation()
-        if (ScenarioPlayer.eventId != this.nowEveId) {
-            this.settingCloseButton.removeEventListener('click', this.closeMenu)
-            return
-        }
+        // if (ScenarioPlayer.eventId != this.nowEveId) {
+        //     console.log('remove');
+        //     this.MenuCloseButton.removeEventListener('click', this.closeMenu)
+        //     return
+        // }
         ScenarioPlayer.menuFlag = false // 反転
 
         // メニューclose
-        document.getElementById('setting-menu').classList.add('hide')
+        document.getElementById('menu-frame').classList.add('hide')
+        this.MenuOpenButton.classList.remove('hide')
         // this.AnimationRestart()
         
     }
@@ -837,12 +860,13 @@ export default class ScenarioPlayer {
      */
     clickMenuList = e => {
         e.stopPropagation()
-        if (ScenarioPlayer.eventId != this.nowEveId) {
-            e.target.removeEventListener('click', this.closeMenu)
-            return
-        }
+        // if (ScenarioPlayer.eventId != this.nowEveId) {
+        //     console.log('remove');
+        //     e.target.removeEventListener('click', this.closeMenu)
+        //     return
+        // }
         const text = e.target.textContent
         // console.log(text + ' click');
-        document.querySelector('#setting-screen .contents').textContent = text
+        document.querySelector('#menu-screen .contents').textContent = text
     }
 }
