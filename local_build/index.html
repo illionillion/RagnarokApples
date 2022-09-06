@@ -17,6 +17,7 @@
         <div id="screen">
           <div id="darkening-floor" class="op0"></div>
           <section id="textScreen" class="none">
+            <!-- 背景画像 -->
             <img
               id="textBackground"
               src="images/background/concept.png"
@@ -28,6 +29,7 @@
                 <!-- 一枚絵の時はここに描画 -->
               </div>
             </div>
+            <!-- キャラ配置 -->
             <div id="character-area">
               <div id="character-left" data-position="left">
                 <img
@@ -71,6 +73,32 @@
               <!-- テキスト描画 -->
               <div id="dialogue-name-area"></div>
               <div id="dialogue-text-area"></div>
+            </div>
+            <div id="menu-open-button">
+              <span>MENU</span>
+            </div>
+            <div id="menu-frame" class="hide">
+              <div id="menu-screen">
+                <div id="menu-close-button">
+                  <span>×</span>
+                </div>
+                <div class="contents"></div>
+              </div>
+              <div id="menu-list">
+                <ul>
+                  <li class="day" data-menubutton="day" data-day="0">○日め</li>
+                  <li class="place" data-menubutton="place" data-place="">場所</li>
+                  <li>Q.SAVE</li>
+                  <li>Q.LOAD</li>
+                  <li>SAVE</li>
+                  <li>LOAD</li>
+                  <li>AUTO</li>
+                  <li>SKIP</li>
+                  <li>LOG</li>
+                  <li>CONFIG</li>
+                  <li class="title" data-menubutton="title">TITLE</li>
+                </ul>
+              </div>
             </div>
           </section>
           <section id="mapScreen">

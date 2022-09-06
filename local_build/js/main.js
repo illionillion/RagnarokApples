@@ -9,10 +9,12 @@ import toDarking from './lib/toDarking.js'
         nowPart: 'A0',
         FloatCheck: true,
         nowDate: 0,
+        nowPlace: undefined,
         eventState: 'title',
         autoPlayingFlag: false, // いらない
         TextPlayer: undefined,
         screenDarking: false, //暗転中か
+        menuFlag: false,
     }
 
     window.addEventListener('resize', FrameSizing)
@@ -54,19 +56,12 @@ import toDarking from './lib/toDarking.js'
                     FloatCheck.children[0].innerHTML = 'ON'
                     TextFloat.classList.remove('op0')
                 }
-                // console.log(FloatCheck);
-                // console.log(gameState.FloatCheck)
             })
 
-            // /**
-            //  * 日付の設定
-            //  */
-            // const setDate = () => {
-            //     // 日付の設定
-            //     document.querySelector('#date > p').innerHTML = `${gameState.nowDate}日目`
-            // }
-
-            // setDate()
+            document.getElementById('menu-frame').addEventListener('click', e => {
+                // console.log('click!');
+                e.stopPropagation()
+            })
 
         }, gameState)
 
