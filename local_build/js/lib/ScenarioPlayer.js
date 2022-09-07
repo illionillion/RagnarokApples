@@ -95,6 +95,9 @@ export default class ScenarioPlayer {
         this.autoPlayingCheck = false
         this.startFlag = true
 
+        document.addEventListener('keypress', this.openMenuKeyup)
+
+
         // イベント付与
         this.screen.addEventListener('click', this.textBoxShowHide, false)    
         this.dialogueEle.addEventListener('click', this.clickDialogue, false)
@@ -594,6 +597,8 @@ export default class ScenarioPlayer {
             this.skipButton.removeEventListener('click', this.toSkip, false)
             this.MenuOpenButton.removeEventListener('click', this.openMenu)
             this.MenuCloseButton.removeEventListener('click', this.closeMenu)
+            document.removeEventListener('keypress', this.openMenuKeyup)
+            
             document.querySelectorAll('#menu-list ul li').forEach(element => {
                 element.removeEventListener('click', this.clickMenuList)
             });
@@ -830,6 +835,38 @@ export default class ScenarioPlayer {
         console.log('open');
         console.log(this.movingFlag);
         console.log(this.screenDarking);
+
+    }
+
+    /**
+     * キー入力
+     * @param {Event} e 
+     */
+    openMenuKeyup = e => {
+
+        e?.stopPropagation()
+        // console.log('key press!!');
+        // console.log(ScenarioPlayer.menuFlag);
+        
+        addEventListener('keyup' ,(function () {
+            return function f(event) {
+                    if ((event.key === "m" || event.key === "M") && ScenarioPlayer.menuFlag === false) {
+                        // 開く
+                        document.getElementById('menu-frame').classList.remove('hide')
+                        ScenarioPlayer.menuFlag = true
+
+                        // ここでアニメーションを停止させる処理を書く
+                        
+                    } else {
+                        // 閉じる
+                        document.getElementById('menu-frame').classList.add('hide')
+                        ScenarioPlayer.menuFlag = false
+                    }
+                    // console.log(ScenarioPlayer.menuFlag);
+                    // イベント削除
+                    removeEventListener('keyup', f)
+            }
+        })())
 
     }
 
