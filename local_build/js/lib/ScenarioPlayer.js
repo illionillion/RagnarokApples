@@ -95,23 +95,7 @@ export default class ScenarioPlayer {
         this.autoPlayingCheck = false
         this.startFlag = true
 
-        // document.addEventListener('keydown', this.openMenuKeyup)
         document.addEventListener('keypress', this.openMenuKeyup)
-        // document.addEventListener('keyup', event => {
-        //     console.log(ScenarioPlayer.menuFlag);
-
-        //         if ((event.key === "m" || event.key === "M") && ScenarioPlayer.menuFlag === false) {
-        //             document.getElementById('menu-frame').classList.remove('hide')
-        //             this.MenuOpenButton.classList.add('hide')
-        //             ScenarioPlayer.menuFlag = true
-                    
-        //         } else {
-        //             document.getElementById('menu-frame').classList.add('hide')
-        //             this.MenuOpenButton.classList.remove('hide')
-        //             ScenarioPlayer.menuFlag = false
-        //         }
-        
-        //     })
 
 
         // イベント付与
@@ -854,6 +838,10 @@ export default class ScenarioPlayer {
 
     }
 
+    /**
+     * キー入力
+     * @param {Event} e 
+     */
     openMenuKeyup = e => {
 
         e?.stopPropagation()
@@ -863,14 +851,19 @@ export default class ScenarioPlayer {
         addEventListener('keyup' ,(function () {
             return function f(event) {
                     if ((event.key === "m" || event.key === "M") && ScenarioPlayer.menuFlag === false) {
+                        // 開く
                         document.getElementById('menu-frame').classList.remove('hide')
                         ScenarioPlayer.menuFlag = true
+
+                        // ここでアニメーションを停止させる処理を書く
                         
                     } else {
+                        // 閉じる
                         document.getElementById('menu-frame').classList.add('hide')
                         ScenarioPlayer.menuFlag = false
                     }
                     // console.log(ScenarioPlayer.menuFlag);
+                    // イベント削除
                     removeEventListener('keyup', f)
             }
         })())
