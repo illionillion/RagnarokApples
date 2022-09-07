@@ -848,11 +848,12 @@ export default class ScenarioPlayer {
         // console.log('key press!!');
         // console.log(ScenarioPlayer.menuFlag);
         
-        addEventListener('keyup' ,(function () {
+        addEventListener('keyup', (function (thisObj) {
             return function f(event) {
                     if ((event.key === "m" || event.key === "M") && ScenarioPlayer.menuFlag === false) {
                         // 開く
                         document.getElementById('menu-frame').classList.remove('hide')
+                        thisObj.MenuOpenButton.classList.add('hide')
                         ScenarioPlayer.menuFlag = true
 
                         // ここでアニメーションを停止させる処理を書く
@@ -860,13 +861,14 @@ export default class ScenarioPlayer {
                     } else {
                         // 閉じる
                         document.getElementById('menu-frame').classList.add('hide')
+                        thisObj.MenuOpenButton.classList.remove('hide')
                         ScenarioPlayer.menuFlag = false
                     }
                     // console.log(ScenarioPlayer.menuFlag);
                     // イベント削除
                     removeEventListener('keyup', f)
             }
-        })())
+        })(this))
 
     }
 
