@@ -4,8 +4,10 @@
     position: absolute;
     width: 10%;
     height: 6%;
-    top: 15px;
-    left: 20px;
+    /* top: 15px;
+    left: 20px; */
+    top: 5%;
+    left: 2%;
     background-color: rgba(0, 0, 0, 0.582);
     text-align: center;
     z-index: 2;
@@ -240,8 +242,8 @@
     position: absolute;
     /* top: 15%;
     right: 20%; */
-    top: 15px;
-    right: 15px;
+    top: 5%;
+    right: 2%;
     width: 10%;
     height: 6%;
     /* line-height: 50px; */

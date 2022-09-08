@@ -131,3 +131,48 @@
     position: relative;
     right: 5%;
 }
+
+#menu-open-button {
+    position: absolute;
+    text-align: center;
+    left: 2%;
+    /* right: 2%; */
+    top: 5%;
+    width: 10%;
+    height: 6%;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+#menu-open-button span{
+    font-size: 2vw;
+}
+#menu-frame{
+    position: absolute;
+    top: 0%;
+    right: 0%;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 3;
+    display: flex;
+}
+#menu-list{
+    flex: 1;
+    border-left: 1px solid #fff;
+}
+#menu-screen{
+    flex: 3;
+}
+#menu-close-button {
+    position: absolute;
+    text-align: center;
+    left: 2%;
+    top: 5%;
+    width: 6%;
+    height: 6%;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+#menu-close-button span{
+    font-size: 2vw;
+}
