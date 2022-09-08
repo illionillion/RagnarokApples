@@ -18,6 +18,9 @@ LOCAL_BUILD_DIR = "フォルダ名を入力"
 SCENARIO_DATA_JSON = "URLを入力"
 # シナリオBGMのJSONデータのURL
 SCENARIO_AUDIO_DATA_JSON = "URLを入力"
+# シナリオマップのJSONデータのURL
+SCENARIO_MAP_DATA_JSON = "URLを入力"
+
 ```
 
 - `npm run build-win`でElectronアプリインストーラー作成
