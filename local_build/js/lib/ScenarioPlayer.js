@@ -856,13 +856,17 @@ export default class ScenarioPlayer {
                         thisObj.MenuOpenButton.classList.add('hide')
                         ScenarioPlayer.menuFlag = true
 
-                        // ここでアニメーションを停止させる処理を書く
-                        
+                        // アニメーション停止
+                        thisObj.AnimationPause()
+
                     } else {
                         // 閉じる
                         document.getElementById('menu-frame').classList.add('hide')
                         thisObj.MenuOpenButton.classList.remove('hide')
                         ScenarioPlayer.menuFlag = false
+
+                        // アニメーション再スタート
+                        thisObj.AnimationRestart()
                     }
                     // console.log(ScenarioPlayer.menuFlag);
                     // イベント削除
