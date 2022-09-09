@@ -856,8 +856,10 @@ export default class ScenarioPlayer {
                         thisObj.MenuOpenButton.classList.add('hide')
                         ScenarioPlayer.menuFlag = true
 
-                        // アニメーション停止
-                        thisObj.AnimationPause()
+                        if (thisObj.movingFlag) {
+                            // アニメーション停止
+                            thisObj.AnimationPause()
+                        }
 
                     } else {
                         // 閉じる
@@ -866,7 +868,10 @@ export default class ScenarioPlayer {
                         ScenarioPlayer.menuFlag = false
 
                         // アニメーション再スタート
-                        thisObj.AnimationRestart()
+                        // 暗転中・待機中は再スタートさせないようにすれば良い？
+                        if (thisObj.pauseFlag) {
+                            thisObj.AnimationRestart() // これだと、autoで切り替わる瞬間にメニュー開閉したら再スタートしなくなる
+                        }
                     }
                     // console.log(ScenarioPlayer.menuFlag);
                     // イベント削除
