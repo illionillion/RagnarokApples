@@ -31,9 +31,16 @@ const writeJson = (fn, json) => {
     //     fs.writeFileSync(build_path + '/js/lib/json/' + fn, JSON.stringify(json))
     //     fs.writeFileSync(__dirname + '/../' + process.env.LOCAL_BUILD_DIR + '/js/lib/json/' + fn, JSON.stringify(json))
     // }
-    fs.writeFileSync(__dirname + '/../' + process.env.LOCAL_BUILD_DIR + '/js/lib/json/' + fn, JSON.stringify(json))
+    if (!app.isPackaged) { // ローカル
+            fs.writeFileSync(__dirname + '/../' + process.env.LOCAL_BUILD_DIR + '/js/lib/json/' + fn, JSON.stringify(json))
+    }
+    // // レンダラーのasarの外(asarと同階層)にJSONを書き出したい
+    // if (!fs.existsSync(__dirname + '/../json/')) { 
+    //     // フォルダが存在しない場合、フォルダ作成
+    //     fs.mkdirSync(__dirname + '/../json/');        
+    // }
+    // fs.writeFileSync(__dirname + '/../json/' + fn, JSON.stringify(json))
 
-    // レンダラーのasarの外(asarと同階層)にJSONを書き出したい
 
     console.log('書き出し完了');
 }
