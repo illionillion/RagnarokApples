@@ -36,6 +36,9 @@ const mainProcess = async () => {
     if (!download) { // 失敗時
         dialog.showErrorBox('Connection Failed','インターネットへの接続が失敗しました。インターネットに接続して、もう一度アプリを起動してください');
     }
+
+    // ここでダウンロードしてきたasarの中のJSONをダウンロードして最新にする
+
     const mainWin = await createWindow() // メインウィンドウ起動
     splashWin.close() //ローディング画面閉じる
 

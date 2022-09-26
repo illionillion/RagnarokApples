@@ -584,6 +584,7 @@ export default class ScenarioPlayer {
             document.querySelector('#character-center img').src='images/character/transparent_background.png'
             document.querySelector('#character-right img').src='images/character/transparent_background.png'
             document.querySelector('#character-right-center img').src='images/character/transparent_background.png'
+            document.querySelector('#menu-screen .menu-title span').textContent = 'MENU'
             this.TextCover.classList.remove('none')
             this.FloatCheck.classList.add('op0')
             this.TextFloat.classList.add('op0')
@@ -856,8 +857,10 @@ export default class ScenarioPlayer {
                         thisObj.MenuOpenButton.classList.add('hide')
                         ScenarioPlayer.menuFlag = true
 
-                        // アニメーション停止
-                        thisObj.AnimationPause()
+                        if (thisObj.movingFlag) {
+                            // アニメーション停止
+                            thisObj.AnimationPause()
+                        }
 
                     } else {
                         // 閉じる
@@ -866,7 +869,10 @@ export default class ScenarioPlayer {
                         ScenarioPlayer.menuFlag = false
 
                         // アニメーション再スタート
-                        thisObj.AnimationRestart()
+                        // 暗転中・待機中は再スタートさせないようにすれば良い？
+                        // if (thisObj.pauseFlag) {
+                        //     thisObj.AnimationRestart() // これだと、autoで切り替わる瞬間にメニュー開閉したら再スタートしなくなる
+                        // }
                     }
                     // console.log(ScenarioPlayer.menuFlag);
                     // イベント削除
@@ -910,6 +916,9 @@ export default class ScenarioPlayer {
         // }
         const text = e.target.textContent
         // console.log(text + ' click');
-        document.querySelector('#menu-screen .contents').textContent = text
+
+        if (!['day', 'place'].includes(e.target.dataset.menubutton)) {
+            document.querySelector('#menu-screen .menu-title span').textContent = text
+        }
     }
 }
