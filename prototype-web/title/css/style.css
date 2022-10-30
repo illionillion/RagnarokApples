@@ -1,0 +1,68 @@
+* {
+    user-select: none !important;
+    -moz-user-select: none !important;
+    -webkit-user-select: none !important;
+  }
+  img {
+    -webkit-user-drag: none;
+  }
+
+  body {
+    margin: 0;
+    background-color: #000;
+  }
+  #frame {
+    position: absolute;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    top: 0%;
+    bottom: 0%;
+    left: 0%;
+    right: 0%;
+  }
+
+  #screen {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    background-color: #000;
+    color: #fff;
+    position: relative;
+  }
+
+  /* 暗転する */
+  #darkening-floor {
+    position: absolute;
+    top: 0%;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    z-index: 3;
+    transition: 500ms;
+  }
+  #darkening-floor.op0 {
+    z-index: -1;
+  }
+
+  /* 非表示(完全に) */
+  .none {
+    display: none;
+  }
+  /* 非表示(透明) */
+  .op0 {
+    opacity: 0;
+  }
+  /* 非表示 */
+  .hide {
+    visibility: hidden;
+  }
+  /* 赤文字 */
+  .red {
+    color: #f00;
+  }
+  /* 大文字 */
+  .large {
+    font-size: 1.5em;
+  }

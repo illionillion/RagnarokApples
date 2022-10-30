@@ -6,6 +6,7 @@
   "main": "src/main.js",
   "scripts": {
     "start": "electron .",
+    "server": "http-server -o",
     "build": "npm run build-mac;npm run build-win",
     "build-mac": "electron-builder --mac --x64",
     "build-win": "electron-builder --win --x64",
@@ -25,7 +26,8 @@
     "asar": "^3.1.0",
     "electron": "^17.1.0",
     "electron-builder": "^23.0.3",
-    "eslint": "^8.12.0"
+    "eslint": "^8.12.0",
+    "http-server": "^14.1.1"
   },
   "build": {
     "appId": "net.makitokatsube.app.1st",
