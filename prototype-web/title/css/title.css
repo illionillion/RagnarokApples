@@ -45,7 +45,7 @@
 }
 
 #title-list ul li:hover{
-    background-image: url(../images/カーソルPNG.png);
+    background-image: url(../images/cursor.png);
     background-size: contain;
     background-repeat: no-repeat;
     background-position-x: 40%;
