@@ -1,5 +1,5 @@
 "use strict"
-import FrameSizing from "./lib/FrameSizing.js"
+import FrameSizing from "../../../local_build/js/lib/FrameSizing.js"
 
 (function(){
 
