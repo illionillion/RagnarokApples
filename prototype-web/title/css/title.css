@@ -44,7 +44,7 @@
     justify-content: center;
 }
 
-#title-list ul li:hover{
+#title-list ul li.on-cursor{
     background-image: url(../images/cursor.png);
     background-size: contain;
     background-repeat: no-repeat;
