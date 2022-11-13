@@ -6,7 +6,8 @@ import toDarking from './lib/toDarking.js'
 (function(){
     const gameState = {
         textEventId: -1, // いらない
-        nowPart: 'A0',
+        // nowPart: 'A0',
+        nowPart: 'init', // マップのinitを取得する
         FloatCheck: true,
         nowDate: 0,
         nowPlace: undefined,
