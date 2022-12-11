@@ -1,4 +1,4 @@
-#title-screen {
+#title-flex {
     display: flex;
     position: absolute;
     width: 100%;
@@ -6,8 +6,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: grey;
-    background-image: url(../images/titleanimation.gif);
+    background-color: none;
+    /* background-image: url(../images/titleanimation.gif); */
     background-size: cover;
 }
 
