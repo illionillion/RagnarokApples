@@ -1,7 +1,8 @@
 // モジュールロード
-const { app, Menu, BrowserWindow, dialog } = require('electron')
+const { app, Menu, BrowserWindow, dialog, ipcMain } = require('electron')
 const { asarDownLoad } = require('./asarDownLoad.js')
 const { createWindow, createSplash } = require('./createWindow.js')
+const { writeJson } = require('./writeFile.js')
 require('dotenv').config({ path: __dirname + '/../.env' }) // .env読み込み
 
 /**
@@ -24,16 +25,20 @@ const mainProcess = async () => {
         return // 処理終了
     }
 
+    const splashWin = await createSplash() // ローディング画面起動
+    
     // URLを指定 
     const url = process.env.ASAR_URL
     // 出力ファイル名を指定
-    const outURL = app.getPath('userData') + '/render.asar'
+    const outURL = app.getPath('userData') + '/renderer.asar'
 
-    const splashWin = await createSplash() // ローディング画面起動
     const download =  await asarDownLoad(url, outURL, splashWin) // ダウンロード開始
     if (!download) { // 失敗時
         dialog.showErrorBox('Connection Failed','インターネットへの接続が失敗しました。インターネットに接続して、もう一度アプリを起動してください');
     }
+
+    // ここでダウンロードしてきたasarの中のJSONをダウンロードして最新にする
+
     const mainWin = await createWindow() // メインウィンドウ起動
     splashWin.close() //ローディング画面閉じる
 
@@ -90,4 +95,13 @@ app.on('activate', () => {
         // Macにて信号赤が押されてからアイコンクリックされた時にダウンロードから始める
         createWindow()
     }
+})
+
+// レンダラーにapp.isPackagedを渡す
+ipcMain.handle('isPackaged', () => {
+   return app.isPackaged
+})
+// レンダラーからfetchで取得したJSONをファイルに書き出させる（開発環境のみ）
+ipcMain.handle('writeJson', (event, data) => {
+   return writeJson(data.filename, data.json)
 })

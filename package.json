@@ -6,12 +6,11 @@
   "main": "src/main.js",
   "scripts": {
     "start": "electron .",
+    "server": "http-server -o",
+    "build": "npm run build-mac;npm run build-win",
     "build-mac": "electron-builder --mac --x64",
     "build-win": "electron-builder --win --x64",
-    "server": "http-server -o",
-    "length-check": "node TextLengthCount.js",
-    "asar-pack": "asar pack",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "asar-pack": "asar pack local_build renderer.asar"
   },
   "repository": {
     "type": "git",
@@ -28,7 +27,7 @@
     "electron": "^17.1.0",
     "electron-builder": "^23.0.3",
     "eslint": "^8.12.0",
-    "http-server": "^14.1.0"
+    "http-server": "^14.1.1"
   },
   "build": {
     "appId": "net.makitokatsube.app.1st",

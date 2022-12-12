@@ -1,12 +1,14 @@
+const { BrowserWindow } = require('electron')
 const https = require('https')
 const originalfs = require('original-fs')
 
 /**
  * http.get
  * asarのダウンロード・置き換え
- * @param {*} url ダウンロードするファイルのURL
- * @param {*} outURL 出力するファイルのURL
- * @param {*} splash ローディング画面
+ * @param {string} url ダウンロードするファイルのURL
+ * @param {string} outURL 出力するファイルのURL
+ * @param {BrowserWindow} splash ローディング画面
+ * @returns {Promise <boolean>}
  */
 const asarDownLoad = async (url, outURL, splash) => {
 

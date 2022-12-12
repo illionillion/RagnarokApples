@@ -1,0 +1,111 @@
+{
+    "A0" : {
+        "items": {
+            "point1":{
+                "place" : "場所1",
+                "partKey" : "A1",
+                "style" : {
+                    "width" : "13%",
+                    "height" : "18%",
+                    "top" : "7%",
+                    "left" : "17%"
+                },
+                "iconImage": "app.png",
+                "characterIcons": {
+                    "0": "tau-sample.jpg",
+                    "1": "app.png",
+                    "2": "tau-sample.jpg"
+                }
+            }
+        },
+        "day": "0日目",
+        "mapMessageCharacter": "bengal.png",
+        "mapMessageText": "さぁ、どこへ行こう？",
+        "mapTextIcon": "tau-sample.jpg",
+        "tipsMessage": {
+            "0": "アイウエオ",
+            "1": "カキクケコ",
+            "2": "サシスセソ",
+            "3": "タチツテト"
+        },
+        "backgroundImage": "map.png"
+    },
+    "A1" : {
+        "items": {
+            "point1":{
+                "place" : "場所1",
+                "partKey" : "A1",
+                "style" : {
+                    "width" : "13%",
+                    "height" : "18%",
+                    "top" : "7%",
+                    "left" : "17%"
+                },
+                "iconImage": "app.png",
+                "characterIcons": {
+                    "0": "tau-sample.jpg",
+                    "1": "tau-sample.jpg",
+                    "2": "tau-sample.jpg"
+                }
+            },
+            "point2":{
+                "place" : "場所2",
+                "partKey" : "A2-1",
+                "style" : {
+                    "width" : "16%",
+                    "height" : "25%",
+                    "top" : "53%",
+                    "left" : "13%"
+                },
+                "iconImage": "app.png",
+                "characterIcons": {
+                    "0": "tau-sample.jpg",
+                    "1": "tau-sample.jpg",
+                    "2": "tau-sample.jpg"
+                }
+            }
+        },
+        "day": "1日目",
+        "mapMessageCharacter": "bibian.png",
+        "mapMessageText": "さて、どこへ行こうか？",
+        "mapTextIcon": "tau-sample.jpg",
+        "tipsMessage": {
+            "0": "サシスセソ",
+            "1": "アイウエオ",
+            "2": "カキクケコ",
+            "3": "タチツテト"
+        },
+        "backgroundImage": "map.png"
+    },
+    "A2-1" : {
+        "items": {
+            "point1":{
+                "place" : "場所3",
+                "partKey" : "A2-2",
+                "style" : {
+                    "width" : "19%",
+                    "height" : "28%",
+                    "top" : "46%",
+                    "left" : "45%"
+                },
+                "iconImage": "app.png",
+                "characterIcons": {
+                    "0": "tau-sample.jpg",
+                    "1": "tau-sample.jpg",
+                    "2": "tau-sample.jpg"
+                }
+            }
+        },
+        "day": "2日目-朝",
+        "mapMessageCharacter": "tau-test.png",
+        "mapMessageText": "さてと、どこへ行こうかな？",
+        "mapTextIcon": "tau-sample.jpg",
+        "tipsMessage": {
+            "0": "カキクケコ",
+            "1": "サシスセソ",
+            "2": "アイウエオ",
+            "3": "タチツテト"
+        },
+        "backgroundImage": "map.png"
+    }
+}
