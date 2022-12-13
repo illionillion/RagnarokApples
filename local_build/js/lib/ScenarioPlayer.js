@@ -101,7 +101,12 @@ export default class ScenarioPlayer {
         // イベント付与
         this.screen.addEventListener('click', this.textBoxShowHide, false)    
         this.dialogueEle.addEventListener('click', this.clickDialogue, false)
-        this.autocheck.textContent = ScenarioPlayer.autoPlayingFlag ? 'Auto ON' : 'Auto OFF'
+        // this.autocheck.textContent = ScenarioPlayer.autoPlayingFlag ? 'Auto ON' : 'Auto OFF'
+        if (ScenarioPlayer.autoPlayingFlag) {
+            this.autocheck.classList.add('active')
+        } else {
+            this.autocheck.classList.remove('active')
+        }
         this.autocheck.addEventListener('click', this.autoToggle, false)
         this.darkeningFloor.addEventListener('click', this.darkeningElePrev, false)
         this.onePicture.addEventListener('click', this.onePictureClick, false)
@@ -227,7 +232,12 @@ export default class ScenarioPlayer {
         e.stopPropagation();
         ScenarioPlayer.autoPlayingFlag = ScenarioPlayer.autoPlayingFlag ? false : true
         this.state.autoPlayingFlag = ScenarioPlayer.autoPlayingFlag
-        e.target.textContent = ScenarioPlayer.autoPlayingFlag ? 'Auto ON' :'Auto OFF';
+        if (ScenarioPlayer.autoPlayingFlag) {
+            this.autocheck.classList.add('active')
+        } else {
+            this.autocheck.classList.remove('active')
+        }
+        // e.target.textContent = ScenarioPlayer.autoPlayingFlag ? 'Auto ON' :'Auto OFF';
         // auto機能をONからOFFに変更したときautoPlayingCheckを初期化
         if (!ScenarioPlayer.autoPlayingFlag) {
             this.autoPlayingCheck = false;
