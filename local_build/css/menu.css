@@ -8,7 +8,13 @@
   width: 10%;
   height: 6%;
   z-index: 2;
+  font-size: 1.3vw;
   /* background-color: rgba(0, 0, 0, 0.4); */
+}
+
+#menu-open-button:hover::after {
+  content: 'MENU';
+  font-family: serif;
 }
 
 #menu-open-button span {
