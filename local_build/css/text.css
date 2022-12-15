@@ -26,9 +26,21 @@
   height: 100%;
 }
 
-#text-control-buttons .active img{
-  /* border: 1px solid #B7AA00; */
-  filter: invert();
+#text-control-buttons .auto{
+  visibility: visible;
+  display: block;
+}
+#text-control-buttons .active .auto{
+  visibility: hidden;
+  display: none;
+}
+#text-control-buttons .auto2{
+  visibility: hidden;
+  display: none;
+}
+#text-control-buttons .active .auto2{
+  visibility: visible;
+  display: block;
 }
 #text-control-buttons div{
   width: 20%;
