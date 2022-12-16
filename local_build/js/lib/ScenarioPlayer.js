@@ -92,6 +92,7 @@ export default class ScenarioPlayer {
         document.querySelector('#menu-list .day').dataset.day = this.day
         document.querySelector('#menu-list .place').textContent = this.place
         document.querySelector('#menu-list .place').dataset.place = this.place
+        document.querySelector('#dialogue-text-arrow').classList.add('hide')
         this.autoPlayingCheck = false
         this.startFlag = true
 
@@ -340,6 +341,8 @@ export default class ScenarioPlayer {
         // 　音声終了
         this.AudioStop()
 
+        document.querySelector('#dialogue-text-arrow').classList.add('hide')
+
         if (this.msgindex >= Object.keys(this.TextList).length) {
             return;
             // this.msgindex=0;
@@ -535,6 +538,7 @@ export default class ScenarioPlayer {
 
         }
 
+        document.querySelector('#dialogue-text-arrow').classList.remove('hide')
         this.next()
 
     }
