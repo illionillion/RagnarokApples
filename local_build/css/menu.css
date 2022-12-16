@@ -1,97 +1,104 @@
 #menu-open-button {
-    position: absolute;
-    text-align: center;
-    left: 2%;
-    /* right: 2%; */
-    top: 5%;
-    width: 10%;
-    height: 6%;
-    z-index: 2;
-    background-color: rgba(0, 0, 0, 0.4);
+  /* position: absolute; */
+  text-align: center;
+  /* flex: 1; */
+  /* left: 2%; */
+  /* right: 2%; */
+  /* top: 5%; */
+  width: 10%;
+  height: 6%;
+  z-index: 2;
+  font-size: 1.3vw;
+  /* background-color: rgba(0, 0, 0, 0.4); */
+}
+
+#menu-open-button:hover::after {
+  content: 'MENU';
+  font-family: serif;
 }
 
 #menu-open-button span {
-    font-size: 2vw;
+  font-size: 2vw;
 }
 
 #menu-frame {
-    position: absolute;
-    top: 0%;
-    right: 0%;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
-    z-index: 3;
-    display: flex;
+  position: absolute;
+  top: 0%;
+  right: 0%;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 3;
+  display: flex;
 }
 
 #menu-list {
-    flex: 1;
-    border-left: 1px solid #fff;
+  flex: 1;
+  border-left: 1px solid #fff;
 }
 
 #menu-screen {
-    flex: 3;
-    display: flex;
-    flex-direction: column;
-    /* position: relative; */
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  /* position: relative; */
 }
 
 #menu-close-button {
-    position: absolute;
-    text-align: center;
-    left: 2%;
-    top: 5%;
-    width: 6%;
-    height: 6%;
-    z-index: 2;
-    background-color: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  text-align: center;
+  left: 2%;
+  top: 5%;
+  width: 6%;
+  height: 6%;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 #menu-close-button span {
-    font-size: 2vw;
+  font-size: 2vw;
 }
 
 /* Menuのボタン */
 #menu-list {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 ul {
-    padding: 0;
-    text-align: center;
-    font-size: calc(5vw / 3);
+  padding: 0;
+  text-align: center;
+  font-size: calc(5vw / 3);
 }
 
 li {
-    list-style: none;
-    margin: 0.5vw 0;
+  list-style: none;
+  margin: 0.5vw 0;
 }
 
 li:not(.day, .place):hover {
-    /* .dayと .placeを除外*/
-    color: rgb(185, 185, 185);
+  /* .dayと .placeを除外*/
+  color: rgb(185, 185, 185);
 }
 
 #menu-screen .menu-title {
-    font-size: calc(5vw / 3);
-    text-align: center;
-    flex: 1;
-    position: relative;
+  font-size: calc(5vw / 3);
+  text-align: center;
+  flex: 1;
+  position: relative;
 }
-#menu-screen .menu-title span{
-    position: absolute;
-    top: 50%;
+#menu-screen .menu-title span {
+  position: absolute;
+  top: 50%;
 }
 
 .menu-title-hr {
-    width: 80%;
-    margin: auto;
+  width: 80%;
+  margin: auto;
 }
 
 #menu-screen .contents {
-    width: 100%;
-    flex: 8;
+  width: 100%;
+  flex: 8;
 }
