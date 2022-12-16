@@ -92,6 +92,7 @@ export default class ScenarioPlayer {
         document.querySelector('#menu-list .day').dataset.day = this.day
         document.querySelector('#menu-list .place').textContent = this.place
         document.querySelector('#menu-list .place').dataset.place = this.place
+        document.querySelector('#dialogue-text-arrow').classList.add('hide')
         this.autoPlayingCheck = false
         this.startFlag = true
 
@@ -101,7 +102,12 @@ export default class ScenarioPlayer {
         // イベント付与
         this.screen.addEventListener('click', this.textBoxShowHide, false)    
         this.dialogueEle.addEventListener('click', this.clickDialogue, false)
-        this.autocheck.textContent = ScenarioPlayer.autoPlayingFlag ? 'Auto ON' : 'Auto OFF'
+        // this.autocheck.textContent = ScenarioPlayer.autoPlayingFlag ? 'Auto ON' : 'Auto OFF'
+        if (ScenarioPlayer.autoPlayingFlag) {
+            this.autocheck.classList.add('active')
+        } else {
+            this.autocheck.classList.remove('active')
+        }
         this.autocheck.addEventListener('click', this.autoToggle, false)
         this.darkeningFloor.addEventListener('click', this.darkeningElePrev, false)
         this.onePicture.addEventListener('click', this.onePictureClick, false)
@@ -227,7 +233,12 @@ export default class ScenarioPlayer {
         e.stopPropagation();
         ScenarioPlayer.autoPlayingFlag = ScenarioPlayer.autoPlayingFlag ? false : true
         this.state.autoPlayingFlag = ScenarioPlayer.autoPlayingFlag
-        e.target.textContent = ScenarioPlayer.autoPlayingFlag ? 'Auto ON' :'Auto OFF';
+        if (ScenarioPlayer.autoPlayingFlag) {
+            this.autocheck.classList.add('active')
+        } else {
+            this.autocheck.classList.remove('active')
+        }
+        // e.target.textContent = ScenarioPlayer.autoPlayingFlag ? 'Auto ON' :'Auto OFF';
         // auto機能をONからOFFに変更したときautoPlayingCheckを初期化
         if (!ScenarioPlayer.autoPlayingFlag) {
             this.autoPlayingCheck = false;
@@ -329,6 +340,8 @@ export default class ScenarioPlayer {
 
         // 　音声終了
         this.AudioStop()
+
+        document.querySelector('#dialogue-text-arrow').classList.add('hide')
 
         if (this.msgindex >= Object.keys(this.TextList).length) {
             return;
@@ -525,6 +538,7 @@ export default class ScenarioPlayer {
 
         }
 
+        document.querySelector('#dialogue-text-arrow').classList.remove('hide')
         this.next()
 
     }

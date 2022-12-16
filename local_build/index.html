@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ラグナロクアップルズ</title>
-    <link rel="shortcut icon" href="../app.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../app.png" type="image/x-icon" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/map.css" />
     <link rel="stylesheet" href="css/text.css" />
     <link rel="stylesheet" href="css/menu.css" />
     <script type="module" src="js/main.js" defer></script>
   </head>
-  <body >
+  <body>
     <main>
       <div id="frame">
         <div id="screen">
@@ -68,15 +68,25 @@
                 />
               </div>
             </div>
-            <div id="autocheck"></div>
-            <div id="skipButton">Skip</div>
             <div id="dialogue">
               <!-- テキスト描画 -->
               <div id="dialogue-name-area"></div>
               <div id="dialogue-text-area"></div>
+              <div id="dialogue-text-arrow">
+                <img src="./images/conversation/arrow.png" alt="" />
+              </div>
             </div>
-            <div id="menu-open-button">
-              <span>MENU</span>
+            <div id="text-control-buttons">
+              <div id="autocheck">
+                <img src="./images/conversation/AUTO.png" class="auto" alt="" />
+                <img src="./images/conversation/AUTO2.png" class="auto2" alt="" />
+              </div>
+              <div id="skipButton">
+                <img src="./images/conversation/SKIP.png" alt="" />
+              </div>
+              <div id="menu-open-button">
+                <img src="./images/conversation/MENU.png" alt="" />
+              </div>
             </div>
             <div id="menu-frame" class="hide">
               <div id="menu-screen">
@@ -86,15 +96,15 @@
                 <div class="menu-title">
                   <span>MENU</span>
                 </div>
-                <hr class="menu-title-hr">
-                <div class="contents">
-
-                </div>
+                <hr class="menu-title-hr" />
+                <div class="contents"></div>
               </div>
               <div id="menu-list">
                 <ul>
                   <li class="day" data-menubutton="day" data-day="0">○日め</li>
-                  <li class="place" data-menubutton="place" data-place="">場所</li>
+                  <li class="place" data-menubutton="place" data-place="">
+                    場所
+                  </li>
                   <li>Q.SAVE</li>
                   <li>Q.LOAD</li>
                   <li>SAVE</li>
