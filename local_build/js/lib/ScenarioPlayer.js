@@ -184,6 +184,7 @@ export default class ScenarioPlayer {
             this.dialogueEle.classList.add('none')
             this.autocheck.classList.add('none')
             this.skipButton.classList.add('none')
+            this.MenuOpenButton.classList.add('none')
             this.dialogueFlag = false
             if (this.movingFlag) this.AnimationPause()
         }else{
@@ -191,6 +192,7 @@ export default class ScenarioPlayer {
             this.dialogueEle.classList.remove('none')
             this.autocheck.classList.remove('none')
             this.skipButton.classList.remove('none')
+            this.MenuOpenButton.classList.remove('none')
             this.dialogueFlag = true
         }
 
