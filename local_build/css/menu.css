@@ -1,15 +1,9 @@
 #menu-open-button {
-  /* position: absolute; */
   text-align: center;
-  /* flex: 1; */
-  /* left: 2%; */
-  /* right: 2%; */
-  /* top: 5%; */
   width: 10%;
   height: 6%;
   z-index: 2;
   font-size: 1.3vw;
-  /* background-color: rgba(0, 0, 0, 0.4); */
 }
 
 #menu-open-button:hover::after {
@@ -41,15 +35,15 @@
   flex: 3;
   display: flex;
   flex-direction: column;
-  /* position: relative; */
 }
 
 #menu-close-button {
   position: absolute;
   text-align: center;
-  left: 2%;
-  top: 5%;
-  width: 6%;
+  right: 2%;
+  top: 4%;
+  transform: translate(-2%, -4%);
+  width: 3%;
   height: 6%;
   z-index: 2;
   background-color: rgba(0, 0, 0, 0.4);
