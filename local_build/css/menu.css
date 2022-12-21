@@ -40,14 +40,34 @@
 #menu-close-button {
   position: absolute;
   text-align: center;
-  right: 2%;
-  top: 4%;
+  right: 1%;
+  top: 3%;
   transform: translate(-2%, -4%);
-  width: 3%;
+  width: 4%;
   height: 6%;
   z-index: 2;
-  background-color: rgba(0, 0, 0, 0.4);
+  /* background-color: rgba(0, 0, 0, 0.4); */
 }
+
+#menu-close-button img{
+  width: 100%;
+}
+/* #menu-close-button .close2{
+  visibility: visible;
+  display: block;
+}
+#menu-close-button .close1{
+  visibility: hidden;
+  display: none;
+}
+#menu-close-button .close2:focus{
+  visibility: hidden;
+  display: none;
+}
+#menu-close-button .close1:focus{
+  visibility: visible;
+  display: block;
+} */
 
 #menu-close-button span {
   font-size: 2vw;
