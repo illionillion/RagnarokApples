@@ -60,10 +60,6 @@
 
 /* オート・非オート表示 */
 #autocheck {
-  /* position: absolute; */
-  /* bottom: 10%;
-  right: 10%; */
-  /* flex: 1; */
   text-align: center;
   z-index: 2;
   font-family: "Noto Serif JP", serif;
@@ -80,10 +76,6 @@
 }
 /* スキップ */
 #skipButton {
-  /* position: absolute; */
-  /* bottom: 10%;
-  right: 18%; */
-  /* flex: 1; */
   text-align: center;
   z-index: 2;
   font-family: "Noto Serif JP", serif;
@@ -108,7 +100,6 @@
   height: 80%;
   top: 10%;
   left: 10%;
-  /* font-size: 1.5em; */
   font-family: "Noto Serif JP", serif;
   font-size: 2.5vw;
 }
@@ -129,22 +120,17 @@
   background-image: url(../images/conversation/textwindow.png);
 }
 #dialogue-name-area {
-  /* margin: 0px auto; */
   margin: 25px auto 5px;
   width: 75%;
   height: 20%;
   font-size: 1.5vw;
   font-weight: normal;
-  /* font-weight: bold; */
 }
 #dialogue-text-area {
   width: 80%;
-  /* line-height: 2em; */
   text-align: justify;
   margin: auto;
-  /* font-weight: bold; */
   font-weight: normal;
-  /* font-size: x-small; */
   font-size: 1vw;
   padding: 0vw 1.4vw;
   letter-spacing: 0.1rem;
@@ -177,10 +163,13 @@
 #character-area div {
   margin: 0 auto;
   width: 25%;
+  position: relative;
 }
 #character-area div img {
   width: 100%;
   object-fit: fill;
+  position: absolute;
+  bottom: 0%;
 }
 
 #character-left {
