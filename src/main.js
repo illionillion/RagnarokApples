@@ -1,6 +1,7 @@
 // モジュールロード
 const { app, Menu, BrowserWindow, dialog, ipcMain } = require('electron')
 const { asarDownLoad } = require('./asarDownLoad.js')
+const { assetsDownLoad } = require('./assetsDownLoad.js')
 const { createWindow, createSplash } = require('./createWindow.js')
 const { writeJson } = require('./writeFile.js')
 require('dotenv').config({ path: __dirname + '/../.env' }) // .env読み込み
@@ -104,4 +105,9 @@ ipcMain.handle('isPackaged', () => {
 // レンダラーからfetchで取得したJSONをファイルに書き出させる（開発環境のみ）
 ipcMain.handle('writeJson', (event, data) => {
    return writeJson(data.filename, data.json)
+})
+
+ipcMain.handle('assetsDownLoad', async (event, data) => {
+    console.log(data);
+   return await assetsDownLoad(data.filename, data.type, data.link)
 })
