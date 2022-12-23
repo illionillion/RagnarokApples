@@ -7,7 +7,11 @@ window.addEventListener('load', () => {
         
         document.getElementById('percent').innerText = `${arg} %`
         document.getElementById('loading').value = arg
-        if(arg == 100) document.querySelector('label>h1').innerText = 'Completed!'
+        if(arg == 100) {
+            document.querySelector('label>h1').innerText = 'Completed!'
+        } else {
+            document.querySelector('label>h1').innerText = 'Loading'
+        }
         
     })
 

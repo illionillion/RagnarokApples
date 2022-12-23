@@ -1,4 +1,4 @@
-const { contextBridge, ipcRenderer } = require('electron');
+const { contextBridge, ipcRenderer, app } = require('electron');
 // const { writeJson } = require('./writeFile');
 
 require('dotenv').config({ path: __dirname + '/../.env' }) // .env読み込み
@@ -14,6 +14,7 @@ contextBridge.exposeInMainWorld('myAPI', {
     isPackaged: async () => await ipcRenderer.invoke('isPackaged'), // パッケージ状態か確認
     writeJson: async (data) => await ipcRenderer.invoke('writeJson', data),
     assetsDownLoad: async (data) => await ipcRenderer.invoke('assetsDownLoad', data),
+    getAssetsPath: async () => await ipcRenderer.invoke('getAssetsPath'),
     on: (channel, callback) => ipcRenderer.on(channel, (event, argv) => callback(event, argv)), // メイン → レンダラー
     LOCAL_BUILD_DIR: process.env.LOCAL_BUILD_DIR,
     __dirname: __dirname,

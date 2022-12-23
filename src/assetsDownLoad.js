@@ -1,6 +1,7 @@
 const https = require("https");
 const fs = require("original-fs");
 const { app } = require("electron");
+const { createSplash } = require("./createWindow");
 
 const assetsDownLoad = async (filename, type, link) => {
   try {
@@ -13,7 +14,7 @@ const assetsDownLoad = async (filename, type, link) => {
           const download = await assetsDownLoad(
             filename,
             type,
-            res.headers.location
+            res.headers.location,
           );
           console.log(download);
           resolve(download);
@@ -47,15 +48,17 @@ const assetsDownLoad = async (filename, type, link) => {
 
         const outURL = app.getPath("userData") + dir + filename;
 
+        const splash = await createSplash()
         let total = 0; // 合計byte数
         let percent = 0; // %
+        console.log(splash);
         res.on("data", (chunk) => {
           total += chunk.length; // これまで読み取ったbyte数
           const length = res.headers["content-length"];
           if (percent !== parseInt((total / length) * 100)) {
             percent = parseInt((total / length) * 100);
             console.log(`${percent} %`);
-            // splash.webContents.send('loadingData', percent)
+            splash.webContents.send('loadingData', percent)
           }
         });
         const outFile = fs.createWriteStream(outURL);
@@ -66,6 +69,7 @@ const assetsDownLoad = async (filename, type, link) => {
           console.log("end");
           console.log(outURL);
           outFile.close();
+          splash.close()
           resolve(true); // trueを返す
         });
       });
