@@ -116,6 +116,5 @@ ipcMain.handle("writeJson", (event, data) => {
 
 const path = app.getPath("userData") + "/assets/";
 ipcMain.handle("getAssetsPath", async (event, data) => {
-  console.log(data);
   return path;
 });
