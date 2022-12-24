@@ -70,9 +70,9 @@ const assetsDownLoad = async (filename, type, link, splash) => {
         }
 
         let dir = "";
-
-        if (!fs.existsSync(app.getPath("userData") + "/assets")) {
-          fs.mkdirSync(app.getPath("userData") + "/assets");
+        const dataPath = app.getPath("userData")
+        if (!fs.existsSync(dataPath + "/assets")) {
+          fs.mkdirSync(dataPath + "/assets");
         }
         switch (type) {
           case "背景":
@@ -90,11 +90,11 @@ const assetsDownLoad = async (filename, type, link, splash) => {
             break;
         }
 
-        if (!fs.existsSync(app.getPath("userData") + dir)) {
-          fs.mkdirSync(app.getPath("userData") + dir);
+        if (!fs.existsSync(dataPath + dir)) {
+          fs.mkdirSync(dataPath + dir);
         }
 
-        const outURL = app.getPath("userData") + dir + filename;
+        const outURL = dataPath + dir + filename;
 
         let total = 0; // 合計byte数
         let percent = 0; // %
