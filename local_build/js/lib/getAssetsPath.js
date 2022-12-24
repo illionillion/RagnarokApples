@@ -8,6 +8,8 @@ const getAudioPath = async () => {
     return await window.myAPI.getAssetsPath() + 'audio'
 }
 
-exports.getAudioPath = getAudioPath
-exports.getCharacterPath = getCharacterPath
-exports.getBackgroundPath = getBackgroundPath
+export {
+    getAudioPath,
+    getCharacterPath,
+    getBackgroundPath
+}

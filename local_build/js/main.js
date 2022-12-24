@@ -35,20 +35,6 @@ import toDarking from './lib/toDarking.js'
 
         await toDarking(async e => {
 
-            const req = await fetch(window?.myAPI?.URLS?.SCENARIO_ASSETS_DATA_JSON)
-            const json = await req.json()
-            console.log(json);
-            for (const filename of Object.keys(json)) {
-                console.log(filename);
-                console.log(json[filename]['type']);
-                console.log(json[filename]['link']);
-                await window?.myAPI?.assetsDownLoad({
-                    filename: filename,
-                    type: json[filename]['type'],
-                    link: json[filename]['link']
-                })
-            }
-
             await CreateMap(gameState)
             // マップ画面遷移系
             const FloatCheck = document.getElementById('FloatCheck')

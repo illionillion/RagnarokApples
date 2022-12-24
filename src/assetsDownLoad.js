@@ -1,20 +1,68 @@
 const https = require("https");
 const fs = require("original-fs");
-const { app } = require("electron");
-const { createSplash } = require("./createWindow");
+const { app, BrowserWindow } = require("electron");
 
-const assetsDownLoad = async (filename, type, link) => {
+/**
+ * 
+ * @param {string} link 
+ * @param {BrowserWindow} splash 
+ * @returns 
+ */
+const getAssetsList = async (link, splash) => {
+  try {
+    return await new Promise((resolve, reject) => {
+      const req = https.get(link, (res) => {
+        let data = "";
+        res.on("data", (d) => {
+          data += d;
+        });
+        res.on("end", async () => {
+          const json = JSON.parse(data);
+          for (const filename of Object.keys(json)) {
+            console.log(filename);
+            console.log(json[filename]["type"]);
+            console.log(json[filename]["link"]);
+            await assetsDownLoad(
+              filename,
+              json[filename]["type"],
+              json[filename]["link"] + '?rand=' + Math.floor(Math.random() * 100),
+              splash
+            );
+          }
+          resolve(true)
+        });
+      });
+
+      req.on('error', error => {
+        console.log(error);
+        reject(false)
+      })
+    });
+  } catch (error) {
+    console.log(error);
+    return error
+  }
+};
+
+/**
+ * 
+ * @param {string} filename 
+ * @param {string} type 
+ * @param {string} link 
+ * @param {BrowserWindow} splash 
+ * @returns 
+ */
+const assetsDownLoad = async (filename, type, link, splash) => {
   try {
     return await new Promise((resolve, reject) => {
       const req = https.get(link, async (res) => {
         console.log(res.statusCode);
-        // console.log(res);
-        if (res.statusCode === 302 || res.statusCode === 303) {
-          console.log(res.headers.location);
+        if (res.statusCode === 302 || res.statusCode === 303 || res.statusCode === 403) {
           const download = await assetsDownLoad(
             filename,
             type,
             res.headers.location,
+            splash
           );
           console.log(download);
           resolve(download);
@@ -48,17 +96,15 @@ const assetsDownLoad = async (filename, type, link) => {
 
         const outURL = app.getPath("userData") + dir + filename;
 
-        const splash = await createSplash()
         let total = 0; // 合計byte数
         let percent = 0; // %
-        console.log(splash);
         res.on("data", (chunk) => {
           total += chunk.length; // これまで読み取ったbyte数
           const length = res.headers["content-length"];
           if (percent !== parseInt((total / length) * 100)) {
             percent = parseInt((total / length) * 100);
             console.log(`${percent} %`);
-            splash.webContents.send('loadingData', percent)
+            splash.webContents.send("loadingData", percent);
           }
         });
         const outFile = fs.createWriteStream(outURL);
@@ -69,7 +115,6 @@ const assetsDownLoad = async (filename, type, link) => {
           console.log("end");
           console.log(outURL);
           outFile.close();
-          splash.close()
           resolve(true); // trueを返す
         });
       });
@@ -87,3 +132,4 @@ const assetsDownLoad = async (filename, type, link) => {
 };
 
 exports.assetsDownLoad = assetsDownLoad;
+exports.getAssetsList = getAssetsList;
