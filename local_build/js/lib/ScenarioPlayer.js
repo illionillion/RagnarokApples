@@ -1,3 +1,4 @@
+import { getAudioPath, getBackgroundPath, getCharacterPath } from "./getAssetsPath.js";
 import { CreateMap } from "./map.js";
 import timer from "./timer.js";
 import toDarking from "./toDarking.js";
@@ -34,7 +35,7 @@ export default class ScenarioPlayer {
      * @param {*} TextList テキストのオブジェクト
      * @param {*} state ゲームのステータスのオブジェクト
      */
-    constructor(TextList, TextAudio, state){
+     constructor(TextList, TextAudio, state){
 
         this.TextList = TextList //シナリオのテキストとそのデータ
         this.state = state //mainから参照するゲームのデータ
@@ -76,7 +77,7 @@ export default class ScenarioPlayer {
     /**
      * シナリオ画面遷移とイベントの設定
      */
-    init(){
+    async init(){
 
         // this.audios = await GetScenarioAudioJson()[this.state.nowPart] //読み込んだaudioのデータ全体
         // console.log(this.audios);
@@ -121,7 +122,7 @@ export default class ScenarioPlayer {
         this.closeMenu()
 
         // プリロード
-        this.AudioPreload()
+        await this.AudioPreload()
         // 1番目に流させる音声を設定
         this.AudioLoading()
     }
@@ -184,6 +185,7 @@ export default class ScenarioPlayer {
             this.dialogueEle.classList.add('none')
             this.autocheck.classList.add('none')
             this.skipButton.classList.add('none')
+            this.MenuOpenButton.classList.add('none')
             this.dialogueFlag = false
             if (this.movingFlag) this.AnimationPause()
         }else{
@@ -191,6 +193,7 @@ export default class ScenarioPlayer {
             this.dialogueEle.classList.remove('none')
             this.autocheck.classList.remove('none')
             this.skipButton.classList.remove('none')
+            this.MenuOpenButton.classList.remove('none')
             this.dialogueFlag = true
         }
 
@@ -663,15 +666,15 @@ export default class ScenarioPlayer {
 
         const fileName = this.TextList[this.msgindex - 1]['backgroundImage']['fileName']
         if (document.getElementById('textBackground').src.indexOf(fileName) === -1) { //画像の変更がある時のみ暗転
-            await toDarking( e => {
+            await toDarking(async e => {
                 document.getElementById('dialogue-name-area').classList.remove('op0');//名前表示
-                this.characterSetting(this.TextList[this.msgindex - 1]['characterList']);//キャラ画像反映
-                this.backgroundSetting(this.TextList[this.msgindex - 1]['backgroundImage'])//読み込み終了=>画面反映まで暗転させたい    
+                await this.characterSetting(this.TextList[this.msgindex - 1]['characterList']);//キャラ画像反映
+                await this.backgroundSetting(this.TextList[this.msgindex - 1]['backgroundImage'])//読み込み終了=>画面反映まで暗転させたい    
             }, this.state)
         }else{
             //画像が同じ=>暗転しない場合
             document.getElementById('dialogue-name-area').classList.remove('op0');//名前表示
-            this.characterSetting(this.TextList[this.msgindex - 1]['characterList']);//キャラ画像反映
+            await this.characterSetting(this.TextList[this.msgindex - 1]['characterList']);//キャラ画像反映
         }
     }
 
@@ -679,12 +682,13 @@ export default class ScenarioPlayer {
      * キャラを設定する
      * @param {*} props キャラのオブジェクト
      */
-    characterSetting = props => {
+    characterSetting = async props => {
         // console.log(props);
         for (const positon in props) {
             if (Object.hasOwnProperty.call(props, positon)) {
                 const element = props[positon];
-                const src = `images/character/${element.src}`
+                // const src = `images/character/${element.src}`
+                const src = await getCharacterPath() + '/' + element.src
                 document.querySelector(`#character-area [data-position=${positon}] img`).src = src 
                 document.querySelector(`#character-area [data-position=${positon}] img`).alt = element.name
                 if (element.status.brightnessDown) {
@@ -700,10 +704,11 @@ export default class ScenarioPlayer {
      * 背景画像設定
      * @param {*} imageObj 画像オブジェクト
      */
-    backgroundSetting = imageObj => {
+    backgroundSetting = async imageObj => {
 
         // srcを変えるだけだが、切り替えに時間がかかってしまう
-        const src = `images/background/${imageObj['fileName']}`
+        // const src = `images/background/${imageObj['fileName']}`
+        const src = await getBackgroundPath() + '/' + imageObj['fileName']
         document.getElementById('textBackground').src = src
         document.getElementById('textBackground').setAttribute('alt', imageObj['name'])
 
@@ -712,7 +717,7 @@ export default class ScenarioPlayer {
     /**
      * 画像のプリロード
      */
-    imagePreload = () => {
+    imagePreload = async () => {
         for (const textEle of this.TextList) {
             const imgname = textEle['backgroundImage'][`fileName`]
             // もし初回なら
@@ -721,7 +726,8 @@ export default class ScenarioPlayer {
                 console.log(imgname)
                 this.imageBackList.push(imgname)
                 const imgele = document.createElement('img')
-                const imgsrc = `images/background/${imgname}`
+                // const imgsrc = `images/background/${imgname}`
+                const imgsrc = await getBackgroundPath() + '/' + imgname
                 imgele.src = imgsrc
             }
 
@@ -734,7 +740,8 @@ export default class ScenarioPlayer {
                         console.log(charname)
                         this.imageCharList.push(charname)
                         const charimgele = document.createElement('img')
-                        const charsrc = `images/character/${charname}`
+                        // const charsrc = `images/character/${charname}`
+                        const charsrc = await getCharacterPath() + '/' + charname
                         charimgele.src =  charsrc
                     }
                 }
@@ -745,13 +752,14 @@ export default class ScenarioPlayer {
     /**
      * 音声ファイルのプリロード
      */
-    AudioPreload = () =>{
+    AudioPreload = async () =>{
         for (const i in this.audios) {
             if (Object.hasOwnProperty.call(this.audios, i)) {
 
                 const v = this.audios[i];
                 let obj = {}
-                obj.audio = new Audio(`audio/${v.file}`)
+                // obj.audio = new Audio(`audio/${v.file}`)
+                obj.audio = new Audio(await getAudioPath() + '/' + v.file)
                 obj.audio.loop = true
                 obj.audio.preload = 'auto'
                 obj.audioLoad = false

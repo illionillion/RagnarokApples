@@ -1,0 +1,15 @@
+const getCharacterPath = async () => {
+    return await window.myAPI.getAssetsPath() + 'character'
+}
+const getBackgroundPath = async () => {
+    return await window.myAPI.getAssetsPath() + 'background'
+}
+const getAudioPath = async () => {
+    return await window.myAPI.getAssetsPath() + 'audio'
+}
+
+export {
+    getAudioPath,
+    getCharacterPath,
+    getBackgroundPath
+}
