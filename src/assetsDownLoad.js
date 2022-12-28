@@ -3,10 +3,10 @@ const fs = require("original-fs");
 const { app, BrowserWindow } = require("electron");
 
 /**
- * 
- * @param {string} link 
- * @param {BrowserWindow} splash 
- * @returns 
+ *
+ * @param {string} link
+ * @param {BrowserWindow} splash
+ * @returns
  */
 const getAssetsList = async (link, splash) => {
   try {
@@ -25,39 +25,44 @@ const getAssetsList = async (link, splash) => {
             await assetsDownLoad(
               filename,
               json[filename]["type"],
-              json[filename]["link"] + '?rand=' + Math.floor(Math.random() * 100),
+              json[filename]["link"] +
+                "?rand=" +
+                Math.floor(Math.random() * 100),
               splash
             );
           }
-          resolve(true)
+          resolve(true);
         });
       });
 
-      req.on('error', error => {
+      req.on("error", (error) => {
         console.log(error);
-        reject(false)
-      })
+        reject(false);
+      });
     });
   } catch (error) {
     console.log(error);
-    return error
+    return error;
   }
 };
 
 /**
- * 
- * @param {string} filename 
- * @param {string} type 
- * @param {string} link 
- * @param {BrowserWindow} splash 
- * @returns 
+ *
+ * @param {string} filename
+ * @param {string} type
+ * @param {string} link
+ * @param {BrowserWindow} splash
+ * @returns
  */
 const assetsDownLoad = async (filename, type, link, splash) => {
   try {
     return await new Promise((resolve, reject) => {
       const req = https.get(link, async (res) => {
         console.log(res.statusCode);
-        if (res.statusCode === 302 || res.statusCode === 303 || res.statusCode === 403) {
+        if (
+          res.statusCode === 302 ||
+          res.statusCode === 303
+        ) {
           const download = await assetsDownLoad(
             filename,
             type,
@@ -69,8 +74,13 @@ const assetsDownLoad = async (filename, type, link, splash) => {
           return;
         }
 
+        if (res.statusCode === 403) {
+          resolve(false)
+          return;
+        }
+
         let dir = "";
-        const dataPath = app.getPath("userData")
+        const dataPath = app.getPath("userData");
         if (!fs.existsSync(dataPath + "/assets")) {
           fs.mkdirSync(dataPath + "/assets");
         }
