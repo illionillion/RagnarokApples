@@ -11,12 +11,34 @@
 }
 
 #confirm-dialog-box {
-    width: 50%;
-    /* margin: auto; */
-    background-image: url(../images/conversation/confirmDialogBox.png);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: contain;
+  width: 50%;
+  /* margin: auto; */
+  background-image: url(../images/conversation/confirmDialogBox.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#confirm-dialog-contents {
+  width: 100%;
+}
+#confirm-dialog-text {
+  font-family: 'Honoka Shin Mincho', serif;
+}
+
+#confirm-dialog-buttons input[type="button"] {
+  color: #ffffff;
+  font-family: 'Honoka Shin Mincho', serif;
+  width: 30%;
+}
+#confirm-dialog-buttons .btn-yes {
+  background-color: #447576;
+}
+#confirm-dialog-buttons .btn-no {
+  background-color: #6B6B6B;
 }
 
 #confirm-dialog-box img{
