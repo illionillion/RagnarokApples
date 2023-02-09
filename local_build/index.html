@@ -10,12 +10,24 @@
     <link rel="stylesheet" href="css/map.css" />
     <link rel="stylesheet" href="css/text.css" />
     <link rel="stylesheet" href="css/menu.css" />
+    <link rel="stylesheet" href="css/confirm-dialog.css" />
     <script type="module" src="js/main.js" defer></script>
   </head>
   <body>
     <main>
       <div id="frame">
         <div id="screen">
+          <div id="confirm-dialog-screen" class="none">
+            <div id="confirm-dialog-box">
+              <div id="confirm-dialog-contents">
+                <div id="confirm-dialog-text">この話をスキップしますか？</div>
+                <div id="confirm-dialog-buttons">
+                  <input type="button" class="btn-yes" value="はい">
+                  <input type="button" class="btn-no" value="いいえ">
+                </div>
+              </div>
+            </div>
+          </div>
           <div id="darkening-floor" class="op0"></div>
           <section id="textScreen" class="none">
             <!-- 背景画像 -->
