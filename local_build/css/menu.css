@@ -115,4 +115,15 @@ li:not(.day, .place):hover {
 #menu-screen .contents {
   width: 100%;
   flex: 8;
+  overflow-y: scroll;
+}
+#menu-screen .contents li{
+  display: flex;
+}
+#menu-screen .contents li .person-name{
+  flex: 1;
+}
+#menu-screen .contents li .person-serif{
+  flex: 8;
+  
 }
