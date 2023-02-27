@@ -119,11 +119,26 @@ li:not(.day, .place):hover {
 }
 #menu-screen .contents li{
   display: flex;
+  width: 80%;
+  margin: auto;
+  margin-bottom: 20px;
+  position: relative;
+  font-size: small;
+}
+#menu-screen .contents li::after{
+  position: absolute;
+  content: "";
+  width: 80%;
+  height: 1px;
+  background-color: #fff;
+  bottom: -10%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 #menu-screen .contents li .person-name{
   flex: 1;
 }
 #menu-screen .contents li .person-serif{
   flex: 8;
-  
+  text-align: left;
 }
