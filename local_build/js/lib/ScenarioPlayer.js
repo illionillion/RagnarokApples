@@ -270,6 +270,7 @@ export default class ScenarioPlayer {
 
   /**
    * デバッグ用のスキップ機能（開発中）
+   * ここで最後のテキストではなく次のマップ画面へ行かせたい、つまりtoMapの処理する
    * @param {*} e
    */
   toSkip = (e) => {
