@@ -276,13 +276,14 @@ export default class ScenarioPlayer {
   toSkip = (e) => {
     e.stopPropagation();
 
-    console.log("skip");
-    this.msgindex = Object.keys(this.TextList).length - 1;
+    // console.log("skip");
+    // this.msgindex = Object.keys(this.TextList).length - 1;
 
-    const text = this.GetText();
-    this.AnimationForcedEnd(text);
+    // const text = this.GetText();
+    // this.AnimationForcedEnd(text);
     ScenarioPlayer.skipConfirmFlag = false
     document.getElementById("confirm-dialog-screen").classList.add("none");
+    this.toMap()
   };
 
   skipCancel = () => {
