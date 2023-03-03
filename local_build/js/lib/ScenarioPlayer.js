@@ -648,6 +648,8 @@ export default class ScenarioPlayer {
       this.TextCover.classList.remove("none");
       this.FloatCheck.classList.add("op0");
       this.TextFloat.classList.add("op0");
+      this.dialogueEle.classList.remove("op0");
+      this.onePicture.classList.add("op0");
 
       // ここにremoveEvent書く？
       this.screen.removeEventListener("click", this.textBoxShowHide, false);
