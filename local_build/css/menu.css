@@ -128,12 +128,11 @@ li:not(.day, .place):hover {
 #menu-screen .contents li::after{
   position: absolute;
   content: "";
-  width: 80%;
+  width: 89%;
   height: 1px;
   background-color: #fff;
   bottom: -10%;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 11%;
 }
 #menu-screen .contents li .person-name{
   flex: 1;
