@@ -270,18 +270,20 @@ export default class ScenarioPlayer {
 
   /**
    * デバッグ用のスキップ機能（開発中）
+   * ここで最後のテキストではなく次のマップ画面へ行かせたい、つまりtoMapの処理する
    * @param {*} e
    */
   toSkip = (e) => {
     e.stopPropagation();
 
-    console.log("skip");
-    this.msgindex = Object.keys(this.TextList).length - 1;
+    // console.log("skip");
+    // this.msgindex = Object.keys(this.TextList).length - 1;
 
-    const text = this.GetText();
-    this.AnimationForcedEnd(text);
+    // const text = this.GetText();
+    // this.AnimationForcedEnd(text);
     ScenarioPlayer.skipConfirmFlag = false
     document.getElementById("confirm-dialog-screen").classList.add("none");
+    this.toMap()
   };
 
   skipCancel = () => {
@@ -646,6 +648,8 @@ export default class ScenarioPlayer {
       this.TextCover.classList.remove("none");
       this.FloatCheck.classList.add("op0");
       this.TextFloat.classList.add("op0");
+      this.dialogueEle.classList.remove("op0");
+      this.onePicture.classList.add("op0");
 
       // ここにremoveEvent書く？
       this.screen.removeEventListener("click", this.textBoxShowHide, false);
@@ -1000,6 +1004,22 @@ export default class ScenarioPlayer {
     if (!["day", "place"].includes(e.target.dataset.menubutton)) {
       document.querySelector("#menu-screen .menu-title span").textContent =
         text;
+      if (e.target.dataset.menubutton === 'log') {
+        const ulEle = document.createElement('ul')
+        const fragment = document.createDocumentFragment()
+        // ログ画面生成
+        for (let i = 0; i < this.msgindex - 1; i++) {
+          const ele = this.TextList[i]
+          const liEle = document.createElement('li')
+          const replace = text => text.replace(/\*/g, '').replace(/\$/g, '').replace(/\//g, '')
+          console.log(replace(ele.characterText.text));
+          liEle.innerHTML = `<span class="person-name">${ele.characterText.name}:</span><span class="person-serif">${replace(ele.characterText.text)}</span>`
+          fragment.appendChild(liEle)
+        }
+        ulEle.appendChild(fragment)
+        document.querySelector('#menu-screen .contents').innerHTML=""
+        document.querySelector('#menu-screen .contents').appendChild(ulEle)
+      }
     }
   };
 }

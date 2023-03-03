@@ -10,6 +10,7 @@
     "build": "npm run build-mac;npm run build-win",
     "build-mac": "electron-builder --mac --x64",
     "build-win": "electron-builder --win --x64",
+    "build-linux": "electron-builder build --linux",
     "asar-pack": "asar pack local_build renderer.asar"
   },
   "repository": {
