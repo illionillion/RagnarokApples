@@ -15,3 +15,24 @@ export const saveData = async (key, value) => {
 export const loadData = async (key) => {
   return localStorage.getItem(key) || "";
 };
+
+/**
+ * セーブ画面起動
+ * @param {"save" | "load"} type 
+ * @returns 
+ */
+export const openGameDataScreen = (type) => {
+  if (!type || type === "") return;
+  if (type === "save") {
+  }
+  if (type === "load") {
+  }
+
+};
+
+/**
+ * ロード画面起動
+ */
+export const closeGameDataScreen = () => {
+
+}
