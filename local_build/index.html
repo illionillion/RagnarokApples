@@ -17,13 +17,34 @@
     <main>
       <div id="frame">
         <div id="screen">
+          <div id="game-data-screen">
+            <div id="game-data-header">
+              <div id="game-data-title"></div>
+              <div id="game-data-close"></div>
+            </div>
+            <div id="game-data-body">
+              <ul id="game-data-list">
+                <template id="game-data-item-template">
+                  <li class="game-data-item">
+                    <div class="game-data-name"></div>
+                    <div class="game-data-content"></div>
+                    <div class="game-data-buttons">
+                      <div class="game-data-copy"></div>
+                      <div class="game-data-reorder"></div>
+                      <div class="game-data-delete"></div>
+                    </div>
+                  </li>
+                </template>
+              </ul>
+            </div>
+          </div>
           <div id="confirm-dialog-screen" class="none">
             <div id="confirm-dialog-box">
               <div id="confirm-dialog-contents">
                 <div id="confirm-dialog-text">この話をスキップしますか？</div>
                 <div id="confirm-dialog-buttons">
-                  <input type="button" class="btn-yes" value="はい">
-                  <input type="button" class="btn-no" value="いいえ">
+                  <input type="button" class="btn-yes" value="はい" />
+                  <input type="button" class="btn-no" value="いいえ" />
                 </div>
               </div>
             </div>
@@ -91,7 +112,11 @@
             <div id="text-control-buttons">
               <div id="autocheck">
                 <img src="./images/conversation/AUTO.png" class="auto" alt="" />
-                <img src="./images/conversation/AUTO2.png" class="auto2" alt="" />
+                <img
+                  src="./images/conversation/AUTO2.png"
+                  class="auto2"
+                  alt=""
+                />
               </div>
               <div id="skipButton">
                 <img src="./images/conversation/SKIP.png" alt="" />
@@ -103,7 +128,11 @@
             <div id="menu-frame" class="hide">
               <div id="menu-screen">
                 <div id="menu-close-button">
-                  <img src="./images/conversation/close2.png" class="close2" alt="">
+                  <img
+                    src="./images/conversation/close2.png"
+                    class="close2"
+                    alt=""
+                  />
                   <!-- <img src="./images/conversation/close1.png" class="close1" alt=""> -->
                 </div>
                 <div class="menu-title">
