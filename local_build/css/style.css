@@ -4,6 +4,10 @@
   font-family: "Noto Serif JP";
   src: url("./fonts/Noto_Serif_JP/NotoSerifJP-Regular.otf") format("truetype");
 }
+@font-face {
+  font-family: "Honoka Shin Mincho";
+  src: url("./fonts/Honoka_Shin_Mincho_L.otf") format("truetype");
+}
 
 * {
   user-select: none !important;
@@ -62,7 +66,7 @@ body {
 
 /* 非表示(完全に) */
 .none {
-  display: none;
+  display: none !important;
 }
 /* 非表示(透明) */
 .op0 {

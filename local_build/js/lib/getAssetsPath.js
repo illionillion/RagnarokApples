@@ -1,15 +1,9 @@
-const getCharacterPath = async () => {
+export const getCharacterPath = async () => {
     return await window.myAPI.getAssetsPath() + 'character'
 }
-const getBackgroundPath = async () => {
+export const getBackgroundPath = async () => {
     return await window.myAPI.getAssetsPath() + 'background'
 }
-const getAudioPath = async () => {
+export const getAudioPath = async () => {
     return await window.myAPI.getAssetsPath() + 'audio'
-}
-
-export {
-    getAudioPath,
-    getCharacterPath,
-    getBackgroundPath
 }

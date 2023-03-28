@@ -27,6 +27,10 @@ const asarDownLoad = async (url, outURL, splash) => {
                     resolve(download) //trueを返す
                     return
                 }
+                if (res.statusCode === 403) {
+                    resolve(false)
+                    return
+                }
                 // ダウンロードした内容をそのまま、ファイル書き出し。
                 let total = 0 // 合計byte数
                 let percent = 0 // %
