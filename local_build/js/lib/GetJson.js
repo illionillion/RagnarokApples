@@ -25,7 +25,7 @@ export default async function GetJson(url) {
     const filename = url.split('/').pop()
 
     // 10回超えたらローカルのデータを渡す // これは最悪の場合
-    if(retryTime > 10) {
+    if(retryTime > 5) {
         console.log('10回:stop');
         const res = await fetch(`./js/lib/json/${filename}`) // シナリオとオーディオでわけれるようにしたい
         // const res = await fetch(myAPI.__dirname + `/../json/${filename}`) // シナリオとオーディオでわけれるようにしたい
