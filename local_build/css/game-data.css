@@ -38,3 +38,30 @@
     margin: auto;
     overflow-y: scroll;
 }
+#game-data-body::-webkit-scrollbar {
+    width: 10px;
+}
+#game-data-body::-webkit-scrollbar-thumb {
+    border-radius: 0.25rem;
+}
+#game-data-body::-webkit-scrollbar-thumb {
+    --bg-opacity: 1;
+    background-color: black;
+}
+
+#game-data-list {
+    height: inherit;
+    /* margin: 0; */
+}
+
+.game-data-item {
+    width: 90%;
+    height: 27%;
+    background-image: url(../images/game-data/data-item-normal.png);
+    background-size: cover;
+    /* margin: 0; */
+    margin: 10px 0px;
+}
+.game-data-item:hover {
+    background-image: url(../images/game-data/data-item-hover.png);
+}
