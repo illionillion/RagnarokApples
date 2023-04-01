@@ -108,3 +108,9 @@
 .game-data-delete:hover {
     background-image: url(../images/game-data/game-data-delete-hover.png);
 }
+.default {
+    background-image: url(../images/game-data/game-data-default-button.png);
+}
+.default:hover {
+    background-image: url(../images/game-data/game-data-default-button.png);
+}
