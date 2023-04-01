@@ -80,18 +80,18 @@
   justify-content: center;
 }
 
-ul {
+#menu-list ul {
   padding: 0;
   text-align: center;
   font-size: calc(5vw / 3);
 }
 
-li {
+#menu-list li {
   list-style: none;
   margin: 0.5vw 0;
 }
 
-li:not(.day, .place):hover {
+#menu-list li:not(.day, .place):hover {
   /* .dayと .placeを除外*/
   color: rgb(185, 185, 185);
 }
