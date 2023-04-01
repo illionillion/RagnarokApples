@@ -51,6 +51,9 @@
 
 #game-data-list {
     height: inherit;
+    padding: 0;
+    text-align: center;
+    font-size: calc(5vw / 3);  
     /* margin: 0; */
 }
 
@@ -59,9 +62,49 @@
     height: 27%;
     background-image: url(../images/game-data/data-item-normal.png);
     background-size: cover;
-    /* margin: 0; */
     margin: 10px 0px;
+    display: flex;
+    align-items: center;
 }
 .game-data-item:hover {
     background-image: url(../images/game-data/data-item-hover.png);
+}
+.game-data-name {
+    flex: 1;
+}
+.game-data-content {
+    flex: 2;
+    text-align: left;
+}
+.game-data-buttons {
+    flex: 2;
+    display: flex;
+    gap: 7.5%;
+    align-items: center;
+    justify-content: center;
+    height: 50%;
+}
+.game-data-buttons div {
+    width: 14%;
+    height: 100%;
+    background-size: cover;
+}
+
+.game-data-copy {
+    background-image: url(../images/game-data/game-data-copy-normal.png);
+}
+.game-data-reorder {
+    background-image: url(../images/game-data/game-data-reorder-normal.png);
+}
+.game-data-delete {
+    background-image: url(../images/game-data/game-data-delete-normal.png);
+}
+.game-data-copy:hover {
+    background-image: url(../images/game-data/game-data-copy-hover.png);
+}
+.game-data-reorder:hover {
+    background-image: url(../images/game-data/game-data-reorder-hover.png);
+}
+.game-data-delete:hover {
+    background-image: url(../images/game-data/game-data-delete-hover.png);
 }
