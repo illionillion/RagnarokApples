@@ -31,8 +31,16 @@ export const openGameDataScreen = (type) => {
 };
 
 /**
- * ロード画面起動
+ * 閉じる
  */
 export const closeGameDataScreen = () => {
+  document.getElementById('game-data-screen').classList.add('none');
+}
 
+/**
+ * 初期化
+ */
+export const initGameData = () => {
+  console.log("e");
+  document.getElementById('game-data-close').addEventListener('click', closeGameDataScreen)
 }
