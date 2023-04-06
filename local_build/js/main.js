@@ -1,6 +1,6 @@
 "use strict"
 import FrameSizing from "./lib/FrameSizing.js"
-import { initGameData } from "./lib/GameData.js"
+import { closeGameDataScreen, initGameData } from "./lib/GameData.js"
 import { CreateMap } from './lib/map.js'
 import toDarking from './lib/toDarking.js'
 
@@ -28,6 +28,7 @@ import toDarking from './lib/toDarking.js'
         FrameSizing()
 
         initGameData()
+        closeGameDataScreen()
 
         // 伝搬チェック用
         // document.querySelectorAll('*').forEach(element => {

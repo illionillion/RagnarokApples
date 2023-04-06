@@ -24,9 +24,12 @@ export const loadData = async (key) => {
 export const openGameDataScreen = (type) => {
   if (!type || type === "") return;
   if (type === "save") {
+    document.getElementById('game-data-title').innerHTML = 'セーブするデータを選択してください。'
   }
   if (type === "load") {
+    document.getElementById('game-data-title').innerHTML = 'ロードするデータを選択してください。'
   }
+  document.getElementById('game-data-screen').classList.remove('none');
 
 };
 
@@ -41,6 +44,5 @@ export const closeGameDataScreen = () => {
  * 初期化
  */
 export const initGameData = () => {
-  console.log("e");
   document.getElementById('game-data-close').addEventListener('click', closeGameDataScreen)
 }
