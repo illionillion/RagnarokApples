@@ -1,3 +1,5 @@
+import { openConfirm } from "./confirm.js";
+
 const dataLength = 20;
 
 /**
@@ -64,5 +66,10 @@ export const initGameData = async () => {
 
     }
     list.appendChild(item);
+    console.log();
+    list.querySelectorAll(".game-data-item")[i - 1].addEventListener("click", () => {
+      console.log("click");
+      openConfirm("セーブしますか？")
+    });
   }
 }
