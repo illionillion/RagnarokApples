@@ -27,7 +27,7 @@ import toDarking from './lib/toDarking.js'
 
         FrameSizing()
 
-        initGameData()
+        await initGameData()
         closeGameDataScreen()
 
         // 伝搬チェック用

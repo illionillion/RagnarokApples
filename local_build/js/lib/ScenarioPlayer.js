@@ -1,4 +1,5 @@
 import { openGameDataScreen } from "./GameData.js";
+import { closeConfirm, openConfirm } from "./confirm.js";
 import {
   getAudioPath,
   getBackgroundPath,
@@ -21,7 +22,7 @@ export default class ScenarioPlayer {
    */
   static menuFlag = false;
 
-  static skipConfirmFlag = false
+  static skipConfirmFlag = false;
 
   // テキストのパーツ
   screen = document.getElementById("textScreen");
@@ -262,11 +263,11 @@ export default class ScenarioPlayer {
     // console.log(ScenarioPlayer.autoPlayingFlag);
   };
 
-  skipConfirm = e => {
+  skipConfirm = (e) => {
     e.stopPropagation();
-    ScenarioPlayer.skipConfirmFlag = true
-    document.getElementById("confirm-dialog-screen").classList.remove("none");
-    this.AnimationPause()
+    ScenarioPlayer.skipConfirmFlag = true;
+    openConfirm("この話をスキップしますか？");
+    this.AnimationPause();
   };
 
   /**
@@ -282,14 +283,14 @@ export default class ScenarioPlayer {
 
     // const text = this.GetText();
     // this.AnimationForcedEnd(text);
-    ScenarioPlayer.skipConfirmFlag = false
-    document.getElementById("confirm-dialog-screen").classList.add("none");
-    this.toMap()
+    ScenarioPlayer.skipConfirmFlag = false;
+    closeConfirm();
+    this.toMap();
   };
 
   skipCancel = () => {
-    ScenarioPlayer.skipConfirmFlag = false
-    document.getElementById("confirm-dialog-screen").classList.add("none");
+    ScenarioPlayer.skipConfirmFlag = false;
+    closeConfirm();
   };
 
   /**
@@ -663,8 +664,8 @@ export default class ScenarioPlayer {
       );
       this.onePicture.removeEventListener("click", this.onePictureClick, false);
       this.skipButton.removeEventListener("click", this.skipConfirm, false);
-      this.skipButtonYes.removeEventListener('click', this.toSkip, false)
-      this.skipButtonNo.removeEventListener('click', this.skipCancel, false)
+      this.skipButtonYes.removeEventListener("click", this.toSkip, false);
+      this.skipButtonNo.removeEventListener("click", this.skipCancel, false);
       this.MenuOpenButton.removeEventListener("click", this.openMenu);
       this.MenuCloseButton.removeEventListener("click", this.closeMenu);
       document.removeEventListener("keypress", this.openMenuKeyup);
@@ -1006,34 +1007,39 @@ export default class ScenarioPlayer {
       document.querySelector("#menu-screen .menu-title span").textContent =
         text;
 
-        switch (e.target.dataset.menubutton) {
-          case 'log':
-            const ulEle = document.createElement('ul')
-            const fragment = document.createDocumentFragment()
-            // ログ画面生成
-            for (let i = 0; i < this.msgindex - 1; i++) {
-              const ele = this.TextList[i]
-              const liEle = document.createElement('li')
-              const replace = text => text.replace(/\*/g, '').replace(/\$/g, '').replace(/\//g, '')
-              console.log(replace(ele.characterText.text));
-              liEle.innerHTML = `<span class="person-name">${ele.characterText.name}:</span><span class="person-serif">${replace(ele.characterText.text)}</span>`
-              fragment.appendChild(liEle)
-            }
-            ulEle.appendChild(fragment)
-            document.querySelector('#menu-screen .contents').innerHTML=""
-            document.querySelector('#menu-screen .contents').appendChild(ulEle)
-            
-            break;
-          case 'save':
-            openGameDataScreen('save');
-            break;
-          case 'load':
-            openGameDataScreen('load');
-            break;
-        
-          default:
-            break;
-        }
+      switch (e.target.dataset.menubutton) {
+        case "log":
+          const ulEle = document.createElement("ul");
+          const fragment = document.createDocumentFragment();
+          // ログ画面生成
+          for (let i = 0; i < this.msgindex - 1; i++) {
+            const ele = this.TextList[i];
+            const liEle = document.createElement("li");
+            const replace = (text) =>
+              text.replace(/\*/g, "").replace(/\$/g, "").replace(/\//g, "");
+            console.log(replace(ele.characterText.text));
+            liEle.innerHTML = `<span class="person-name">${
+              ele.characterText.name
+            }:</span><span class="person-serif">${replace(
+              ele.characterText.text
+            )}</span>`;
+            fragment.appendChild(liEle);
+          }
+          ulEle.appendChild(fragment);
+          document.querySelector("#menu-screen .contents").innerHTML = "";
+          document.querySelector("#menu-screen .contents").appendChild(ulEle);
+
+          break;
+        case "save":
+          openGameDataScreen("save");
+          break;
+        case "load":
+          openGameDataScreen("load");
+          break;
+
+        default:
+          break;
+      }
     }
   };
 }

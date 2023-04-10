@@ -1,3 +1,7 @@
+import { openConfirm } from "./confirm.js";
+
+const dataLength = 20;
+
 /**
  * データの保存
  * @param {string} key
@@ -43,6 +47,29 @@ export const closeGameDataScreen = () => {
 /**
  * 初期化
  */
-export const initGameData = () => {
+export const initGameData = async () => {
   document.getElementById('game-data-close').addEventListener('click', closeGameDataScreen)
+  const template = document.getElementById("game-data-item-template");
+  const list = document.getElementById("game-data-list");
+  for (let i = 1; i <= dataLength; i++) {
+    const data = await loadData(i);
+    const item = template.content.cloneNode(true)
+    if (data !== "") {
+      // データがあった場合
+    } else {
+      // データがない場合
+      item.querySelector(".game-data-name").innerHTML = `データ${i}`;
+      item.querySelector(".game-data-content").innerHTML = `データがありません`;
+      item.querySelector(".game-data-copy").classList.add("default");
+      item.querySelector(".game-data-reorder").classList.add("default");
+      item.querySelector(".game-data-delete").classList.add("default");
+
+    }
+    list.appendChild(item);
+    console.log();
+    list.querySelectorAll(".game-data-item")[i - 1].addEventListener("click", () => {
+      console.log("click");
+      openConfirm("セーブしますか？")
+    });
+  }
 }
