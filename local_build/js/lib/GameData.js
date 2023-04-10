@@ -58,6 +58,10 @@ export const initGameData = async () => {
       // データがない場合
       item.querySelector(".game-data-name").innerHTML = `データ${i}`;
       item.querySelector(".game-data-content").innerHTML = `データがありません`;
+      item.querySelector(".game-data-copy").classList.add("default");
+      item.querySelector(".game-data-reorder").classList.add("default");
+      item.querySelector(".game-data-delete").classList.add("default");
+
     }
     list.appendChild(item);
   }
