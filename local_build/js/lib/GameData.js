@@ -1,6 +1,9 @@
-import { openConfirm } from "./confirm.js";
+import { closeConfirm, openConfirm } from "./confirm.js";
 
 const dataLength = 20;
+const yesButton = document.querySelector("#confirm-dialog-buttons .btn-yes");
+const noButton = document.querySelector("#confirm-dialog-buttons .btn-no");
+const closeButton = document.getElementById("game-data-close");
 
 /**
  * データの保存
@@ -22,38 +25,21 @@ export const loadData = async (key) => {
 
 /**
  * セーブ画面起動
- * @param {"save" | "load"} type 
- * @returns 
+ * @param {"save" | "load"} type
+ * @returns
  */
-export const openGameDataScreen = (type) => {
+export const openGameDataScreen = async (type) => {
   if (!type || type === "") return;
-  if (type === "save") {
-    document.getElementById('game-data-title').innerHTML = 'セーブするデータを選択してください。'
-  }
-  if (type === "load") {
-    document.getElementById('game-data-title').innerHTML = 'ロードするデータを選択してください。'
-  }
-  document.getElementById('game-data-screen').classList.remove('none');
+  
+  document.getElementById("game-data-title").innerHTML =
+    `${type === "load" ? "ロード" : "セーブ"}するデータを選択してください。`;
 
-};
-
-/**
- * 閉じる
- */
-export const closeGameDataScreen = () => {
-  document.getElementById('game-data-screen').classList.add('none');
-}
-
-/**
- * 初期化
- */
-export const initGameData = async () => {
-  document.getElementById('game-data-close').addEventListener('click', closeGameDataScreen)
   const template = document.getElementById("game-data-item-template");
   const list = document.getElementById("game-data-list");
+  list.innerHTML = "";
   for (let i = 1; i <= dataLength; i++) {
     const data = await loadData(i);
-    const item = template.content.cloneNode(true)
+    const item = template.content.cloneNode(true);
     if (data !== "") {
       // データがあった場合
     } else {
@@ -63,13 +49,35 @@ export const initGameData = async () => {
       item.querySelector(".game-data-copy").classList.add("default");
       item.querySelector(".game-data-reorder").classList.add("default");
       item.querySelector(".game-data-delete").classList.add("default");
-
     }
     list.appendChild(item);
-    console.log();
-    list.querySelectorAll(".game-data-item")[i - 1].addEventListener("click", () => {
-      console.log("click");
-      openConfirm("セーブしますか？")
-    });
+    list
+      .querySelectorAll(".game-data-item")
+      [i - 1].addEventListener("click", () => {
+        openConfirm(`${type === "load" ? "ロード" : "セーブ"}しますか？`);
+        yesButton.addEventListener("click", dataConformYes);
+        noButton.addEventListener("click", dataConformNo);
+      });
   }
-}
+
+  closeButton.addEventListener("click", closeGameDataScreen);
+  document.getElementById("game-data-screen").classList.remove("none");
+};
+
+/**
+ * 閉じる
+ */
+export const closeGameDataScreen = () => {
+  document.getElementById("game-data-screen").classList.add("none");
+  closeButton.removeEventListener("click", closeGameDataScreen);
+};
+
+// セーブしますか？「はい」
+const dataConformYes = () => {
+  closeConfirm();
+};
+
+// セーブしますか？「いいえ」
+const dataConformNo = () => {
+  closeConfirm();
+};

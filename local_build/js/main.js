@@ -1,6 +1,6 @@
 "use strict"
 import FrameSizing from "./lib/FrameSizing.js"
-import { closeGameDataScreen, initGameData } from "./lib/GameData.js"
+import { closeGameDataScreen } from "./lib/GameData.js"
 import { CreateMap } from './lib/map.js'
 import toDarking from './lib/toDarking.js'
 
@@ -27,7 +27,6 @@ import toDarking from './lib/toDarking.js'
 
         FrameSizing()
 
-        await initGameData()
         closeGameDataScreen()
 
         // 伝搬チェック用
