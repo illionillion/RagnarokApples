@@ -119,8 +119,6 @@ export default class ScenarioPlayer {
     this.darkeningFloor.addEventListener("click", this.darkeningElePrev, false);
     this.onePicture.addEventListener("click", this.onePictureClick, false);
     this.skipButton.addEventListener("click", this.skipConfirm, false);
-    this.skipButtonYes.addEventListener("click", this.toSkip, false);
-    this.skipButtonNo.addEventListener("click", this.skipCancel, false);
     this.MenuOpenButton.addEventListener("click", this.openMenu);
     this.MenuCloseButton.addEventListener("click", this.closeMenu);
     document.querySelectorAll("#menu-list ul li").forEach((element) => {
@@ -267,6 +265,9 @@ export default class ScenarioPlayer {
     e.stopPropagation();
     ScenarioPlayer.skipConfirmFlag = true;
     openConfirm("この話をスキップしますか？");
+    this.skipButtonYes.addEventListener("click", this.toSkip, false);
+    this.skipButtonNo.addEventListener("click", this.skipCancel, false);
+
     this.AnimationPause();
   };
 
@@ -284,12 +285,16 @@ export default class ScenarioPlayer {
     // const text = this.GetText();
     // this.AnimationForcedEnd(text);
     ScenarioPlayer.skipConfirmFlag = false;
+    this.skipButtonYes.removeEventListener("click", this.toSkip, false);
+    this.skipButtonNo.removeEventListener("click", this.skipCancel, false);
     closeConfirm();
     this.toMap();
   };
 
   skipCancel = () => {
     ScenarioPlayer.skipConfirmFlag = false;
+    this.skipButtonYes.removeEventListener("click", this.toSkip, false);
+    this.skipButtonNo.removeEventListener("click", this.skipCancel, false);
     closeConfirm();
   };
 
@@ -664,8 +669,6 @@ export default class ScenarioPlayer {
       );
       this.onePicture.removeEventListener("click", this.onePictureClick, false);
       this.skipButton.removeEventListener("click", this.skipConfirm, false);
-      this.skipButtonYes.removeEventListener("click", this.toSkip, false);
-      this.skipButtonNo.removeEventListener("click", this.skipCancel, false);
       this.MenuOpenButton.removeEventListener("click", this.openMenu);
       this.MenuCloseButton.removeEventListener("click", this.closeMenu);
       document.removeEventListener("keypress", this.openMenuKeyup);
