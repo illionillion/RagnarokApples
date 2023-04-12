@@ -58,14 +58,16 @@ export const openGameDataScreen = async (type) => {
         openConfirm(`${type === "load" ? "ロード" : "セーブ"}しますか？`);
         const execYes = () => {
           dataConformYes(type, i);
-          yesButton.removeEventListener("click", execYes);
-          noButton.removeEventListener("click", execNo);
+          removeEvent();
         };
         const execNo = () => {
           dataConformNo();
-          yesButton.removeEventListener("click", execYes);
-          noButton.removeEventListener("click", execNo);
+          removeEvent();
         };
+        const removeEvent = () => {
+          yesButton.removeEventListener("click", execYes);
+          noButton.removeEventListener("click", execNo);  
+        }
         yesButton.addEventListener("click", execYes);
         noButton.addEventListener("click", execNo);
       });
