@@ -30,9 +30,10 @@ export const loadData = async (key) => {
  */
 export const openGameDataScreen = async (type) => {
   if (!type || type === "") return;
-  
-  document.getElementById("game-data-title").innerHTML =
-    `${type === "load" ? "ロード" : "セーブ"}するデータを選択してください。`;
+
+  document.getElementById("game-data-title").innerHTML = `${
+    type === "load" ? "ロード" : "セーブ"
+  }するデータを選択してください。`;
 
   const template = document.getElementById("game-data-item-template");
   const list = document.getElementById("game-data-list");
@@ -55,8 +56,18 @@ export const openGameDataScreen = async (type) => {
       .querySelectorAll(".game-data-item")
       [i - 1].addEventListener("click", () => {
         openConfirm(`${type === "load" ? "ロード" : "セーブ"}しますか？`);
-        yesButton.addEventListener("click", dataConformYes);
-        noButton.addEventListener("click", dataConformNo);
+        const execYes = () => {
+          dataConformYes(type, i);
+          yesButton.removeEventListener("click", execYes);
+          noButton.removeEventListener("click", execNo);
+        };
+        const execNo = () => {
+          dataConformNo();
+          yesButton.removeEventListener("click", execYes);
+          noButton.removeEventListener("click", execNo);
+        };
+        yesButton.addEventListener("click", execYes);
+        noButton.addEventListener("click", execNo);
       });
   }
 
@@ -72,12 +83,25 @@ export const closeGameDataScreen = () => {
   closeButton.removeEventListener("click", closeGameDataScreen);
 };
 
-// セーブしますか？「はい」
-const dataConformYes = () => {
+/**
+ * セーブしますか？「はい」
+ * @param {"save" | "load"} type
+ * @param {number} no
+ */
+const dataConformYes = async (type, no) => {
+  if (type === "save") {
+    await saveData("data-" + no, "test-" + no);
+  }
+  if (type === "load") {
+    console.log(await loadData("data-" + no));
+  }
   closeConfirm();
 };
 
-// セーブしますか？「いいえ」
+/**
+ * セーブしますか？「いいえ」
+ * 
+ */
 const dataConformNo = () => {
   closeConfirm();
 };
