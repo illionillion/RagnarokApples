@@ -8,6 +8,15 @@ const dataLength = 20;
 const yesButton = document.querySelector("#confirm-dialog-buttons .btn-yes");
 const noButton = document.querySelector("#confirm-dialog-buttons .btn-no");
 const closeButton = document.getElementById("game-data-close");
+let gameData = {};
+
+/**
+ * データの同期
+ * @param {Object} gameState 
+ */
+const initGameData = (gameState) => {
+  gameData = gameState;
+}
 
 /**
  * データの保存
