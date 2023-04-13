@@ -1,5 +1,9 @@
 import { closeConfirm, openConfirm } from "./confirm.js";
 
+/**
+ * データ総数
+ * @type {number}
+ */
 const dataLength = 20;
 const yesButton = document.querySelector("#confirm-dialog-buttons .btn-yes");
 const noButton = document.querySelector("#confirm-dialog-buttons .btn-no");
