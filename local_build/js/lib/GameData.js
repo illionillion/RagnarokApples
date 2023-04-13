@@ -43,13 +43,20 @@ export const openGameDataScreen = async (type) => {
   const list = document.getElementById("game-data-list");
   list.innerHTML = "";
   for (let i = 1; i <= dataLength; i++) {
-    const data = await loadData(i);
+    const data = await loadData("data-" + i);
+    /**
+     * @type {HTMLElement}
+     */
     const item = template.content.cloneNode(true);
+    item.querySelector(".game-data-name").innerHTML = `データ${i}`;
     if (data !== "") {
       // データがあった場合
+      item.querySelector(".game-data-content").innerHTML = `タウ　n日目　⚪︎⚪︎`;
+      item.querySelector(".game-data-copy").classList.remove("default");
+      item.querySelector(".game-data-reorder").classList.remove("default");
+      item.querySelector(".game-data-delete").classList.remove("default");
     } else {
       // データがない場合
-      item.querySelector(".game-data-name").innerHTML = `データ${i}`;
       item.querySelector(".game-data-content").innerHTML = `データがありません`;
       item.querySelector(".game-data-copy").classList.add("default");
       item.querySelector(".game-data-reorder").classList.add("default");
