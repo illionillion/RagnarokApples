@@ -8,13 +8,16 @@ const dataLength = 20;
 const yesButton = document.querySelector("#confirm-dialog-buttons .btn-yes");
 const noButton = document.querySelector("#confirm-dialog-buttons .btn-no");
 const closeButton = document.getElementById("game-data-close");
+/**
+ * ゲームのデータを参照渡しで保存
+ */
 let gameData = {};
 
 /**
  * データの同期
  * @param {Object} gameState 
  */
-const initGameData = (gameState) => {
+export const initGameData = (gameState) => {
   gameData = gameState;
 }
 
@@ -43,6 +46,8 @@ export const loadData = async (key) => {
  */
 export const openGameDataScreen = async (type) => {
   if (!type || type === "") return;
+
+  console.log(gameData);
 
   document.getElementById("game-data-title").innerHTML = `${
     type === "load" ? "ロード" : "セーブ"
@@ -112,7 +117,8 @@ export const closeGameDataScreen = () => {
  */
 const dataConformYes = async (type, no) => {
   if (type === "save") {
-    await saveData("data-" + no, "test-" + no);
+    await saveData("data-" + no, JSON.stringify(gameData));
+    // await saveData("data-" + no, no);
   }
   if (type === "load") {
     console.log(await loadData("data-" + no));
