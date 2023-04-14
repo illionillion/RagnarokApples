@@ -1,9 +1,22 @@
 import { closeConfirm, openConfirm } from "./confirm.js";
 
+/**
+ * データ総数
+ * @type {number}
+ */
 const dataLength = 20;
 const yesButton = document.querySelector("#confirm-dialog-buttons .btn-yes");
 const noButton = document.querySelector("#confirm-dialog-buttons .btn-no");
 const closeButton = document.getElementById("game-data-close");
+let gameData = {};
+
+/**
+ * データの同期
+ * @param {Object} gameState 
+ */
+const initGameData = (gameState) => {
+  gameData = gameState;
+}
 
 /**
  * データの保存
@@ -39,13 +52,20 @@ export const openGameDataScreen = async (type) => {
   const list = document.getElementById("game-data-list");
   list.innerHTML = "";
   for (let i = 1; i <= dataLength; i++) {
-    const data = await loadData(i);
+    const data = await loadData("data-" + i);
+    /**
+     * @type {HTMLElement}
+     */
     const item = template.content.cloneNode(true);
+    item.querySelector(".game-data-name").innerHTML = `データ${i}`;
     if (data !== "") {
       // データがあった場合
+      item.querySelector(".game-data-content").innerHTML = `タウ　n日目　⚪︎⚪︎`;
+      item.querySelector(".game-data-copy").classList.remove("default");
+      item.querySelector(".game-data-reorder").classList.remove("default");
+      item.querySelector(".game-data-delete").classList.remove("default");
     } else {
       // データがない場合
-      item.querySelector(".game-data-name").innerHTML = `データ${i}`;
       item.querySelector(".game-data-content").innerHTML = `データがありません`;
       item.querySelector(".game-data-copy").classList.add("default");
       item.querySelector(".game-data-reorder").classList.add("default");
