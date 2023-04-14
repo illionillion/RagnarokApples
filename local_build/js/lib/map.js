@@ -102,7 +102,8 @@ export async function CreateMap(gameState) {
                             gameState.nowPart = partKey
                             gameState.nowDate = mapData["day"]
                             gameState.nowPlace = item.place
-                            gameState.TextPlayer = new ScenarioPlayer(TextData[partKey], TextAudio[partKey], gameState)//プレイヤー生成
+                            // gameState.TextPlayer = 
+                            new ScenarioPlayer(TextData[partKey], TextAudio[partKey], gameState)//プレイヤー生成
 
                         }, gameState)
 
