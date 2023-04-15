@@ -10,6 +10,7 @@ import toDarking from "./lib/toDarking.js";
     textEventId: -1, // いらない
     // nowPart: 'A0',
     nowPart: "init", // マップのinitを取得する
+    prevPart: "",
     FloatCheck: true,
     nowDate: 0,
     nowPlace: undefined,
