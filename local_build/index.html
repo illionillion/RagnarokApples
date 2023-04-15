@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="css/text.css" />
     <link rel="stylesheet" href="css/menu.css" />
     <link rel="stylesheet" href="css/confirm-dialog.css" />
+    <link rel="stylesheet" href="css/game-data.css" />
     <script type="module" src="js/main.js" defer></script>
   </head>
   <body>
@@ -19,23 +20,23 @@
         <div id="screen">
           <div id="game-data-screen">
             <div id="game-data-header">
-              <div id="game-data-title"></div>
+              <div id="game-data-title">タイトル</div>
               <div id="game-data-close"></div>
             </div>
             <div id="game-data-body">
+              <!-- 以下を複製 -->
+              <template id="game-data-item-template">
+                <li class="game-data-item">
+                  <div class="game-data-name"></div>
+                  <div class="game-data-content"></div>
+                  <div class="game-data-buttons">
+                    <div class="game-data-copy"></div>
+                    <div class="game-data-reorder"></div>
+                    <div class="game-data-delete"></div>
+                  </div>
+                </li>
+              </template>
               <ul id="game-data-list">
-                <!-- 以下を複製 -->
-                <template id="game-data-item-template">
-                  <li class="game-data-item">
-                    <div class="game-data-name"></div>
-                    <div class="game-data-content"></div>
-                    <div class="game-data-buttons">
-                      <div class="game-data-copy"></div>
-                      <div class="game-data-reorder"></div>
-                      <div class="game-data-delete"></div>
-                    </div>
-                  </li>
-                </template>
               </ul>
             </div>
           </div>

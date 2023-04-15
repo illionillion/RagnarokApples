@@ -1,3 +1,5 @@
+import { openGameDataScreen } from "./GameData.js";
+import { closeConfirm, openConfirm } from "./confirm.js";
 import {
   getAudioPath,
   getBackgroundPath,
@@ -20,9 +22,9 @@ export default class ScenarioPlayer {
    */
   static menuFlag = false;
 
-  static skipConfirmFlag = false
+  static skipConfirmFlag = false;
 
-  // テキストのパーツ
+  // テキストのパーツ // こいつらstaticつけるべき
   screen = document.getElementById("textScreen");
   dialogueEle = document.getElementById("dialogue");
   dialogueText = document.getElementById("dialogue-text-area");
@@ -117,8 +119,6 @@ export default class ScenarioPlayer {
     this.darkeningFloor.addEventListener("click", this.darkeningElePrev, false);
     this.onePicture.addEventListener("click", this.onePictureClick, false);
     this.skipButton.addEventListener("click", this.skipConfirm, false);
-    this.skipButtonYes.addEventListener("click", this.toSkip, false);
-    this.skipButtonNo.addEventListener("click", this.skipCancel, false);
     this.MenuOpenButton.addEventListener("click", this.openMenu);
     this.MenuCloseButton.addEventListener("click", this.closeMenu);
     document.querySelectorAll("#menu-list ul li").forEach((element) => {
@@ -170,6 +170,7 @@ export default class ScenarioPlayer {
    * @returns イベント削除とキャンセル
    */
   textBoxShowHide = (e) => {
+    if(this.eventReset()) return
     // if (ScenarioPlayer.eventId != this.nowEveId) {
     //     console.log('remove');
     //     // console.error('remove');
@@ -210,6 +211,9 @@ export default class ScenarioPlayer {
    * @returns イベント削除とキャンセル
    */
   clickDialogue = (e) => {
+    e.stopPropagation(); //イベントの伝搬を防止
+    if(this.eventReset()) return
+
     // if (ScenarioPlayer.eventId != this.nowEveId) {
     //     console.log('remove');
     //     this.dialogueEle.removeEventListener('click',this.clickDialogue)
@@ -219,7 +223,6 @@ export default class ScenarioPlayer {
       // 1枚絵使用時はクリック無視
       return;
     }
-    e.stopPropagation(); //イベントの伝搬を防止
     if (this.startFlag) {
       this.startFlag = false; //いらない？
       this.Loading();
@@ -234,12 +237,14 @@ export default class ScenarioPlayer {
    * @returns イベント削除とキャンセル
    */
   autoToggle = (e) => {
+    e.stopPropagation();
+    if(this.eventReset()) return
+
     // if (ScenarioPlayer.eventId != this.nowEveId) {
     //     console.log('remove');
     //     this.autocheck.removeEventListener('click',this.autoToggle)
     //     return
     // }
-    e.stopPropagation();
     ScenarioPlayer.autoPlayingFlag = ScenarioPlayer.autoPlayingFlag
       ? false
       : true;
@@ -261,11 +266,17 @@ export default class ScenarioPlayer {
     // console.log(ScenarioPlayer.autoPlayingFlag);
   };
 
-  skipConfirm = e => {
+  skipConfirm = (e) => {
+    
     e.stopPropagation();
-    ScenarioPlayer.skipConfirmFlag = true
-    document.getElementById("confirm-dialog-screen").classList.remove("none");
-    this.AnimationPause()
+
+    if(this.eventReset()) return
+    ScenarioPlayer.skipConfirmFlag = true;
+    openConfirm("この話をスキップしますか？");
+    this.skipButtonYes.addEventListener("click", this.toSkip, false);
+    this.skipButtonNo.addEventListener("click", this.skipCancel, false);
+
+    this.AnimationPause();
   };
 
   /**
@@ -281,14 +292,18 @@ export default class ScenarioPlayer {
 
     // const text = this.GetText();
     // this.AnimationForcedEnd(text);
-    ScenarioPlayer.skipConfirmFlag = false
-    document.getElementById("confirm-dialog-screen").classList.add("none");
-    this.toMap()
+    ScenarioPlayer.skipConfirmFlag = false;
+    this.skipButtonYes.removeEventListener("click", this.toSkip, false);
+    this.skipButtonNo.removeEventListener("click", this.skipCancel, false);
+    closeConfirm();
+    this.toMap();
   };
 
   skipCancel = () => {
-    ScenarioPlayer.skipConfirmFlag = false
-    document.getElementById("confirm-dialog-screen").classList.add("none");
+    ScenarioPlayer.skipConfirmFlag = false;
+    this.skipButtonYes.removeEventListener("click", this.toSkip, false);
+    this.skipButtonNo.removeEventListener("click", this.skipCancel, false);
+    closeConfirm();
   };
 
   /**
@@ -311,6 +326,9 @@ export default class ScenarioPlayer {
    * @returns イベント削除とキャンセル
    */
   onePictureClick = (e) => {
+    e.stopPropagation();
+    if(this.eventReset()) return
+
     // console.log(e.target);
     // if (ScenarioPlayer.eventId != this.nowEveId) {
     //     console.log('remove');
@@ -321,7 +339,6 @@ export default class ScenarioPlayer {
       // 1枚絵非使用時はクリック無視
       return;
     }
-    e.stopPropagation();
     this.ScenarioClick();
   };
 
@@ -619,6 +636,35 @@ export default class ScenarioPlayer {
   };
 
   /**
+   * 外部からマップに戻すときに実行するやつ
+   */
+  static screenReset = () => {
+    // シナリオ画面へ遷移
+    document.getElementById("textScreen").classList.add("none");
+    document.getElementById("mapScreen").classList.remove("none");
+    // いろいろ初期化
+    document.getElementById("textBackground").src =
+      "images/background/concept.png";
+    document.querySelector("#character-left img").src =
+      "images/character/transparent_background.png";
+    document.querySelector("#character-left-center img").src =
+      "images/character/transparent_background.png";
+    document.querySelector("#character-center img").src =
+      "images/character/transparent_background.png";
+    document.querySelector("#character-right img").src =
+      "images/character/transparent_background.png";
+    document.querySelector("#character-right-center img").src =
+      "images/character/transparent_background.png";
+    document.querySelector("#menu-screen .menu-title span").textContent =
+      "MENU";
+    document.getElementById("mapTextCover").classList.remove("none");
+    document.getElementById("FloatCheck").classList.add("op0");
+    document.getElementById("mapTextFloat").classList.add("op0");
+    document.getElementById("dialogue").classList.remove("op0");
+    document.getElementById("one-picture").classList.add("op0");
+  }
+
+  /**
    * シナリオ画面からマップ画面へ戻る
    */
   toMap = async () => {
@@ -662,8 +708,6 @@ export default class ScenarioPlayer {
       );
       this.onePicture.removeEventListener("click", this.onePictureClick, false);
       this.skipButton.removeEventListener("click", this.skipConfirm, false);
-      this.skipButtonYes.removeEventListener('click', this.toSkip, false)
-      this.skipButtonNo.removeEventListener('click', this.skipCancel, false)
       this.MenuOpenButton.removeEventListener("click", this.openMenu);
       this.MenuCloseButton.removeEventListener("click", this.closeMenu);
       document.removeEventListener("keypress", this.openMenuKeyup);
@@ -676,6 +720,37 @@ export default class ScenarioPlayer {
       await CreateMap(this.state);
     }, this.state);
   };
+
+  /**
+   * IDが違う場合はイベントリセット
+   * @returns {boolean} true: リセット, false: 非リセット
+   */
+  eventReset = () => {
+    if (ScenarioPlayer.eventId !== this.nowEveId) {
+      console.log("prev screen events reset");
+      this.screen.removeEventListener("click", this.textBoxShowHide, false);
+      this.dialogueEle.removeEventListener("click", this.clickDialogue, false);
+      this.autocheck.removeEventListener("click", this.autoToggle, false);
+      this.darkeningFloor.removeEventListener(
+        "click",
+        this.darkeningElePrev,
+        false
+      );
+      this.onePicture.removeEventListener("click", this.onePictureClick, false);
+      this.skipButton.removeEventListener("click", this.skipConfirm, false);
+      this.MenuOpenButton.removeEventListener("click", this.openMenu);
+      this.MenuCloseButton.removeEventListener("click", this.closeMenu);
+      document.removeEventListener("keypress", this.openMenuKeyup);
+
+      document.querySelectorAll("#menu-list ul li").forEach((element) => {
+        element.removeEventListener("click", this.clickMenuList);
+      });
+
+      return true
+    }
+
+    return false
+  }
 
   /**
    * アニメーションを一時停止
@@ -904,6 +979,8 @@ export default class ScenarioPlayer {
   openMenu = (e) => {
     // console.log('click!');
     e?.stopPropagation();
+    if(this.eventReset()) return
+
     // if (ScenarioPlayer.eventId != this.nowEveId) {
     //     console.log('remove');
     //     this.MenuOpenButton.removeEventListener('click', this.openMenu)
@@ -928,6 +1005,8 @@ export default class ScenarioPlayer {
    */
   openMenuKeyup = (e) => {
     e?.stopPropagation();
+    if(this.eventReset()) return
+
     // console.log('key press!!');
     // console.log(ScenarioPlayer.menuFlag);
 
@@ -974,6 +1053,8 @@ export default class ScenarioPlayer {
    */
   closeMenu = (e) => {
     e?.stopPropagation();
+    if(this.eventReset()) return
+
     // if (ScenarioPlayer.eventId != this.nowEveId) {
     //     console.log('remove');
     //     this.MenuCloseButton.removeEventListener('click', this.closeMenu)
@@ -993,6 +1074,8 @@ export default class ScenarioPlayer {
    */
   clickMenuList = (e) => {
     e.stopPropagation();
+    if(this.eventReset()) return
+
     // if (ScenarioPlayer.eventId != this.nowEveId) {
     //     console.log('remove');
     //     e.target.removeEventListener('click', this.closeMenu)
@@ -1004,21 +1087,39 @@ export default class ScenarioPlayer {
     if (!["day", "place"].includes(e.target.dataset.menubutton)) {
       document.querySelector("#menu-screen .menu-title span").textContent =
         text;
-      if (e.target.dataset.menubutton === 'log') {
-        const ulEle = document.createElement('ul')
-        const fragment = document.createDocumentFragment()
-        // ログ画面生成
-        for (let i = 0; i < this.msgindex - 1; i++) {
-          const ele = this.TextList[i]
-          const liEle = document.createElement('li')
-          const replace = text => text.replace(/\*/g, '').replace(/\$/g, '').replace(/\//g, '')
-          console.log(replace(ele.characterText.text));
-          liEle.innerHTML = `<span class="person-name">${ele.characterText.name}:</span><span class="person-serif">${replace(ele.characterText.text)}</span>`
-          fragment.appendChild(liEle)
-        }
-        ulEle.appendChild(fragment)
-        document.querySelector('#menu-screen .contents').innerHTML=""
-        document.querySelector('#menu-screen .contents').appendChild(ulEle)
+
+      switch (e.target.dataset.menubutton) {
+        case "log":
+          const ulEle = document.createElement("ul");
+          const fragment = document.createDocumentFragment();
+          // ログ画面生成
+          for (let i = 0; i < this.msgindex - 1; i++) {
+            const ele = this.TextList[i];
+            const liEle = document.createElement("li");
+            const replace = (text) =>
+              text.replace(/\*/g, "").replace(/\$/g, "").replace(/\//g, "");
+            console.log(replace(ele.characterText.text));
+            liEle.innerHTML = `<span class="person-name">${
+              ele.characterText.name
+            }:</span><span class="person-serif">${replace(
+              ele.characterText.text
+            )}</span>`;
+            fragment.appendChild(liEle);
+          }
+          ulEle.appendChild(fragment);
+          document.querySelector("#menu-screen .contents").innerHTML = "";
+          document.querySelector("#menu-screen .contents").appendChild(ulEle);
+
+          break;
+        case "save":
+          openGameDataScreen("save");
+          break;
+        case "load":
+          openGameDataScreen("load");
+          break;
+
+        default:
+          break;
       }
     }
   };
