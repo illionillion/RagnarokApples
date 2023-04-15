@@ -57,7 +57,7 @@ body {
   width: 100%;
   height: 100%;
   background-color: #000;
-  z-index: 3;
+  z-index: 5;
   transition: 500ms;
 }
 #darkening-floor.op0 {

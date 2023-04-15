@@ -1,4 +1,7 @@
+import ScenarioPlayer from "./ScenarioPlayer.js";
 import { closeConfirm, openConfirm } from "./confirm.js";
+import { CreateMap } from "./map.js";
+import toDarking from "./toDarking.js";
 
 /**
  * データ総数
@@ -60,12 +63,15 @@ export const openGameDataScreen = async (type) => {
     const data = await loadData("data-" + i);
     /**
      * @type {HTMLElement}
-     */
-    const item = template.content.cloneNode(true);
-    item.querySelector(".game-data-name").innerHTML = `データ${i}`;
-    if (data !== "") {
+    */
+   const item = template.content.cloneNode(true);
+   item.querySelector(".game-data-name").innerHTML = `データ${i}`;
+   if (data !== "") {
+      const json = JSON.parse(data);
       // データがあった場合
-      item.querySelector(".game-data-content").innerHTML = `タウ　n日目　⚪︎⚪︎`;
+      const name = json["charName"];
+      const nowDate = json["nowDate"];
+      item.querySelector(".game-data-content").innerHTML = `${name} ${nowDate}`;
       item.querySelector(".game-data-copy").classList.remove("default");
       item.querySelector(".game-data-reorder").classList.remove("default");
       item.querySelector(".game-data-delete").classList.remove("default");
@@ -80,6 +86,7 @@ export const openGameDataScreen = async (type) => {
     list
       .querySelectorAll(".game-data-item")
       [i - 1].addEventListener("click", () => {
+        if(data === "" && type === "load") return;
         openConfirm(`${type === "load" ? "ロード" : "セーブ"}しますか？`);
         const execYes = () => {
           dataConformYes(type, i);
@@ -118,12 +125,26 @@ export const closeGameDataScreen = () => {
 const dataConformYes = async (type, no) => {
   if (type === "save") {
     await saveData("data-" + no, JSON.stringify(gameData));
-    // await saveData("data-" + no, no);
+    closeConfirm();
+    openGameDataScreen("save");
   }
   if (type === "load") {
     console.log(await loadData("data-" + no));
+    const data = JSON.parse(await loadData("data-" + no));
+    Object.keys(gameData).forEach(key => {
+      if (key === "nowPart") {
+        gameData[key] = data["prevPart"];
+      } else {
+        gameData[key] = data[key];
+      }
+    });
+    await toDarking(async (e) => {
+      closeConfirm();
+      closeGameDataScreen()
+      await CreateMap(gameData);
+      ScenarioPlayer.screenReset()
+    }, gameData);
   }
-  closeConfirm();
 };
 
 /**
