@@ -18,11 +18,11 @@ let gameData = {};
 
 /**
  * データの同期
- * @param {Object} gameState 
+ * @param {Object} gameState
  */
 export const initGameData = (gameState) => {
   gameData = gameState;
-}
+};
 
 /**
  * データの保存
@@ -44,11 +44,11 @@ export const loadData = async (key) => {
 
 /**
  * データの削除
- * @param {string} key 
+ * @param {string} key
  */
 export const removeData = async (key) => {
   localStorage.removeItem(key);
-}
+};
 
 /**
  * セーブ画面起動
@@ -71,21 +71,21 @@ export const openGameDataScreen = async (type) => {
     const data = await loadData("data-" + i);
     /**
      * @type {HTMLElement}
-    */
-   const item = template.content.cloneNode(true);
-   item.querySelector(".game-data-name").innerHTML = `データ${i}`;
+     */
+    const item = template.content.cloneNode(true);
+    item.querySelector(".game-data-name").innerHTML = `データ${i}`;
 
-   const is_json_check = is_json(data);
+    const is_json_check = is_json(data);
 
-   if (data !== "" && is_json_check) {
-     const json = JSON.parse(data); // ここでJSONに変換できなくてエラーとか起こりそう
-     // データがあった場合
-     const name = json["charName"];
-     const nowDate = json["nowDate"];
-     item.querySelector(".game-data-content").innerHTML = `${name} ${nowDate}`;
-     item.querySelector(".game-data-copy").classList.remove("default");
-     item.querySelector(".game-data-reorder").classList.remove("default");
-     item.querySelector(".game-data-delete").classList.remove("default");
+    if (data !== "" && is_json_check) {
+      const json = JSON.parse(data); // ここでJSONに変換できなくてエラーとか起こりそう
+      // データがあった場合
+      const name = json["charName"];
+      const nowDate = json["nowDate"];
+      item.querySelector(".game-data-content").innerHTML = `${name} ${nowDate}`;
+      item.querySelector(".game-data-copy").classList.remove("default");
+      item.querySelector(".game-data-reorder").classList.remove("default");
+      item.querySelector(".game-data-delete").classList.remove("default");
     } else {
       // データがない場合
       item.querySelector(".game-data-content").innerHTML = `データがありません`;
@@ -97,26 +97,15 @@ export const openGameDataScreen = async (type) => {
       await removeData("data-" + i);
     }
     list.appendChild(item);
-    list
-      .querySelectorAll(".game-data-item")
-      [i - 1].addEventListener("click", () => {
-        if((data === "" || !is_json_check) && type === "load") return;
-        openConfirm(`${type === "load" ? "ロード" : "セーブ"}しますか？`);
-        const execYes = () => {
-          dataConformYes(type, i);
-          removeEvent();
-        };
-        const execNo = () => {
-          dataConformNo();
-          removeEvent();
-        };
-        const removeEvent = () => {
-          yesButton.removeEventListener("click", execYes);
-          noButton.removeEventListener("click", execNo);  
-        }
-        yesButton.addEventListener("click", execYes);
-        noButton.addEventListener("click", execNo);
-      });
+    const listItem = list.querySelectorAll(".game-data-item")[i - 1];
+    const deleteButton = listItem.querySelector(".game-data-delete");
+
+    listItem.addEventListener("click", () =>
+      onClickItem(data === "" || !is_json_check, type, i)
+    );
+    deleteButton.addEventListener("click", (e) =>
+      onClickDelete(e, data === "" || !is_json_check, type, i)
+    );
   }
 
   closeButton.addEventListener("click", closeGameDataScreen);
@@ -145,7 +134,7 @@ const dataConformYes = async (type, no) => {
   if (type === "load") {
     console.log(await loadData("data-" + no));
     const data = JSON.parse(await loadData("data-" + no));
-    Object.keys(gameData).forEach(key => {
+    Object.keys(gameData).forEach((key) => {
       if (key === "nowPart") {
         gameData[key] = data["prevPart"];
       } else {
@@ -154,25 +143,71 @@ const dataConformYes = async (type, no) => {
     });
     await toDarking(async (e) => {
       closeConfirm();
-      closeGameDataScreen()
+      closeGameDataScreen();
       await CreateMap(gameData);
-      ScenarioPlayer.screenReset()
+      ScenarioPlayer.screenReset();
     }, gameData);
   }
 };
 
 /**
- * セーブしますか？「いいえ」
- * 
+ *  アイテムをクリックした時（セーブ・ロードの確認）
+ * @param {boolean} preventFlag
+ * @param {"save" | "load"} type
+ * @param {number} i
  */
-const dataConformNo = () => {
-  closeConfirm();
+const onClickItem = (preventFlag, type, i) => {
+  if (preventFlag && type === "load") return;
+  openConfirm(`${type === "load" ? "ロード" : "セーブ"}しますか？`);
+  const execYes = () => {
+    dataConformYes(type, i);
+    removeEvent();
+  };
+  const execNo = () => {
+    closeConfirm();
+    removeEvent();
+  };
+  const removeEvent = () => {
+    yesButton.removeEventListener("click", execYes);
+    noButton.removeEventListener("click", execNo);
+  };
+  yesButton.addEventListener("click", execYes);
+  noButton.addEventListener("click", execNo);
+};
+
+/**
+ * 削除ボタン押した時
+ * @param {Event} e
+ * @param {boolean} preventFlag
+ * @param {"save" | "load"} type
+ * @param {number} i
+ */
+const onClickDelete = (e, preventFlag, type, i) => {
+  if (preventFlag) return;
+  e.stopPropagation(); // この順番でいい
+  openConfirm(`データ${i}を削除しますか？`);
+  const execYes = async () => {
+    await removeData("data-" + i);
+    closeConfirm();
+    openGameDataScreen(type);
+    removeEvent();
+  };
+  const execNo = () => {
+    closeConfirm();
+    removeEvent();
+  };
+  const removeEvent = () => {
+    yesButton.removeEventListener("click", execYes);
+    noButton.removeEventListener("click", execNo);
+  };
+  yesButton.addEventListener("click", execYes);
+  noButton.addEventListener("click", execNo);
 };
 
 /**
  * JSONか判定
- * @param {string} str 
- * @returns {boolean} `true`: JSONである, `false`: JSONでない 
+ * @param {string} str
+ * @returns {boolean} `true`: JSONである, `false`: JSONでない
  */
 export const is_json = (str) => {
   try {
@@ -181,4 +216,4 @@ export const is_json = (str) => {
     return false;
   }
   return true;
-}
+};
