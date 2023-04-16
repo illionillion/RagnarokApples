@@ -43,6 +43,14 @@ export const loadData = async (key) => {
 };
 
 /**
+ * データの削除
+ * @param {string} key 
+ */
+export const removeData = async (key) => {
+  localStorage.removeItem(key);
+}
+
+/**
  * セーブ画面起動
  * @param {"save" | "load"} type
  * @returns
@@ -66,27 +74,33 @@ export const openGameDataScreen = async (type) => {
     */
    const item = template.content.cloneNode(true);
    item.querySelector(".game-data-name").innerHTML = `データ${i}`;
-   if (data !== "") {
-      const json = JSON.parse(data);
-      // データがあった場合
-      const name = json["charName"];
-      const nowDate = json["nowDate"];
-      item.querySelector(".game-data-content").innerHTML = `${name} ${nowDate}`;
-      item.querySelector(".game-data-copy").classList.remove("default");
-      item.querySelector(".game-data-reorder").classList.remove("default");
-      item.querySelector(".game-data-delete").classList.remove("default");
+
+   const is_json_check = is_json(data);
+
+   if (data !== "" && is_json_check) {
+     const json = JSON.parse(data); // ここでJSONに変換できなくてエラーとか起こりそう
+     // データがあった場合
+     const name = json["charName"];
+     const nowDate = json["nowDate"];
+     item.querySelector(".game-data-content").innerHTML = `${name} ${nowDate}`;
+     item.querySelector(".game-data-copy").classList.remove("default");
+     item.querySelector(".game-data-reorder").classList.remove("default");
+     item.querySelector(".game-data-delete").classList.remove("default");
     } else {
       // データがない場合
       item.querySelector(".game-data-content").innerHTML = `データがありません`;
       item.querySelector(".game-data-copy").classList.add("default");
       item.querySelector(".game-data-reorder").classList.add("default");
       item.querySelector(".game-data-delete").classList.add("default");
+
+      // データの削除
+      await removeData("data-" + i);
     }
     list.appendChild(item);
     list
       .querySelectorAll(".game-data-item")
       [i - 1].addEventListener("click", () => {
-        if(data === "" && type === "load") return;
+        if((data === "" || !is_json_check) && type === "load") return;
         openConfirm(`${type === "load" ? "ロード" : "セーブ"}しますか？`);
         const execYes = () => {
           dataConformYes(type, i);
@@ -154,3 +168,17 @@ const dataConformYes = async (type, no) => {
 const dataConformNo = () => {
   closeConfirm();
 };
+
+/**
+ * JSONか判定
+ * @param {string} str 
+ * @returns {boolean} `true`: JSONである, `false`: JSONでない 
+ */
+export const is_json = (str) => {
+  try {
+    JSON.parse(str);
+  } catch (e) {
+    return false;
+  }
+  return true;
+}
