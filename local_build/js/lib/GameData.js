@@ -46,7 +46,7 @@ const loadData = async (key) => {
  * データの削除
  * @param {string} key
  */
-const removeData = async (key) => {
+const deleteData = async (key) => {
   localStorage.removeItem(key);
 };
 
@@ -60,6 +60,17 @@ const copyData = async (from, to) => {
 };
 
 /**
+ * データの入れ替え
+ * @param {string} from
+ * @param {string} to
+ */
+const replaceData = async (from, to) => {
+  const tmp = await loadData(to); // toのデータを退避
+  await saveData(to, await loadData(from)); // toのデータをfromに上書き
+  await saveData(from, tmp); // fromのデータをtoに上書き
+};
+
+/**
  * タイトル設定
  * @param {string} title
  */
@@ -69,7 +80,7 @@ const setGameDataTitle = (title) => {
 
 /**
  * セーブ画面起動
- * @param {"save" | "load" | "copy" | "move"} type
+ * @param {"save" | "load" | "copy" | "replace"} type
  * @param {number} op
  * @param {"save" | "load"} prevType
  * @returns
@@ -87,7 +98,7 @@ export const openGameDataScreen = async (type, op = -1, prevType = "") => {
           return "セーブする";
         case "copy":
           return "コピーする";
-        case "move":
+        case "replace":
           return "入れ替える";
         default:
           return "";
@@ -127,12 +138,13 @@ export const openGameDataScreen = async (type, op = -1, prevType = "") => {
       item.querySelector(".delete").classList.add("default");
 
       // データの削除
-      await removeData("data-" + i);
+      await deleteData("data-" + i);
     }
     list.appendChild(item);
     const listItem = list.querySelectorAll(".game-data-item")[i - 1];
     const deleteButton = listItem.querySelector(".delete");
     const copyButton = listItem.querySelector(".copy");
+    const reorderButton = listItem.querySelector(".reorder");
     const preventFlag = data === "" || !is_json_check;
 
     if (i === op) listItem.classList.add("current");
@@ -146,6 +158,9 @@ export const openGameDataScreen = async (type, op = -1, prevType = "") => {
       );
       copyButton.addEventListener("click", (e) =>
         onClickCopy(e, preventFlag, type, i)
+      );
+      reorderButton.addEventListener("click", (e) =>
+        onClickReplace(e, preventFlag, type, i)
       );
     }
   }
@@ -165,7 +180,7 @@ export const closeGameDataScreen = () => {
 
 /**
  * セーブ | ロード | コピー しますか？「はい」
- * @param {"save" | "load" | "copy" | "move"} type
+ * @param {"save" | "load" | "copy" | "replace"} type
  * @param {number} no
  * @param {number} op
  * @param {"save" | "load"} prevType
@@ -200,8 +215,11 @@ const dataConformYes = async (type, no, op, prevType) => {
       openGameDataScreen(prevType);
 
       break;
-    case "move":
+    case "replace":
       // 入れ替え
+      await replaceData("data-" + op, "data-" + no);
+      closeConfirm();
+      openGameDataScreen(prevType);
 
       break;
 
@@ -213,7 +231,7 @@ const dataConformYes = async (type, no, op, prevType) => {
 /**
  *  アイテムをクリックした時（セーブ・ロードの確認）
  * @param {boolean} preventFlag
- * @param {"save" | "load" | "copy" | "move"} type
+ * @param {"save" | "load" | "copy" | "replace"} type
  * @param {number} i
  * @param {number} op
  * @param {"save" | "load"} prevType
@@ -229,7 +247,7 @@ const onClickItem = (preventFlag, type, i, op, prevType) => {
           return "ロードし";
         case "copy":
           return `データ${op}をデータ${i}にコピーし`;
-        case "move":
+        case "replace":
           return `データ${op}をデータ${i}に入れ替え`;
 
         default:
@@ -265,7 +283,7 @@ const onClickDelete = (e, preventFlag, type, i) => {
   e.stopPropagation(); // この順番でいい
   openConfirm(`データ${i}を削除しますか？`);
   const execYes = async () => {
-    await removeData("data-" + i);
+    await deleteData("data-" + i);
     closeConfirm();
     openGameDataScreen(type);
     removeEvent();
@@ -294,6 +312,29 @@ const onClickCopy = (e, preventFlag, type, i) => {
   e.stopPropagation(); // この順番でいい
 
   openGameDataScreen("copy", i, type);
+
+  // ここで戻るボタンのイベント変更
+  const toPrev = () => {
+    openGameDataScreen(type);
+    closeButton.removeEventListener("click", toPrev);
+    closeButton.addEventListener("click", closeGameDataScreen);
+  };
+  closeButton.removeEventListener("click", closeGameDataScreen);
+  closeButton.addEventListener("click", toPrev);
+};
+
+/**
+ * 入れ替えボタン押した時
+ * @param {Event} e
+ * @param {boolean} preventFlag
+ * @param {"save" | "load" | "copy" | "replace"} type
+ * @param {number} i
+ */
+const onClickReplace = (e, preventFlag, type, i) => {
+  if (preventFlag) return;
+  e.stopPropagation(); // この順番でいい
+
+  openGameDataScreen("replace", i, type);
 
   // ここで戻るボタンのイベント変更
   const toPrev = () => {
