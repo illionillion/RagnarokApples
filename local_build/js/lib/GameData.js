@@ -51,18 +51,25 @@ export const removeData = async (key) => {
 };
 
 /**
+ * タイトル設定
+ * @param {string} title
+ */
+const setGameDataTitle = (title) => {
+  document.getElementById("game-data-title").innerHTML = title;
+};
+
+/**
  * セーブ画面起動
- * @param {"save" | "load"} type
+ * @param {"save" | "load" | "copy"} type
+ * @param {number} op
  * @returns
  */
-export const openGameDataScreen = async (type) => {
+export const openGameDataScreen = async (type, op = -1) => {
   if (!type || type === "") return;
 
-  console.log(gameData);
-
-  document.getElementById("game-data-title").innerHTML = `${
-    type === "load" ? "ロード" : "セーブ"
-  }するデータを選択してください。`;
+  setGameDataTitle(
+    `${type === "load" ? "ロード" : "セーブ"}するデータを選択してください。`
+  );
 
   const template = document.getElementById("game-data-item-template");
   const list = document.getElementById("game-data-list");
@@ -83,29 +90,27 @@ export const openGameDataScreen = async (type) => {
       const name = json["charName"];
       const nowDate = json["nowDate"];
       item.querySelector(".game-data-content").innerHTML = `${name} ${nowDate}`;
-      item.querySelector(".game-data-copy").classList.remove("default");
-      item.querySelector(".game-data-reorder").classList.remove("default");
-      item.querySelector(".game-data-delete").classList.remove("default");
     } else {
       // データがない場合
       item.querySelector(".game-data-content").innerHTML = `データがありません`;
-      item.querySelector(".game-data-copy").classList.add("default");
-      item.querySelector(".game-data-reorder").classList.add("default");
-      item.querySelector(".game-data-delete").classList.add("default");
+      item.querySelector(".copy").classList.add("default");
+      item.querySelector(".reorder").classList.add("default");
+      item.querySelector(".delete").classList.add("default");
 
       // データの削除
       await removeData("data-" + i);
     }
     list.appendChild(item);
     const listItem = list.querySelectorAll(".game-data-item")[i - 1];
-    const deleteButton = listItem.querySelector(".game-data-delete");
+    const deleteButton = listItem.querySelector(".delete");
+    const copyButton = listItem.querySelector(".copy");
+    const preventFlag = data === "" || !is_json_check;
 
-    listItem.addEventListener("click", () =>
-      onClickItem(data === "" || !is_json_check, type, i)
-    );
+    listItem.addEventListener("click", () => onClickItem(preventFlag, type, i));
     deleteButton.addEventListener("click", (e) =>
-      onClickDelete(e, data === "" || !is_json_check, type, i)
+      onClickDelete(e, preventFlag, type, i)
     );
+    copyButton.addEventListener("click", (e) => onClickCopy(e, preventFlag, i));
   }
 
   closeButton.addEventListener("click", closeGameDataScreen);
@@ -121,7 +126,7 @@ export const closeGameDataScreen = () => {
 };
 
 /**
- * セーブしますか？「はい」
+ * セーブ | ロード | コピー しますか？「はい」
  * @param {"save" | "load"} type
  * @param {number} no
  */
@@ -202,6 +207,43 @@ const onClickDelete = (e, preventFlag, type, i) => {
   };
   yesButton.addEventListener("click", execYes);
   noButton.addEventListener("click", execNo);
+};
+
+/**
+ * コピーボタン押した時
+ * @param {Event} e
+ * @param {boolean} preventFlag
+ * @param {number} i
+ */
+const onClickCopy = (e, preventFlag, i) => {
+  if (preventFlag) return;
+  e.stopPropagation(); // この順番でいい
+  
+  // これ以降をどうする？
+  setGameDataTitle("コピーするデータを選択してください。");
+  document.querySelectorAll(".game-data-button").forEach(element => {
+    element.classList.add("disabled");
+  });
+
+  // openGameDataScreen("copy", i);
+
+  // openConfirm(`データ${i}を削除しますか？`);
+  // const execYes = async () => {
+  //   await removeData("data-" + i);
+  //   closeConfirm();
+  //   openGameDataScreen(type);
+  //   removeEvent();
+  // };
+  // const execNo = () => {
+  //   closeConfirm();
+  //   removeEvent();
+  // };
+  // const removeEvent = () => {
+  //   yesButton.removeEventListener("click", execYes);
+  //   noButton.removeEventListener("click", execNo);
+  // };
+  // yesButton.addEventListener("click", execYes);
+  // noButton.addEventListener("click", execNo);
 };
 
 /**

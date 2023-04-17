@@ -90,27 +90,36 @@
     background-size: cover;
 }
 
-.game-data-copy {
+.game-data-button.copy {
     background-image: url(../images/game-data/game-data-copy-normal.png);
 }
-.game-data-reorder {
+.game-data-button.reorder {
     background-image: url(../images/game-data/game-data-reorder-normal.png);
 }
-.game-data-delete {
+.game-data-button.delete {
     background-image: url(../images/game-data/game-data-delete-normal.png);
 }
-.game-data-copy:hover {
+.game-data-button.copy.disabled {
     background-image: url(../images/game-data/game-data-copy-hover.png);
 }
-.game-data-reorder:hover {
+.game-data-button.reorder.disabled {
     background-image: url(../images/game-data/game-data-reorder-hover.png);
 }
-.game-data-delete:hover {
+.game-data-button.delete.disabled {
     background-image: url(../images/game-data/game-data-delete-hover.png);
 }
-.default {
+.game-data-button.copy:hover {
+    background-image: url(../images/game-data/game-data-copy-hover.png);
+}
+.game-data-button.reorder:hover {
+    background-image: url(../images/game-data/game-data-reorder-hover.png);
+}
+.game-data-button.delete:hover {
+    background-image: url(../images/game-data/game-data-delete-hover.png);
+}
+.game-data-button.default {
     background-image: url(../images/game-data/game-data-default-button.png);
 }
-.default:hover {
+.game-data-button.default:hover {
     background-image: url(../images/game-data/game-data-default-button.png);
 }
