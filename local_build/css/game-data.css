@@ -69,6 +69,9 @@
 .game-data-item:hover {
     background-image: url(../images/game-data/data-item-hover.png);
 }
+.game-data-item.current {
+    background-image: url(../images/game-data/data-item-hover.png);
+}
 .game-data-name {
     flex: 1;
 }

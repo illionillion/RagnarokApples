@@ -135,6 +135,8 @@ export const openGameDataScreen = async (type, op = -1, prevType = "") => {
     const copyButton = listItem.querySelector(".copy");
     const preventFlag = data === "" || !is_json_check;
 
+    if (i === op) listItem.classList.add("current");
+
     listItem.addEventListener("click", () =>
       onClickItem(preventFlag, type, i, op, prevType)
     );
@@ -148,6 +150,7 @@ export const openGameDataScreen = async (type, op = -1, prevType = "") => {
     }
   }
 
+  closeButton.removeEventListener("click", closeGameDataScreen); // openGameDataScreenを多用するのでcloseGameDataScreenが多重しないために必要
   closeButton.addEventListener("click", closeGameDataScreen);
   document.getElementById("game-data-screen").classList.remove("none");
 };
@@ -194,7 +197,7 @@ const dataConformYes = async (type, no, op, prevType) => {
       // コピー
       await copyData("data-" + op, "data-" + no);
       closeConfirm();
-      openGameDataScreen(prevType); // ここでcopyから前のsave || loadに戻したい
+      openGameDataScreen(prevType);
 
       break;
     case "move":
@@ -293,6 +296,13 @@ const onClickCopy = (e, preventFlag, type, i) => {
   openGameDataScreen("copy", i, type);
 
   // ここで戻るボタンのイベント変更
+  const toPrev = () => {
+    openGameDataScreen(type);
+    closeButton.removeEventListener("click", toPrev);
+    closeButton.addEventListener("click", closeGameDataScreen);
+  };
+  closeButton.removeEventListener("click", closeGameDataScreen);
+  closeButton.addEventListener("click", toPrev);
 };
 
 /**
