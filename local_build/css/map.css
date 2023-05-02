@@ -158,7 +158,30 @@
     /* display: flex; */
     background-color: rgba(0, 0, 0, 0.4);
     font-family: 'Noto Serif JP', serif;
+    background-image: url(../images/map-screen/map1_background.png);
+    background-size: cover;
+}
 
+#mapTextCover::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 44%;
+    height: 76%;
+    background-image: url(../images/map-screen/map1_background_bottom.png);
+    background-size: cover;
+}
+
+#mapTextCover::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 15%;
+    height: 26%;
+    background-image: url(../images/map-screen/map1_background_top.png);
+    background-size: cover;
 }
 
 #mapTextCharacter img{
@@ -168,9 +191,9 @@
 #mapTextCharacter{
     /* flex: 1; */
     position: absolute;
-    bottom: 0%;
-    left: 5%;
-    width: 25%;
+    bottom: -1%;
+    left: 16%;
+    width: 22%;
 }
 
 #speechBubble p.textarea{
