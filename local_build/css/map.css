@@ -1,277 +1,282 @@
 @charset "utf-8";
 
-#date{
-    position: absolute;
-    width: 10%;
-    height: 6%;
-    /* top: 15px;
+#date {
+  position: absolute;
+  width: 10%;
+  height: 6%;
+  /* top: 15px;
     left: 20px; */
-    top: 5%;
-    left: 2%;
-    background-color: rgba(0, 0, 0, 0.582);
-    text-align: center;
-    z-index: 2;
-    font-family: 'Noto Serif JP', serif;
-    
+  top: 5%;
+  left: 2%;
+  background-color: rgba(0, 0, 0, 0.582);
+  text-align: center;
+  z-index: 2;
+  font-family: "Noto Serif JP", serif;
 }
 
 #date p {
-    margin: 0 auto;
-    width: 100%;
-    font-size: 2vw;
+  margin: 0 auto;
+  width: 100%;
+  font-size: 2vw;
 }
 
-#mapBackground{
-    width: 100%;
-    height: 100%;
+#mapBackground {
+  width: 100%;
+  height: 100%;
 }
 #mapScreen {
-    position: absolute;
-    top: 0%;
-    left: 0%;
-    width: 100%;
-    height: 100%;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
 }
 
-#mapWrapper{
-    position: absolute;
-    top: 0%;
-    left: 0%;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.582);
-    z-index: 2;
+#mapWrapper {
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.582);
+  z-index: 2;
 }
 
-#mapItems{
-    position: absolute;
-    top: 0%;
-    left: 0%;
-    width: 100%;
-    height: 100%;
+#mapItems {
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
 }
 
 .map-touch {
-    position: absolute;
-    background-color: rgba(0, 0, 0, 0.699);
-    animation: flash 4.5s linear infinite;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.699);
+  animation: flash 4.5s linear infinite;
 }
-.map-touch img{
-    width: 100%;
+.map-touch img {
+  width: 100%;
 }
 /* 点滅アニメーション */
 @keyframes flash {
-    0%,100% {
-      opacity: 1;
-    }
-  
-    50% {
-      opacity: 0.5;
-    }
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
 }
 
-#mapSelectFloat{
-    position: absolute;
-    /* position: relative; */
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 3;
-    width: 60%;
-    height: 50%;
-    background-color: rgba(255, 255, 255, 1);
-    font-family: 'Noto Serif JP', serif;
-
+#mapSelectFloat {
+  position: absolute;
+  /* position: relative; */
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  width: 60%;
+  height: 50%;
+  background-color: rgba(255, 255, 255, 1);
+  font-family: "Noto Serif JP", serif;
 }
 
-#placeName{
-    position: absolute;
-    top: 5%;
-    left: 50%;
-    transform: translate(-50%,-10%);
-    width: 80%;
-    height: 20%;
-    color: #000;
-    text-align: center;
-    font-size: 2vw;
+#placeName {
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  transform: translate(-50%, -10%);
+  width: 80%;
+  height: 20%;
+  color: #000;
+  text-align: center;
+  font-size: 2vw;
 }
 
 #mapSelectButton {
-    position: absolute;
-    left: 50%;
-    top: 40%;
-    transform: translate(-50%,-40%);
-    width: 100%;
-    height: 35%;
-    display: flex;
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -40%);
+  width: 100%;
+  height: 35%;
+  display: flex;
 }
 
-#mapSelectButton div{
-    width: 40%;
-    height: 50%;
-    color: #000;
-    background-color: yellow;
-    border-radius: 25px;
-    text-align: center;
-    margin: 10px auto;
-    margin-top: 0;
-    font-size: 1.2vw;
+#mapSelectButton div {
+  width: 40%;
+  height: 50%;
+  color: #000;
+  background-color: yellow;
+  border-radius: 25px;
+  text-align: center;
+  margin: 10px auto;
+  margin-top: 0;
+  font-size: 1.2vw;
 }
 
-#mapCharacterList{
-    position: absolute;
-    left: 50%;
-    bottom: 5%;
-    transform: translate(-50%,5%);
-    border: 1px solid #000;
-    width: 90%;
-    /* height: 40%; */
+#mapCharacterList {
+  position: absolute;
+  left: 50%;
+  bottom: 5%;
+  transform: translate(-50%, 5%);
+  border: 1px solid #000;
+  width: 90%;
+  /* height: 40%; */
 }
 
-#mapCharacterList ul{
-    margin: 0;
-    padding-left: 0;
-    list-style-type: none;
-    display: flex;
+#mapCharacterList ul {
+  margin: 0;
+  padding-left: 0;
+  list-style-type: none;
+  display: flex;
 }
 
-#mapCharacterList ul li{
-    background-color: #000;
-    width: 20%;
-    height: 20%;
-    margin: 0px auto;
-    border-radius: 50%;
-    overflow: hidden;
+#mapCharacterList ul li {
+  background-color: #000;
+  width: 20%;
+  height: 20%;
+  margin: 0px auto;
+  border-radius: 50%;
+  overflow: hidden;
 }
-#mapCharacterList ul li img{
-    width: 100%;
-    object-fit: cover;
+#mapCharacterList ul li img {
+  width: 100%;
+  object-fit: cover;
 }
-
 
 #mapTextCover {
-    position: absolute;
-    top: 0%;
-    left: 0%;
-    width: 100%;
-    height: 100%;
-    /* display: flex; */
-    background-color: rgba(0, 0, 0, 0.4);
-    font-family: 'Noto Serif JP', serif;
-    background-image: url(../images/map-screen/map1_background.png);
-    background-size: cover;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  /* display: flex; */
+  background-color: rgba(0, 0, 0, 0.4);
+  font-family: "Noto Serif JP", serif;
+  background-image: url(../images/map-screen/map1_background.png);
+  background-size: cover;
 }
 
 #mapTextCover::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 44%;
-    height: 76%;
-    background-image: url(../images/map-screen/map1_background_bottom.png);
-    background-size: cover;
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 44%;
+  height: 76%;
+  background-image: url(../images/map-screen/map1_background_bottom.png);
+  background-size: cover;
 }
 
 #mapTextCover::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 15%;
-    height: 26%;
-    background-image: url(../images/map-screen/map1_background_top.png);
-    background-size: cover;
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 15%;
+  height: 26%;
+  background-image: url(../images/map-screen/map1_background_top.png);
+  background-size: cover;
 }
 
-#mapTextCharacter img{
-    width: 100%;
-    object-fit: cover;
+#mapTextCharacter img {
+  width: 100%;
+  object-fit: cover;
 }
-#mapTextCharacter{
-    /* flex: 1; */
-    position: absolute;
-    bottom: -1%;
-    left: 16%;
-    width: 22%;
-}
-
-#speechBubble p.textarea{
-    /* margin: 10px auto; */
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 90%;
-    height: 75%;
-    transform: translate(-50%,-50%);
-    color: #000;
-    text-align: center;
-    font-size: 1.5vw;
-}
-#speechBubble{
-    position: relative;
-    width: 38%;
-    height: 18%;
-    top: 25%;
-    left: 30%;
-    text-align: left;
-    background-size: cover;
-    background-image: url(../images/mapHukidashi.png);
-    font-family: 'Noto Serif JP', serif;
-
+#mapTextCharacter {
+  /* flex: 1; */
+  position: absolute;
+  bottom: -1%;
+  left: 16%;
+  width: 22%;
 }
 
-#mapTextFloat{
-    position: absolute;
-    bottom: 5%;
-    left: 50%;
-    transform: translate(-50%,0%);
-    display: flex;
-    width: 80%;
-}
-#mapTextFloat.op0{
-    z-index: -1;
+#mapTextDate {
+  position: absolute;
+  right: 21%;
+  top: 21%;
+  font-size: 2.6rem;
+  font-weight: 1000;
 }
 
-#mapTextIcon{
-    width: 15%;
-    background-color: #000;
-    border-radius: 50%;
-    overflow: hidden;
+#speechBubble p.textarea {
+  /* margin: 10px auto; */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 90%;
+  height: 75%;
+  transform: translate(-50%, -50%);
+  color: #000;
+  text-align: center;
+  font-size: 1.5vw;
+}
+#speechBubble {
+  position: relative;
+  width: 38%;
+  height: 18%;
+  top: 25%;
+  left: 30%;
+  text-align: left;
+  background-size: cover;
+  background-image: url(../images/mapHukidashi.png);
+  font-family: "Noto Serif JP", serif;
 }
 
-#mapTextIcon img{
-    width: 100%;
+#mapTextFloat {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  display: flex;
+  width: 80%;
+}
+#mapTextFloat.op0 {
+  z-index: -1;
 }
 
-#FloatSpeechBubble{
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0.5);
+#mapTextIcon {
+  width: 15%;
+  background-color: #000;
+  border-radius: 50%;
+  overflow: hidden;
 }
 
-#FloatSpeechBubble .textarea{
-    height: 100%;
-    padding-left: 5px;
-    font-size: 1.2vw;
-    text-shadow: 1px 2px 3px #808080; 
+#mapTextIcon img {
+  width: 100%;
 }
 
-#FloatCheck p{
-    margin: 0 auto;
-    width: 100%;
-    font-size: 2vw;
+#FloatSpeechBubble {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.5);
 }
-#FloatCheck{
-    position: absolute;
-    /* top: 15%;
+
+#FloatSpeechBubble .textarea {
+  height: 100%;
+  padding-left: 5px;
+  font-size: 1.2vw;
+  text-shadow: 1px 2px 3px #808080;
+}
+
+#FloatCheck p {
+  margin: 0 auto;
+  width: 100%;
+  font-size: 2vw;
+}
+#FloatCheck {
+  position: absolute;
+  /* top: 15%;
     right: 20%; */
-    top: 5%;
-    right: 2%;
-    width: 10%;
-    height: 6%;
-    /* line-height: 50px; */
-    background-color: rgba(0, 0, 0, 0.4);
-    text-align: center;
-    /* font-size: 1.2rem; */
-    z-index: 2;
+  top: 5%;
+  right: 2%;
+  width: 10%;
+  height: 6%;
+  /* line-height: 50px; */
+  background-color: rgba(0, 0, 0, 0.4);
+  text-align: center;
+  /* font-size: 1.2rem; */
+  z-index: 2;
 }
