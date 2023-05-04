@@ -196,34 +196,40 @@
 
 #mapTextDate {
   position: absolute;
-  right: 21%;
-  top: 21%;
-  font-size: 2.6rem;
-  font-weight: 1000;
+  right: 22%;
+  top: 22%;
+  font-size: 4vw;
+  font-weight: 700;
 }
 
 #speechBubble p.textarea {
-  /* margin: 10px auto; */
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 90%;
-  height: 75%;
-  transform: translate(-50%, -50%);
   color: #000;
   text-align: center;
   font-size: 1.5vw;
+  padding-bottom: 5%;
 }
 #speechBubble {
-  position: relative;
-  width: 38%;
-  height: 18%;
-  top: 25%;
-  left: 30%;
-  text-align: left;
+  position: absolute;
+  width: 32%;
+  height: 22%;
+  bottom: 32%;
+  right: 14%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-size: cover;
-  background-image: url(../images/mapHukidashi.png);
+  background-image: url(../images/map-screen/map1_Hukidashi.png);
   font-family: "Noto Serif JP", serif;
+}
+
+#mapClickText {
+  position: absolute;
+  width: 28%;
+  height: 4%;
+  bottom: 23%;
+  right: 16%;
+  background-image: url(../images/map-screen/map1_click_text.png);
+  background-size: cover;
 }
 
 #mapTextFloat {
