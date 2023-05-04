@@ -141,7 +141,7 @@ export async function CreateMap(gameState) {
   const mapTextCharacter = document.querySelector("#mapTextCharacter img");
   mapTextCharacter.src = mapData
     ? `images/character/${mapData["mapMessageCharacter"]}`
-    : `images/character/bengal.png`;
+    : `images/character/testpicture_tau.png`;
 
   const spb = document.querySelector("#speechBubble .textarea");
   const msg = mapData ? mapData["mapMessageText"] : "テキスト切れ";

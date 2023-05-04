@@ -29,7 +29,7 @@ export const initGameData = (gameState) => {
  * @param {string} key
  * @param {string} value
  */
-export const saveData = async (key, value) => {
+const saveData = async (key, value) => {
   localStorage.setItem(key, value);
 };
 
@@ -38,7 +38,7 @@ export const saveData = async (key, value) => {
  * @param {string} key
  * @returns
  */
-export const loadData = async (key) => {
+const loadData = async (key) => {
   return localStorage.getItem(key) || "";
 };
 
@@ -46,23 +46,65 @@ export const loadData = async (key) => {
  * データの削除
  * @param {string} key
  */
-export const removeData = async (key) => {
+const deleteData = async (key) => {
   localStorage.removeItem(key);
 };
 
 /**
+ * データのコピー
+ * @param {string} from
+ * @param {string} to
+ */
+const copyData = async (from, to) => {
+  await saveData(to, await loadData(from));
+};
+
+/**
+ * データの入れ替え
+ * @param {string} from
+ * @param {string} to
+ */
+const replaceData = async (from, to) => {
+  const tmp = await loadData(to); // toのデータを退避
+  await saveData(to, await loadData(from)); // toのデータをfromに上書き
+  await saveData(from, tmp); // fromのデータをtoに上書き
+};
+
+/**
+ * タイトル設定
+ * @param {string} title
+ */
+const setGameDataTitle = (title) => {
+  document.getElementById("game-data-title").innerHTML = title;
+};
+
+/**
  * セーブ画面起動
- * @param {"save" | "load"} type
+ * @param {"save" | "load" | "copy" | "replace"} type
+ * @param {number} op
+ * @param {"save" | "load"} prevType
  * @returns
  */
-export const openGameDataScreen = async (type) => {
+export const openGameDataScreen = async (type, op = -1, prevType = "") => {
   if (!type || type === "") return;
 
-  console.log(gameData);
-
-  document.getElementById("game-data-title").innerHTML = `${
-    type === "load" ? "ロード" : "セーブ"
-  }するデータを選択してください。`;
+  setGameDataTitle(
+    // `${type === "load" ? "ロード" : "セーブ"}するデータを選択してください。`
+    `${(() => {
+      switch (type) {
+        case "load":
+          return "ロードする";
+        case "save":
+          return "セーブする";
+        case "copy":
+          return "コピーする";
+        case "replace":
+          return "入れ替える";
+        default:
+          return "";
+      }
+    })()}データを選択してください。`
+  );
 
   const template = document.getElementById("game-data-item-template");
   const list = document.getElementById("game-data-list");
@@ -83,31 +125,47 @@ export const openGameDataScreen = async (type) => {
       const name = json["charName"];
       const nowDate = json["nowDate"];
       item.querySelector(".game-data-content").innerHTML = `${name} ${nowDate}`;
-      item.querySelector(".game-data-copy").classList.remove("default");
-      item.querySelector(".game-data-reorder").classList.remove("default");
-      item.querySelector(".game-data-delete").classList.remove("default");
+      if (op >= 0) {
+        item.querySelector(".copy").classList.add("disabled");
+        item.querySelector(".reorder").classList.add("disabled");
+        item.querySelector(".delete").classList.add("disabled");
+      }
     } else {
       // データがない場合
       item.querySelector(".game-data-content").innerHTML = `データがありません`;
-      item.querySelector(".game-data-copy").classList.add("default");
-      item.querySelector(".game-data-reorder").classList.add("default");
-      item.querySelector(".game-data-delete").classList.add("default");
+      item.querySelector(".copy").classList.add("default");
+      item.querySelector(".reorder").classList.add("default");
+      item.querySelector(".delete").classList.add("default");
 
       // データの削除
-      await removeData("data-" + i);
+      await deleteData("data-" + i);
     }
     list.appendChild(item);
     const listItem = list.querySelectorAll(".game-data-item")[i - 1];
-    const deleteButton = listItem.querySelector(".game-data-delete");
+    const deleteButton = listItem.querySelector(".delete");
+    const copyButton = listItem.querySelector(".copy");
+    const reorderButton = listItem.querySelector(".reorder");
+    const preventFlag = data === "" || !is_json_check;
+
+    if (i === op) listItem.classList.add("current");
 
     listItem.addEventListener("click", () =>
-      onClickItem(data === "" || !is_json_check, type, i)
+      onClickItem(preventFlag, type, i, op, prevType)
     );
-    deleteButton.addEventListener("click", (e) =>
-      onClickDelete(e, data === "" || !is_json_check, type, i)
-    );
+    if (op === -1) {
+      deleteButton.addEventListener("click", (e) =>
+        onClickDelete(e, preventFlag, type, i)
+      );
+      copyButton.addEventListener("click", (e) =>
+        onClickCopy(e, preventFlag, type, i)
+      );
+      reorderButton.addEventListener("click", (e) =>
+        onClickReplace(e, preventFlag, type, i)
+      );
+    }
   }
 
+  closeButton.removeEventListener("click", closeGameDataScreen); // openGameDataScreenを多用するのでcloseGameDataScreenが多重しないために必要
   closeButton.addEventListener("click", closeGameDataScreen);
   document.getElementById("game-data-screen").classList.remove("none");
 };
@@ -121,46 +179,84 @@ export const closeGameDataScreen = () => {
 };
 
 /**
- * セーブしますか？「はい」
- * @param {"save" | "load"} type
+ * セーブ | ロード | コピー しますか？「はい」
+ * @param {"save" | "load" | "copy" | "replace"} type
  * @param {number} no
+ * @param {number} op
+ * @param {"save" | "load"} prevType
  */
-const dataConformYes = async (type, no) => {
-  if (type === "save") {
-    await saveData("data-" + no, JSON.stringify(gameData));
-    closeConfirm();
-    openGameDataScreen("save");
-  }
-  if (type === "load") {
-    console.log(await loadData("data-" + no));
-    const data = JSON.parse(await loadData("data-" + no));
-    Object.keys(gameData).forEach((key) => {
-      if (key === "nowPart") {
-        gameData[key] = data["prevPart"];
-      } else {
-        gameData[key] = data[key];
-      }
-    });
-    await toDarking(async (e) => {
+const dataConformYes = async (type, no, op, prevType) => {
+  switch (type) {
+    case "save":
+      await saveData("data-" + no, JSON.stringify(gameData));
       closeConfirm();
-      closeGameDataScreen();
-      await CreateMap(gameData);
-      ScenarioPlayer.screenReset();
-    }, gameData);
+      openGameDataScreen("save");
+      break;
+    case "load":
+      const data = JSON.parse(await loadData("data-" + no));
+      Object.keys(gameData).forEach((key) => {
+        if (key === "nowPart") {
+          gameData[key] = data["prevPart"];
+        } else {
+          gameData[key] = data[key];
+        }
+      });
+      await toDarking(async (e) => {
+        closeConfirm();
+        closeGameDataScreen();
+        await CreateMap(gameData);
+        ScenarioPlayer.screenReset();
+      }, gameData);
+      break;
+    case "copy":
+      // コピー
+      await copyData("data-" + op, "data-" + no);
+      closeConfirm();
+      openGameDataScreen(prevType);
+
+      break;
+    case "replace":
+      // 入れ替え
+      await replaceData("data-" + op, "data-" + no);
+      closeConfirm();
+      openGameDataScreen(prevType);
+
+      break;
+
+    default:
+      break;
   }
 };
 
 /**
  *  アイテムをクリックした時（セーブ・ロードの確認）
  * @param {boolean} preventFlag
- * @param {"save" | "load"} type
+ * @param {"save" | "load" | "copy" | "replace"} type
  * @param {number} i
+ * @param {number} op
+ * @param {"save" | "load"} prevType
  */
-const onClickItem = (preventFlag, type, i) => {
+const onClickItem = (preventFlag, type, i, op, prevType) => {
   if (preventFlag && type === "load") return;
-  openConfirm(`${type === "load" ? "ロード" : "セーブ"}しますか？`);
+  openConfirm(
+    `${(() => {
+      switch (type) {
+        case "save":
+          return "セーブし";
+        case "load":
+          return "ロードし";
+        case "copy":
+          return `データ${op}をデータ${i}にコピーし`;
+        case "replace":
+          return `データ${op}をデータ${i}に入れ替え`;
+
+        default:
+          return "";
+      }
+    })()}ますか？`
+  );
   const execYes = () => {
-    dataConformYes(type, i);
+    dataConformYes(type, i, op, prevType);
     removeEvent();
   };
   const execNo = () => {
@@ -187,7 +283,7 @@ const onClickDelete = (e, preventFlag, type, i) => {
   e.stopPropagation(); // この順番でいい
   openConfirm(`データ${i}を削除しますか？`);
   const execYes = async () => {
-    await removeData("data-" + i);
+    await deleteData("data-" + i);
     closeConfirm();
     openGameDataScreen(type);
     removeEvent();
@@ -202,6 +298,52 @@ const onClickDelete = (e, preventFlag, type, i) => {
   };
   yesButton.addEventListener("click", execYes);
   noButton.addEventListener("click", execNo);
+};
+
+/**
+ * コピーボタン押した時
+ * @param {Event} e
+ * @param {boolean} preventFlag
+ * @param {"save" | "load" | "copy" | "move"} type
+ * @param {number} i
+ */
+const onClickCopy = (e, preventFlag, type, i) => {
+  if (preventFlag) return;
+  e.stopPropagation(); // この順番でいい
+
+  openGameDataScreen("copy", i, type);
+
+  // ここで戻るボタンのイベント変更
+  const toPrev = () => {
+    openGameDataScreen(type);
+    closeButton.removeEventListener("click", toPrev);
+    closeButton.addEventListener("click", closeGameDataScreen);
+  };
+  closeButton.removeEventListener("click", closeGameDataScreen);
+  closeButton.addEventListener("click", toPrev);
+};
+
+/**
+ * 入れ替えボタン押した時
+ * @param {Event} e
+ * @param {boolean} preventFlag
+ * @param {"save" | "load" | "copy" | "replace"} type
+ * @param {number} i
+ */
+const onClickReplace = (e, preventFlag, type, i) => {
+  if (preventFlag) return;
+  e.stopPropagation(); // この順番でいい
+
+  openGameDataScreen("replace", i, type);
+
+  // ここで戻るボタンのイベント変更
+  const toPrev = () => {
+    openGameDataScreen(type);
+    closeButton.removeEventListener("click", toPrev);
+    closeButton.addEventListener("click", closeGameDataScreen);
+  };
+  closeButton.removeEventListener("click", closeGameDataScreen);
+  closeButton.addEventListener("click", toPrev);
 };
 
 /**
