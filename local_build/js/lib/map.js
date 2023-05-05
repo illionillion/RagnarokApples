@@ -193,6 +193,9 @@ export async function CreateMap(gameState) {
   document.querySelector("#date > p").innerHTML = mapData
     ? mapData["day"]
     : "0日目";
+  document.querySelector("#mapTextDate").innerHTML = mapData
+    ? mapData["day"]
+    : "0日目";
 
   if (!mapData) alert("ゲーム終了");
 }
