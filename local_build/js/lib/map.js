@@ -183,17 +183,18 @@ export async function CreateMap(gameState) {
     })()
   );
 
-  const mapImg = document.getElementById("mapBackground");
-  const imgSrc = mapData
-    ? `images/background/${mapData["backgroundImage"]}`
-    : "images/background/map.png";
+  // const mapImg = document.getElementById("mapBackground");
+  // const imgSrc = mapData
+  //   ? `images/background/${mapData["backgroundImage"]}`
+  //   : "images/background/map.png";
+  // const imgSrc = "images/map-screen/map2_background.png";
   // console.log(imgSrc);
-  mapImg.setAttribute("src", imgSrc);
+  // mapImg.setAttribute("src", imgSrc);
   // 日付
-  document.querySelector("#date > p").innerHTML = mapData
+  document.querySelector("#map2TextDate").innerHTML = mapData
     ? mapData["day"]
     : "0日目";
-  document.querySelector("#mapTextDate").innerHTML = mapData
+  document.querySelector("#map1TextDate").innerHTML = mapData
     ? mapData["day"]
     : "0日目";
 
