@@ -50,9 +50,52 @@
   height: 100%;
 }
 
+/* 医務室 */
+#medical-room {
+  width: 15%;
+  top: 36%;
+  left: 23.9%;
+}
+/* 仮想訓練室 */
+#virtual-training-room {
+  width: 10.2%;
+  top: 29%;
+  right: 16.7%;
+}
+/* 開発実験室 */
+#development-laboratory {
+  width: 19%;
+  top: 46%;
+  left: 1%;
+}
+/* 格納庫 */
+#hangar {
+  width: 30.2%;
+  top: 7.4%;
+  left: 7.2%;
+}
+/* 基地正門 */
+#base-main-gate {
+  width: 11%;
+  bottom: 2.5%;
+  left: 48%;
+}
+/* 作戦会議室 */
+#conference-room {
+  width: 9.7%;
+  top: 40.2%;
+  right: 28.8%;
+}
+/* 司令室 */
+#control-room {
+  width: 12%;
+  top: 49.5%;
+  right: 43.6%;
+}
+
 .map-touch {
   position: absolute;
-  background-color: rgba(0, 0, 0, 0.699);
+  /* background-color: rgba(0, 0, 0, 0.699); */
   animation: flash 4.5s linear infinite;
 }
 .map-touch img {

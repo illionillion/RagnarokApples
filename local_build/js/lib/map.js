@@ -134,8 +134,8 @@ export async function CreateMap(gameState) {
     }
   }
   // DOMにappend
-  document.getElementById("mapItems").innerHTML = "";
-  document.getElementById("mapItems").appendChild(eleFragment);
+  // document.getElementById("mapItems").innerHTML = ""; // 一時的にコメントアウト
+  // document.getElementById("mapItems").appendChild(eleFragment);
 
   // 立ち絵変更
   const mapTextCharacter = document.querySelector("#mapTextCharacter img");
