@@ -79,6 +79,15 @@
   width: 11%;
   bottom: 2.5%;
   left: 48%;
+  position: absolute;
+}
+#base-main-gate p{
+  display: none;
+  position: absolute;
+  bottom: 0%;
+}
+#base-main-gate map:hover + p{
+  display: block;
 }
 /* 作戦会議室 */
 #conference-room {
