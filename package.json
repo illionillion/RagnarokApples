@@ -52,6 +52,7 @@
     }
   },
   "dependencies": {
-    "dotenv": "^9.0.2"
+    "dotenv": "^9.0.2",
+    "image-map-resizer": "^1.0.10"
   }
 }

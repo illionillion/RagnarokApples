@@ -84,7 +84,7 @@
 #base-main-gate p{
   display: none;
   position: absolute;
-  bottom: 0%;
+  bottom: -30%;
 }
 #base-main-gate map:hover + p{
   display: block;
