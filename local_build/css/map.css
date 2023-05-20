@@ -81,12 +81,12 @@
   left: 48%;
   position: absolute;
 }
-#base-main-gate p{
+.map-touch p{
   display: none;
   position: absolute;
   bottom: -30%;
 }
-#base-main-gate map:hover + p{
+.map-touch map:hover + p{
   display: block;
 }
 /* 作戦会議室 */
