@@ -29,6 +29,7 @@ import toDarking from "./lib/toDarking.js";
     });
 
     FrameSizing();
+    window?.myAPI?.imageMapResize() //イメージマップのリサイズ
 
     initGameData(gameState);
     closeGameDataScreen();
