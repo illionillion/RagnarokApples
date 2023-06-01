@@ -47,12 +47,13 @@ export async function CreateMap(gameState) {
   for (const itemId in mapItems) {
     if (Object.hasOwnProperty.call(mapItems, itemId)) {
       const item = mapItems[itemId];
+      // 要素を作成するのではなくjsonから取得したIDの.map-touch要素を探して取得
       const itemEle = document.createElement("div");
       itemEle.id = itemId;
       itemEle.className = "map-touch";
       itemEle.dataset.place = item.place;
-      const imgEle = document.createElement("img");
-      imgEle.src = `images/mapicon/${item["iconImage"]}`;
+      const imgEle = document.createElement("img"); // 元々あるやつを取得するのでいらん
+      imgEle.src = `images/mapicon/${item["iconImage"]}`; // これもいらん
       itemEle.appendChild(imgEle);
 
       // アイコンタッチ時のイベント付与
@@ -120,14 +121,14 @@ export async function CreateMap(gameState) {
         noBtn.addEventListener("click", selectEve, false);
       });
 
-      // スタイル付与
-      const styles = item.style;
-      for (const prop in styles) {
-        if (Object.hasOwnProperty.call(styles, prop)) {
-          const val = styles[prop];
-          itemEle.style[prop] = val;
-        }
-      }
+      // スタイル付与 // ここがいらなくなる
+      // const styles = item.style;
+      // for (const prop in styles) {
+      //   if (Object.hasOwnProperty.call(styles, prop)) {
+      //     const val = styles[prop];
+      //     itemEle.style[prop] = val;
+      //   }
+      // }
 
       // フラグメントにappend
       eleFragment.appendChild(itemEle);
