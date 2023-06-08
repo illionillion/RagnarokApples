@@ -1,7 +1,7 @@
 const { contextBridge, ipcRenderer, app } = require("electron");
 const resize = require("image-map-resizer");
 // const { writeJson } = require('./writeFile');
-console.log('resize', resize);
+// console.log('resize', resize);
 
 require("dotenv").config({ path: __dirname + "/../.env" }); // .env読み込み
 

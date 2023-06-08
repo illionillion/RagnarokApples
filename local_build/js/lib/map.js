@@ -38,25 +38,26 @@ export async function CreateMap(gameState) {
 
   // マップアイテムの生成
   gameState.eventState = "map";
-  const eleFragment = document.createDocumentFragment();
   const mapData = mapItemsJson[gameState.nowPart];
   // シナリオ格納
   const mapItems = mapData && mapData["items"];
-  // console.log(gameState.nowPart);
-  // console.log(mapItems);
+
+  document
+    .querySelectorAll(".map-touch")
+    .forEach((ele) => ele.classList.add("none"));
+
   for (const itemId in mapItems) {
     if (Object.hasOwnProperty.call(mapItems, itemId)) {
       const item = mapItems[itemId];
-      const itemEle = document.createElement("div");
-      itemEle.id = itemId;
-      itemEle.className = "map-touch";
-      itemEle.dataset.place = item.place;
-      const imgEle = document.createElement("img");
-      imgEle.src = `images/mapicon/${item["iconImage"]}`;
-      itemEle.appendChild(imgEle);
+      // 要素を作成するのではなくjsonから取得したIDの.map-touch要素を探して取得
+      const itemEle = document.querySelector(
+        `.map-touch[data-place=${item.place}]`
+      );
+      itemEle.classList.remove("none");
+      const itemButton = itemEle.querySelector(".map-title-button");
 
       // アイコンタッチ時のイベント付与
-      imgEle.addEventListener("click", (e) => {
+      itemButton.addEventListener("click", (e) => {
         const float = document.getElementById("mapWrapper");
         float.classList.remove("none");
         const pname = document.getElementById("placeName");
@@ -119,23 +120,8 @@ export async function CreateMap(gameState) {
         yesBtn.addEventListener("click", selectEve, false);
         noBtn.addEventListener("click", selectEve, false);
       });
-
-      // スタイル付与
-      const styles = item.style;
-      for (const prop in styles) {
-        if (Object.hasOwnProperty.call(styles, prop)) {
-          const val = styles[prop];
-          itemEle.style[prop] = val;
-        }
-      }
-
-      // フラグメントにappend
-      eleFragment.appendChild(itemEle);
     }
   }
-  // DOMにappend
-  // document.getElementById("mapItems").innerHTML = ""; // 一時的にコメントアウト
-  // document.getElementById("mapItems").appendChild(eleFragment);
 
   // 立ち絵変更
   const mapTextCharacter = document.querySelector("#mapTextCharacter img");

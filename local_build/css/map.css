@@ -50,17 +50,59 @@
   height: 100%;
 }
 
+.map-touch .map-title-button{
+  position: absolute;
+  background-image: url(../images/map-screen/map2-button-normal.png);
+  background-size: cover;
+  color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  font-size: 2vw;
+}
+.map-touch img{
+  visibility: hidden;
+}
+.map-touch .map-title-button:hover + img{
+  visibility: visible;
+}
+.map-touch .map-title-button:hover{
+  background-image: url(../images/map-screen/map2-button-hover.png);
+}
+.map-touch p{
+  display: none;
+  position: absolute;
+  bottom: -30%;
+}
+.map-touch map:hover + p{
+  display: block;
+}
+
+
 /* 医務室 */
 #medical-room {
   width: 15%;
   top: 36%;
   left: 23.9%;
 }
+#medical-room .map-title-button{
+  width: 165%;
+  height: 30%;
+  bottom: -8%;
+  right: 62%;
+}
 /* 仮想訓練室 */
 #virtual-training-room {
   width: 10.2%;
   top: 29%;
   right: 16.7%;
+}
+#virtual-training-room .map-title-button{
+  width: 236%;
+  height: 22%;
+  top: -26%;
+  left: -69%;
 }
 /* 開発実験室 */
 #development-laboratory {
@@ -81,14 +123,6 @@
   left: 48%;
   position: absolute;
 }
-#base-main-gate p{
-  display: none;
-  position: absolute;
-  bottom: -30%;
-}
-#base-main-gate map:hover + p{
-  display: block;
-}
 /* 作戦会議室 */
 #conference-room {
   width: 9.7%;
@@ -104,11 +138,10 @@
 
 .map-touch {
   position: absolute;
-  /* background-color: rgba(0, 0, 0, 0.699); */
-  animation: flash 4.5s linear infinite;
 }
 .map-touch img {
   width: 100%;
+  animation: flash 4.5s linear infinite;
 }
 /* 点滅アニメーション */
 @keyframes flash {
@@ -124,7 +157,6 @@
 
 #mapSelectFloat {
   position: absolute;
-  /* position: relative; */
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -176,7 +208,6 @@
   transform: translate(-50%, 5%);
   border: 1px solid #000;
   width: 90%;
-  /* height: 40%; */
 }
 
 #mapCharacterList ul {
@@ -205,11 +236,11 @@
   left: 0%;
   width: 100%;
   height: 100%;
-  /* display: flex; */
   background-color: rgba(0, 0, 0, 0.4);
   font-family: "Noto Serif JP", serif;
   background-image: url(../images/map-screen/map1_background.png);
   background-size: cover;
+  z-index: 1;
 }
 
 #mapTextCover::before {
