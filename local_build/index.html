@@ -30,9 +30,9 @@
                   <div class="game-data-name"></div>
                   <div class="game-data-content"></div>
                   <div class="game-data-buttons">
-                    <div class="game-data-copy"></div>
-                    <div class="game-data-reorder"></div>
-                    <div class="game-data-delete"></div>
+                    <div class="game-data-button copy"></div>
+                    <div class="game-data-button reorder"></div>
+                    <div class="game-data-button delete"></div>
                   </div>
                 </li>
               </template>
@@ -176,20 +176,72 @@
                 </div>
               </div>
             </div>
-            <div id="date">
+            <div id="date" class="none">
               <p></p>
             </div>
-            <img id="mapBackground" src="map.png" alt="" srcset="" />
+            <div id="map2TextDate"></div>
+            <img id="mapBackground" src="./images/map-screen/map2_background.png" alt="" srcset="" />
             <div id="mapItems">
               <!-- マップアイテム一覧 -->
+              <div id="medical-room" class="map-touch" data-place="医務室">
+                <div class="map-title-button">医務室</div>
+                <img src="images/map-screen/medical-room.png" usemap="#medical-room-map">
+                <map name="medical-room-map">
+                  <area target="" alt="" title="" href="#" coords="42,104,39,129,0,158,12,378,275,435,402,326,402,298,397,294,390,14,271,0,140,73,116,68" shape="poly">
+                </map>
+              </div>
+              <div id="virtual-training-room" class="map-touch" data-place="仮想訓練室">
+                <div class="map-title-button">仮想訓練室</div>
+                <img src="images/map-screen/virtual-training-room.png" usemap="#virtual-training-room-map">
+                <map name="virtual-training-room-map">
+                  <area target="" alt="" title="" href="#" coords="65,42,2,600,214,607,271,60,266,53,265,14,170,0,163,48" shape="poly">
+                </map>
+              </div>
+              <div id="development-laboratory" class="map-touch" data-place="開発実験室">
+                <div class="map-title-button">開発実験室</div>
+                <img src="images/map-screen/development-laboratory.png" usemap="#development-laboratory-map">
+                <map name="development-laboratory-map">
+                  <area target="" alt="" title="" href="#" coords="221,1,0,103,279,135,473,25" shape="poly">
+                </map>
+              </div>
+              <div id="hangar" class="map-touch" data-place="格納庫">
+                <div class="map-title-button">格納庫</div>
+                <img src="images/map-screen/hangar.png" usemap="#hangar-map">
+                <map name="hangar-map">
+                  <area target="" alt="" title="" href="#" coords="-1,98,4,176,12,185,35,191,49,191,65,192,82,189,106,197,124,199,138,201,151,200,168,195,183,203,196,210,210,211,222,211,235,207,247,201,256,195,361,196,362,208,409,221,508,220,509,198,645,155,764,166,803,149,803,70,796,54,786,46,774,35,759,26,741,21,719,15,690,12,652,15,595,27,568,34,543,41,487,56,476,43,470,34,455,22,439,13,422,5,387,1,344,1,327,0,259,13,168,30,131,40,94,58,84,67,84,101,77,103,75,115,68,115,66,100,62,93,21,88" shape="poly">
+                </map>
+              </div>
+              <div id="base-main-gate" class="map-touch" data-place="基地正門">
+                <div class="map-title-button">基地正門</div>
+                <img src="images/map-screen/base-main-gate.png" usemap="#base-main-gate-map">
+                <map name="base-main-gate-map">
+                  <area target="" alt="" title="" href="#" coords="56,0,281,34,279,101,229,177,3,131,1,69" shape="poly">
+                </map>
+              </div>
+              <div id="conference-room" class="map-touch" data-place="作戦会議室">
+                <div class="map-title-button">作戦会議室</div>
+                <img src="images/map-screen/conference-room.png" usemap="#conference-room-map">
+                <map name="conference-room-map">
+                  <area target="" alt="" title="" href="#" coords="85,0,17,104,-1,422,192,443,233,310,259,17" shape="poly">
+                </map>
+              </div>
+              <div id="control-room" class="map-touch" data-place="司令室">
+                <div class="map-title-button">司令室</div>
+                <img src="images/map-screen/control-room.png" usemap="#control-room-map">
+                <map name="control-room-map">
+                  <area target="" alt="" title="" href="#" coords="87,1,59,32,52,29,1,81,3,205,48,215,46,232,52,238,183,259,196,243,267,252,310,186,315,61,282,58,282,44,260,35,261,22,229,17,223,5,213,4,203,6,194,10" shape="poly">
+                </map>
+              </div>
             </div>
             <div id="mapTextCover">
               <div id="mapTextCharacter">
-                <img src="images/character/bengal.png" alt="" srcset="" />
+                <img src="images/character/testpicture_tau.png" alt="" srcset="" />
               </div>
+              <div id="map1TextDate"></div>
               <div id="speechBubble">
                 <p class="textarea"></p>
               </div>
+              <div id="mapClickText"></div>
             </div>
             <div id="mapTextFloat" class="op0">
               <div id="mapTextIcon">
@@ -199,7 +251,7 @@
                 <p class="textarea"></p>
               </div>
             </div>
-            <div id="FloatCheck" class="op0"><p>ON</p></div>
+            <div id="FloatCheck" class="op0 none"><p>ON</p></div>
           </section>
         </div>
       </div>
