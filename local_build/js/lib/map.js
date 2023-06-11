@@ -60,9 +60,9 @@ export async function CreateMap(gameState) {
       itemButton.addEventListener("click", (e) => {
         const float = document.getElementById("mapWrapper");
         float.classList.remove("none");
-        const pname = document.getElementById("placeName");
-        const placeName = e.target.parentElement.dataset.place;
-        pname.innerHTML = placeName;
+        // const pname = document.getElementById("placeName");
+        // const placeName = e.target.parentElement.dataset.place;
+        // pname.innerHTML = placeName;
 
         // 登場キャラアイコン変更
         const mapCharacterListImgs = document.querySelectorAll(
