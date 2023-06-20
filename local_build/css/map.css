@@ -168,23 +168,30 @@
   background-size: cover;
 }
 
-#placeName {
+.placeName {
   position: absolute;
-  /* top: 5%;
-  left: 50%; */
-  top: 15%;
-  left: 19%;
-  transform: translate(-50%, -10%);
-  /* width: 80%;
-  height: 20%; */
-  width: 30%;
-  height: 50%;
   color: #000;
   text-align: center;
   font-size: 2vw;
 }
 
-#placeName img {
+.placeName[data-place="医務室"] {
+  top: 15%;
+  left: 19%;
+  transform: translate(-50%, -10%);
+  width: 30%;
+  height: 50%;
+}
+
+.placeName[data-place="仮想訓練室"] {
+  top: 15%;
+  left: 25%;
+  transform: translate(-50%, -10%);
+  width: 40%;
+  height: 50%;
+}
+
+.placeName img {
   width: 100%;
   height: 100%;
 }

@@ -45,6 +45,9 @@ export async function CreateMap(gameState) {
   document
     .querySelectorAll(".map-touch")
     .forEach((ele) => ele.classList.add("none"));
+  document
+    .querySelectorAll(".placeName")
+    .forEach((ele) => ele.classList.add("none"));
 
   for (const itemId in mapItems) {
     if (Object.hasOwnProperty.call(mapItems, itemId)) {
@@ -60,6 +63,7 @@ export async function CreateMap(gameState) {
       itemButton.addEventListener("click", (e) => {
         const float = document.getElementById("mapWrapper");
         float.classList.remove("none");
+        document.querySelector(`.placeName[data-place="${item.place}"]`).classList.remove('none')
         // const pname = document.getElementById("placeName");
         // const placeName = e.target.parentElement.dataset.place;
         // pname.innerHTML = placeName;
