@@ -38,7 +38,8 @@
   left: 0%;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.582);
+  background-image: url(../images/map-screen/map3-background.png);
+  background-size: cover;
   z-index: 2;
 }
 
@@ -50,7 +51,7 @@
   height: 100%;
 }
 
-.map-touch .map-title-button{
+.map-touch .map-title-button {
   position: absolute;
   background-image: url(../images/map-screen/map2-button-normal.png);
   background-size: cover;
@@ -61,24 +62,23 @@
   z-index: 1;
   font-size: 2vw;
 }
-.map-touch img{
+.map-touch img {
   visibility: hidden;
 }
-.map-touch .map-title-button:hover + img{
+.map-touch .map-title-button:hover + img {
   visibility: visible;
 }
-.map-touch .map-title-button:hover{
+.map-touch .map-title-button:hover {
   background-image: url(../images/map-screen/map2-button-hover.png);
 }
-.map-touch p{
+.map-touch p {
   display: none;
   position: absolute;
   bottom: -30%;
 }
-.map-touch map:hover + p{
+.map-touch map:hover + p {
   display: block;
 }
-
 
 /* 医務室 */
 #medical-room {
@@ -86,7 +86,7 @@
   top: 36%;
   left: 23.9%;
 }
-#medical-room .map-title-button{
+#medical-room .map-title-button {
   width: 165%;
   height: 30%;
   bottom: -8%;
@@ -98,7 +98,7 @@
   top: 29%;
   right: 16.7%;
 }
-#virtual-training-room .map-title-button{
+#virtual-training-room .map-title-button {
   width: 236%;
   height: 22%;
   top: -26%;
@@ -161,53 +161,77 @@
   top: 50%;
   transform: translate(-50%, -50%);
   z-index: 3;
-  width: 60%;
-  height: 50%;
-  background-color: rgba(255, 255, 255, 1);
+  width: 100%;
+  height: 69%;
   font-family: "Noto Serif JP", serif;
+  background-image: url(../images/map-screen/map3-float.png);
+  background-size: cover;
 }
 
-#placeName {
+.placeName {
   position: absolute;
-  top: 5%;
-  left: 50%;
-  transform: translate(-50%, -10%);
-  width: 80%;
-  height: 20%;
   color: #000;
   text-align: center;
   font-size: 2vw;
 }
 
+.placeName[data-place="医務室"] {
+  top: 15%;
+  left: 19%;
+  transform: translate(-50%, -10%);
+  width: 30%;
+  height: 50%;
+}
+
+.placeName[data-place="仮想訓練室"] {
+  top: 15%;
+  left: 25%;
+  transform: translate(-50%, -10%);
+  width: 40%;
+  height: 50%;
+}
+
+.placeName img {
+  width: 100%;
+  height: 100%;
+}
+
 #mapSelectButton {
   position: absolute;
-  left: 50%;
-  top: 40%;
+  left: 33%;
+  top: 68%;
   transform: translate(-50%, -40%);
-  width: 100%;
+  width: 40%;
   height: 35%;
+  justify-content: center;
   display: flex;
+  align-items: center;
 }
 
 #mapSelectButton div {
-  width: 40%;
-  height: 50%;
-  color: #000;
-  background-color: yellow;
-  border-radius: 25px;
+  width: 31%;
+  height: 20%;
+  color: #fff;
   text-align: center;
-  margin: 10px auto;
-  margin-top: 0;
   font-size: 1.2vw;
+  padding-left: 4%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#mapSelectButton div:hover {
+  background-image: url(../images/map-screen/cursor.png);
+  background-size: cover;
 }
 
 #mapCharacterList {
   position: absolute;
-  left: 50%;
-  bottom: 5%;
+  left: 36%;
+  bottom: 37%;
   transform: translate(-50%, 5%);
-  border: 1px solid #000;
-  width: 90%;
+  /* border: 1px solid #000; */
+  width: 30%;
 }
 
 #mapCharacterList ul {
@@ -215,15 +239,18 @@
   padding-left: 0;
   list-style-type: none;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5%;
 }
 
 #mapCharacterList ul li {
-  background-color: #000;
   width: 20%;
   height: 20%;
-  margin: 0px auto;
-  border-radius: 50%;
-  overflow: hidden;
+  /* background-color: #000; */
+  /* margin: 0px auto; */
+  /* border-radius: 50%; */
+  /* overflow: hidden; */
 }
 #mapCharacterList ul li img {
   width: 100%;
