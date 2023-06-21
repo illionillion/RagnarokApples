@@ -45,9 +45,6 @@ export async function CreateMap(gameState) {
   document
     .querySelectorAll(".map-touch")
     .forEach((ele) => ele.classList.add("none"));
-  document
-    .querySelectorAll(".placeName")
-    .forEach((ele) => ele.classList.add("none"));
 
   for (const itemId in mapItems) {
     if (Object.hasOwnProperty.call(mapItems, itemId)) {
@@ -63,10 +60,12 @@ export async function CreateMap(gameState) {
       itemButton.addEventListener("click", (e) => {
         const float = document.getElementById("mapWrapper");
         float.classList.remove("none");
-        document.querySelector(`.placeName[data-place="${item.place}"]`).classList.remove('none')
-        // const pname = document.getElementById("placeName");
-        // const placeName = e.target.parentElement.dataset.place;
-        // pname.innerHTML = placeName;
+        document
+          .querySelectorAll(".placeName")
+          .forEach((ele) => ele.classList.add("none"));
+        document
+          .querySelector(`.placeName[data-place="${item.place}"]`)
+          .classList.remove("none");
 
         // 登場キャラアイコン変更
         const mapCharacterListImgs = document.querySelectorAll(
@@ -75,7 +74,9 @@ export async function CreateMap(gameState) {
         for (const i in mapCharacterListImgs) {
           if (Object.hasOwnProperty.call(mapCharacterListImgs, i)) {
             const ele = mapCharacterListImgs[i];
-            if (["app.png", "tau-sample.jpg"].includes(item["characterIcons"][i])) {
+            if (
+              ["app.png", "tau-sample.jpg"].includes(item["characterIcons"][i])
+            ) {
               ele.src = `images/map-screen/map3-default-icon.png`;
             } else {
               ele.src = `images/character/icon/${item["characterIcons"][i]}`;
