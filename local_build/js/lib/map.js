@@ -56,8 +56,7 @@ export async function CreateMap(gameState) {
       itemEle.classList.remove("none");
       const itemButton = itemEle.querySelector(".map-title-button");
 
-      // アイコンタッチ時のイベント付与
-      itemButton.addEventListener("click", (e) => {
+      const touchEvent = () => {
         const float = document.getElementById("mapWrapper");
         float.classList.remove("none");
         document
@@ -103,6 +102,8 @@ export async function CreateMap(gameState) {
           if (e.target === yesBtn) {
             // yesが押された
 
+            itemButton.removeEventListener("click", touchEvent);
+
             // 暗転
             await toDarking((e) => {
               // シナリオ画面へ遷移
@@ -111,12 +112,10 @@ export async function CreateMap(gameState) {
 
               console.log(TextData[partKey]); //選択されたシナリオ
 
-              gameState.textEventId++;
               gameState.prevPart = gameState.nowPart;
               gameState.nowPart = partKey;
               gameState.nowDate = mapData["day"];
               gameState.nowPlace = item.place;
-              // gameState.TextPlayer =
               new ScenarioPlayer(
                 TextData[partKey],
                 TextAudio[partKey],
@@ -128,7 +127,10 @@ export async function CreateMap(gameState) {
 
         yesBtn.addEventListener("click", selectEve, false);
         noBtn.addEventListener("click", selectEve, false);
-      });
+      };
+
+      // アイコンタッチ時のイベント付与
+      itemButton.addEventListener("click", touchEvent);
     }
   }
 
