@@ -110,6 +110,12 @@
   top: 46%;
   left: 1%;
 }
+#development-laboratory .map-title-button {
+  width: 165%;
+  height: 30%;
+  bottom: -8%;
+  right: 62%;
+}
 /* 格納庫 */
 #hangar {
   width: 30.2%;
