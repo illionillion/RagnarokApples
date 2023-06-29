@@ -4,8 +4,6 @@
   position: absolute;
   width: 10%;
   height: 6%;
-  /* top: 15px;
-    left: 20px; */
   top: 5%;
   left: 2%;
   background-color: rgba(0, 0, 0, 0.582);
@@ -247,10 +245,6 @@
 #mapCharacterList ul li {
   width: 20%;
   height: 20%;
-  /* background-color: #000; */
-  /* margin: 0px auto; */
-  /* border-radius: 50%; */
-  /* overflow: hidden; */
 }
 #mapCharacterList ul li img {
   width: 100%;
@@ -410,15 +404,24 @@
 }
 #FloatCheck {
   position: absolute;
-  /* top: 15%;
-    right: 20%; */
   top: 5%;
   right: 2%;
   width: 10%;
   height: 6%;
-  /* line-height: 50px; */
   background-color: rgba(0, 0, 0, 0.4);
   text-align: center;
-  /* font-size: 1.2rem; */
   z-index: 2;
+}
+
+#map-menu-btn {
+  position: absolute;
+  bottom: 3%;
+  right: 2%;
+  background-color: #47230ac4;
+  width: 19%;
+  height: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
 }
