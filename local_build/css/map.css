@@ -24,6 +24,7 @@
   width: 100%;
   height: 100%;
 }
+
 #mapScreen {
   position: absolute;
   top: 0%;
@@ -62,21 +63,26 @@
   z-index: 1;
   font-size: 2vw;
 }
+
 .map-touch img {
   visibility: hidden;
 }
-.map-touch .map-title-button:hover + img {
+
+.map-touch .map-title-button:hover+img {
   visibility: visible;
 }
+
 .map-touch .map-title-button:hover {
   background-image: url(../images/map-screen/map2-button-hover.png);
 }
+
 .map-touch p {
   display: none;
   position: absolute;
   bottom: -30%;
 }
-.map-touch map:hover + p {
+
+.map-touch map:hover+p {
   display: block;
 }
 
@@ -86,42 +92,56 @@
   top: 36%;
   left: 23.9%;
 }
+
 #medical-room .map-title-button {
-  width: 165%;
-  height: 30%;
-  bottom: -8%;
-  right: 62%;
+  width: 135%;
+  height: 25%;
+  bottom: -3%;
+  right: 60%;
 }
+
 /* 仮想訓練室 */
 #virtual-training-room {
   width: 10.2%;
   top: 29%;
   right: 16.7%;
 }
+
 #virtual-training-room .map-title-button {
-  width: 236%;
-  height: 22%;
-  top: -26%;
-  left: -69%;
+  width: 215%;
+  height: 19%;
+  top: -18%;
+  left: -25%;
 }
+
 /* 開発実験室 */
 #development-laboratory {
   width: 19%;
   top: 46%;
   left: 1%;
 }
+
 #development-laboratory .map-title-button {
-  width: 165%;
-  height: 30%;
-  bottom: -8%;
-  right: 62%;
+  width: 111%;
+  height: 64%;
+  bottom: 165%;
+  right: -61%;
 }
+
 /* 格納庫 */
 #hangar {
   width: 30.2%;
   top: 7.4%;
   left: 7.2%;
 }
+
+#hangar .map-title-button {
+  width: 67%;
+  height: 42%;
+  bottom: 47%;
+  right: -76%;
+}
+
 /* 基地正門 */
 #base-main-gate {
   width: 11%;
@@ -129,12 +149,28 @@
   left: 48%;
   position: absolute;
 }
+
+#base-main-gate .map-title-button {
+  width: 186%;
+  height: 52%;
+  bottom: 47%;
+  right: -240%;
+}
+
 /* 作戦会議室 */
 #conference-room {
   width: 9.7%;
   top: 40.2%;
   right: 28.8%;
 }
+
+#conference-room .map-title-button {
+  width: 212%;
+  height: 24%;
+  bottom: -19%;
+  right: 81%;
+}
+
 /* 司令室 */
 #control-room {
   width: 12%;
@@ -142,15 +178,25 @@
   right: 43.6%;
 }
 
+#control-room .map-title-button {
+  width: 172%;
+  height: 38%;
+  bottom: 143%;
+  right: -41%;
+}
+
 .map-touch {
   position: absolute;
 }
+
 .map-touch img {
   width: 100%;
   animation: flash 4.5s linear infinite;
 }
+
 /* 点滅アニメーション */
 @keyframes flash {
+
   0%,
   100% {
     opacity: 1;
@@ -258,6 +304,7 @@
   /* border-radius: 50%; */
   /* overflow: hidden; */
 }
+
 #mapCharacterList ul li img {
   width: 100%;
   object-fit: cover;
@@ -302,6 +349,7 @@
   width: 100%;
   object-fit: cover;
 }
+
 #mapTextCharacter {
   /* flex: 1; */
   position: absolute;
@@ -339,6 +387,7 @@
   font-size: 1.5vw;
   padding-bottom: 5%;
 }
+
 #speechBubble {
   position: absolute;
   width: 32%;
@@ -375,6 +424,7 @@
   background-image: url(../images/map-screen/map2TextFloat.png);
   background-size: cover;
 }
+
 #mapTextFloat.op0 {
   z-index: -1;
 }
@@ -414,6 +464,7 @@
   width: 100%;
   font-size: 2vw;
 }
+
 #FloatCheck {
   position: absolute;
   /* top: 15%;
