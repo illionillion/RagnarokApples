@@ -4,8 +4,6 @@
   position: absolute;
   width: 10%;
   height: 6%;
-  /* top: 15px;
-    left: 20px; */
   top: 5%;
   left: 2%;
   background-color: rgba(0, 0, 0, 0.582);
@@ -243,6 +241,44 @@
   height: 50%;
 }
 
+.placeName[data-place="格納庫"] {
+  top: 15%;
+  left: 20%;
+  transform: translate(-50%, -10%);
+  width: 30%;
+  height: 50%;
+}
+
+.placeName[data-place="作戦会議室"] {
+  top: 15%;
+  left: 25%;
+  transform: translate(-50%, -10%);
+  width: 40%;
+  height: 50%;
+}
+
+.placeName[data-place="司令室"] {
+  top: 15%;
+  left: 20%;
+  transform: translate(-50%, -10%);
+  width: 30%;
+  height: 50%;
+}
+.placeName[data-place="開発実験室"] {
+  top: 15%;
+  left: 25%;
+  transform: translate(-50%, -10%);
+  width: 40%;
+  height: 50%;
+}
+.placeName[data-place="基地正門"] {
+  top: 15%;
+  left: 23%;
+  transform: translate(-50%, -10%);
+  width: 36%;
+  height: 50%;
+}
+
 .placeName img {
   width: 100%;
   height: 100%;
@@ -299,10 +335,6 @@
 #mapCharacterList ul li {
   width: 20%;
   height: 20%;
-  /* background-color: #000; */
-  /* margin: 0px auto; */
-  /* border-radius: 50%; */
-  /* overflow: hidden; */
 }
 
 #mapCharacterList ul li img {
@@ -467,15 +499,35 @@
 
 #FloatCheck {
   position: absolute;
-  /* top: 15%;
-    right: 20%; */
   top: 5%;
   right: 2%;
   width: 10%;
   height: 6%;
-  /* line-height: 50px; */
   background-color: rgba(0, 0, 0, 0.4);
   text-align: center;
-  /* font-size: 1.2rem; */
   z-index: 2;
+}
+
+#map-menu-btn {
+  position: absolute;
+  top: 12%;
+  right: 1%;
+  background-image: url(../images/conversation/MENU.png);
+  background-size: cover;
+  width: 6%;
+  height: 12%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+#map-menu-btn::after {
+  position: absolute;
+  content: 'menu';
+  top: 0%;
+  color: #000;
+  background-color: #d4d5d6ca;
+  padding: 0 12%;
+  border-radius: 25px;
 }
