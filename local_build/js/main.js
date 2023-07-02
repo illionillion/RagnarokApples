@@ -2,13 +2,12 @@
 import FrameSizing from "./lib/FrameSizing.js";
 import { closeGameDataScreen, initGameData } from "./lib/GameData.js";
 import { CreateMap } from "./lib/map.js";
+import { initMenu } from "./lib/menu.js";
 import toDarking from "./lib/toDarking.js";
 
 (function () {
   const gameState = {
     charName: "タウ",
-    textEventId: -1, // いらない
-    // nowPart: 'A0',
     nowPart: "init", // マップのinitを取得する
     prevPart: "",
     FloatCheck: true,
@@ -32,6 +31,7 @@ import toDarking from "./lib/toDarking.js";
     window?.myAPI?.imageMapResize() //イメージマップのリサイズ
 
     initGameData(gameState);
+    initMenu()
     closeGameDataScreen();
 
     // 伝搬チェック用

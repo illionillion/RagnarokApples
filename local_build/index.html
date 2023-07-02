@@ -127,41 +127,60 @@
                 <img src="./images/conversation/MENU.png" alt="" />
               </div>
             </div>
-            <div id="menu-frame" class="hide">
-              <div id="menu-screen">
-                <div id="menu-close-button">
-                  <img
-                    src="./images/conversation/close2.png"
-                    class="close2"
-                    alt=""
-                  />
-                  <!-- <img src="./images/conversation/close1.png" class="close1" alt=""> -->
-                </div>
-                <div class="menu-title">
-                  <span>MENU</span>
-                </div>
-                <hr class="menu-title-hr" />
-                <div class="contents"></div>
-              </div>
-              <div id="menu-list">
-                <ul>
-                  <li class="day" data-menubutton="day" data-day="0">○日め</li>
-                  <li class="place" data-menubutton="place" data-place="">
-                    場所
-                  </li>
-                  <li data-menubutton="save">SAVE</li>
-                  <li data-menubutton="load">LOAD</li>
-                  <li data-menubutton="log">LOG</li>
-                  <li class="title" data-menubutton="title">TITLE</li>
-                </ul>
-              </div>
-            </div>
           </section>
+          <div id="menu-frame" class="hide">
+            <div id="menu-screen">
+              <div id="menu-close-button">
+                <img
+                  src="./images/conversation/close2.png"
+                  class="close2"
+                  alt=""
+                />
+              </div>
+              <div class="menu-title">
+                <span>MENU</span>
+              </div>
+              <hr class="menu-title-hr" />
+              <div class="contents"></div>
+            </div>
+            <div id="menu-list">
+              <ul>
+                <li class="day" data-menubutton="day" data-day="0">○日め</li>
+                <li class="place" data-menubutton="place" data-place="">
+                  場所
+                </li>
+                <li data-menubutton="save">SAVE</li>
+                <li data-menubutton="load">LOAD</li>
+                <li data-menubutton="log">LOG</li>
+                <li class="title" data-menubutton="title">TITLE</li>
+              </ul>
+            </div>
+          </div>
           <section id="mapScreen">
             <div id="mapWrapper" class="none">
               <div id="mapSelectFloat">
                 <!-- マップアイテムクリック時の確認画面 -->
-                <p id="placeName">場所の名前</p>
+                <div class="placeName" data-place="医務室">
+                  <img src="./images/map-screen/medical-room-text.png" alt="医務室">
+                </div>
+                <div class="placeName" data-place="仮想訓練室">
+                  <img src="./images/map-screen/virtual-training-room-text.png" alt="仮想訓練室">
+                </div>
+                <div class="placeName" data-place="開発実験室">
+                  <img src="./images/map-screen/development-laboratory-text.png" alt="開発実験室">
+                </div>
+                <div class="placeName" data-place="格納庫">
+                  <img src="./images/map-screen/hangar-text.png" alt="格納庫">
+                </div>
+                <div class="placeName" data-place="基地正門">
+                  <img src="./images/map-screen/base-main-gate-text.png" alt="基地正門">
+                </div>
+                <div class="placeName" data-place="作戦会議室">
+                  <img src="./images/map-screen/conference-room-text.png" alt="作戦会議室">
+                </div>
+                <div class="placeName" data-place="司令室">
+                  <img src="./images/map-screen/control-room-text.png" alt="司令室">
+                </div>
                 <div id="mapSelectButton">
                   <div id="mapSelectYes">ここにする</div>
                   <div id="mapSelectNo">やめておく</div>
@@ -169,9 +188,9 @@
                 <div id="mapCharacterList">
                   <ul>
                     <!-- キャラ一覧 -->
-                    <li><img src="app.png" alt="" srcset="" /></li>
-                    <li><img src="app.png" alt="" srcset="" /></li>
-                    <li><img src="app.png" alt="" srcset="" /></li>
+                    <li><img src="images/map-screen/map3-default-icon.png" alt="" srcset="" /></li>
+                    <li><img src="images/map-screen/map3-default-icon.png" alt="" srcset="" /></li>
+                    <li><img src="images/map-screen/map3-default-icon.png" alt="" srcset="" /></li>
                   </ul>
                 </div>
               </div>
@@ -252,6 +271,7 @@
               </div>
             </div>
             <div id="FloatCheck" class="op0 none"><p>ON</p></div>
+            <div id="map-menu-btn"></div>
           </section>
         </div>
       </div>

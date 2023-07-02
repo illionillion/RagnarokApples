@@ -6,6 +6,7 @@ import {
   getCharacterPath,
 } from "./getAssetsPath.js";
 import { CreateMap } from "./map.js";
+import { closeMenuScreen, openMenuScreen } from "./menu.js";
 import timer from "./timer.js";
 import toDarking from "./toDarking.js";
 export default class ScenarioPlayer {
@@ -988,7 +989,8 @@ export default class ScenarioPlayer {
     // }
     ScenarioPlayer.menuFlag = true;
     // メニュー起動
-    document.getElementById("menu-frame").classList.remove("hide");
+    // document.getElementById("menu-frame").classList.remove("hide");
+    openMenuScreen()
     this.MenuOpenButton.classList.add("hide");
     if (this.movingFlag) {
       // ここでアニメーションを停止させたい
@@ -1063,7 +1065,8 @@ export default class ScenarioPlayer {
     ScenarioPlayer.menuFlag = false; // 反転
 
     // メニューclose
-    document.getElementById("menu-frame").classList.add("hide");
+    // document.getElementById("menu-frame").classList.add("hide");
+    // closeMenuScreen()
     this.MenuOpenButton.classList.remove("hide");
     // this.AnimationRestart()
   };
