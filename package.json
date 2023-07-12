@@ -6,7 +6,7 @@
   "main": "src/main.js",
   "scripts": {
     "start": "electron .",
-    "server": "http-server -o",
+    "server": "http-server -o ./prototype-web/",
     "build": "npm run build-mac;npm run build-win;npm run build-linux",
     "build-mac": "electron-builder --mac --x64",
     "build-win": "electron-builder --win --x64",
