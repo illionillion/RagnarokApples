@@ -1,0 +1,58 @@
+@charset "UTF-8";
+
+/* .keyboard-wrapper {
+    display: flex;
+} */
+
+.wrapper {
+    width: auto;
+    text-align: center;
+}
+
+.name-wrapper {
+    height: 30px;
+    max-width: 780px;
+    border: solid 2px rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    margin: auto;
+}
+
+#name {
+    display: inline;
+    letter-spacing: 0.8rem;
+    /* border-bottom: 1px dashed black; */
+    padding-bottom: 0.1rem;
+    background-image : linear-gradient(to right, #000, #000 18px, transparent 1px);  /* 幅2の線を作る */
+    background-size: 29px 1.6px;          /* グラデーションの幅・高さを指定 */
+    background-position: left bottom;  /* 背景の開始位置を指定 */
+    background-repeat: repeat-x;       /* 横向きにのみ繰り返す */
+}
+
+.keyboard-wrapper {
+    margin: 0 auto;
+}
+
+
+.keyboard-wrapper .keys input{
+    font-size: 16px;
+    height: 50px;
+    width: 50px;
+    margin: 2px;
+    border-color: rgb(197, 197, 197);
+}
+
+.keyboard-wrapper .keys .long-input {
+    width: 8%;
+}
+
+.hidden {
+    /* overflow: hidden; */
+    background-color: transparent;
+    opacity: 0;
+}
+
+/* ボタンが押された時 */
+.keyboard-wrapper .keys input:focus {
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.5),
+      inset -3px -3px 7px rgba(255, 255, 255, 0.05);
+  }
