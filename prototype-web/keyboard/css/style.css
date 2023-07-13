@@ -1,58 +1,68 @@
-@charset "UTF-8";
-
-/* .keyboard-wrapper {
-    display: flex;
-} */
-
-.wrapper {
-    width: auto;
-    text-align: center;
+* {
+  user-select: none !important;
+  -moz-user-select: none !important;
+  -webkit-user-select: none !important;
+}
+img {
+  -webkit-user-drag: none;
 }
 
-.name-wrapper {
-    height: 30px;
-    max-width: 780px;
-    border: solid 2px rgba(0, 0, 0, 0.5);
-    padding: 10px;
-    margin: auto;
+body {
+  margin: 0;
+  background-color: #000;
+}
+#frame {
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
 }
 
-#name {
-    display: inline;
-    letter-spacing: 0.8rem;
-    /* border-bottom: 1px dashed black; */
-    padding-bottom: 0.1rem;
-    background-image : linear-gradient(to right, #000, #000 18px, transparent 1px);  /* 幅2の線を作る */
-    background-size: 29px 1.6px;          /* グラデーションの幅・高さを指定 */
-    background-position: left bottom;  /* 背景の開始位置を指定 */
-    background-repeat: repeat-x;       /* 横向きにのみ繰り返す */
+#screen {
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  background-color: #000;
+  color: #fff;
+  position: relative;
 }
 
-.keyboard-wrapper {
-    margin: 0 auto;
+/* 暗転する */
+#darkening-floor {
+  position: absolute;
+  top: 0%;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  z-index: 3;
+  transition: 500ms;
+}
+#darkening-floor.op0 {
+  z-index: -1;
 }
 
-
-.keyboard-wrapper .keys input{
-    font-size: 16px;
-    height: 50px;
-    width: 50px;
-    margin: 2px;
-    border-color: rgb(197, 197, 197);
+/* 非表示(完全に) */
+.none {
+  display: none;
 }
-
-.keyboard-wrapper .keys .long-input {
-    width: 8%;
+/* 非表示(透明) */
+.op0 {
+  opacity: 0;
 }
-
-.hidden {
-    /* overflow: hidden; */
-    background-color: transparent;
-    opacity: 0;
+/* 非表示 */
+.hide {
+  visibility: hidden;
 }
-
-/* ボタンが押された時 */
-.keyboard-wrapper .keys input:focus {
-    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.5),
-      inset -3px -3px 7px rgba(255, 255, 255, 0.05);
-  }
+/* 赤文字 */
+.red {
+  color: #f00;
+}
+/* 大文字 */
+.large {
+  font-size: 1.5em;
+}
