@@ -1,6 +1,7 @@
 import ScenarioPlayer from "./ScenarioPlayer.js";
 import { closeConfirm, openConfirm } from "./confirm.js";
 import { CreateMap } from "./map.js";
+import { closeMenuScreen } from "./menu.js";
 import toDarking from "./toDarking.js";
 
 /**
@@ -204,6 +205,7 @@ const dataConformYes = async (type, no, op, prevType) => {
       await toDarking(async (e) => {
         closeConfirm();
         closeGameDataScreen();
+        closeMenuScreen()
         await CreateMap(gameData);
         ScenarioPlayer.screenReset();
       }, gameData);

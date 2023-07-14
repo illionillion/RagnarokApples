@@ -6,7 +6,7 @@ import {
   getCharacterPath,
 } from "./getAssetsPath.js";
 import { CreateMap } from "./map.js";
-import { closeMenuScreen, openMenuScreen } from "./menu.js";
+import { openMenuScreen } from "./menu.js";
 import timer from "./timer.js";
 import toDarking from "./toDarking.js";
 export default class ScenarioPlayer {
@@ -1115,10 +1115,10 @@ export default class ScenarioPlayer {
 
           break;
         case "save":
-          openGameDataScreen("save");
+          // openGameDataScreen("save");
           break;
         case "load":
-          openGameDataScreen("load");
+          // openGameDataScreen("load");
           break;
 
         default:
