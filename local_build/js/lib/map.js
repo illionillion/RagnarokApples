@@ -36,8 +36,18 @@ export async function CreateMap(gameState) {
 
   const NowCreateMapCount = ++CreateMapCount;
 
+  const nowPart = (()=>{
+    if (gameState.isLoad) {
+      gameState.isLoad = false
+      if (gameState.eventState !== "map") {
+        return gameState.prevPart
+      }
+    }
+    return gameState.nowPart
+  })()
+
   // マップアイテムの生成
-  const mapData = mapItemsJson[gameState.nowPart];
+  const mapData = mapItemsJson[nowPart];
   gameState.eventState = "map";
   gameState.nowDate = mapData["day"];
   // シナリオ格納

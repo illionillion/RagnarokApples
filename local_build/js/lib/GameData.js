@@ -195,13 +195,15 @@ const dataConformYes = async (type, no, op, prevType) => {
       break;
     case "load":
       const data = JSON.parse(await loadData("data-" + no));
-      Object.keys(gameData).forEach((key) => {
-        if (key === "nowPart" && data.eventState !== "map") {
-          gameData[key] = data["prevPart"];
-        } else {
-          gameData[key] = data[key];
-        }
-      });
+      // Object.keys(gameData).forEach((key) => {
+      //   if (key === "nowPart" && data.eventState !== "map") {
+      //     gameData[key] = data["prevPart"];
+      //   } else {
+      //     gameData[key] = data[key];
+      //   }
+      // });
+      gameData = data
+      gameData.isLoad = true
       await toDarking(async (e) => {
         closeConfirm();
         closeGameDataScreen();

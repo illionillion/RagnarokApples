@@ -18,6 +18,7 @@ import toDarking from "./lib/toDarking.js";
     TextPlayer: undefined, // いらない
     screenDarking: false, //暗転中か
     menuFlag: false,
+    isLoad: false, // ロード直後かどうか
   };
 
   window.addEventListener("resize", FrameSizing);
