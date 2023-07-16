@@ -32,7 +32,7 @@ import toDarking from "./lib/toDarking.js";
     window?.myAPI?.imageMapResize() //イメージマップのリサイズ
 
     initGameData(gameState);
-    initMenu()
+    initMenu(gameState)
     closeGameDataScreen();
 
     // 伝搬チェック用
