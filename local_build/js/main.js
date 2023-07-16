@@ -11,7 +11,7 @@ import toDarking from "./lib/toDarking.js";
     nowPart: "init", // マップのinitを取得する
     prevPart: "",
     FloatCheck: true,
-    nowDate: 0,
+    nowDate: "0日目",
     nowPlace: undefined,
     eventState: "title",
     autoPlayingFlag: false, // いらない
