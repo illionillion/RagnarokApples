@@ -1,4 +1,3 @@
-import { openGameDataScreen } from "./GameData.js";
 import { closeConfirm, openConfirm } from "./confirm.js";
 import {
   getAudioPath,
