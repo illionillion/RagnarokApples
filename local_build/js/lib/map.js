@@ -39,6 +39,7 @@ export async function CreateMap(gameState) {
   // マップアイテムの生成
   gameState.eventState = "map";
   const mapData = mapItemsJson[gameState.nowPart];
+  gameState.nowDate = mapData["day"];
   // シナリオ格納
   const mapItems = mapData && mapData["items"];
 
@@ -114,7 +115,7 @@ export async function CreateMap(gameState) {
 
               gameState.prevPart = gameState.nowPart;
               gameState.nowPart = partKey;
-              gameState.nowDate = mapData["day"];
+              // gameState.nowDate = mapData["day"];
               gameState.nowPlace = item.place;
               new ScenarioPlayer(
                 TextData[partKey],
