@@ -196,7 +196,7 @@ const dataConformYes = async (type, no, op, prevType) => {
     case "load":
       const data = JSON.parse(await loadData("data-" + no));
       Object.keys(gameData).forEach((key) => {
-        if (key === "nowPart") {
+        if (key === "nowPart" && data.eventState !== "map") {
           gameData[key] = data["prevPart"];
         } else {
           gameData[key] = data[key];
@@ -205,7 +205,7 @@ const dataConformYes = async (type, no, op, prevType) => {
       await toDarking(async (e) => {
         closeConfirm();
         closeGameDataScreen();
-        closeMenuScreen()
+        closeMenuScreen();
         await CreateMap(gameData);
         ScenarioPlayer.screenReset();
       }, gameData);

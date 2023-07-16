@@ -37,12 +37,13 @@ export async function CreateMap(gameState) {
   const NowCreateMapCount = ++CreateMapCount;
 
   // マップアイテムの生成
-  gameState.eventState = "map";
   const mapData = mapItemsJson[gameState.nowPart];
   gameState.eventState = "map";
   gameState.nowDate = mapData["day"];
   // シナリオ格納
   const mapItems = mapData && mapData["items"];
+
+  console.log(gameState);
 
   document
     .querySelectorAll(".map-touch")
