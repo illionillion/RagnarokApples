@@ -716,6 +716,8 @@ export default class ScenarioPlayer {
         element.removeEventListener("click", this.clickMenuList);
       });
 
+      this.state.nowPart = this.state.nextPart
+
       // ここに新マップ描画処理
       await CreateMap(this.state);
     }, this.state);

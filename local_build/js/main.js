@@ -9,7 +9,7 @@ import toDarking from "./lib/toDarking.js";
   const gameState = {
     charName: "タウ",
     nowPart: "init", // マップのinitを取得する
-    prevPart: "init",
+    nextPart: "init",
     FloatCheck: true,
     nowDate: "0日目",
     nowPlace: undefined,

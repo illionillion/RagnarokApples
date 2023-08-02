@@ -36,15 +36,17 @@ export async function CreateMap(gameState) {
 
   const NowCreateMapCount = ++CreateMapCount;
 
-  const nowPart = (()=>{
-    if (gameState.isLoad) {
-      gameState.isLoad = false
-      if (gameState.eventState !== "map") {
-        return gameState.prevPart
-      }
-    }
-    return gameState.nowPart
-  })()
+  // const nowPart = (()=>{
+  //   // いらない？
+  //   if (gameState.isLoad) {
+  //     gameState.isLoad = false
+  //     if (gameState.eventState !== "map") {
+  //       return gameState.nextPart
+  //     }
+  //   }
+  //   return gameState.nowPart
+  // })()
+  const nowPart = gameState.nowPart
 
   // マップアイテムの生成
   const mapData = mapItemsJson[nowPart];
@@ -125,8 +127,9 @@ export async function CreateMap(gameState) {
 
               console.log(TextData[partKey]); //選択されたシナリオ
 
-              gameState.prevPart = gameState.nowPart;
-              gameState.nowPart = partKey;
+              // gameState.nextPart = gameState.nowPart;
+              gameState.nextPart = partKey; // 次のパートを設定、マップに再遷移時にこれをnowPartへ
+              // gameState.nowPart = partKey;
               // gameState.nowDate = mapData["day"];
               gameState.nowPlace = item.place;
               new ScenarioPlayer(

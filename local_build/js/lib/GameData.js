@@ -197,7 +197,7 @@ const dataConformYes = async (type, no, op, prevType) => {
       const data = JSON.parse(await loadData("data-" + no));
       // Object.keys(gameData).forEach((key) => {
       //   if (key === "nowPart" && data.eventState !== "map") {
-      //     gameData[key] = data["prevPart"];
+      //     gameData[key] = data["nextPart"];
       //   } else {
       //     gameData[key] = data[key];
       //   }
