@@ -3,7 +3,8 @@
 .wrapper {
   width: auto;
   text-align: center;
-  background-color: #fff;
+  /* background-color: #fff; */
+  background: url("../images/name-backgroundimage1.png") no-repeat bottom / contain;
 }
 
 .name-wrapper {
