@@ -41,7 +41,8 @@
   height: 50px;
   width: 50px;
   margin: 2px;
-  border-color: rgb(197, 197, 197);
+  /* border-color: rgb(197, 197, 197); */
+  background-color: #001829;
 }
 
 .keyboard-wrapper .keys .long-input {
