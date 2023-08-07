@@ -31,6 +31,7 @@ export const openMenuScreen = () => {
         menuFrame.querySelector('#menu-list li[data-menubutton="place"]').classList.add('none')
         menuFrame.querySelector('#menu-list li[data-menubutton="log"]').classList.add('none')
     }
+    setMenuDay()
 }
 
 /**
@@ -38,4 +39,11 @@ export const openMenuScreen = () => {
  */
 export const closeMenuScreen = () => {
     menuFrame.classList.add("hide");
+}
+
+const setMenuDay = () => {
+    document.querySelector("#menu-list .day").textContent = gameData.nowDate;
+    document.querySelector("#menu-list .day").dataset.day = gameData.nowDate;
+    document.querySelector("#menu-list .place").textContent = gameData.nowPlace;
+    document.querySelector("#menu-list .place").dataset.place = gameData.nowPlace;
 }
