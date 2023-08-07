@@ -88,13 +88,13 @@ export async function CreateMap(gameState) {
         for (const i in mapCharacterListImgs) {
           if (Object.hasOwnProperty.call(mapCharacterListImgs, i)) {
             const ele = mapCharacterListImgs[i];
-            if (
-              ["app.png", "tau-sample.jpg"].includes(item["characterIcons"][i])
-            ) {
-              ele.src = `images/map-screen/map3-default-icon.png`;
-            } else {
+            // if (
+              // ["app.png", "tau-sample.jpg"].includes(item["characterIcons"][i])
+            // ) {
+              // ele.src = `images/map-screen/map3-default-icon.png`;
+            // } else {
               ele.src = `images/character/icon/${item["characterIcons"][i]}`;
-            }
+            // }
           }
         }
 

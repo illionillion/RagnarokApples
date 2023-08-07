@@ -35,6 +35,14 @@ import toDarking from "./lib/toDarking.js";
     initMenu(gameState)
     closeGameDataScreen();
 
+    document.querySelectorAll(
+      "#mapCharacterList ul li img"
+    ).forEach(ele => {
+      ele.addEventListener('error', () => {
+        ele.src = "images/map-screen/map3-default-icon.png"
+      })
+    })
+
     // 伝搬チェック用
     // document.querySelectorAll('*').forEach(element => {
     //     element.addEventListener('click',e=>{
