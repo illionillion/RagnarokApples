@@ -62,6 +62,7 @@ import toDarking from "./lib/toDarking.js";
         TextFloat.classList.remove("op0");
       });
 
+      // ここのON/OFFいらない？
       FloatCheck.addEventListener("click", (e) => {
         //2と3の切り替え
         if (!TextCover.classList.contains("none")) return;
