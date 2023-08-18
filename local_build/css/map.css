@@ -352,6 +352,10 @@
   background-color: aliceblue;
 }
 
+.placeImage img {
+  width: 100%;
+}
+
 #mapTextCover {
   position: absolute;
   top: 0%;
