@@ -1,7 +1,7 @@
 import ScenarioPlayer from "./ScenarioPlayer.js";
 import { closeConfirm, openConfirm } from "./confirm.js";
 import { CreateMap } from "./map.js";
-import { closeMenuScreen } from "./menu.js";
+import { closeMenuScreen, initMenu } from "./menu.js";
 import toDarking from "./toDarking.js";
 
 /**
@@ -196,6 +196,7 @@ const dataConformYes = async (type, no, op, prevType) => {
     case "load":
       const data = JSON.parse(await loadData("data-" + no));
       gameData = data
+      initMenu(gameData) // menu.js内のgameDataの同期
       await toDarking(async (e) => {
         closeConfirm();
         closeGameDataScreen();

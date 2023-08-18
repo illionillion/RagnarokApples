@@ -10,13 +10,17 @@ const menuCloseButton = document.getElementById("menu-close-button");
  */
 export const initMenu = (gameState) => {
 
+    // 初回のみ（GameData.jsから呼ばれる場合は実行せずにgameDataの設定だけ行う）
+    if (Object.keys(gameData).length === 0) {
+        menuOpenButton.addEventListener('click', openMenuScreen)
+        menuCloseButton.addEventListener('click', closeMenuScreen)
+        // ログ以外はここから発火
+        menuFrame.querySelector('#menu-list li[data-menubutton="load"]').addEventListener('click', () => openGameDataScreen("load"))
+        menuFrame.querySelector('#menu-list li[data-menubutton="save"]').addEventListener('click', () => openGameDataScreen("save"))
+    }
+
     gameData = gameState
 
-    menuOpenButton.addEventListener('click', openMenuScreen)
-    menuCloseButton.addEventListener('click', closeMenuScreen)
-    // ログ以外はここから発火
-    menuFrame.querySelector('#menu-list li[data-menubutton="load"]').addEventListener('click', () => openGameDataScreen("load"))
-    menuFrame.querySelector('#menu-list li[data-menubutton="save"]').addEventListener('click', () => openGameDataScreen("save"))
 }
 
 /**
