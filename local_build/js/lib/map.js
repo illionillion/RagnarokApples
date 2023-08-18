@@ -36,16 +36,6 @@ export async function CreateMap(gameState) {
 
   const NowCreateMapCount = ++CreateMapCount;
 
-  // const nowPart = (()=>{
-  //   // いらない？
-  //   if (gameState.isLoad) {
-  //     gameState.isLoad = false
-  //     if (gameState.eventState !== "map") {
-  //       return gameState.nextPart
-  //     }
-  //   }
-  //   return gameState.nowPart
-  // })()
   const nowPart = gameState.nowPart
 
   // マップアイテムの生成

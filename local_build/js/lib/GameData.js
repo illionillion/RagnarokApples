@@ -196,7 +196,6 @@ const dataConformYes = async (type, no, op, prevType) => {
     case "load":
       const data = JSON.parse(await loadData("data-" + no));
       gameData = data
-      gameData.isLoad = true
       await toDarking(async (e) => {
         closeConfirm();
         closeGameDataScreen();
