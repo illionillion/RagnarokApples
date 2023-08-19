@@ -70,6 +70,12 @@ export async function CreateMap(gameState) {
         document
           .querySelector(`.placeName[data-place="${item.place}"]`)
           .classList.remove("none");
+        document
+          .querySelectorAll(".placeImage img")
+          .forEach((ele) => ele.classList.add("none"));
+        document
+          .querySelector(`.placeImage img[data-place="${item.place}"]`)
+          .classList.remove("none");
 
         // 登場キャラアイコン変更
         const mapCharacterListImgs = document.querySelectorAll(
