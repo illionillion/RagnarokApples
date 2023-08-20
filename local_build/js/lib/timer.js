@@ -4,11 +4,11 @@
  * @returns Promise
  */
 const timer = s => {
-    return new Promise((resolve, reject)=>{
-        const timerId = setTimeout(() => {
-            resolve();
-        }, s);
-    })
-}
+  return new Promise((resolve, reject) => {
+    const timerId = setTimeout(() => {
+      resolve();
+    }, s);
+  });
+};
 
-export default timer
+export default timer;

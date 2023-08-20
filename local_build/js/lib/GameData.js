@@ -1,17 +1,17 @@
-import ScenarioPlayer from "./ScenarioPlayer.js";
-import { closeConfirm, openConfirm } from "./confirm.js";
-import { CreateMap } from "./map.js";
-import { closeMenuScreen, initMenu } from "./menu.js";
-import toDarking from "./toDarking.js";
+import ScenarioPlayer from './ScenarioPlayer.js';
+import { closeConfirm, openConfirm } from './confirm.js';
+import { CreateMap } from './map.js';
+import { closeMenuScreen, initMenu } from './menu.js';
+import toDarking from './toDarking.js';
 
 /**
  * データ総数
  * @type {number}
  */
 const dataLength = 20;
-const yesButton = document.querySelector("#confirm-dialog-buttons .btn-yes");
-const noButton = document.querySelector("#confirm-dialog-buttons .btn-no");
-const closeButton = document.getElementById("game-data-close");
+const yesButton = document.querySelector('#confirm-dialog-buttons .btn-yes');
+const noButton = document.querySelector('#confirm-dialog-buttons .btn-no');
+const closeButton = document.getElementById('game-data-close');
 /**
  * ゲームのデータを参照渡しで保存
  */
@@ -40,7 +40,7 @@ const saveData = async (key, value) => {
  * @returns
  */
 const loadData = async (key) => {
-  return localStorage.getItem(key) || "";
+  return localStorage.getItem(key) || '';
 };
 
 /**
@@ -76,7 +76,7 @@ const replaceData = async (from, to) => {
  * @param {string} title
  */
 const setGameDataTitle = (title) => {
-  document.getElementById("game-data-title").innerHTML = title;
+  document.getElementById('game-data-title').innerHTML = title;
 };
 
 /**
@@ -86,97 +86,97 @@ const setGameDataTitle = (title) => {
  * @param {"save" | "load"} prevType
  * @returns
  */
-export const openGameDataScreen = async (type, op = -1, prevType = "") => {
-  if (!type || type === "") return;
+export const openGameDataScreen = async (type, op = -1, prevType = '') => {
+  if (!type || type === '') return;
 
   setGameDataTitle(
     // `${type === "load" ? "ロード" : "セーブ"}するデータを選択してください。`
     `${(() => {
       switch (type) {
-        case "load":
-          return "ロードする";
-        case "save":
-          return "セーブする";
-        case "copy":
-          return "コピーする";
-        case "replace":
-          return "入れ替える";
+        case 'load':
+          return 'ロードする';
+        case 'save':
+          return 'セーブする';
+        case 'copy':
+          return 'コピーする';
+        case 'replace':
+          return '入れ替える';
         default:
-          return "";
+          return '';
       }
     })()}データを選択してください。`
   );
 
-  const template = document.getElementById("game-data-item-template");
-  const list = document.getElementById("game-data-list");
-  list.innerHTML = "";
+  const template = document.getElementById('game-data-item-template');
+  const list = document.getElementById('game-data-list');
+  list.innerHTML = '';
   for (let i = 1; i <= dataLength; i++) {
-    const data = await loadData("data-" + i);
+    const data = await loadData('data-' + i);
     /**
      * @type {HTMLElement}
      */
     const item = template.content.cloneNode(true);
-    item.querySelector(".game-data-name").innerHTML = `データ${i}`;
+    item.querySelector('.game-data-name').innerHTML = `データ${i}`;
 
     const is_json_check = is_json(data);
 
-    if (data !== "" && is_json_check) {
+    if (data !== '' && is_json_check) {
       const json = JSON.parse(data); // ここでJSONに変換できなくてエラーとか起こりそう
       // データがあった場合
-      const name = json["charName"];
-      const nowDate = json["nowDate"];
-      item.querySelector(".game-data-content").innerHTML = `${name} ${nowDate}`;
+      const name = json.charName;
+      const nowDate = json.nowDate;
+      item.querySelector('.game-data-content').innerHTML = `${name} ${nowDate}`;
       if (op >= 0) {
-        item.querySelector(".copy").classList.add("disabled");
-        item.querySelector(".reorder").classList.add("disabled");
-        item.querySelector(".delete").classList.add("disabled");
+        item.querySelector('.copy').classList.add('disabled');
+        item.querySelector('.reorder').classList.add('disabled');
+        item.querySelector('.delete').classList.add('disabled');
       }
     } else {
       // データがない場合
-      item.querySelector(".game-data-content").innerHTML = `データがありません`;
-      item.querySelector(".copy").classList.add("default");
-      item.querySelector(".reorder").classList.add("default");
-      item.querySelector(".delete").classList.add("default");
+      item.querySelector('.game-data-content').innerHTML = 'データがありません';
+      item.querySelector('.copy').classList.add('default');
+      item.querySelector('.reorder').classList.add('default');
+      item.querySelector('.delete').classList.add('default');
 
       // データの削除
-      await deleteData("data-" + i);
+      await deleteData('data-' + i);
     }
     list.appendChild(item);
-    const listItem = list.querySelectorAll(".game-data-item")[i - 1];
-    const deleteButton = listItem.querySelector(".delete");
-    const copyButton = listItem.querySelector(".copy");
-    const reorderButton = listItem.querySelector(".reorder");
-    const preventFlag = data === "" || !is_json_check;
+    const listItem = list.querySelectorAll('.game-data-item')[i - 1];
+    const deleteButton = listItem.querySelector('.delete');
+    const copyButton = listItem.querySelector('.copy');
+    const reorderButton = listItem.querySelector('.reorder');
+    const preventFlag = data === '' || !is_json_check;
 
-    if (i === op) listItem.classList.add("current");
+    if (i === op) listItem.classList.add('current');
 
-    listItem.addEventListener("click", () =>
+    listItem.addEventListener('click', () =>
       onClickItem(preventFlag, type, i, op, prevType)
     );
     if (op === -1) {
-      deleteButton.addEventListener("click", (e) =>
+      deleteButton.addEventListener('click', (e) =>
         onClickDelete(e, preventFlag, type, i)
       );
-      copyButton.addEventListener("click", (e) =>
+      copyButton.addEventListener('click', (e) =>
         onClickCopy(e, preventFlag, type, i)
       );
-      reorderButton.addEventListener("click", (e) =>
+      reorderButton.addEventListener('click', (e) =>
         onClickReplace(e, preventFlag, type, i)
       );
     }
   }
 
-  closeButton.removeEventListener("click", closeGameDataScreen); // openGameDataScreenを多用するのでcloseGameDataScreenが多重しないために必要
-  closeButton.addEventListener("click", closeGameDataScreen);
-  document.getElementById("game-data-screen").classList.remove("none");
+  closeButton.removeEventListener('click', closeGameDataScreen); // openGameDataScreenを多用するのでcloseGameDataScreenが多重しないために必要
+  closeButton.addEventListener('click', closeGameDataScreen);
+  document.getElementById('game-data-screen').classList.remove('none');
 };
 
 /**
  * 閉じる
  */
 export const closeGameDataScreen = () => {
-  document.getElementById("game-data-screen").classList.add("none");
-  closeButton.removeEventListener("click", closeGameDataScreen);
+  document.getElementById('game-data-screen').classList.add('none');
+  closeButton.removeEventListener('click', closeGameDataScreen);
 };
 
 /**
@@ -188,15 +188,15 @@ export const closeGameDataScreen = () => {
  */
 const dataConformYes = async (type, no, op, prevType) => {
   switch (type) {
-    case "save":
-      await saveData("data-" + no, JSON.stringify(gameData));
+    case 'save':
+      await saveData('data-' + no, JSON.stringify(gameData));
       closeConfirm();
-      openGameDataScreen("save");
+      openGameDataScreen('save');
       break;
-    case "load":
-      const data = JSON.parse(await loadData("data-" + no));
-      gameData = data
-      initMenu(gameData) // menu.js内のgameDataの同期
+    case 'load':
+      const data = JSON.parse(await loadData('data-' + no));
+      gameData = data;
+      initMenu(gameData); // menu.js内のgameDataの同期
       await toDarking(async (e) => {
         closeConfirm();
         closeGameDataScreen();
@@ -205,16 +205,16 @@ const dataConformYes = async (type, no, op, prevType) => {
         ScenarioPlayer.screenReset();
       }, gameData);
       break;
-    case "copy":
+    case 'copy':
       // コピー
-      await copyData("data-" + op, "data-" + no);
+      await copyData('data-' + op, 'data-' + no);
       closeConfirm();
       openGameDataScreen(prevType);
 
       break;
-    case "replace":
+    case 'replace':
       // 入れ替え
-      await replaceData("data-" + op, "data-" + no);
+      await replaceData('data-' + op, 'data-' + no);
       closeConfirm();
       openGameDataScreen(prevType);
 
@@ -234,21 +234,21 @@ const dataConformYes = async (type, no, op, prevType) => {
  * @param {"save" | "load"} prevType
  */
 const onClickItem = (preventFlag, type, i, op, prevType) => {
-  if (preventFlag && type === "load") return;
+  if (preventFlag && type === 'load') return;
   openConfirm(
     `${(() => {
       switch (type) {
-        case "save":
-          return "セーブし";
-        case "load":
-          return "ロードし";
-        case "copy":
+        case 'save':
+          return 'セーブし';
+        case 'load':
+          return 'ロードし';
+        case 'copy':
           return `データ${op}をデータ${i}にコピーし`;
-        case "replace":
+        case 'replace':
           return `データ${op}をデータ${i}に入れ替え`;
 
         default:
-          return "";
+          return '';
       }
     })()}ますか？`
   );
@@ -261,11 +261,11 @@ const onClickItem = (preventFlag, type, i, op, prevType) => {
     removeEvent();
   };
   const removeEvent = () => {
-    yesButton.removeEventListener("click", execYes);
-    noButton.removeEventListener("click", execNo);
+    yesButton.removeEventListener('click', execYes);
+    noButton.removeEventListener('click', execNo);
   };
-  yesButton.addEventListener("click", execYes);
-  noButton.addEventListener("click", execNo);
+  yesButton.addEventListener('click', execYes);
+  noButton.addEventListener('click', execNo);
 };
 
 /**
@@ -280,7 +280,7 @@ const onClickDelete = (e, preventFlag, type, i) => {
   e.stopPropagation(); // この順番でいい
   openConfirm(`データ${i}を削除しますか？`);
   const execYes = async () => {
-    await deleteData("data-" + i);
+    await deleteData('data-' + i);
     closeConfirm();
     openGameDataScreen(type);
     removeEvent();
@@ -290,11 +290,11 @@ const onClickDelete = (e, preventFlag, type, i) => {
     removeEvent();
   };
   const removeEvent = () => {
-    yesButton.removeEventListener("click", execYes);
-    noButton.removeEventListener("click", execNo);
+    yesButton.removeEventListener('click', execYes);
+    noButton.removeEventListener('click', execNo);
   };
-  yesButton.addEventListener("click", execYes);
-  noButton.addEventListener("click", execNo);
+  yesButton.addEventListener('click', execYes);
+  noButton.addEventListener('click', execNo);
 };
 
 /**
@@ -308,16 +308,16 @@ const onClickCopy = (e, preventFlag, type, i) => {
   if (preventFlag) return;
   e.stopPropagation(); // この順番でいい
 
-  openGameDataScreen("copy", i, type);
+  openGameDataScreen('copy', i, type);
 
   // ここで戻るボタンのイベント変更
   const toPrev = () => {
     openGameDataScreen(type);
-    closeButton.removeEventListener("click", toPrev);
-    closeButton.addEventListener("click", closeGameDataScreen);
+    closeButton.removeEventListener('click', toPrev);
+    closeButton.addEventListener('click', closeGameDataScreen);
   };
-  closeButton.removeEventListener("click", closeGameDataScreen);
-  closeButton.addEventListener("click", toPrev);
+  closeButton.removeEventListener('click', closeGameDataScreen);
+  closeButton.addEventListener('click', toPrev);
 };
 
 /**
@@ -331,16 +331,16 @@ const onClickReplace = (e, preventFlag, type, i) => {
   if (preventFlag) return;
   e.stopPropagation(); // この順番でいい
 
-  openGameDataScreen("replace", i, type);
+  openGameDataScreen('replace', i, type);
 
   // ここで戻るボタンのイベント変更
   const toPrev = () => {
     openGameDataScreen(type);
-    closeButton.removeEventListener("click", toPrev);
-    closeButton.addEventListener("click", closeGameDataScreen);
+    closeButton.removeEventListener('click', toPrev);
+    closeButton.addEventListener('click', closeGameDataScreen);
   };
-  closeButton.removeEventListener("click", closeGameDataScreen);
-  closeButton.addEventListener("click", toPrev);
+  closeButton.removeEventListener('click', closeGameDataScreen);
+  closeButton.addEventListener('click', toPrev);
 };
 
 /**
