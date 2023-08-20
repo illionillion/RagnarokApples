@@ -1,6 +1,6 @@
-const https = require("https");
-const fs = require("original-fs");
-const { app, BrowserWindow } = require("electron");
+const https = require('https');
+const fs = require('original-fs');
+const { app, BrowserWindow } = require('electron');
 
 /**
  *
@@ -12,21 +12,21 @@ const getAssetsList = async (link, splash) => {
   try {
     return await new Promise((resolve, reject) => {
       const req = https.get(link, (res) => {
-        let data = "";
-        res.on("data", (d) => {
+        let data = '';
+        res.on('data', (d) => {
           data += d;
         });
-        res.on("end", async () => {
+        res.on('end', async () => {
           const json = JSON.parse(data);
           for (const filename of Object.keys(json)) {
             console.log(filename);
-            console.log(json[filename]["type"]);
-            console.log(json[filename]["link"]);
+            console.log(json[filename].type);
+            console.log(json[filename].link);
             await assetsDownLoad(
               filename,
-              json[filename]["type"],
-              json[filename]["link"] +
-                "?rand=" +
+              json[filename].type,
+              json[filename].link +
+                '?rand=' +
                 Math.floor(Math.random() * 100),
               splash
             );
@@ -35,7 +35,7 @@ const getAssetsList = async (link, splash) => {
         });
       });
 
-      req.on("error", (error) => {
+      req.on('error', (error) => {
         console.log(error);
         reject(false);
       });
@@ -75,25 +75,25 @@ const assetsDownLoad = async (filename, type, link, splash) => {
         }
 
         if (res.statusCode === 403) {
-          resolve(false)
+          resolve(false);
           return;
         }
 
-        let dir = "";
-        const dataPath = app.getPath("userData");
-        if (!fs.existsSync(dataPath + "/assets")) {
-          fs.mkdirSync(dataPath + "/assets");
+        let dir = '';
+        const dataPath = app.getPath('userData');
+        if (!fs.existsSync(dataPath + '/assets')) {
+          fs.mkdirSync(dataPath + '/assets');
         }
         switch (type) {
-          case "背景":
-            dir = "/assets/background/";
+          case '背景':
+            dir = '/assets/background/';
             break;
-          case "キャラクター":
-            dir = "/assets/character/";
+          case 'キャラクター':
+            dir = '/assets/character/';
 
             break;
-          case "音声":
-            dir = "/assets/audio/";
+          case '音声':
+            dir = '/assets/audio/';
             break;
 
           default:
@@ -108,21 +108,21 @@ const assetsDownLoad = async (filename, type, link, splash) => {
 
         let total = 0; // 合計byte数
         let percent = 0; // %
-        res.on("data", (chunk) => {
+        res.on('data', (chunk) => {
           total += chunk.length; // これまで読み取ったbyte数
-          const length = res.headers["content-length"];
+          const length = res.headers['content-length'];
           if (percent !== parseInt((total / length) * 100)) {
             percent = parseInt((total / length) * 100);
             console.log(`${percent} %`);
-            splash.webContents.send("loadingData", percent);
+            splash.webContents.send('loadingData', percent);
           }
         });
         const outFile = fs.createWriteStream(outURL);
         res.pipe(outFile);
 
         // 終わったらファイルストリームをクローズ。
-        res.on("end", () => {
-          console.log("end");
+        res.on('end', () => {
+          console.log('end');
           console.log(outURL);
           outFile.close();
           resolve(true); // trueを返す
@@ -130,8 +130,8 @@ const assetsDownLoad = async (filename, type, link, splash) => {
       });
 
       // エラーがあれば扱う。
-      req.on("error", (err) => {
-        console.log("Error: ", err);
+      req.on('error', (err) => {
+        console.log('Error: ', err);
         reject(false); // falseを返す
       });
     });

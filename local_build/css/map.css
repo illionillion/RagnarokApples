@@ -342,6 +342,18 @@
   object-fit: cover;
 }
 
+.placeImage {
+  position: absolute;
+  width: 39.3%;
+  height: 56.4%;
+  top: 19.7%;
+  right: 7.2%;
+}
+
+.placeImage img {
+  width: 100%;
+}
+
 #mapTextCover {
   position: absolute;
   top: 0%;
