@@ -4,7 +4,7 @@
   width: auto;
   text-align: center;
   /* background-color: #fff; */
-  background: url("../images/name-背景_アートボード 1.png") no-repeat bottom / contain;
+  background: url("../images/name-background.png") no-repeat bottom / contain;
 }
 
 .name-wrapper {
@@ -13,7 +13,7 @@
   border: solid 2px rgba(0, 0, 0, 0.5);
   padding: 10px;
   margin: auto;
-  background-image: url("../images/name-テキストボックス.png");
+  background-image: url("../images/name-textbox.png");
 }
 
 #name {
