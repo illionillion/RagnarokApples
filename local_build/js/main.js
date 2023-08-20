@@ -55,7 +55,7 @@ import toDarking from './lib/toDarking.js';
       const FloatCheck = document.getElementById('FloatCheck');
       const TextFloat = document.getElementById('mapTextFloat');
       const TextCover = document.getElementById('mapTextCover');
-      TextCover.addEventListener('click', (e) => {
+      TextCover.addEventListener('click', () => {
         // 1から2へ遷移
         TextCover.classList.add('none');
         FloatCheck.classList.remove('op0');
@@ -63,7 +63,7 @@ import toDarking from './lib/toDarking.js';
       });
 
       // ここのON/OFFいらない？
-      FloatCheck.addEventListener('click', (e) => {
+      FloatCheck.addEventListener('click', () => {
         // 2と3の切り替え
         if (!TextCover.classList.contains('none')) return;
         if (gameState.FloatCheck) {
