@@ -8,12 +8,15 @@
 }
 
 .name-wrapper {
-  height: 30px;
-  max-width: 780px;
-  border: solid 2px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  height: 10%;
+  width: 80%;
+  max-width: 840px;
+  /* border: solid 2px rgba(0, 0, 0, 0.5); */
   padding: 10px;
-  margin: auto;
+  margin: 13% auto 4%;;
   background-image: url("../images/name-textbox.png");
+  background-size: 100% 100%;
 }
 
 #name {
@@ -34,12 +37,16 @@
 
 .keyboard-wrapper {
   margin: 0 auto;
+  height: 50%;
+  width: 80%;
 }
 
 .keyboard-wrapper .keys input {
   font-size: 16px;
+  max-height: 50px;
   height: 50px;
-  width: 50px;
+  max-width: 50px;
+  width: 7%;
   margin: 2px;
   /* border-color: rgb(197, 197, 197); */
   background-color: #001829;
