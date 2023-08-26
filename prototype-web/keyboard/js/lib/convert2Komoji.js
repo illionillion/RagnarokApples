@@ -1,7 +1,7 @@
 export function convert2Komoji(moji) {
     const seionKeyObj = {
         'ア': 'ァ',
-        'イ': 'イ',
+        'イ': 'ィ',
         'ウ': 'ゥ',
         'エ': 'ェ',
         'オ': 'ォ',
