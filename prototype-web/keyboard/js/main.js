@@ -5,7 +5,7 @@ import { convert2HanDakuon } from "./lib/convert2HanDakuon.js";
 import { convert2Komoji } from "./lib/convert2Komoji.js";
 window.addEventListener("load", () => {
   let input = document.querySelectorAll("input");
-  let named = document.getElementById("name");
+  let named = document.getElementById("keyboard-name");
   let names = [];
   let Count = 0;
 
@@ -62,6 +62,7 @@ window.addEventListener("load", () => {
     }
   }
 
+  // 小文字ボタン
   function komojiBtn() {
     let komoji = convert2Komoji(names[names.length - 1]);
 
@@ -103,6 +104,7 @@ window.addEventListener("load", () => {
     }
   }
 
+  // 半濁点ボタン
   function HandakuBtn() {
     let Handakumoji = convert2HanDakuon(names[names.length - 1]);
 
