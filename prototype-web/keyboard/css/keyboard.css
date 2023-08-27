@@ -1,13 +1,13 @@
 @charset "UTF-8";
 
-.wrapper {
+.keyboard-main-wrapper {
   width: auto;
   text-align: center;
   /* background-color: #fff; */
   background: url("../images/name-background.png") no-repeat bottom / contain;
 }
 
-.name-wrapper {
+.keyboard-nameArea-wrapper {
   text-align: center;
   height: 10%;
   width: 79%;
@@ -19,7 +19,7 @@
   background-size: 100% 100%;
 }
 
-#name {
+#keyboard-name {
   display: inline;
   letter-spacing: 0.8rem;
   /* border-bottom: 1px dashed black; */
