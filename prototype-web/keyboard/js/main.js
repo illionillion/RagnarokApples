@@ -4,7 +4,7 @@ import { convert2Dakuon } from "./lib/convert2Dakuon.js";
 import { convert2HanDakuon } from "./lib/convert2HanDakuon.js";
 import { convert2Komoji } from "./lib/convert2Komoji.js";
 window.addEventListener("load", () => {
-  let input = document.querySelectorAll("input");
+  let input = document.querySelectorAll(".keyboard-rows > input");
   let named = document.getElementById("keyboard-name");
   let names = [];
   let Count = 0;
@@ -130,12 +130,8 @@ window.addEventListener("load", () => {
 
   for (let i = 0; i < input.length; i++) {
     input[i].addEventListener("click", function () {
-      this.blur(".keyboard-wrapper .keys input:focus ");
+      this.blur();
 
-      // setTimeoutが効かない
-      // setTimeout(() => {
-      //     this.blur(".keyboard-wrapper .keys input:focus ")
-      // }, 10);
     });
   }
 });
