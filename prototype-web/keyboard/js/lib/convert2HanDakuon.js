@@ -9,7 +9,12 @@ export function convert2HanDakuon(moji) {
         'ピ': 'ヒ',
         'プ': 'フ',
         'ペ': 'ヘ',
-        'ポ': 'ホ'
+        'ポ': 'ホ',
+        'バ': 'パ',
+        'ビ': 'ピ',
+        'ブ': 'プ',
+        'ベ': 'ペ',
+        'ボ': 'ポ'
     }
     return seionKeyObj[moji]
 }

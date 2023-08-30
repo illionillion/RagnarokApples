@@ -36,6 +36,10 @@ window.addEventListener("load", () => {
         HandakuBtn();
         return;
       }
+      if (ele.value === "決定") {
+        confirmBtn();
+        return;
+      }
 
       typed(ele);
       // console.log(ele.value);
@@ -117,6 +121,11 @@ window.addEventListener("load", () => {
 
       console.log(names);
     }
+  }
+
+  // 決定ボタン
+  function confirmBtn(){
+    console.log("決定");
   }
 
   for (let i = 0; i < input.length; i++) {
