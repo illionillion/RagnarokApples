@@ -20,7 +20,9 @@
 }
 
 #keyboard-name {
-  display: inline;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   letter-spacing: 0.8rem;
   /* border-bottom: 1px dashed black; */
   padding-bottom: 0.1rem;
@@ -42,11 +44,11 @@
   width: 85%;
 }
 
-.keys{
+.keyboard-rows{
   height: 20%;
 }
 
-.keyboard-wrapper .keys input {
+.keyboard-wrapper .keyboard-rows input {
   font-size: 17px;
   /* font-size: clamp(13px, 2vw, 17px); */
   font-size: 1.2vw;
@@ -60,7 +62,7 @@
   color: #D2E1DC;
 }
 
-.keyboard-wrapper .keys .long-input {
+.keyboard-wrapper .keyboard-rows .long-input {
   margin-left: 4%;
   width: 10%;
   max-width: 130px;
@@ -73,7 +75,7 @@
 }
 
 /* ボタンが押された時 */
-.keyboard-wrapper .keys input:focus {
+.keyboard-wrapper .keyboard-rows input:focus {
   box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.5),
     inset -3px -3px 7px rgba(255, 255, 255, 0.05);
 }
