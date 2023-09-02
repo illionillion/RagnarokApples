@@ -55,7 +55,7 @@
 }
 
 #title-list ul li.on-cursor{
-    background-image: url(../images/cursor.png);
+    background-image: url(../images/title/cursor.png);
     background-size: contain;
     background-repeat: no-repeat;
     background-position-x: 40%;
