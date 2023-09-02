@@ -3,6 +3,7 @@ import FrameSizing from './lib/FrameSizing.js';
 import { closeGameDataScreen, initGameData } from './lib/GameData.js';
 import { CreateMap } from './lib/map.js';
 import { initMenu } from './lib/menu.js';
+import { TitleInit } from './lib/title.js';
 import toDarking from './lib/toDarking.js';
 
 (function () {
@@ -34,6 +35,16 @@ import toDarking from './lib/toDarking.js';
     initMenu(gameState);
     closeGameDataScreen();
 
+    TitleInit()
+    // 伝搬チェック用
+    // document.querySelectorAll('*').forEach(element => {
+    //     element.addEventListener('click',e=>{
+    //         console.log(e.target)
+    //     })
+    // });
+
+
+    // 以下からがマップへ切り替え用のコード
     document.querySelectorAll(
       '#mapCharacterList ul li img'
     ).forEach(ele => {
@@ -41,13 +52,6 @@ import toDarking from './lib/toDarking.js';
         ele.src = 'images/map-screen/map3-default-icon.png';
       });
     });
-
-    // 伝搬チェック用
-    // document.querySelectorAll('*').forEach(element => {
-    //     element.addEventListener('click',e=>{
-    //         console.log(e.target)
-    //     })
-    // });
 
     await toDarking(async (e) => {
       await CreateMap(gameState);
