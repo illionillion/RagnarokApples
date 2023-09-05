@@ -1,3 +1,4 @@
+import { openGameDataScreen } from './GameData.js';
 import { CreateMap } from './map.js';
 import toDarking from './toDarking.js';
 
@@ -73,6 +74,7 @@ export const TitleInit = (gameState) => {
         case 'continue':
           break;
         case 'load':
+          openGameDataScreen("load")
           break;
         case 'gallery':
           break;
@@ -103,7 +105,6 @@ export const TitleInit = (gameState) => {
 
   setAllowCursor();
 };
-
 
 export const TitleClose = () => {
   document.getElementById('title-screen').classList.add('none');

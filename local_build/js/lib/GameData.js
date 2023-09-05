@@ -2,7 +2,7 @@ import ScenarioPlayer from './ScenarioPlayer.js';
 import { closeConfirm, openConfirm } from './confirm.js';
 import { CreateMap } from './map.js';
 import { closeMenuScreen, initMenu } from './menu.js';
-import { TitleInit } from './title.js';
+import { TitleClose, TitleInit } from './title.js';
 import toDarking from './toDarking.js';
 
 /**
@@ -203,6 +203,7 @@ const dataConformYes = async (type, no, op, prevType) => {
         closeConfirm();
         closeGameDataScreen();
         closeMenuScreen();
+        TitleClose();
         await CreateMap(gameData);
         ScenarioPlayer.screenReset();
       }, gameData);

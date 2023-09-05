@@ -85,13 +85,7 @@ export async function CreateMap (gameState) {
         for (const i in mapCharacterListImgs) {
           if (Object.hasOwnProperty.call(mapCharacterListImgs, i)) {
             const ele = mapCharacterListImgs[i];
-            // if (
-            // ["app.png", "tau-sample.jpg"].includes(item["characterIcons"][i])
-            // ) {
-            // ele.src = `images/map-screen/map3-default-icon.png`;
-            // } else {
             ele.src = `images/character/icon/${item.characterIcons[i]}`;
-            // }
           }
         }
 
@@ -124,10 +118,7 @@ export async function CreateMap (gameState) {
 
               console.log(TextData[partKey]); // 選択されたシナリオ
 
-              // gameState.nextPart = gameState.nowPart;
               gameState.nextPart = partKey; // 次のパートを設定、マップに再遷移時にこれをnowPartへ
-              // gameState.nowPart = partKey;
-              // gameState.nowDate = mapData["day"];
               gameState.nowPlace = item.place;
               new ScenarioPlayer(
                 TextData[partKey],
@@ -192,13 +183,6 @@ export async function CreateMap (gameState) {
     })()
   );
 
-  // const mapImg = document.getElementById("mapBackground");
-  // const imgSrc = mapData
-  //   ? `images/background/${mapData["backgroundImage"]}`
-  //   : "images/background/map.png";
-  // const imgSrc = "images/map-screen/map2_background.png";
-  // console.log(imgSrc);
-  // mapImg.setAttribute("src", imgSrc);
   // 日付
   document.querySelector('#map2TextDate').innerHTML = mapData
     ? mapData.day
