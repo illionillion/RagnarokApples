@@ -40,8 +40,9 @@ window.addEventListener("load", () => {
         confirmBtn();
         return;
       }
-
-      typed(ele);
+      if(Count < 6){
+        typed(ele);
+      }
       // console.log(ele.value);
     });
   });
