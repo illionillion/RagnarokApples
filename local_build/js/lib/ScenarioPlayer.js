@@ -1116,6 +1116,10 @@ export default class ScenarioPlayer {
         case 'load':
           // openGameDataScreen("load");
           break;
+        case 'title':
+          // ここでタイトル画面に戻す
+          console.log('to title');
+          break;
 
         default:
           break;
