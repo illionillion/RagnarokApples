@@ -27,6 +27,11 @@ export const TitleInit = (gameState) => {
       // console.log(`Left`);
     } else if (e.code == 'KeyD' || e.code == 'ArrowRight') {
       // console.log(`Right`);
+    } else if (e.code == 'Enter' || e.code == 'Space') {
+      // 別画面でも十字キー・エンターが効いて危ないから今はコメントアウト
+      // const nav = document.querySelector('[data-nav].on-cursor').dataset.nav
+      // clickHandler(index, nav)
+      return
     }
 
     setAllowCursor();
@@ -39,15 +44,16 @@ export const TitleInit = (gameState) => {
     document
       .querySelectorAll('#title-list ul li')
       [index].classList.add('on-cursor');
-    for (let i = 0; i < 5; i++) {
-      if (i === index) continue;
+    document.querySelectorAll('#title-list ul li').forEach((ele, i) => {
+      if (i === index) return;
       document
         .querySelectorAll('#title-list ul li')
         [i].classList.remove('on-cursor');
-    }
+    })
   };
 
   /**
+   * クリック時
    * @param {number} i
    * @param {string} nav
    */
@@ -71,15 +77,15 @@ export const TitleInit = (gameState) => {
             TitleClose();
           }, gameData);
           break;
-        case 'continue':
-          break;
+        // case 'continue':
+        //   break;
         case 'load':
           openGameDataScreen("load")
           break;
-        case 'gallery':
-          break;
-        case 'setting':
-          break;
+        // case 'gallery':
+        //   break;
+        // case 'setting':
+        //   break;
 
         default:
           break;
@@ -95,13 +101,12 @@ export const TitleInit = (gameState) => {
   document.addEventListener('contextmenu', () => {
     return false;
   });
-  for (let i = 0; i < 5; i++) {
-    document
-      .querySelectorAll('#title-list ul li')
-      [i].addEventListener('click', (e) => {
-        clickHandler(i, e.target.dataset.nav);
-      });
-  }
+
+  document.querySelectorAll('#title-list ul li').forEach((ele, i) => {
+    ele.addEventListener('click', (e) => {
+      clickHandler(i, e.target.dataset.nav);
+    });
+  });
 
   setAllowCursor();
 };
