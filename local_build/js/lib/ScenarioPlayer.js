@@ -1081,7 +1081,7 @@ export default class ScenarioPlayer {
     //     return
     // }
     const text = e.target.textContent;
-    // console.log(text + ' click');
+    console.log(text + ' click');
 
     if (!['day', 'place'].includes(e.target.dataset.menubutton)) {
       document.querySelector('#menu-screen .menu-title span').textContent =
@@ -1118,7 +1118,7 @@ export default class ScenarioPlayer {
           break;
         case 'title':
           // ここでタイトル画面に戻す
-          console.log('to title');
+          // console.log('to title');
           break;
 
         default:

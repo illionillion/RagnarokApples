@@ -31,7 +31,7 @@ export const TitleInit = (gameState) => {
       // 別画面でも十字キー・エンターが効いて危ないから今はコメントアウト
       // const nav = document.querySelector('[data-nav].on-cursor').dataset.nav
       // clickHandler(index, nav)
-      return
+      return;
     }
 
     setAllowCursor();
@@ -49,7 +49,7 @@ export const TitleInit = (gameState) => {
       document
         .querySelectorAll('#title-list ul li')
         [i].classList.remove('on-cursor');
-    })
+    });
   };
 
   /**
@@ -80,12 +80,12 @@ export const TitleInit = (gameState) => {
         // case 'continue':
         //   break;
         case 'load':
-          openGameDataScreen("load")
+          openGameDataScreen('load');
           break;
-        // case 'gallery':
-        //   break;
-        // case 'setting':
-        //   break;
+          // case 'gallery':
+          //   break;
+          // case 'setting':
+          //   break;
 
         default:
           break;
@@ -116,5 +116,5 @@ export const TitleClose = () => {
 };
 
 export const TitleOpen = () => {
-  document.getElementById('title-screen').classList.rmeove('none');
+  document.getElementById('title-screen').classList.remove('none');
 };

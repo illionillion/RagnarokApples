@@ -1,4 +1,5 @@
 import { openGameDataScreen } from './GameData.js';
+import { TitleOpen } from './title.js';
 
 let gameData = {};
 
@@ -14,8 +15,22 @@ export const initMenu = (gameState) => {
     menuOpenButton.addEventListener('click', openMenuScreen);
     menuCloseButton.addEventListener('click', closeMenuScreen);
     // ログ以外はここから発火
-    menuFrame.querySelector('#menu-list li[data-menubutton="load"]').addEventListener('click', () => openGameDataScreen('load'));
-    menuFrame.querySelector('#menu-list li[data-menubutton="save"]').addEventListener('click', () => openGameDataScreen('save'));
+    menuFrame
+      .querySelector('#menu-list li[data-menubutton="load"]')
+      .addEventListener('click', () => openGameDataScreen('load'));
+    menuFrame
+      .querySelector('#menu-list li[data-menubutton="save"]')
+      .addEventListener('click', () => openGameDataScreen('save'));
+    menuFrame
+      .querySelector('#menu-list li[data-menubutton="title"]')
+      .addEventListener('click', () => {
+        // マップ画面も元に戻す必要あり
+        document
+          .querySelectorAll('.map-touch')
+          .forEach((ele) => ele.classList.add('none'));
+        closeMenuScreen();
+        TitleOpen();
+      });
   }
 
   gameData = gameState;
@@ -27,11 +42,19 @@ export const initMenu = (gameState) => {
 export const openMenuScreen = () => {
   menuFrame.classList.remove('hide');
   if (gameData.eventState === 'ScenarioPlayer') {
-    menuFrame.querySelector('#menu-list li[data-menubutton="place"]').classList.remove('none');
-    menuFrame.querySelector('#menu-list li[data-menubutton="log"]').classList.remove('none');
+    menuFrame
+      .querySelector('#menu-list li[data-menubutton="place"]')
+      .classList.remove('none');
+    menuFrame
+      .querySelector('#menu-list li[data-menubutton="log"]')
+      .classList.remove('none');
   } else {
-    menuFrame.querySelector('#menu-list li[data-menubutton="place"]').classList.add('none');
-    menuFrame.querySelector('#menu-list li[data-menubutton="log"]').classList.add('none');
+    menuFrame
+      .querySelector('#menu-list li[data-menubutton="place"]')
+      .classList.add('none');
+    menuFrame
+      .querySelector('#menu-list li[data-menubutton="log"]')
+      .classList.add('none');
   }
   setMenuDay();
 };
