@@ -26,6 +26,7 @@ let mapItemsJson;
  */
 export async function CreateMap (gameState) {
   document.getElementById('mapScreen').classList.remove('none'); // mapの表示
+  document.getElementById('mapTextCover').classList.remove('none');
   /*
     データ取得
     ここのURLを.envで隠したい
