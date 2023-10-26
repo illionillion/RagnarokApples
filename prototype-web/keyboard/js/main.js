@@ -49,7 +49,13 @@ window.addEventListener("load", () => {
 
   function typed(ele) {
     names[Count] = ele.value;
-    named.innerHTML = names.join("");
+    // named.innerHTML = names.join("");
+    named.innerHTML = "";
+    names.forEach(function(name){
+      const spanele = document.createElement("span");
+      spanele.innerHTML = name;
+      named.appendChild(spanele);
+    })
 
     console.log(named);
     Count++;

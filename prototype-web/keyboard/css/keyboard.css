@@ -19,6 +19,10 @@
   background-size: 100% 100%;
 }
 
+#keyboard-name span{
+  border-bottom: 2px solid #333;
+}
+
 #keyboard-name {
   display: flex;
   height: 100%;
@@ -28,12 +32,12 @@
   letter-spacing: 0.8rem;
   /* border-bottom: 1px dashed black; */
   padding-bottom: 0.1rem;
-  background-image: linear-gradient(
+  /* background-image: linear-gradient(
     to right,
     #000,
     #000 18px,
     transparent 1px
-  ); /* 幅2の線を作る */
+  ); 幅2の線を作る */
   background-size: 29px 1.6px; /* グラデーションの幅・高さを指定 */
   background-position: left bottom; /* 背景の開始位置を指定 */
   background-repeat: repeat-x; /* 横向きにのみ繰り返す */
