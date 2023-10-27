@@ -47,15 +47,28 @@ window.addEventListener("load", () => {
     });
   });
 
-  function typed(ele) {
-    names[Count] = ele.value;
-    // named.innerHTML = names.join("");
+  /**
+   * 更新
+   */
+  function update() {
     named.innerHTML = "";
     names.forEach(function(name){
       const spanele = document.createElement("span");
       spanele.innerHTML = name;
       named.appendChild(spanele);
     })
+  }
+
+  function typed(ele) {
+    names[Count] = ele.value;
+    // named.innerHTML = names.join("");
+    // named.innerHTML = "";
+    // names.forEach(function(name){
+    //   const spanele = document.createElement("span");
+    //   spanele.innerHTML = name;
+    //   named.appendChild(spanele);
+    // })
+    update()
 
     console.log(named);
     Count++;
@@ -67,7 +80,8 @@ window.addEventListener("load", () => {
     if (Count !== 0) {
       // この条件式がないと配列が空の時に、削除ボタンを押すと添字がマイナスになる
       names.pop();
-      named.innerHTML = names.join("");
+      // named.innerHTML = names.join("");
+      update()
       Count--;
       console.log(names);
     }
@@ -81,7 +95,8 @@ window.addEventListener("load", () => {
       names.slice(names.length);
       Count--;
       names[Count] = komoji;
-      named.innerHTML = names.join("");
+      // named.innerHTML = names.join("");
+      update()
       Count++;
 
       console.log(names);
@@ -94,7 +109,8 @@ window.addEventListener("load", () => {
       names = [];
       Count = 0;
     }
-    named.innerHTML = names.join("");
+    // named.innerHTML = names.join("");
+    update()
     console.log(names);
   }
 
@@ -108,7 +124,8 @@ window.addEventListener("load", () => {
       names.slice(names.length);
       Count--;
       names[Count] = dakumoji;
-      named.innerHTML = names.join("");
+      // named.innerHTML = names.join("");
+      update()
       Count++;
 
       console.log(names);
@@ -123,7 +140,8 @@ window.addEventListener("load", () => {
       names.slice(names.length);
       Count--;
       names[Count] = Handakumoji;
-      named.innerHTML = names.join("");
+      // named.innerHTML = names.join("");
+      update()
       Count++;
 
       console.log(names);
