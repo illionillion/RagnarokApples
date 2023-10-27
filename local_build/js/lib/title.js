@@ -1,4 +1,5 @@
 import { openGameDataScreen } from './GameData.js';
+import { defaultGameState } from './defaultGameState.js';
 import { CreateMap } from './map.js';
 import toDarking from './toDarking.js';
 
@@ -71,7 +72,8 @@ export const TitleInit = (gameState) => {
                 ele.src = 'images/map-screen/map3-default-icon.png';
               });
             });
-
+          // データの初期化
+          gameData = Object.assign({}, defaultGameState);
           await toDarking(async () => {
             await CreateMap(gameData);
             TitleClose();
