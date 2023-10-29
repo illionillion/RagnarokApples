@@ -399,7 +399,7 @@ export default class ScenarioPlayer {
      */
     const speakerName = this.replaceName(this.TextList[this.msgindex].characterText.name); // ここで名前だけ置き換え？
     console.log(speakerName);
-    const text = this.replaceName(this.TextList[this.msgindex].characterText.text)
+    const text = this.replaceName(this.TextList[this.msgindex].characterText.text);
     console.log(text);
     for (
       let i = 0;
@@ -1075,8 +1075,8 @@ export default class ScenarioPlayer {
    * @returns 
    */
   replaceName = (text) => {
-    return text.replace(/\[hero-name\]/g, this.state.charName)
-  }
+    return text.replace(/\[hero-name\]/g, this.state.charName);
+  };
 
   /**
    * メニューリストクリック時

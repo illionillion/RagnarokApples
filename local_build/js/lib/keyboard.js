@@ -1,12 +1,12 @@
-import { closeConfirm, openConfirm } from "./confirm.js";
-import { convert2Dakuon } from "./convert2Dakuon.js";
-import { convert2HanDakuon } from "./convert2HanDakuon.js";
-import { convert2Komoji } from "./convert2Komoji.js";
-import { CreateMap } from "./map.js";
-import toDarking from "./toDarking.js";
+import { closeConfirm, openConfirm } from './confirm.js';
+import { convert2Dakuon } from './convert2Dakuon.js';
+import { convert2HanDakuon } from './convert2HanDakuon.js';
+import { convert2Komoji } from './convert2Komoji.js';
+import { CreateMap } from './map.js';
+import toDarking from './toDarking.js';
 
-let input = document.querySelectorAll(".keyboard-rows > input");
-let named = document.getElementById("keyboard-name");
+let input = document.querySelectorAll('.keyboard-rows > input');
+let named = document.getElementById('keyboard-name');
 let names = [];
 let Count = 0;
 let initFlag = false;
@@ -19,31 +19,31 @@ export const initKeyboard = (gameState) => {
   update();
 
   if (initFlag) return;
-  document.getElementById("keyboard-screen").classList.remove("none");
+  document.getElementById('keyboard-screen').classList.remove('none');
   input.forEach(function (ele) {
-    ele.addEventListener("click", function () {
-      if (ele.value === "削除") {
-        console.log("削除");
+    ele.addEventListener('click', function () {
+      if (ele.value === '削除') {
+        console.log('削除');
         deleteBtn();
         return;
       }
-      if (ele.value === "小字") {
+      if (ele.value === '小字') {
         komojiBtn();
         return;
       }
-      if (ele.value === "全削除") {
+      if (ele.value === '全削除') {
         allDeleteBtn();
         return;
       }
-      if (ele.value === "゛") {
+      if (ele.value === '゛') {
         dakuBtn();
         return;
       }
-      if (ele.value === "゜") {
+      if (ele.value === '゜') {
         HandakuBtn();
         return;
       }
-      if (ele.value === "決定") {
+      if (ele.value === '決定') {
         confirmBtn();
         return;
       }
@@ -53,7 +53,7 @@ export const initKeyboard = (gameState) => {
     });
   });
   for (let i = 0; i < input.length; i++) {
-    input[i].addEventListener("click", function () {
+    input[i].addEventListener('click', function () {
       this.blur();
     });
   }
@@ -64,9 +64,9 @@ export const initKeyboard = (gameState) => {
  * 更新
  */
 function update() {
-  named.innerHTML = "";
+  named.innerHTML = '';
   names.forEach(function (name) {
-    const spanele = document.createElement("span");
+    const spanele = document.createElement('span');
     spanele.innerHTML = name;
     named.appendChild(spanele);
   });
@@ -150,39 +150,39 @@ function HandakuBtn() {
 // 決定ボタン
 function confirmBtn() {
   if (names.length > 0) {
-    console.log("決定");
-    openConfirm(`「${names.join("")}」で決定しますか？`);
+    console.log('決定');
+    openConfirm(`「${names.join('')}」で決定しますか？`);
     // yes・noのイベント登録
     document
-      .querySelector("#confirm-dialog-buttons .btn-yes")
-      .addEventListener("click", confirmYes);
+      .querySelector('#confirm-dialog-buttons .btn-yes')
+      .addEventListener('click', confirmYes);
     document
-      .querySelector("#confirm-dialog-buttons .btn-no")
-      .addEventListener("click", confirmNo);
+      .querySelector('#confirm-dialog-buttons .btn-no')
+      .addEventListener('click', confirmNo);
   } else {
-    console.log("空です");
+    console.log('空です');
   }
 }
 
 const confirmYes = async () => {
   // 名前を記録してマップへ移動する
-  gameData.charName = names.join("");
+  gameData.charName = names.join('');
   // データの初期化
   await toDarking(async () => {
     // ここで名前入力に移動する
     await CreateMap(gameData);
     // 閉じる処理
     confirmNo();
-    document.getElementById("keyboard-screen").classList.add("none");
+    document.getElementById('keyboard-screen').classList.add('none');
   }, gameData);
 };
 
 const confirmNo = () => {
   closeConfirm();
   document
-    .querySelector("#confirm-dialog-buttons .btn-yes")
-    .removeEventListener("click", confirmYes);
+    .querySelector('#confirm-dialog-buttons .btn-yes')
+    .removeEventListener('click', confirmYes);
   document
-    .querySelector("#confirm-dialog-buttons .btn-no")
-    .removeEventListener("click", confirmNo);
+    .querySelector('#confirm-dialog-buttons .btn-no')
+    .removeEventListener('click', confirmNo);
 };
