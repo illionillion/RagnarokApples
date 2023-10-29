@@ -7,6 +7,7 @@
     <title>ラグナロクアップルズ</title>
     <link rel="shortcut icon" href="../app.png" type="image/x-icon" />
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/title.css" />
     <link rel="stylesheet" href="css/map.css" />
     <link rel="stylesheet" href="css/text.css" />
     <link rel="stylesheet" href="css/menu.css" />
@@ -18,7 +19,7 @@
     <main>
       <div id="frame">
         <div id="screen">
-          <div id="game-data-screen">
+          <div id="game-data-screen" class="none">
             <div id="game-data-header">
               <div id="game-data-title">タイトル</div>
               <div id="game-data-close"></div>
@@ -156,7 +157,7 @@
               </ul>
             </div>
           </div>
-          <section id="mapScreen">
+          <section id="mapScreen" class="none">
             <div id="mapWrapper" class="none">
               <div id="mapSelectFloat">
                 <!-- マップアイテムクリック時の確認画面 -->
@@ -281,6 +282,26 @@
             </div>
             <div id="FloatCheck" class="op0 none"><p>ON</p></div>
             <div id="map-menu-btn"></div>
+          </section>
+          <!-- タイトル -->
+          <section id="title-screen">
+            <video id="title-background-video" poster="./images/title/titleanimation.gif" autoplay loop muted>
+              <source src="./images/title/titlemp4.mp4" type="video/mp4">
+            </video>
+            <div id="title-flex">
+              <div id="title-logo">
+                <img src="./images/title/logokiri.png" alt="" srcset="" />
+              </div>
+              <div id="title-list">
+                <ul>
+                  <li data-nav="start">はじめから</li>
+                  <!-- <li data-nav="continue">つづきから</li> -->
+                  <li data-nav="load">中断データ</li>
+                  <!-- <li data-nav="gallery">ギャラリー</li> -->
+                  <!-- <li data-nav="setting">設定</li> -->
+                </ul>
+              </div>
+            </div>
           </section>
         </div>
       </div>

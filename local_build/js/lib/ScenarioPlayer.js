@@ -662,7 +662,7 @@ export default class ScenarioPlayer {
   /**
    * シナリオ画面からマップ画面へ戻る
    */
-  toMap = async () => {
+  toMap = async (isTitle = false) => {
     this.AudioStop();
     console.log('end');
     this.state.eventState = 'map';
@@ -686,7 +686,7 @@ export default class ScenarioPlayer {
         'images/character/transparent_background.png';
       document.querySelector('#menu-screen .menu-title span').textContent =
         'MENU';
-      this.TextCover.classList.remove('none');
+      if(!isTitle) this.TextCover.classList.remove('none');
       this.FloatCheck.classList.add('op0');
       this.TextFloat.classList.add('op0');
       this.dialogueEle.classList.remove('op0');
@@ -712,9 +712,8 @@ export default class ScenarioPlayer {
       });
 
       this.state.nowPart = this.state.nextPart;
-
       // ここに新マップ描画処理
-      await CreateMap(this.state);
+      if(!isTitle) await CreateMap(this.state);
     }, this.state);
   };
 
@@ -1081,7 +1080,7 @@ export default class ScenarioPlayer {
     //     return
     // }
     const text = e.target.textContent;
-    // console.log(text + ' click');
+    console.log(text + ' click');
 
     if (!['day', 'place'].includes(e.target.dataset.menubutton)) {
       document.querySelector('#menu-screen .menu-title span').textContent =
@@ -1115,6 +1114,11 @@ export default class ScenarioPlayer {
           break;
         case 'load':
           // openGameDataScreen("load");
+          break;
+        case 'title':
+          // ここでタイトル画面に戻す
+          // console.log('to title');
+          this.toMap(true);
           break;
 
         default:
