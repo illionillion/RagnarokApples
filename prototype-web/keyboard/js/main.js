@@ -1,42 +1,42 @@
-"use strict";
-import FrameSizing from "../../../local_build/js/lib/FrameSizing.js";
-import { convert2Dakuon } from "./lib/convert2Dakuon.js";
-import { convert2HanDakuon } from "./lib/convert2HanDakuon.js";
-import { convert2Komoji } from "./lib/convert2Komoji.js";
-window.addEventListener("load", () => {
-  let input = document.querySelectorAll(".keyboard-rows > input");
-  let named = document.getElementById("keyboard-name");
+'use strict';
+import FrameSizing from '../../../local_build/js/lib/FrameSizing.js';
+import { convert2Dakuon } from './lib/convert2Dakuon.js';
+import { convert2HanDakuon } from './lib/convert2HanDakuon.js';
+import { convert2Komoji } from './lib/convert2Komoji.js';
+window.addEventListener('load', () => {
+  let input = document.querySelectorAll('.keyboard-rows > input');
+  let named = document.getElementById('keyboard-name');
   let names = [];
   let Count = 0;
 
-  window.addEventListener("resize", FrameSizing);
+  window.addEventListener('resize', FrameSizing);
   FrameSizing();
   // console.log(input);
 
   input.forEach(function (ele) {
-    ele.addEventListener("click", function () {
-      if (ele.value === "削除") {
-        console.log("削除");
+    ele.addEventListener('click', function () {
+      if (ele.value === '削除') {
+        console.log('削除');
         deleteBtn();
         return;
       }
-      if (ele.value === "小字") {
+      if (ele.value === '小字') {
         komojiBtn();
         return;
       }
-      if (ele.value === "全削除") {
+      if (ele.value === '全削除') {
         allDeleteBtn();
         return;
       }
-      if (ele.value === "゛") {
+      if (ele.value === '゛') {
         dakuBtn();
         return;
       }
-      if (ele.value === "゜") {
+      if (ele.value === '゜') {
         HandakuBtn();
         return;
       }
-      if (ele.value === "決定") {
+      if (ele.value === '決定') {
         confirmBtn();
         return;
       }
@@ -51,12 +51,12 @@ window.addEventListener("load", () => {
    * 更新
    */
   function update() {
-    named.innerHTML = "";
+    named.innerHTML = '';
     names.forEach(function(name){
-      const spanele = document.createElement("span");
+      const spanele = document.createElement('span');
       spanele.innerHTML = name;
       named.appendChild(spanele);
-    })
+    });
   }
 
   function typed(ele) {
@@ -68,7 +68,7 @@ window.addEventListener("load", () => {
     //   spanele.innerHTML = name;
     //   named.appendChild(spanele);
     // })
-    update()
+    update();
 
     console.log(named);
     Count++;
@@ -81,7 +81,7 @@ window.addEventListener("load", () => {
       // この条件式がないと配列が空の時に、削除ボタンを押すと添字がマイナスになる
       names.pop();
       // named.innerHTML = names.join("");
-      update()
+      update();
       Count--;
       console.log(names);
     }
@@ -96,7 +96,7 @@ window.addEventListener("load", () => {
       Count--;
       names[Count] = komoji;
       // named.innerHTML = names.join("");
-      update()
+      update();
       Count++;
 
       console.log(names);
@@ -110,7 +110,7 @@ window.addEventListener("load", () => {
       Count = 0;
     }
     // named.innerHTML = names.join("");
-    update()
+    update();
     console.log(names);
   }
 
@@ -125,7 +125,7 @@ window.addEventListener("load", () => {
       Count--;
       names[Count] = dakumoji;
       // named.innerHTML = names.join("");
-      update()
+      update();
       Count++;
 
       console.log(names);
@@ -141,7 +141,7 @@ window.addEventListener("load", () => {
       Count--;
       names[Count] = Handakumoji;
       // named.innerHTML = names.join("");
-      update()
+      update();
       Count++;
 
       console.log(names);
@@ -150,11 +150,11 @@ window.addEventListener("load", () => {
 
   // 決定ボタン
   function confirmBtn(){
-    console.log("決定");
+    console.log('決定');
   }
 
   for (let i = 0; i < input.length; i++) {
-    input[i].addEventListener("click", function () {
+    input[i].addEventListener('click', function () {
       this.blur();
 
     });
