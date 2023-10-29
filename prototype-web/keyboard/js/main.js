@@ -150,7 +150,11 @@ window.addEventListener('load', () => {
 
   // 決定ボタン
   function confirmBtn(){
-    console.log('決定');
+    if (names.length > 0) {
+      console.log('決定');
+    } else {
+      console.log('空です');
+    }
   }
 
   for (let i = 0; i < input.length; i++) {
