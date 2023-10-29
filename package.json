@@ -11,7 +11,9 @@
     "build-mac": "electron-builder --mac --x64",
     "build-win": "electron-builder --win --x64",
     "build-linux": "electron-builder build --linux",
-    "asar-pack": "asar pack local_build renderer.asar"
+    "asar-pack": "asar pack local_build renderer.asar",
+    "lint": "eslint --ext .js .",
+    "lint:fix": "eslint --fix --ext .js ."
   },
   "repository": {
     "type": "git",
@@ -27,7 +29,13 @@
     "asar": "^3.1.0",
     "electron": "^17.1.0",
     "electron-builder": "^23.0.3",
-    "http-server": "^14.1.1"
+    "eslint": "^8.47.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-n": "^16.0.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "http-server": "^14.1.1",
+    "eslint-plugin-unused-imports": "^3.0.0"
   },
   "build": {
     "appId": "net.makitokatsube.app.1st",
