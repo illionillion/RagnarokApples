@@ -1,0 +1,87 @@
+@charset "UTF-8";
+
+.keyboard-main-wrapper {
+  width: auto;
+  text-align: center;
+  /* background-color: #fff; */
+  background: url("../images/name-background.png") no-repeat bottom / contain;
+}
+
+.keyboard-nameArea-wrapper {
+  text-align: center;
+  height: 10%;
+  width: 79%;
+  /* max-width: 840px; */
+  /* border: solid 2px rgba(0, 0, 0, 0.5); */
+  padding: 10px;
+  margin: 12.5% auto 2%;;
+  background-image: url("../images/name-textbox.png");
+  background-size: 100% 100%;
+}
+
+#keyboard-name span{
+  border-bottom: 2px solid #333;
+}
+
+#keyboard-name {
+  display: flex;
+  height: 100%;
+  margin: 0;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  /* border-bottom: 1px dashed black; */
+  padding-bottom: 0.1rem;
+  /* background-image: linear-gradient(
+    to right,
+    #000,
+    #000 18px,
+    transparent 1px
+  ); 幅2の線を作る */
+  background-size: 29px 1.6px; /* グラデーションの幅・高さを指定 */
+  background-position: left bottom; /* 背景の開始位置を指定 */
+  background-repeat: repeat-x; /* 横向きにのみ繰り返す */
+}
+
+.keyboard-wrapper {
+  margin: auto;
+  text-align: center;
+  height: 50%;
+  width: 85%;
+}
+
+.keyboard-rows{
+  height: 20%;
+}
+
+.keyboard-wrapper .keyboard-rows input {
+  font-size: 17px;
+  /* font-size: clamp(13px, 2vw, 17px); */
+  font-size: 1.2vw;
+  /* max-height: 50px; */
+  height: 75%;
+  /* max-width: 50px; */
+  width: 5%;
+  margin: 0.9%;
+  /* border-color: rgb(197, 197, 197); */
+  background-color: #001829;
+  color: #D2E1DC;
+}
+
+.keyboard-wrapper .keyboard-rows .long-input {
+  margin-left: 4%;
+  width: 10%;
+  max-width: 130px;
+}
+
+.hidden {
+  /* overflow: hidden; */
+  background-color: transparent;
+  opacity: 0;
+}
+
+/* ボタンが押された時 */
+.keyboard-wrapper .keyboard-rows input:focus {
+  box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.5),
+    inset -3px -3px 7px rgba(255, 255, 255, 0.05);
+}

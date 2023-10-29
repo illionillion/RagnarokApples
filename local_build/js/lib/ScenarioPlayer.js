@@ -397,16 +397,19 @@ export default class ScenarioPlayer {
     /**
      * 名前取得
      */
-    const speakerName = this.TextList[this.msgindex].characterText.name;
+    const speakerName = this.replaceName(this.TextList[this.msgindex].characterText.name); // ここで名前だけ置き換え？
+    console.log(speakerName);
+    const text = this.replaceName(this.TextList[this.msgindex].characterText.text);
+    console.log(text);
     for (
       let i = 0;
-      i < this.TextList[this.msgindex].characterText.text.length;
+      i < text.length;
       i++
     ) {
       /**
        * 取得した文字が記号だった場合は文字演出の終始なのでフラグを反転させてcontinueする
        */
-      const element = this.TextList[this.msgindex].characterText.text[i];
+      const element = text[i]; // ここでテキスト内名前置き換え？
       if (element === '/') {
         // 赤文字
         // console.log(element);
@@ -1064,6 +1067,15 @@ export default class ScenarioPlayer {
     // closeMenuScreen()
     this.MenuOpenButton.classList.remove('hide');
     // this.AnimationRestart()
+  };
+
+  /**
+   * 名前の置き換え
+   * @param {string} text 
+   * @returns 
+   */
+  replaceName = (text) => {
+    return text.replace(/\[hero-name\]/g, this.state.charName);
   };
 
   /**

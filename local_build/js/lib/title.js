@@ -1,5 +1,5 @@
 import { openGameDataScreen } from './GameData.js';
-import { CreateMap } from './map.js';
+import { initKeyboard } from './keyboard.js';
 import toDarking from './toDarking.js';
 
 let gameData = {};
@@ -73,7 +73,9 @@ export const TitleInit = (gameState) => {
             });
           // データの初期化
           await toDarking(async () => {
-            await CreateMap(gameData);
+            // ここで名前入力に移動する
+            initKeyboard(gameData);
+            // await CreateMap(gameData);
             TitleClose();
           }, gameData);
           break;
