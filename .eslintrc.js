@@ -2,22 +2,21 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
-    node: true
+    node: true,
   },
   // extends: 'standard',
   overrides: [
     {
       env: {
-        node: true
+        node: true,
       },
-      files: [
-        '.eslintrc.{js,cjs}'
-      ],
-    }
+      files: ['.eslintrc.{js,cjs}'],
+    },
   ],
+  plugins: ['unused-imports'],
   parserOptions: {
     sourceType: 'module',
-    ecmaVersion: 'latest'
+    ecmaVersion: 'latest',
   },
   rules: {
     quotes: ['error', 'single'],
@@ -25,6 +24,10 @@ module.exports = {
     // no-mixed-spaces-and-tabsルールをoffに設定する
     'no-mixed-spaces-and-tabs': 'off',
     // // インデントはスペースで統一
-    indent: ['error', 2, { SwitchCase: 1 }]
-  }
+    indent: ['error', 2, { SwitchCase: 1 }],
+    /**
+     * 未使用のimport削除
+     */
+    'unused-imports/no-unused-imports': 'warn',
+  },
 };

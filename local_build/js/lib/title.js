@@ -1,5 +1,4 @@
 import { openGameDataScreen } from './GameData.js';
-import { defaultGameState } from './defaultGameState.js';
 import { CreateMap } from './map.js';
 import toDarking from './toDarking.js';
 
@@ -118,5 +117,5 @@ export const TitleClose = () => {
 
 export const TitleOpen = () => {
   document.getElementById('title-screen').classList.remove('none');
-  window.location.reload()
+  window.location.reload();
 };

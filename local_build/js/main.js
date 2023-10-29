@@ -2,10 +2,8 @@
 import FrameSizing from './lib/FrameSizing.js';
 import { closeGameDataScreen, initGameData } from './lib/GameData.js';
 import { defaultGameState } from './lib/defaultGameState.js';
-import { CreateMap } from './lib/map.js';
 import { initMenu } from './lib/menu.js';
 import { TitleInit } from './lib/title.js';
-import toDarking from './lib/toDarking.js';
 
 (function () {
   const gameState = defaultGameState;
