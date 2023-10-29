@@ -397,16 +397,19 @@ export default class ScenarioPlayer {
     /**
      * 名前取得
      */
-    const speakerName = this.TextList[this.msgindex].characterText.name;
+    const speakerName = this.replaceName(this.TextList[this.msgindex].characterText.name); // ここで名前だけ置き換え？
+    console.log(speakerName);
+    const text = this.replaceName(this.TextList[this.msgindex].characterText.text);
+    console.log(text);
     for (
       let i = 0;
-      i < this.TextList[this.msgindex].characterText.text.length;
+      i < text.length;
       i++
     ) {
       /**
        * 取得した文字が記号だった場合は文字演出の終始なのでフラグを反転させてcontinueする
        */
-      const element = this.TextList[this.msgindex].characterText.text[i];
+      const element = text[i]; // ここでテキスト内名前置き換え？
       if (element === '/') {
         // 赤文字
         // console.log(element);
@@ -662,7 +665,7 @@ export default class ScenarioPlayer {
   /**
    * シナリオ画面からマップ画面へ戻る
    */
-  toMap = async () => {
+  toMap = async (isTitle = false) => {
     this.AudioStop();
     console.log('end');
     this.state.eventState = 'map';
@@ -686,7 +689,7 @@ export default class ScenarioPlayer {
         'images/character/transparent_background.png';
       document.querySelector('#menu-screen .menu-title span').textContent =
         'MENU';
-      this.TextCover.classList.remove('none');
+      if(!isTitle) this.TextCover.classList.remove('none');
       this.FloatCheck.classList.add('op0');
       this.TextFloat.classList.add('op0');
       this.dialogueEle.classList.remove('op0');
@@ -712,9 +715,8 @@ export default class ScenarioPlayer {
       });
 
       this.state.nowPart = this.state.nextPart;
-
       // ここに新マップ描画処理
-      await CreateMap(this.state);
+      if(!isTitle) await CreateMap(this.state);
     }, this.state);
   };
 
@@ -1068,6 +1070,15 @@ export default class ScenarioPlayer {
   };
 
   /**
+   * 名前の置き換え
+   * @param {string} text 
+   * @returns 
+   */
+  replaceName = (text) => {
+    return text.replace(/\[hero-name\]/g, this.state.charName);
+  };
+
+  /**
    * メニューリストクリック時
    * @param {Event} e
    */
@@ -1081,7 +1092,7 @@ export default class ScenarioPlayer {
     //     return
     // }
     const text = e.target.textContent;
-    // console.log(text + ' click');
+    console.log(text + ' click');
 
     if (!['day', 'place'].includes(e.target.dataset.menubutton)) {
       document.querySelector('#menu-screen .menu-title span').textContent =
@@ -1115,6 +1126,11 @@ export default class ScenarioPlayer {
           break;
         case 'load':
           // openGameDataScreen("load");
+          break;
+        case 'title':
+          // ここでタイトル画面に戻す
+          // console.log('to title');
+          this.toMap(true);
           break;
 
         default:
