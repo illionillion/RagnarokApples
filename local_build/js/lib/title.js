@@ -73,7 +73,6 @@ export const TitleInit = (gameState) => {
               });
             });
           // データの初期化
-          gameData = Object.assign({}, defaultGameState);
           await toDarking(async () => {
             await CreateMap(gameData);
             TitleClose();
@@ -119,4 +118,5 @@ export const TitleClose = () => {
 
 export const TitleOpen = () => {
   document.getElementById('title-screen').classList.remove('none');
+  window.location.reload()
 };
