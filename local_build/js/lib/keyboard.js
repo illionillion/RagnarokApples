@@ -9,6 +9,7 @@ let input = document.querySelectorAll('.keyboard-rows > input');
 let named = document.getElementById('keyboard-name');
 let names = [];
 let Count = 0;
+const maxCount = 6;
 let initFlag = false;
 let gameData = {};
 
@@ -47,7 +48,7 @@ export const initKeyboard = (gameState) => {
         confirmBtn();
         return;
       }
-      if (Count < 6) {
+      if (Count < maxCount) {
         typed(ele);
       }
     });
@@ -65,7 +66,8 @@ export const initKeyboard = (gameState) => {
  */
 function update() {
   named.innerHTML = '';
-  names.forEach(function (name) {
+  console.log([...names, ...new Array(maxCount - names.length).fill('\u3000')]);
+  [...names, ...new Array(maxCount - names.length).fill('\u3000')].forEach(function (name) {
     const spanele = document.createElement('span');
     spanele.innerHTML = name;
     named.appendChild(spanele);
